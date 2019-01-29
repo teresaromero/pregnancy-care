@@ -7,7 +7,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
-
+const cors = require("cors");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const flash = require("connect-flash");
@@ -32,6 +32,18 @@ const debug = require("debug")(
 );
 
 const app = express();
+
+const whitelist = ["http://localhost:3001"];
+
+const corsOptions = {
+  origin: function(origin, callback) {
+    var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+    callback(null, originIsWhitelisted);
+  },
+  credentials: true
+};
+
+app.use(cors(corsOptions));
 
 // Middleware Setup
 app.use(logger("dev"));
