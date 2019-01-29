@@ -1,15 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "bulma/css/bulma.min.css";
+import "@fortawesome/fontawesome-free/css/all.css";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./lib/redux/store";
 
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>,
   document.getElementById("root")
 );
 

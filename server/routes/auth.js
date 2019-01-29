@@ -20,7 +20,9 @@ router.post("/login", (req, res, next) => {
     if (err) return res.status(500).json({ message: err });
     if (!user) return res.status(401).json({ failureDetails });
     loginPromise(req, user)
-      .then(() => res.status(200).json({ user }))
+      .then(() => {
+        return res.status(200).json({ user });
+      })
       .catch(e => res.status(500).json({ message: e.message }));
   })(req, res, next);
 });
@@ -79,9 +81,11 @@ router.post("/signup", (req, res, next) => {
 
 router.get("/currentUser", (req, res) => {
   const { user } = req;
+  console.log("hola");
+console.log(user)
   user
-    ? res.json({ success: "ok", user })
-    : res.status(401).json({ message: "No user logged" });
+    ? res.json(user)
+    : res.status(404).json({ message: "No user logged" });
 });
 
 router.get("/confirm/:confirmationCode", (req, res) => {

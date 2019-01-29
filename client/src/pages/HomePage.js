@@ -1,13 +1,9 @@
-import React from 'react'
-import ToggleBox from '../components/ToggleBox';
+import React from "react";
 
-
-
-export const HomePage = ()=>{
-  return(
-    <div className="section">
-    <p className="title">HomePAge</p>
-    <ToggleBox/>
-    </div>
-  )
-}
+export const HomePage = () => {
+  return (
+    <React.Fragment>
+      <p className="title">Homepage</p>
+    </React.Fragment>
+  );
+};
