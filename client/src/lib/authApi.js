@@ -1,6 +1,6 @@
 const get = endPoint => {
   const url = `http://localhost:3000${endPoint}`;
-  return fetch(url, { withCredentials: "include" })
+  return fetch(url, { credentials: "include" })
     .then(res => res.json())
     .then(response => {
       return response;
@@ -15,7 +15,7 @@ const post = (endPoint, data) => {
     headers: {
       "Content-Type": "application/json"
     },
-    withCredentials: "include"
+    credentials: "include"
   })
     .then(res => res.json())
     .then(response => {
