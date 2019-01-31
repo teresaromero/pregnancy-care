@@ -6,13 +6,14 @@ const userSchema = new Schema({
   surname: { type: String, required: true },
   email: { type: String, required: true ,lowercase:true},
   password: { type: String, required: true },
-  gender: {type:String, enum:["Male","Female"], required:true},
+  gender: {type:String, enum:["Male","Female"]},
   role: {
     type: String,
     enum : ['ADMIN', 'CUSTOMER', 'EMPLOYEE'],
     default: 'ADMIN'
   },
   confirmationCode: String,
+  image: String,
   isActive: { type: Boolean, default: false },
   business: [{ type: Schema.Types.ObjectId, ref:'Business' }]
 }, {

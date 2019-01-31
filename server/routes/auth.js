@@ -28,12 +28,11 @@ router.post("/login", (req, res, next) => {
 });
 
 router.post("/signup", (req, res, next) => {
-  const { name, surname, email, password, gender } = req.body;
+  const { name, surname, email, password } = req.body;
   if (
     name === "" ||
     surname === "" ||
     email === "" ||
-    gender === "" ||
     password === ""
   ) {
     res.json({ message: "Please enter all values" });
@@ -55,7 +54,6 @@ router.post("/signup", (req, res, next) => {
       name,
       surname,
       email,
-      gender,
       confirmationCode,
       password: hashPass
     });
@@ -81,21 +79,19 @@ router.post("/signup", (req, res, next) => {
 
 router.get("/currentUser", (req, res) => {
   const { user } = req;
-  console.log("hola");
-console.log(user)
   user
     ? res.json(user)
-    : res.status(404).json({ message: "No user logged" });
+    : res.status(404);
 });
 
 router.get("/confirm/:confirmationCode", (req, res) => {
   let { confirmationCode } = req.params;
   User.findOneAndUpdate(
     { confirmationCode: confirmationCode },
-    { isActive: true }
+    { isActive: true },{new:true}
   ).then(user => {
     res.json({ success: "user active", user });
-  });
+  }).catch(err=>console.log("error in activation"));
 });
 
 router.get("/isAdmin", (req, res) => {

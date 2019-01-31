@@ -11,6 +11,7 @@ export const logout = () => {
   };
 };
 
+
 export const errorMessageAction = message => {
   return {
     type: "ADD_MESSAGE",
@@ -21,5 +22,11 @@ export const errorMessageAction = message => {
 export const clearMessages = () => {
   return {
     type: "DELETE_ALL_MESSAGES"
+  };
+};
+export const toggle = (value) => {
+  return {
+    type: "TOGGLE_SIDENAV",
+    value
   };
 };
