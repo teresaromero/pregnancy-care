@@ -39,23 +39,23 @@ export class Navbar extends React.Component {
               <ul className="menu-list is-hidden-tablet">
                 <li>
                 <NavLink to="/dashboard" activeClassName="is-active">
-              <span class="icon">
-                <i class="fas fa-home" />
+              <span className="icon">
+                <i className="fas fa-home" />
               </span>
               <span>Dashboard</span>
             </NavLink>
                 </li>
                 <li>
                 <NavLink to="/patients" activeClassName="is-active">
-            <span class="icon">
-                <i class="fas fa-users" />
+            <span className="icon">
+                <i className="fas fa-users" />
               </span><span>Patients</span>
             </NavLink>
                 </li>
                 <li>
                 <NavLink to="/overview" activeClassName="is-active">
-            <span class="icon">
-                <i class="fas fa-calendar-alt"/>
+            <span className="icon">
+                <i className="fas fa-calendar-alt"/>
               </span><span>Agenda</span>
             </NavLink>
                 </li>
