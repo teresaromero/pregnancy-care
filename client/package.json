@@ -14,6 +14,7 @@
     "bulma": "^0.7.2",
     "classnames": "^2.2.6",
     "extract-loader": "^3.1.0",
+    "node-sass": "^4.11.0",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
@@ -26,7 +27,9 @@
     "redux": "^4.0.1"
   },
   "scripts": {
-    "start": "PORT=3001 react-scripts start",
+    "css-build": "node-sass -o -x src/lib/myBulma.scss  src/lib/myBulma.css",
+    "css-watch": "yarn  start css-build --watch",
+    "start": "PORT=3001 react-scripts start css-build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -11,18 +11,14 @@ export class Navbar extends React.Component {
   }
   render() {
     let { isActive } = this.state;
-    const burgerClass = cx("navbar-burger burger",{ "is-active": isActive });
+    const burgerClass = cx("navbar-burger burger", { "is-active": isActive });
     const menuClass = cx("navbar-menu", { "is-active": isActive });
     return (
       <React.Fragment>
-        <nav
-          className="navbar is-info"
-          role="navigation"
-          aria-label="main navigation"
-        >
+        <nav className="navbar" role="navigation" aria-label="main navigation">
           <div className="navbar-brand">
             <div className="navbar-item">
-              <h1 className="title">Pregnancy Care</h1>
+              <h1 className="title has-text-centered has-text-white-bis">Pregnancy Care</h1>
             </div>
 
             <a
@@ -40,15 +36,28 @@ export class Navbar extends React.Component {
 
           <div className={menuClass}>
             <div className="navbar-start">
-              <ul class="menu-list is-hidden-desktop">
+              <ul className="menu-list is-hidden-tablet">
                 <li>
-                  <NavLink to="/dashboard">Dashboard</NavLink>
+                <NavLink to="/dashboard" activeClassName="is-active">
+              <span class="icon">
+                <i class="fas fa-home" />
+              </span>
+              <span>Dashboard</span>
+            </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/patients">Patients</NavLink>
+                <NavLink to="/patients" activeClassName="is-active">
+            <span class="icon">
+                <i class="fas fa-users" />
+              </span><span>Patients</span>
+            </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/overview">Agenda</NavLink>
+                <NavLink to="/overview" activeClassName="is-active">
+            <span class="icon">
+                <i class="fas fa-calendar-alt"/>
+              </span><span>Agenda</span>
+            </NavLink>
                 </li>
               </ul>
             </div>
