@@ -29,12 +29,7 @@ router.post("/login", (req, res, next) => {
 
 router.post("/signup", (req, res, next) => {
   const { name, surname, email, password } = req.body;
-  if (
-    name === "" ||
-    surname === "" ||
-    email === "" ||
-    password === ""
-  ) {
+  if (name === "" || surname === "" || email === "" || password === "") {
     res.json({ message: "Please enter all values" });
     return;
   }
@@ -62,13 +57,13 @@ router.post("/signup", (req, res, next) => {
       .save()
       .then(user =>
         loginPromise(req, user).then(user => {
-          res.json({ user });
           activateUserMail(
             user.email,
             user.name,
             user.email,
             user.confirmationCode
           );
+          res.json({ user });
         })
       )
       .catch(err => {
@@ -79,19 +74,21 @@ router.post("/signup", (req, res, next) => {
 
 router.get("/currentUser", (req, res) => {
   const { user } = req;
-  user
-    ? res.json(user)
-    : res.status(404);
+  console.log(user)
+  user ? res.json(user) : res.status(404).json({ Error: "No user loged" });
 });
 
 router.get("/confirm/:confirmationCode", (req, res) => {
   let { confirmationCode } = req.params;
   User.findOneAndUpdate(
     { confirmationCode: confirmationCode },
-    { isActive: true },{new:true}
-  ).then(user => {
-    res.json({ success: "user active", user });
-  }).catch(err=>console.log("error in activation"));
+    { isActive: true },
+    { new: true }
+  )
+    .then(user => {
+      res.json({ success: "user active", user });
+    })
+    .catch(err => console.log("error in activation"));
 });
 
 router.get("/isAdmin", (req, res) => {

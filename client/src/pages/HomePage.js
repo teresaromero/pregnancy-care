@@ -1,47 +1,40 @@
 import React from "react";
-import PropTypes from "prop-types";
-import withStyles from "@material-ui/core/styles/withStyles";
+import { LoginForm } from "../components/LoginForm";
+import { SignupForm } from "../components/SignupForm";
 
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { FullWidthTabs } from "../components/FullWidthTabs";
-import { Grid, Typography } from "@material-ui/core";
-
-const styles = theme => ({
-  main: {
-    width: "auto",
-    display: "block", // Fix IE 11 issue.
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-      width: 600,
-      marginLeft: "auto",
-      marginRight: "auto"
-    }
-  }
-});
-
-const _HomePage = ({ classes }) => {
+export const HomePage = () => {
   return (
-    <Grid
-      style={{ height: "100vh" }}
-      container
-      spacing={24}
-      direction="column"
-      wrap="nowrap"
-      justify="center"
-      align="center"
-    >
-    
-      <Grid item xs={12} sm={8}>
-        <FullWidthTabs />
-      </Grid>
-    </Grid>
+    <React.Fragment>
+      <div id="homepage" className="section">
+        <div className="container">
+          <div className="box">
+            <div className="section">
+              <p className="title">Pregnancy Care</p>
+              <p className="subtitle">Handle all your patient information</p>
+            </div>
+            <div className="section">
+              <div className="tabs is-centered">
+                <ul>
+                  <li className="is-active">
+                    <a>Login</a>
+                  </li>
+                  <li>
+                    <a>Signup</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="columns">
+              <div className="column">
+                <LoginForm />
+              </div>
+              <div className="column">
+                <SignupForm />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </React.Fragment>
   );
 };
-
-_HomePage.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-export const HomePage = connect()(withRouter(withStyles(styles)(_HomePage)));

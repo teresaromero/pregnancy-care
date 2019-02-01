@@ -1,4 +1,4 @@
-export const login = (user) => {
+export const login = user => {
   return {
     type: "LOGIN",
     user
@@ -10,7 +10,6 @@ export const logout = () => {
     type: "LOGOUT"
   };
 };
-
 
 export const errorMessageAction = message => {
   return {
@@ -24,9 +23,5 @@ export const clearMessages = () => {
     type: "DELETE_ALL_MESSAGES"
   };
 };
-export const toggle = (value) => {
-  return {
-    type: "TOGGLE_SIDENAV",
-    value
-  };
-};
+
+

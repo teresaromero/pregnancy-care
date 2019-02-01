@@ -1,7 +1,8 @@
 const initialStore = {
   user: null,
   messages: [],
-  openSide:false
+  openSide:false,
+  theme:null
 };
 
 export const rootReducer = (store = initialStore, action) => {

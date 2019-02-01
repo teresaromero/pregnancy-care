@@ -1,24 +1,7 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
-/* color palette */
-/* 
-blue - 0393DF
-darkblue - 105ACC
-light blue - 91D4F2
-green - A4CF7C
-yellow - F9E939
-*/
-
-body {
-  margin: 0;
-  padding: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+#homepage{
+  background-color:#91D4F2;
+  max-height: 100vh;
   min-height: 100vh;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
 }
