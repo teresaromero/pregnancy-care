@@ -11,7 +11,7 @@ export class Navbar extends React.Component {
   }
   render() {
     let { isActive } = this.state;
-    const burgerClass = cx("navbar-burger burger", { "is-active": isActive });
+    const burgerClass = cx("navbar-burger burger",{ "is-active": isActive });
     const menuClass = cx("navbar-menu", { "is-active": isActive });
     return (
       <React.Fragment>

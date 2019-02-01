@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router";
-import { HomePage } from "./pages/HomePage";
+import  HomePage  from "./pages/HomePage";
 
 import { Dashboard } from "./components/Dashboard";
 import { DashboardPage } from "./pages/DashboardPage";

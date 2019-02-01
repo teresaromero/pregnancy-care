@@ -33,7 +33,7 @@ class _LoginForm extends React.Component {
   render() {
     let { email, password } = this.state;
     return (
-      <React.Fragment>
+      <div className="section">
         <form method="POST" onSubmit={e => this.handleSubmit(e)}>
           <InputF
             id="email-login"
@@ -57,7 +57,7 @@ class _LoginForm extends React.Component {
             Login
           </button>
         </form>
-      </React.Fragment>
+      </div>
     );
   }
 }
