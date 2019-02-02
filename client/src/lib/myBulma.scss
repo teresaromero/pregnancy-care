@@ -20,12 +20,33 @@ $success:$green;
 $warning:$yellow;
 $link: $dark-blue;
 
+//Body
+body{
+  min-height:100vh;
+}
+
+//columns
+
+
+  
+
 //Navbar
 $navbar-breakpoint:769px;
 $navbar-height: 3.7rem;
 $navbar-burger-color: $yellow;
 
 //Aside
+aside{
+  min-height: 85vh;
+  max-height: 85vh;
+  overflow-y: scroll;
+}
 
+//Dashboard Conteiner
+.dashContent{
+  min-height: 85vh;
+  max-height: 85vh;
+  overflow-y: scroll;
+}
 
 @import "../../node_modules/bulma/bulma.sass";

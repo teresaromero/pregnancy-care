@@ -1,5 +1,18 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
 @import url(../../node_modules/@fortawesome/fontawesome-free/css/all.css);
+body {
+  min-height: 100vh; }
+
+aside {
+  min-height: 85vh;
+  max-height: 85vh;
+  overflow-y: scroll; }
+
+.dashContent {
+  min-height: 85vh;
+  max-height: 85vh;
+  overflow-y: scroll; }
+
 /*! bulma.io v0.7.2 | MIT License | github.com/jgthms/bulma */
 @keyframes spinAround {
   from {

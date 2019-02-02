@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 export const Aside = () => {
   return (
     <React.Fragment>
-      <aside className="menu column section is-one-quarter is-narrow-mobile is-fullheight section is-hidden-mobile has-background-white">
+      <aside className="menu column is-one-quarter is-narrow is-fullheight container is-hidden-mobile has-background-white">
         <div className="card">
           <div className="card-content">
             <div className="content">

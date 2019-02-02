@@ -7,9 +7,11 @@ export const Dashboard = ({ children }) => {
   return (
     <React.Fragment>
       <Navbar />
-      <div className="columns is-fullheight">
-        <Aside />
-        <div className="column section">{children}</div>
+      <div className="section">
+        <div className="columns container">
+          <Aside />
+          <div className="column container dashContent">{children}</div>
+        </div>
       </div>
     </React.Fragment>
   );
