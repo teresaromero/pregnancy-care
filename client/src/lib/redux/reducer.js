@@ -1,8 +1,6 @@
 const initialStore = {
   user: null,
-  messages: [],
-  openSide:false,
-  theme:null
+  messages: []
 };
 
 export const rootReducer = (store = initialStore, action) => {
@@ -32,12 +30,6 @@ export const rootReducer = (store = initialStore, action) => {
       store = {
         ...store,
         messages: []
-      };
-      break;
-      case "TOGGLE_SIDENAV":
-      store = {
-        ...store,
-        openSide: action.value
       };
       break;
   }

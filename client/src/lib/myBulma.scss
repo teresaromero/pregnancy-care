@@ -8,15 +8,24 @@ $dark-blue: #105acc;
 $green: #a4cf7c;
 $yellow: #f9e939;
 $light-blue: #91d4f2;
+$blue:#0393DF;
 $beige-light: #d0d1cd;
 $beige-lighter: #eff0eb;
 
+
+//bulma colors
+$primary: $dark-blue;
+$info: $light-blue;
+$success:$green;
+$warning:$yellow;
+$link: $dark-blue;
+
 //Navbar
-$navbar-background-color:$dark-blue;
+$navbar-breakpoint:769px;
 $navbar-height: 3.7rem;
 $navbar-burger-color: $yellow;
 
 //Aside
-$menu-item-active-background-color:$dark-blue;
+
 
 @import "../../node_modules/bulma/bulma.sass";

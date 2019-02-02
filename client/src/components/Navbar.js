@@ -15,7 +15,7 @@ export class Navbar extends React.Component {
     const menuClass = cx("navbar-menu", { "is-active": isActive });
     return (
       <React.Fragment>
-        <nav className="navbar" role="navigation" aria-label="main navigation">
+        <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
           <div className="navbar-brand">
             <div className="navbar-item">
               <h1 className="title has-text-centered has-text-white-bis">Pregnancy Care</h1>
