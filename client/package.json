@@ -12,6 +12,8 @@
     "@material/react-top-app-bar": "^0.9.0",
     "@material/theme": "^0.43.0",
     "bulma": "^0.7.2",
+    "bulma-badge": "^0.2.0",
+    "bulma-tooltip": "^2.0.2",
     "classnames": "^2.2.6",
     "extract-loader": "^3.1.0",
     "node-sass": "^4.11.0",

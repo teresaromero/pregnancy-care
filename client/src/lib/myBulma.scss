@@ -23,10 +23,18 @@ $link: $dark-blue;
 //Body
 body{
   min-height:100vh;
+  max-height: 100vh;
 }
 
-//columns
+#root, .App{
+  min-height: 100%;
+  max-height: 100%;
+}
 
+//User Card
+.card-header.userCard{
+  justify-content: space-evenly;
+}
 
   
 
@@ -50,3 +58,5 @@ aside{
 }
 
 @import "../../node_modules/bulma/bulma.sass";
+@import "../../node_modules/bulma-badge/dist/css/bulma-badge.sass";
+@import "../../node_modules//bulma-tooltip/dist/css/bulma-tooltip.sass"

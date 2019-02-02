@@ -5,6 +5,8 @@ import  HomePage  from "./pages/HomePage";
 import { Dashboard } from "./components/Dashboard";
 import { DashboardPage } from "./pages/DashboardPage";
 import { PatientsPage } from "./pages/PatientsPage";
+import { ProtectedRoute } from "./components/PrivateRoute";
+import { ProfilePage } from "./pages/ProfilePage";
 
 const HomePageContainer = () => {
   return (
@@ -30,7 +32,15 @@ const DashboardPageContainer = () => {
           strict
           path="/patients"
           component={PatientsPage}
+        
           key="patients-page"
+        />
+        <Route
+          exact
+          strict
+          path="/profile"
+          component={ProfilePage}
+          key="profile-page"
         />
       </Dashboard>
     </React.Fragment>
@@ -51,7 +61,7 @@ export default class App extends Component {
                 component={HomePageContainer}
                 key="homepage"
               />
-              <Route component={DashboardPageContainer} />
+              <ProtectedRoute component={DashboardPageContainer} />
             </Switch>
           </div>
         )}

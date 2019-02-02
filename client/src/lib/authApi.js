@@ -30,7 +30,9 @@ const post = (endPoint, data) => {
 export default class AuthApi {
   static signup(name, surname, email, password) {
     return post("/api/auth/signup", { name, surname, email, password })
-      .then(res => res.data.user)
+      .then(res => {
+        return res.user
+      })
       .catch(err => console.log(err));
   }
 

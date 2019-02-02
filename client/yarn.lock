@@ -2344,6 +2344,16 @@ builtin-status-codes@^3.0.0:
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
   integrity sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
 
+bulma-badge@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/bulma-badge/-/bulma-badge-0.2.0.tgz#d71d295c5ce78c0b9b6c2f0d9efd4ebfb5644a61"
+  integrity sha512-7D3jlobs2FGug4JvY2CnP+EeDeANsMb/ONrPUvCTpuIGIERwFr32pRQ0oWQ2pzaU3ehRUsJojXJyYX1AD9tbZQ==
+
+bulma-tooltip@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/bulma-tooltip/-/bulma-tooltip-2.0.2.tgz#cf0bf5ad2dc75492cbcbd4816e1a005314dc90ac"
+  integrity sha512-xsqWeWV7tsUn3uH04SqJeP7/CyC1RaDVIyVzr4/sIO3friIIOi7L6jc5g7qUwDxuBQl72yH/yRPuefpXoQ4hWg==
+
 bulma@^0.7.2:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.7.2.tgz#8e944377b74c7926558830d38d8e19eaf49f5fb6"
