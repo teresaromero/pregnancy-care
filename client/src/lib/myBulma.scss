@@ -51,11 +51,7 @@ aside{
 }
 
 //Dashboard Conteiner
-.dashContent{
-  min-height: 85vh;
-  max-height: 85vh;
-  overflow-y: scroll;
-}
+
 
 @import "../../node_modules/bulma/bulma.sass";
 @import "../../node_modules/bulma-badge/dist/css/bulma-badge.sass";

@@ -18,7 +18,7 @@ class _Navbar extends React.Component {
     let { dispatch, history } = this.props;
     authApi.logout().then(() => {
       dispatch(logout());
-      history.push("/");
+      history.push("/welcome");
     });
   }
 

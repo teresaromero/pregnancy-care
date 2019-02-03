@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router";
+import { Switch, Route, Redirect } from "react-router";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Dashboard } from "./components/Dashboard";
@@ -9,22 +9,13 @@ import { ProtectedRoute } from "./components/PrivateRoute";
 import { ProfilePage } from "./pages/ProfilePage";
 import WelcomePage from "./pages/WelcomePage";
 
-const WelcomePageContainer = () => {
-  return (
-    <React.Fragment>
-      <Route exact path="/welcome" component={WelcomePage} />
-    </React.Fragment>
-  );
-};
-
 const DashboardPageContainer = () => {
   return (
     <React.Fragment>
       <Dashboard>
         <Route
           exact
-          strict
-          path="/"
+          path="/dashboard"
           component={DashboardPage}
           key="dashboard-page"
         />
@@ -50,25 +41,19 @@ const DashboardPageContainer = () => {
 class _App extends Component {
   render() {
     let { user } = this.props;
-    return user ? (
-      <Route
-        render={({ location }) => (
-          <div className="App">
-            <Switch location={location}>
-              <Route
-                exact
-                strict
-                path="/welcome"
-                component={WelcomePageContainer}
-                key="homepage"
-              />
-              <ProtectedRoute component={DashboardPageContainer} />
-            </Switch>
-          </div>
-        )}
-      />
-    ) : (
-      <p>Loading</p>
+    return (
+      <div className="App">
+        <Switch location={this.props.location}>
+          {user ? (
+            <ProtectedRoute component={DashboardPageContainer} />
+          ) : (
+            <React.Fragment>
+              <Redirect from="/" to="/welcome" />
+              <Route path="/welcome" component={WelcomePage} />
+            </React.Fragment>
+          )}
+        </Switch>
+      </div>
     );
   }
 }
