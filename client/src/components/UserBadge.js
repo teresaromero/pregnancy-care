@@ -20,6 +20,6 @@ const _UserBadge = ({ user }) => {
   );
 };
 
-export const UserBadge = connect(state => ({ user: state.user }))(
+export const UserBadge = connect(store => ({ user: store.user }))(
   withRouter(_UserBadge)
 );

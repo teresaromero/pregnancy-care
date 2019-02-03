@@ -1,5 +1,4 @@
 import React from "react";
-import cx from "classnames";
 
 import { connect } from "react-redux";
 
@@ -10,9 +9,7 @@ const _ProfileView = ({ user }) => {
     <div className="section">
       <div class="columns is-mobile is-centered has-text-centered	">
         <div class="column is-half">
-          <div className="section">
-            
-          </div>
+          <div className="section" />
           <p>
             {user.name} {user.surname}
           </p>
@@ -24,6 +21,6 @@ const _ProfileView = ({ user }) => {
   );
 };
 
-export const ProfileView = connect(state => ({ user: state.user }))(
+export const ProfileView = connect(store => ({ user: store.user }))(
   withRouter(_ProfileView)
 );

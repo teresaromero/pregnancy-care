@@ -5,7 +5,7 @@ import authApi from "../lib/authApi";
 import { connect } from "react-redux";
 import { logout } from "../lib/redux/actions";
 import { withRouter } from "react-router-dom";
-import { UserBadge } from "./UserBadge";
+
 
 class _Navbar extends React.Component {
   constructor() {
@@ -23,8 +23,6 @@ class _Navbar extends React.Component {
   }
 
   render() {
-    let { user } = this.props;
-    console.log(user);
     let { isActive } = this.state;
     const burgerClass = cx("navbar-burger burger", { "is-active": isActive });
     const menuClass = cx("navbar-menu", { "is-active": isActive });
@@ -117,6 +115,6 @@ class _Navbar extends React.Component {
   }
 }
 
-export const Navbar = connect(state => ({ user: state.user }))(
+export const Navbar = connect(store => ({ user: store.user }))(
   withRouter(_Navbar)
 );

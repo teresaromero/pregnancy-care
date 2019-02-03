@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router";
-import  HomePage  from "./pages/HomePage";
-
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { Dashboard } from "./components/Dashboard";
 import { DashboardPage } from "./pages/DashboardPage";
 import { PatientsPage } from "./pages/PatientsPage";
 import { ProtectedRoute } from "./components/PrivateRoute";
 import { ProfilePage } from "./pages/ProfilePage";
+import WelcomePage from "./pages/WelcomePage";
 
-const HomePageContainer = () => {
+const WelcomePageContainer = () => {
   return (
     <React.Fragment>
-      <Route exact path="/" component={HomePage} />
+      <Route exact path="/welcome" component={WelcomePage} />
     </React.Fragment>
   );
 };
@@ -23,7 +24,7 @@ const DashboardPageContainer = () => {
         <Route
           exact
           strict
-          path="/dashboard"
+          path="/"
           component={DashboardPage}
           key="dashboard-page"
         />
@@ -32,7 +33,6 @@ const DashboardPageContainer = () => {
           strict
           path="/patients"
           component={PatientsPage}
-        
           key="patients-page"
         />
         <Route
@@ -47,9 +47,10 @@ const DashboardPageContainer = () => {
   );
 };
 
-export default class App extends Component {
+class _App extends Component {
   render() {
-    return (
+    let { user } = this.props;
+    return user ? (
       <Route
         render={({ location }) => (
           <div className="App">
@@ -57,8 +58,8 @@ export default class App extends Component {
               <Route
                 exact
                 strict
-                path="/"
-                component={HomePageContainer}
+                path="/welcome"
+                component={WelcomePageContainer}
                 key="homepage"
               />
               <ProtectedRoute component={DashboardPageContainer} />
@@ -66,6 +67,10 @@ export default class App extends Component {
           </div>
         )}
       />
+    ) : (
+      <p>Loading</p>
     );
   }
 }
+
+export const App = connect(store => ({ user: store.user }))(withRouter(_App));

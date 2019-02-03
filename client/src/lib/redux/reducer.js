@@ -1,5 +1,6 @@
 const initialStore = {
   user: null,
+  isAuth:false,
   messages: []
 };
 
@@ -14,7 +15,8 @@ export const rootReducer = (store = initialStore, action) => {
     case "LOGOUT":
       store = {
         ...store,
-        user: null
+        user: null,
+        isAuth:false
       };
       break;
     default:

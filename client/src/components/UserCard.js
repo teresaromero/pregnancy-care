@@ -9,30 +9,30 @@ const _UserCard = ({ user }) => {
     <React.Fragment>
       <div className="card">
         <div className="card-content">
-          <div class="media">
-            <div class="media-left">
-              <figure class="image is-64x64">
+          <div className="media">
+            <div className="media-left">
+              <figure className="image is-64x64">
                 <img
                   className="is-rounded"
                   src="https://bulma.io/images/placeholders/96x96.png"
-                  alt="profile-picture"
+                  alt="profile"
                 />
               </figure>
             </div>
-            <div class="media-content">
-              <p class="title is-5">
+            <div className="media-content">
+              <p className="title is-5">
                 {user.name} {user.surname}
               </p>
-              <p class="subtitle is-7">Role: {user.role}</p>
+              <p className="subtitle is-7">Role: {user.role}</p>
             </div>
           </div>
         </div>
-        <header class="card-header userCard">
+        <header className="card-header userCard">
         <UserBadge/>
           <NavLink to="/profile">
-            <span class="card-header-icon" aria-label="more options">
-              <span class="icon">
-                <i class="fas fa-user-edit" aria-hidden="true" />
+            <span className="card-header-icon" aria-label="more options">
+              <span className="icon">
+                <i className="fas fa-user-edit" aria-hidden="true" />
               </span>
             </span>
           </NavLink>
@@ -42,6 +42,6 @@ const _UserCard = ({ user }) => {
   );
 };
 
-export const UserCard = connect(state => ({ user: state.user }))(
+export const UserCard = connect(store => ({ user: store.user }))(
   withRouter(_UserCard)
 );

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { UserCard } from "./UserCard";
 
-const _Aside = ({user}) => {
+const _Aside = () => {
   return (
     <React.Fragment>
       <aside className="menu column is-one-quarter is-narrow is-fullheight container is-hidden-mobile">
@@ -83,6 +83,6 @@ const _Aside = ({user}) => {
   );
 };
 
-export const Aside = connect(state => ({ user: state.user }))(
+export const Aside = connect(store => ({ user: store.user }))(
   withRouter(_Aside)
 );

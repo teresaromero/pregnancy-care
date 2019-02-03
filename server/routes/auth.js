@@ -74,8 +74,11 @@ router.post("/signup", (req, res, next) => {
 
 router.get("/currentUser", (req, res) => {
   const { user } = req;
-  console.log(user)
-  user ? res.json(user) : res.status(404).json({ Error: "No user loged" });
+  if (user) {
+    res.json({ succes: "OK", user });
+  } else {
+    res.status(401).json({ succes: "NO USER LOGGED IN" });
+  }
 });
 
 router.get("/confirm/:confirmationCode", (req, res) => {
@@ -89,27 +92,6 @@ router.get("/confirm/:confirmationCode", (req, res) => {
       res.json({ success: "user active", user });
     })
     .catch(err => console.log("error in activation"));
-});
-
-router.get("/isAdmin", (req, res) => {
-  const { user } = req;
-  user.role === "ADMIN"
-    ? res.json({ success: "ok", user })
-    : res.status(401).json({ role: user.role });
-});
-
-router.get("/isCustomer", (req, res) => {
-  const { user } = req;
-  user.role === "CUSTOMER"
-    ? res.json({ success: "ok", user })
-    : res.status(401).json({ role: user.role });
-});
-
-router.get("/isEmployee", (req, res) => {
-  const { user } = req;
-  user.role === "EMPLOYEE"
-    ? res.json({ success: "ok", user })
-    : res.status(401).json({ message: user.role });
 });
 
 router.get("/logout", (req, res) => {

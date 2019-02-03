@@ -3,7 +3,7 @@ import cx from "classnames";
 import { LoginForm } from "../components/LoginForm";
 import { SignupForm } from "../components/SignupForm";
 
-export default class HomePage extends React.Component {
+export default class WelcomePage extends React.Component {
   constructor() {
     super();
     this.state = {

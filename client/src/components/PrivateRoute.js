@@ -2,15 +2,19 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
-const _ProtectedRoute = ({ component: Component, user, ...rest }) => {
-  return (
+export const ProtectedRoute = connect(store => ({ user: store.user }))(
+  ({ component: Component, user, ...rest }) => (
     <Route
       {...rest}
-      render={props => (user ? <Component {...props} /> : <Redirect to="/" />)}
+      render={props =>
+        user ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{ pathname: "/welcome", state: { from: props.location } }}
+          />
+        )
+      }
     />
-  );
-};
-
-export const ProtectedRoute = connect(state => ({ user: state.user }))(
-  _ProtectedRoute
+  )
 );
