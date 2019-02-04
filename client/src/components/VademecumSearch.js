@@ -1,7 +1,5 @@
 import React from "react";
 
-import PatientsApi from "../lib/patientsApi.js";
-import { PatientsListCard } from "./PatientsListCard.js";
 import { InputF } from "./Input.js";
 import VademecumApi from "../lib/vademecumApi.js";
 import { DrugListCard } from "./DrugListCard.js";
@@ -24,11 +22,11 @@ export default class VademecumSearch extends React.Component {
   }
 
   handleSearch(e) {
+    console.log(this.state.query);
     if (e.target.value !== "") {
       let param = e.target.name;
       this.setState({ query: e.target.value }, () => {
         VademecumApi.drugs(param, this.state.query).then(results => {
-          console.log(results);
           this.setState({ data: results });
         });
       });
@@ -51,27 +49,62 @@ export default class VademecumSearch extends React.Component {
               value={this.state.queryName}
               handleChange={e => this.handleSearch(e)}
             />
-            <div className="columns is-multiline">
-              {this.state.data ? (
-                this.state.data.length === 0 ? (
-                  <div className="section">
-                    <article className="message is-danger">
-                      <div className="message-header">
-                        <p>Not Found</p>
+
+            <nav class="level is-mobile">
+              <div class="level-item has-text-centered">
+                <span class="icon is-large has-text-danger">
+                  <i class="fas fa-user-md" aria-hidden="true" />
+                </span>
+                <span>With medical reciept</span>
+              </div>
+              <div class="level-item has-text-centered">
+                <span class="icon is-large has-text-danger">
+                  <i class="fas fa-car-crash" aria-hidden="true" />
+                </span>
+                <span>Driving effects</span>
+              </div>
+              <div class="level-item has-text-centered">
+                <span class="icon is-large has-text-danger">
+                  <i class="fas fa-caret-down" aria-hidden="true" />
+                </span>
+                <span>Black triangle</span>
+              </div>
+            </nav>
+
+            <div className="section">
+              <div className="container">
+                {this.state.data ? (
+                  this.state.data.length === 0 ? (
+                    <div className="section">
+                      <div className="container">
+                        <article className="message is-danger">
+                          <div className="message-header">
+                            <p>Not Found</p>
+                          </div>
+                          <div className="message-body">Not matching</div>
+                        </article>
                       </div>
-                      <div className="message-body">Not matching</div>
-                    </article>
-                  </div>
+                    </div>
+                  ) : (
+                    this.state.data.map(drug => (
+                      <DrugListCard key={drug._id} drug={drug} />
+                    ))
+                  )
                 ) : (
-                  this.state.data.map(drug => (
-                    <DrugListCard key={drug._id} drug={drug} />
-                  ))
-                )
-              ) : (
-                <progress className="progress is-small is-primary" max="100">
-                  15%
-                </progress>
-              )}
+                  <div className="section">
+                    <div className="container">
+                      <article class="message">
+                        <div class="message-header">
+                          <p>No data</p>
+                        </div>
+                        <div class="message-body">
+                          Search for drugs by name and get information.
+                        </div>
+                      </article>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

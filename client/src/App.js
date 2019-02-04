@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { Switch, Route, Redirect } from "react-router";
+import {  Route} from "react-router";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Dashboard } from "./components/Dashboard";
 
-import { ProtectedRoute } from "./components/PrivateRoute";
 
 import { Navbar } from "./components/Navbar";
 

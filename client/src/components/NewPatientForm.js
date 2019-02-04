@@ -1,10 +1,10 @@
 import React from "react";
-import AuthApi from "../lib/authApi";
+
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { errorMessageAction, login, clearMessages } from "../lib/redux/actions";
+import { errorMessageAction, clearMessages } from "../lib/redux/actions";
 
-import { InputF } from "./Input";
+
 import PatientsApi from "../lib/patientsApi";
 
 class _NewPatientForm extends React.Component {
@@ -46,7 +46,7 @@ class _NewPatientForm extends React.Component {
       phone,
       insurance
     } = this.state;
-    const { history, dispatch } = this.props;
+    const { dispatch } = this.props;
     if (!e.target.checkValidity()) {
       return;
     }

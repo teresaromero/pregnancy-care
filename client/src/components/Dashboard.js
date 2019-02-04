@@ -1,7 +1,7 @@
 import React from "react";
 import { Aside } from "./Aside";
 import { DashboardPage } from "../pages/DashboardPage";
-import { Switch, Route, Redirect } from "react-router";
+import { Switch, Route } from "react-router";
 import { PatientsPage } from "../pages/PatientsPage";
 import { ProfilePage } from "../pages/ProfilePage";
 import { connect } from "react-redux";
@@ -27,7 +27,6 @@ const _Dashboard = ({ match, children, user }) => {
                   <Switch>
                     <Route
                       exact
-                      strict
                       path={`${path}`}
                       component={DashboardPage}
                     />

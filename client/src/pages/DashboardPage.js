@@ -1,18 +1,19 @@
 import React from "react";
+import Calendar from 'react-calendar'
 
 export const DashboardPage = () => {
   return (
-    <div className="section">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel odio
-        a diam pellentesque cursus. Suspendisse potenti. Duis nec pulvinar
-        tortor, non rhoncus enim. Morbi vitae est vel tortor pretium ultrices
-        non dapibus urna. Praesent ut purus elit. In arcu enim, vehicula nec
-        vehicula in, mollis nec mi. Nulla eget convallis turpis, in ullamcorper
-        sapien. In lobortis ipsum purus, et mattis justo imperdiet at. Aliquam
-        rutrum vulputate nisi, rhoncus lacinia sapien mattis ut. Nulla a velit
-        id dolor vulputate tristique at dictum quam.
-      </p>
+    <React.Fragment>
+
+      <div className="section">
+      <div className="container">
+      <Calendar locale="en" view="year"/>
+      
+      
+      </div>
+      </div>
+<div className="section">
+      
 
       <p>
         Aenean eu neque fringilla nisi rhoncus pulvinar. Morbi vitae erat
@@ -60,5 +61,8 @@ export const DashboardPage = () => {
         magna, vehicula eu dapibus a, venenatis at tellus.
       </p>
     </div>
+
+    </React.Fragment>
+    
   );
 };
