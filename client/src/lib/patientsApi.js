@@ -14,6 +14,12 @@ export default class PatientsApi {
       .then(res => res.data)
       .catch(err => console.log(err));
   }
+  static search(query) {
+    return instance
+      .get(`/api/patients/search?q=${query}`)
+      .then(res => res.data.patients)
+      .catch(err => console.log(err));
+  }
   static addPatient(
     name,
     surname,

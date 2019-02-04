@@ -6,6 +6,7 @@ import { PatientsPage } from "../pages/PatientsPage";
 import { ProfilePage } from "../pages/ProfilePage";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { AddPatientPage } from "../pages/AddPatientPage";
 
 const _Dashboard = ({ match, children, user }) => {
   let { path } = match;
@@ -30,6 +31,11 @@ const _Dashboard = ({ match, children, user }) => {
                       exact
                       path={`${path}/patients`}
                       component={PatientsPage}
+                    />
+                    <Route
+                      exact
+                      path={`${path}/patients/add`}
+                      component={AddPatientPage}
                     />
                     <Route
                       exact

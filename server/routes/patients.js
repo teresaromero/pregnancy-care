@@ -69,7 +69,18 @@ router.get("/all", (req, res, next) => {
   User.find({ role: "CUSTOMER" })
     .sort({ createdAt: -1 })
     .then(users => {
-      res.json({ all: users });
+      res.json({ users });
     });
+});
+
+//route for searching - exact text
+router.get("/search", (req, res, next) => {
+  let {q} = req.query
+  User.find({ role: "CUSTOMER" ,$text:{$search:q}},{score:{$meta:"textScore"}})
+    .sort({ score: {$meta:'textScore'} })
+    .then(patients => {
+      res.json({ patients });
+    });
+  
 });
 module.exports = router;

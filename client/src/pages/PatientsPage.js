@@ -1,9 +1,9 @@
 import React from 'react';
-import { NewPatientForm } from '../components/NewPatientForm';
+import PatientsList from '../components/PatientsList';
 
 
 export const PatientsPage =()=>{
   return(
-    <NewPatientForm/>
+    <PatientsList/>
   )
 }
