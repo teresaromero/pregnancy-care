@@ -11,7 +11,7 @@ export const ProtectedRoute = connect(store => ({ user: store.user }))(
           <Component {...props} />
         ) : (
           <Redirect
-            to={{ pathname: "/welcome", state: { from: props.location } }}
+            to={{ pathname: "/", state: { from: props.location } }}
           />
         )
       }

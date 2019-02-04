@@ -4,16 +4,16 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { UserCard } from "./UserCard";
 
-const _Aside = () => {
+const _Aside = ({ path }) => {
   return (
     <React.Fragment>
       <aside className="menu column is-one-quarter is-narrow is-fullheight container is-hidden-mobile">
-        <UserCard/>
+        <UserCard />
 
         <p className="menu-label">General</p>
         <ul className="menu-list">
           <li>
-            <NavLink to="/dashboard" activeClassName="is-active">
+            <NavLink to={`${path}`} activeClassName="is-active">
               <span className="icon">
                 <i className="fas fa-home" />
               </span>
@@ -21,12 +21,30 @@ const _Aside = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/patients" activeClassName="is-active">
+            <NavLink to={`${path}/patients`} activeClassName="is-active">
               <span className="icon">
                 <i className="fas fa-users" />
               </span>
               <span>Patients</span>
             </NavLink>
+            <ul>
+              <li>
+                <NavLink
+                  to={`${path}/patients/add`}
+                  activeClassName="is-active"
+                >
+                  <span>Add Patient</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={`${path}/patients/search`}
+                  activeClassName="is-active"
+                >
+                  <span>Search</span>
+                </NavLink>
+              </li>
+            </ul>
           </li>
         </ul>
         <p className="menu-label">Agenda</p>
@@ -70,7 +88,7 @@ const _Aside = () => {
         <p className="menu-label">Settings</p>
         <ul className="menu-list">
           <li>
-            <NavLink to="/profile" activeClassName="is-active">
+            <NavLink to={`${path}/profile`} activeClassName="is-active">
               <span className="icon">
                 <i className="fas fa-cog" />
               </span>
@@ -83,6 +101,6 @@ const _Aside = () => {
   );
 };
 
-export const Aside = connect(store => ({ user: store.user }))(
-  withRouter(_Aside)
+export const Aside = withRouter(
+  connect(store => ({ user: store.user }))(_Aside)
 );

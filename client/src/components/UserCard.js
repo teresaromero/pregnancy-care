@@ -42,6 +42,4 @@ const _UserCard = ({ user }) => {
   );
 };
 
-export const UserCard = connect(store => ({ user: store.user }))(
-  withRouter(_UserCard)
-);
+export const UserCard = withRouter(connect(store => ({ user: store.user }))(_UserCard));

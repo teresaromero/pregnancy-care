@@ -7,14 +7,28 @@ const userSchema = new Schema({
   email: { type: String, required: true ,lowercase:true},
   password: { type: String, required: true },
   gender: {type:String, enum:["Male","Female"]},
+  bornDate: { type: Date, default: Date.now },
+  confirmationCode: String,
+  image: String,
+  isActive: { type: Boolean, default: false },
   role: {
     type: String,
     enum : ['ADMIN', 'CUSTOMER', 'EMPLOYEE'],
     default: 'ADMIN'
   },
-  confirmationCode: String,
-  image: String,
-  isActive: { type: Boolean, default: false },
+  //only customer data
+  address: {
+    street: { type: String, required: true },
+    city: { type: String, required: true },
+    state: { type: String, required: true },
+    zip: { type: Number, required: true }
+  },
+  phone:{ type: String, required: true },
+  profession:{type:String,required:true},
+  insurance:{type:String,required:true},
+  RGPD:{type:Boolean,default:false},
+  RGPDdoc:{type:String},
+  idNum:{type:String,required:true},
   business: [{ type: Schema.Types.ObjectId, ref:'Business' }]
 }, {
   timestamps: true

@@ -1,8 +1,9 @@
-import React from "react";
+import React from 'react';
+import { NewPatientForm } from '../components/NewPatientForm';
 
 
-export const PatientsPage = () => {
-  return (
-
-    <p>Patients PAge</p>
-  )}
+export const PatientsPage =()=>{
+  return(
+    <NewPatientForm/>
+  )
+}

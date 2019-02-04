@@ -73,12 +73,11 @@ router.post("/signup", (req, res, next) => {
 });
 
 router.get("/currentUser", (req, res) => {
-  const { user } = req;
-  if (user) {
-    res.json({ succes: "OK", user });
-  } else {
-    res.status(401).json({ succes: "NO USER LOGGED IN" });
+  if (req.isAuthenticated()) {
+    res.status(200).json(req.user);
+    return;
   }
+  res.status(403).json({ message: "Unauthorized" });
 });
 
 router.get("/confirm/:confirmationCode", (req, res) => {
