@@ -3,8 +3,10 @@ import React from "react";
 import PatientsApi from "../lib/patientsApi.js";
 import { PatientsListCard } from "./PatientsListCard.js";
 import { InputF } from "./Input.js";
+import VademecumApi from "../lib/vademecumApi.js";
+import { DrugListCard } from "./DrugListCard.js";
 
-export default class PatientsList extends React.Component {
+export default class VademecumSearch extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -15,11 +17,6 @@ export default class PatientsList extends React.Component {
   }
   componentDidMount() {
     console.log("Component did mount");
-
-    PatientsApi.allPatients().then(data => {
-      console.log(data.users)
-      this.setState({ data:data.users });
-    });
   }
 
   componentWillUnmount() {
@@ -28,17 +25,15 @@ export default class PatientsList extends React.Component {
 
   handleSearch(e) {
     if (e.target.value !== "") {
+      let param = e.target.name;
       this.setState({ query: e.target.value }, () => {
-        PatientsApi.search(this.state.query).then(results => {
+        VademecumApi.drugs(param, this.state.query).then(results => {
+          console.log(results);
           this.setState({ data: results });
         });
       });
     } else {
-      this.setState({ query: e.target.value, notFound: false }, () => {
-        PatientsApi.allPatients().then(data => {
-          this.setState({ data:data.users });
-        });
-      });
+      this.setState({ query: "" });
     }
   }
 
@@ -48,12 +43,12 @@ export default class PatientsList extends React.Component {
         <div className="section">
           <div className="container">
             <InputF
-              name="Search"
+              name="nombre"
               title="Search"
-              label="Quick Search"
+              label="Drug Name"
               inputtype="text"
-              placeholder="Search by name, surname, id, phone (Only exact values)"
-              value={this.state.query}
+              placeholder=""
+              value={this.state.queryName}
               handleChange={e => this.handleSearch(e)}
             />
             <div className="columns is-multiline">
@@ -64,18 +59,18 @@ export default class PatientsList extends React.Component {
                       <div className="message-header">
                         <p>Not Found</p>
                       </div>
-                      <div className="message-body">
-                        Not matching
-                      </div>
+                      <div className="message-body">Not matching</div>
                     </article>
                   </div>
                 ) : (
-                  this.state.data.map(patient => (
-                    <PatientsListCard key={patient._id} patient={patient} />
+                  this.state.data.map(drug => (
+                    <DrugListCard key={drug._id} drug={drug} />
                   ))
                 )
               ) : (
-                <progress className="progress is-small is-primary" max="100">15%</progress>
+                <progress className="progress is-small is-primary" max="100">
+                  15%
+                </progress>
               )}
             </div>
           </div>

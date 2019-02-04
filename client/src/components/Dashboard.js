@@ -7,6 +7,10 @@ import { ProfilePage } from "../pages/ProfilePage";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { AddPatientPage } from "../pages/AddPatientPage";
+import { AdvancedSearchPage } from "../pages/AdvancedSearchPage";
+import {VademecumPage} from '../pages/VademecumPage'
+
+
 
 const _Dashboard = ({ match, children, user }) => {
   let { path } = match;
@@ -36,6 +40,16 @@ const _Dashboard = ({ match, children, user }) => {
                       exact
                       path={`${path}/patients/add`}
                       component={AddPatientPage}
+                    />
+                    <Route
+                      exact
+                      path={`${path}/patients/advancedSearch`}
+                      component={AdvancedSearchPage}
+                    />
+                    <Route
+                      exact
+                      path={`${path}/vademecum`}
+                      component={VademecumPage}
                     />
                     <Route
                       exact

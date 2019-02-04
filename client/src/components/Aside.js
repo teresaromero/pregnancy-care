@@ -38,10 +38,10 @@ const _Aside = ({ path }) => {
               </li>
               <li>
                 <NavLink
-                  to={`${path}/patients/search`}
+                  to={`${path}/patients/advancedSearch`}
                   activeClassName="is-active"
                 >
-                  <span>Search</span>
+                  <span>Advanced Search</span>
                 </NavLink>
               </li>
             </ul>
@@ -69,7 +69,7 @@ const _Aside = ({ path }) => {
         <p className="menu-label">Data</p>
         <ul className="menu-list">
           <li>
-            <NavLink to="/vademecum" activeClassName="is-active">
+            <NavLink to={`${path}/vademecum`} activeClassName="is-active">
               <span className="icon">
                 <i className="fas fa-search" />
               </span>
