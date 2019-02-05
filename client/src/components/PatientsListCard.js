@@ -1,27 +1,50 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const PatientsListCard = ({ patient }) => {
   return (
-    <div className="column">
-     
-        <div className="box">
-          <article className="media">
-            <div className="media-left">
-              
+    <div className="section patientCard">
+      <div class="card">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-48x48">
+                <img
+                  className="is-rounded"
+                  src="https://bulma.io/images/placeholders/96x96.png"
+                  alt="patient"
+                />
+              </figure>
             </div>
-            <div className="content">
-              <p>
-                <strong>{patient.name} {patient.surname}</strong>
+            <div class="media-content">
+              <p class="title is-6">
+                {patient.name} {patient.surname}
               </p>
-    
-              <Link to={`/patient/${patient._id}`}>
-              <button className="button is-warning"><span><i className="far fa-eye"></i></span>See Record</button>
-              </Link>
+              <p class="subtitle is-7">{patient.role}</p>
             </div>
-          </article>
+          </div>
         </div>
-     
+        <footer class="card-footer">
+          <NavLink to="" class="card-footer-item">
+            Record
+            <span className="icon">
+              <i class="fas fa-file-alt" aria-hidden="true" />
+            </span>
+          </NavLink>
+          <NavLink to="" class="card-footer-item">
+            Edit
+            <span className="icon">
+              <i class="fas fa-user-edit" aria-hidden="true" />
+            </span>
+          </NavLink>
+          <NavLink to="" class="card-footer-item is-danger">
+            Delete
+            <span className="icon is-danger">
+              <i class="fas fa-user-times" aria-hidden="true" />
+            </span>
+          </NavLink>
+        </footer>
+      </div>
     </div>
   );
 };

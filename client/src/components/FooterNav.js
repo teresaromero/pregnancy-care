@@ -1,7 +1,8 @@
 import React from "react";
 import { withRouter, NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 
-export const FooterNav = () => {
+const _FooterNav = ({path}) => {
   return (
     <nav
       class="navbar is-fixed-bottom is-primary"
@@ -11,7 +12,7 @@ export const FooterNav = () => {
     >
       <div id="footer-content" className="navbar-brand">
         <NavLink
-          to="/dashboard"
+          to={`${path}`}
           activeClassName="is-active"
           className="navbar-item"
         >
@@ -20,7 +21,7 @@ export const FooterNav = () => {
           </span>
         </NavLink>
         <NavLink
-          to="/dashboard"
+          to={`${path}/patients/add`}
           activeClassName="is-active"
           className="navbar-item"
         >
@@ -29,7 +30,7 @@ export const FooterNav = () => {
           </span>
         </NavLink>
         <NavLink
-          to="/overview"
+          to={`${path}/calendar`}
           activeClassName="is-active"
           className="navbar-item"
         >
@@ -38,7 +39,7 @@ export const FooterNav = () => {
           </span>
         </NavLink>
         <NavLink
-          to={`/vademecum`}
+          to={`${path}/vademecum`}
           activeClassName="is-active"
           className="navbar-item"
         >
@@ -47,7 +48,7 @@ export const FooterNav = () => {
           </span>
         </NavLink>
         <NavLink
-          to={`/profile`}
+          to={`${path}/profile`}
           activeClassName="is-active"
           className="navbar-item"
         >
@@ -59,3 +60,5 @@ export const FooterNav = () => {
     </nav>
   );
 };
+
+export const FooterNav = withRouter(connect()(_FooterNav));

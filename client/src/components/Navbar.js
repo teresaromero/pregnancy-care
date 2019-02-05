@@ -30,7 +30,7 @@ class _Navbar extends React.Component {
       <React.Fragment>
         <nav
         id="top-nav"
-          className="navbar is-primary"
+          className="navbar is-primary is-fixed-top"
           role="navigation"
           aria-label="main navigation"
         >

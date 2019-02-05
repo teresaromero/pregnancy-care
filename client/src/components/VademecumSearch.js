@@ -39,73 +39,65 @@ export default class VademecumSearch extends React.Component {
     return (
       <React.Fragment>
         <div className="section">
-          <div className="container">
-            <InputF
-              name="nombre"
-              title="Search"
-              label="Drug Name"
-              inputtype="text"
-              placeholder=""
-              value={this.state.queryName}
-              handleChange={e => this.handleSearch(e)}
-            />
+          <InputF
+            name="nombre"
+            title="Search"
+            label="Drug Name"
+            inputtype="text"
+            placeholder=""
+            value={this.state.queryName}
+            handleChange={e => this.handleSearch(e)}
+          />
 
-            <nav class="level is-mobile">
-              <div class="level-item has-text-centered">
-                <span class="icon is-large has-text-danger">
-                  <i class="fas fa-user-md" aria-hidden="true" />
-                </span>
-                <span>With medical reciept</span>
-              </div>
-              <div class="level-item has-text-centered">
-                <span class="icon is-large has-text-danger">
-                  <i class="fas fa-car-crash" aria-hidden="true" />
-                </span>
-                <span>Driving effects</span>
-              </div>
-              <div class="level-item has-text-centered">
-                <span class="icon is-large has-text-danger">
-                  <i class="fas fa-caret-down" aria-hidden="true" />
-                </span>
-                <span>Black triangle</span>
-              </div>
-            </nav>
-
-            <div className="section">
-              <div className="container">
-                {this.state.data ? (
-                  this.state.data.length === 0 ? (
-                    <div className="section">
-                      <div className="container">
-                        <article className="message is-danger">
-                          <div className="message-header">
-                            <p>Not Found</p>
-                          </div>
-                          <div className="message-body">Not matching</div>
-                        </article>
-                      </div>
-                    </div>
-                  ) : (
-                    this.state.data.map(drug => (
-                      <DrugListCard key={drug._id} drug={drug} />
-                    ))
-                  )
-                ) : (
-                  <div className="section">
-                    <div className="container">
-                      <article class="message">
-                        <div class="message-header">
-                          <p>No data</p>
-                        </div>
-                        <div class="message-body">
-                          Search for drugs by name and get information.
-                        </div>
-                      </article>
-                    </div>
-                  </div>
-                )}
-              </div>
+          <nav class="level is-mobile">
+            <div class="level-item has-text-centered">
+              <span class="icon is-large has-text-danger">
+                <i class="fas fa-user-md" aria-hidden="true" />
+              </span>
+              <span>With medical reciept</span>
             </div>
+            <div class="level-item has-text-centered">
+              <span class="icon is-large has-text-danger">
+                <i class="fas fa-car-crash" aria-hidden="true" />
+              </span>
+              <span>Driving effects</span>
+            </div>
+            <div class="level-item has-text-centered">
+              <span class="icon is-large has-text-danger">
+                <i class="fas fa-caret-down" aria-hidden="true" />
+              </span>
+              <span>Black triangle</span>
+            </div>
+          </nav>
+
+          <div className="section">
+            {this.state.data ? (
+              this.state.data.length === 0 ? (
+                <div className="section">
+                  <article className="message is-danger">
+                    <div className="message-header">
+                      <p>Not Found</p>
+                    </div>
+                    <div className="message-body">Not matching</div>
+                  </article>
+                </div>
+              ) : (
+                this.state.data.map(drug => (
+                  <DrugListCard key={drug._id} drug={drug} />
+                ))
+              )
+            ) : (
+              <div className="section">
+                <article class="message">
+                  <div class="message-header">
+                    <p>No data</p>
+                  </div>
+                  <div class="message-body">
+                    Search for drugs by name and get information.
+                  </div>
+                </article>
+              </div>
+            )}
           </div>
         </div>
       </React.Fragment>

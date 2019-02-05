@@ -17,8 +17,8 @@ export default class PatientsList extends React.Component {
     console.log("Component did mount");
 
     PatientsApi.allPatients().then(data => {
-      console.log(data.users)
-      this.setState({ data:data.users });
+      console.log(data.users);
+      this.setState({ data: data.users });
     });
   }
 
@@ -36,7 +36,7 @@ export default class PatientsList extends React.Component {
     } else {
       this.setState({ query: e.target.value, notFound: false }, () => {
         PatientsApi.allPatients().then(data => {
-          this.setState({ data:data.users });
+          this.setState({ data: data.users });
         });
       });
     }
@@ -45,40 +45,43 @@ export default class PatientsList extends React.Component {
   render() {
     return (
       <React.Fragment>
+        <InputF
+          name="Search"
+          title="Search"
+          label="Quick Search"
+          inputtype="text"
+          placeholder="Search by name, surname, id, phone (Only exact values)"
+          value={this.state.query}
+          handleChange={e => this.handleSearch(e)}
+        />
         <div className="section">
-          <div className="container">
-            <InputF
-              name="Search"
-              title="Search"
-              label="Quick Search"
-              inputtype="text"
-              placeholder="Search by name, surname, id, phone (Only exact values)"
-              value={this.state.query}
-              handleChange={e => this.handleSearch(e)}
-            />
-            <div className="columns is-multiline">
-              {this.state.data ? (
-                this.state.data.length === 0 ? (
-                  <div className="section">
-                    <article className="message is-danger">
-                      <div className="message-header">
-                        <p>Not Found</p>
-                      </div>
-                      <div className="message-body">
-                        Not matching
-                      </div>
-                    </article>
+          {this.state.data ? (
+            this.state.data.length === 0 ? (
+              <div className="section">
+                <article className="message is-danger">
+                  <div className="message-header">
+                    <p>Not Found</p>
                   </div>
-                ) : (
-                  this.state.data.map(patient => (
-                    <PatientsListCard key={patient._id} patient={patient} />
-                  ))
-                )
-              ) : (
-                <progress className="progress is-small is-primary" max="100">15%</progress>
-              )}
+                  <div className="message-body">Not matching</div>
+                </article>
+              </div>
+            ) : (
+              this.state.data.map(patient => (
+                <PatientsListCard key={patient._id} patient={patient} />
+              ))
+            )
+          ) : (
+            <div className="section">
+              <article class="message">
+                <div class="message-header">
+                  <p>No data</p>
+                </div>
+                <div class="message-body">
+                  Search for drugs by name and get information.
+                </div>
+              </article>
             </div>
-          </div>
+          )}
         </div>
       </React.Fragment>
     );
