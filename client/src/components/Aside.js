@@ -7,7 +7,7 @@ import { UserCard } from "./UserCard";
 const _Aside = ({ path }) => {
   return (
     <React.Fragment>
-      <aside className="menu column is-one-quarter is-narrow is-fullheight container is-hidden-mobile">
+      <aside className="menu">
         <UserCard />
 
         <p className="menu-label">General</p>

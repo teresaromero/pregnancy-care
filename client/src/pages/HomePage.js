@@ -17,39 +17,34 @@ export default class HomePage extends React.Component {
     let signupTabClass = cx({ "is-active": signupActive });
     return (
       <React.Fragment>
-        <div className="section">
-          <div className="container">
-            <div className="tabs is-centered">
-              <ul>
-                <li
-                  className={loginTabClass}
-                  onClick={() =>
-                    this.setState({
-                      loginActive: true,
-                      signupActive: false
-                    })
-                  }
-                >
-                  <a>Login</a>
-                </li>
-                <li
-                  className={signupTabClass}
-                  onClick={() =>
-                    this.setState({
-                      signupActive: true,
-                      loginActive: false
-                    })
-                  }
-                >
-                  <a>Signup</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="container">
-            {loginActive ? <LoginForm /> : <SignupForm />}
-          </div>
+        <div className="tabs is-centered">
+          <ul>
+            <li
+              className={loginTabClass}
+              onClick={() =>
+                this.setState({
+                  loginActive: true,
+                  signupActive: false
+                })
+              }
+            >
+              <a>Login</a>
+            </li>
+            <li
+              className={signupTabClass}
+              onClick={() =>
+                this.setState({
+                  signupActive: true,
+                  loginActive: false
+                })
+              }
+            >
+              <a>Signup</a>
+            </li>
+          </ul>
         </div>
+
+        {loginActive ? <LoginForm /> : <SignupForm />}
       </React.Fragment>
     );
   }

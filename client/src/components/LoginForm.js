@@ -33,31 +33,29 @@ class _LoginForm extends React.Component {
   render() {
     let { email, password } = this.state;
     return (
-      <div className="section">
-        <form method="POST" onSubmit={e => this.handleSubmit(e)}>
-          <InputDiv
-            id="email-login"
-            name="email"
-            label="Email"
-            value={email}
-            type="email"
-            placeholder=""
-            handleChange={e => this.setState({ email: e.target.value })}
-          />
-          <InputDiv
-            id="password-login"
-            name="password"
-            label="Password"
-            value={password}
-            type="password"
-            placeholder=""
-            handleChange={e => this.setState({ password: e.target.value })}
-          />
-          <button type="submit" className="button is-info">
-            Login
-          </button>
-        </form>
-      </div>
+      <form method="POST" onSubmit={e => this.handleSubmit(e)}>
+        <InputDiv
+          id="email-login"
+          name="email"
+          label="Email"
+          value={email}
+          type="email"
+          placeholder=""
+          handleChange={e => this.setState({ email: e.target.value })}
+        />
+        <InputDiv
+          id="password-login"
+          name="password"
+          label="Password"
+          value={password}
+          type="password"
+          placeholder=""
+          handleChange={e => this.setState({ password: e.target.value })}
+        />
+        <button type="submit" className="button is-info">
+          Login
+        </button>
+      </form>
     );
   }
 }

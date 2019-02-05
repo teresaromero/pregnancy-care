@@ -6,10 +6,10 @@ export const DashboardPage = () => {
   return (
     <React.Fragment>
       <Messages />
-      <div className="section">
+      
         <Calendar locale="en" view="year" />
-      </div>
-      <div className="section">
+     
+      
         <p>
           Aenean eu neque fringilla nisi rhoncus pulvinar. Morbi vitae erat
           aliquet, pulvinar neque nec, blandit magna. Vestibulum at nisl arcu.
@@ -57,7 +57,7 @@ export const DashboardPage = () => {
           ac risus. Nullam enim magna, vehicula eu dapibus a, venenatis at
           tellus.
         </p>
-      </div>
+      
     </React.Fragment>
   );
 };

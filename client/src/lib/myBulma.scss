@@ -19,12 +19,13 @@ $success: $green;
 $warning: $yellow;
 $link: $dark-blue;
 
+html{
+
+}
 //Body
 body,#root,.App{
-  min-height: 100vh;
-  max-height: 100vh;
-  min-width: 100vw;
-  max-width: 100vw;
+  background-color:hsl(0, 0%, 98%);
+  
 }
 
 //User Card
@@ -34,7 +35,7 @@ body,#root,.App{
 
 //section padding
 $section-padding:1rem 1.5rem;
-$section-padding-medium:3rem 1.5rem;
+$section-padding-medium:3.75rem 1.5rem;
 $section-padding-large:6rem 1.5rem;
 
 
@@ -53,6 +54,16 @@ aside {
   overflow-y: scroll;
 }
 
+//main content scroll
+.mainContent{
+  min-height: 85vh;
+  max-height: 85vh;
+  overflow-y: scroll;
+}
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+}
 //Footer Nav
 
 @media screen and (min-width: 769px) {

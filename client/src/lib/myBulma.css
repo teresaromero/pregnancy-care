@@ -2,10 +2,7 @@
 @import url(../../node_modules/@fortawesome/fontawesome-free/css/all.css);
 @import url(../../node_modules/cool-checkboxes-for-bulma.io/dist/css/bulma-radio-checkbox.css);
 body, #root, .App {
-  min-height: 100vh;
-  max-height: 100vh;
-  min-width: 100vw;
-  max-width: 100vw; }
+  background-color: #fafafa; }
 
 .card-header.userCard {
   justify-content: space-evenly; }
@@ -14,6 +11,16 @@ aside {
   min-height: 85vh;
   max-height: 85vh;
   overflow-y: scroll; }
+
+.mainContent {
+  min-height: 85vh;
+  max-height: 85vh;
+  overflow-y: scroll; }
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+  /* make scrollbar transparent */ }
 
 @media screen and (min-width: 769px) {
   #footer-nav {
@@ -6770,7 +6777,7 @@ label.panel-block {
   padding: 1rem 1.5rem; }
   @media screen and (min-width: 1088px) {
     .section.is-medium {
-      padding: 3rem 1.5rem; }
+      padding: 3.75rem 1.5rem; }
     .section.is-large {
       padding: 6rem 1.5rem; } }
 
