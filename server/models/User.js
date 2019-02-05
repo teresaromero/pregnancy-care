@@ -22,13 +22,14 @@ const userSchema = new Schema(
       street: { type: String, required: true },
       city: { type: String, required: true },
       state: { type: String, required: true },
-      zip: { type: Number, required: true }
+      zip: { type: String, required: true }
     },
     phone: { type: String, required: true },
-    profession: { type: String, required: true },
-    insurance: { type: String, required: true },
-    RGPD: { type: Boolean, default: false },
-    RGPDdoc: { type: String },
+    profession: { type: String },
+    insurance: { type: String },
+    insNumber: { type: String },
+    GDPR: { type: Boolean, default: false, required: true },
+    GDPRdoc: { type: String },
     idNum: { type: String, required: true },
     business: [{ type: Schema.Types.ObjectId, ref: "Business" }]
   },
@@ -37,12 +38,15 @@ const userSchema = new Schema(
   }
 );
 
-userSchema.index({
-  name: "text",
-  surname: "text",
-  idNum: "text",
-  phone: "text"
-},{weights:{name:4,surname:3,idNum:2,phone:1}});
+userSchema.index(
+  {
+    name: "text",
+    surname: "text",
+    idNum: "text",
+    phone: "text"
+  },
+  { weights: { name: 4, surname: 3, idNum: 2, phone: 1 } }
+);
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;

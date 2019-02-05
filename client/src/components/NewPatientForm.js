@@ -1,11 +1,15 @@
 import React from "react";
 
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { errorMessageAction, clearMessages } from "../lib/redux/actions";
 
-
 import PatientsApi from "../lib/patientsApi";
+import { InputP } from "./InputP";
+import { InputDiv } from "./InputDiv";
+
+import { insurances } from "../lib/insuranceCompany";
+import { Messages } from "./Message";
 
 class _NewPatientForm extends React.Component {
   constructor() {
@@ -25,7 +29,9 @@ class _NewPatientForm extends React.Component {
       profession: "",
       bornDate: "",
       phone: "",
-      insurance: ""
+      insurance: "",
+      insNumber: "",
+      GDPR: false
     };
   }
 
@@ -44,9 +50,11 @@ class _NewPatientForm extends React.Component {
       profession,
       bornDate,
       phone,
-      insurance
+      insurance,
+      insNumber,
+      GDPR
     } = this.state;
-    const { dispatch } = this.props;
+    const { dispatch,history } = this.props;
     if (!e.target.checkValidity()) {
       return;
     }
@@ -64,11 +72,13 @@ class _NewPatientForm extends React.Component {
       profession,
       bornDate,
       phone,
-      insurance
+      insurance,
+      insNumber,
+      GDPR
     )
       .then(res => {
-        dispatch(clearMessages());
-        console.log(res);
+        dispatch(errorMessageAction("New Patient Created"));
+        history.push('/dashboard/patients')
       })
       .catch(e => {
         dispatch(errorMessageAction("Invalid credentials"));
@@ -89,229 +99,187 @@ class _NewPatientForm extends React.Component {
       profession,
       bornDate,
       phone,
-      insurance
+      insurance,
+      insNumber,
+      GDPR
     } = this.state;
 
     return (
       <div className="section">
+      <Messages/>
         <form method="POST" onSubmit={e => this.handleSubmit(e)}>
-          {/* IDENTIFICATION SUBFORM */}
-          <div className="field identification">
-            <div className="field-label is-normal">
-              <label className="label">Identification</label>
+          <div className="section">
+            <p>Identification</p>
+            <div className="field-body">
+              <InputP
+                id="name-patient"
+                name="name"
+                label="Name"
+                value={name}
+                type="text"
+                placeholder="Name"
+                handleChange={e => this.setState({ name: e.target.value })}
+              />
+              <InputP
+                id="surname-patient"
+                name="surname"
+                label="Surname"
+                value={surname}
+                type="text"
+                placeholder="Surname"
+                handleChange={e => this.setState({ surname: e.target.value })}
+              />
             </div>
             <div className="field-body">
-              <div className="field">
-                <div className="field-label is-normal">
-                  <label className="label">Name</label>
-                </div>
-                <p className="control is-expanded">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="Name"
-                    value={name}
-                    onChange={e => this.setState({ name: e.target.value })}
-                  />
-                </p>
-              </div>
-              <div className="field">
-                <div className="field-label is-normal">
-                  <label className="label">Surname</label>
-                </div>
-                <p className="control is-expanded">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="Surname"
-                    value={surname}
-                    onChange={e => this.setState({ surname: e.target.value })}
-                  />
-                </p>
-              </div>
+              <InputP
+                id="id-patient"
+                name="id"
+                label="ID"
+                value={idNum}
+                type="text"
+                placeholder="ID"
+                handleChange={e => this.setState({ idNum: e.target.value })}
+              />
+              <InputP
+                id="born-date-patient"
+                name="born-date"
+                label="Born Date"
+                value={bornDate}
+                type="date"
+                placeholder=""
+                handleChange={e => this.setState({ bornDate: e.target.value })}
+              />
             </div>
           </div>
-          <div className="field-body">
-            <div className="field">
-              <div className="field-label is-normal">
-                <label className="label">ID</label>
+          <div className="section">
+            <p>Contact Information</p>
+            <div className="field-body">
+              <InputP
+                id="street-patient"
+                name="street"
+                label="Street"
+                value={street}
+                type="text"
+                placeholder="Street"
+                handleChange={e => this.setState({ street: e.target.value })}
+              />
+              <InputP
+                id="number-patient"
+                name="number"
+                label="Number"
+                value={number}
+                type="text"
+                placeholder="24"
+                handleChange={e => this.setState({ number: e.target.value })}
+              />
+            </div>
+            <div className="field-body">
+              <InputP
+                id="city-patient"
+                name="city"
+                label="City"
+                value={city}
+                type="text"
+                placeholder="City"
+                handleChange={e => this.setState({ city: e.target.value })}
+              />
+              <InputP
+                id="state-patient"
+                name="state"
+                label="State"
+                value={state}
+                type="text"
+                placeholder="State"
+                handleChange={e => this.setState({ state: e.target.value })}
+              />
+              <InputP
+                id="zip-patient"
+                name="zip"
+                label="Zip"
+                value={zip}
+                type="text"
+                placeholder="Zip"
+                handleChange={e => this.setState({ zip: e.target.value })}
+              />
+            </div>
+            <div className="field-body">
+              <InputP
+                id="phone-patient"
+                name="phone"
+                label="Phone"
+                value={phone}
+                type="text"
+                placeholder="Phone"
+                handleChange={e => this.setState({ phone: e.target.value })}
+              />
+              <InputP
+                id="email-patient"
+                name="email"
+                label="Email"
+                value={email}
+                type="email"
+                placeholder="Email"
+                handleChange={e => this.setState({ email: e.target.value })}
+              />
+            </div>
+          </div>
+          <div className="section">
+            <p>Additional Information</p>
+            <div className="field-body">
+              <div class="field">
+                <label class="label">Insurance Company</label>
+                <p class="control">
+                  <div class="select is-fullwidth">
+                    <select
+                      value={insurance}
+                      onChange={e =>
+                        this.setState({ insurance: e.target.value })
+                      }
+                    >
+                      {insurances.map(company => (
+                        <option value={company}>{company}</option>
+                      ))}
+                    </select>
+                  </div>
+                </p>
               </div>
-              <p className="control is-expanded">
+              <InputP
+                id="insurance-patient"
+                name="insurance"
+                label="Insurance Number"
+                value={insNumber}
+                type="text"
+                placeholder="12544785"
+                handleChange={e => this.setState({ insNumber: e.target.value })}
+              />
+            </div>
+            <InputDiv
+              id="profession-patient"
+              name="profession"
+              label="Profession"
+              value={profession}
+              type="text"
+              placeholder=""
+              handleChange={e => this.setState({ profession: e.target.value })}
+            />
+          </div>
+          <div class="field">
+            <div class="control">
+              <label class="checkbox">
                 <input
-                  className="input"
-                  type="text"
-                  placeholder="ID"
-                  value={idNum}
-                  onChange={e => this.setState({ idNum: e.target.value })}
+                  type="checkbox"
+                  value={GDPR}
+                  onChange={e => this.setState({ GDPR: e.target.checked })}
                 />
-              </p>
-            </div>
-            <div className="field">
-              <div className="field-label is-normal">
-                <label className="label">Born Date</label>
-              </div>
-              <p className="control is-expanded">
-                <input
-                  className="input"
-                  type="date"
-                  placeholder=""
-                  value={bornDate}
-                  onChange={e => this.setState({ bornDate: e.target.value })}
-                />
-              </p>
+                Patient agrees with <Link to="">GDPR</Link> and has signed it.
+              </label>
             </div>
           </div>
-          {/* CONTACT SUBFORM */}
-          <div className="field contact">
-            <div className="field-label is-normal">
-              <label className="label">Contact Information</label>
-            </div>
-            <div className="field-body">
-              <div className="field">
-                <div className="field-label is-normal">
-                  <label className="label">Street</label>
-                </div>
-                <p className="control is-expanded">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="Street"
-                    value={street}
-                    onChange={e => this.setState({ street: e.target.value })}
-                  />
-                </p>
-              </div>
-              <div className="field">
-                <div className="field-label is-normal">
-                  <label className="label">Number</label>
-                </div>
-                <p className="control is-expanded">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="Number"
-                    value={number}
-                    onChange={e => this.setState({ number: e.target.value })}
-                  />
-                </p>
-              </div>
-            </div>
-            <div className="field-body">
-              <div className="field">
-                <div className="field-label is-normal">
-                  <label className="label">City</label>
-                </div>
-                <p className="control is-expanded">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="City"
-                    value={city}
-                    onChange={e => this.setState({ city: e.target.value })}
-                  />
-                </p>
-              </div>
-              <div className="field">
-                <div className="field-label is-normal">
-                  <label className="label">State</label>
-                </div>
-                <p className="control is-expanded">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="State"
-                    value={state}
-                    onChange={e => this.setState({ state: e.target.value })}
-                  />
-                </p>
-              </div>
-              <div className="field">
-                <div className="field-label is-normal">
-                  <label className="label">Zip Code</label>
-                </div>
-                <p className="control is-expanded">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="Zip Code"
-                    value={zip}
-                    onChange={e => this.setState({ zip: e.target.value })}
-                  />
-                </p>
-              </div>
-            </div>
-            <div className="field-body">
-              <div className="field">
-                <div className="field-label is-normal">
-                  <label className="label">Phone</label>
-                </div>
-                <p className="control is-expanded">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="Phone"
-                    value={phone}
-                    onChange={e => this.setState({ phone: e.target.value })}
-                  />
-                </p>
-              </div>
-              <div className="field">
-                <div className="field-label is-normal">
-                  <label className="label">Email</label>
-                </div>
-                <p className="control is-expanded">
-                  <input
-                    className="input"
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={e => this.setState({ email: e.target.value })}
-                  />
-                </p>
-              </div>
-            </div>
+          <div className="has-text-centered">
+            <button type="submit" className="button is-primary">
+              Create
+            </button>
           </div>
-          <div className="field additional">
-            <div className="field-label is-normal">
-              <label className="label">Aditional Info</label>
-            </div>
-            <div className="field-body">
-              <div className="field">
-                <div className="field-label is-normal">
-                  <label className="label">Insurance</label>
-                </div>
-                <p className="control is-expanded">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="Insurance"
-                    value={insurance}
-                    onChange={e => this.setState({ insurance: e.target.value })}
-                  />
-                </p>
-              </div>
-              <div className="field">
-                <div className="field-label is-normal">
-                  <label className="label">Profession</label>
-                </div>
-                <p className="control is-expanded">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="Profession"
-                    value={profession}
-                    onChange={e =>
-                      this.setState({ profession: e.target.value })
-                    }
-                  />
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <button type="submit" className="button is-primary">
-            Create
-          </button>
         </form>
       </div>
     );

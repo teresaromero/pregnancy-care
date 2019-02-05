@@ -1,6 +1,6 @@
 import React from "react";
 
-import { InputF } from "./Input.js";
+import { InputDiv } from "./InputDiv.js";
 import VademecumApi from "../lib/vademecumApi.js";
 import { DrugListCard } from "./DrugListCard.js";
 
@@ -39,7 +39,7 @@ export default class VademecumSearch extends React.Component {
     return (
       <React.Fragment>
         <div className="section">
-          <InputF
+          <InputDiv
             name="nombre"
             title="Search"
             label="Drug Name"

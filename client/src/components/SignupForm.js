@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { errorMessageAction, login, clearMessages } from "../lib/redux/actions";
 
-import { InputF } from "./Input";
+import { InputDiv } from "./InputDiv";
 
 class _SignupForm extends React.Component {
   constructor() {
@@ -42,7 +42,7 @@ class _SignupForm extends React.Component {
     return (
       <div className="section">
         <form method="POST" onSubmit={e => this.handleSubmit(e)}>
-          <InputF
+          <InputDiv
             id="name-signup"
             name="name"
             value={name}
@@ -51,7 +51,7 @@ class _SignupForm extends React.Component {
             placeholder=""
             handleChange={e => this.setState({ name: e.target.value })}
           />
-          <InputF
+          <InputDiv
             id="surname-signup"
             name="surname"
             value={surname}
@@ -60,7 +60,7 @@ class _SignupForm extends React.Component {
             placeholder=""
             handleChange={e => this.setState({ surname: e.target.value })}
           />
-          <InputF
+          <InputDiv
             id="email-signup"
             name="email"
             value={email}
@@ -69,7 +69,7 @@ class _SignupForm extends React.Component {
             placeholder=""
             handleChange={e => this.setState({ email: e.target.value })}
           />
-          <InputF
+          <InputDiv
             id="password-signup"
             name="password"
             value={password}

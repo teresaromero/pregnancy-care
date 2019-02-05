@@ -9,18 +9,20 @@ const bcryptSalt = 10;
 router.post("/create", (req, res, next) => {
   const {
     name,
-    surname,
-    email,
-    idNum,
-    street,
-    number,
-    city,
-    state,
-    zip,
-    profession,
-    bornDate,
-    phone,
-    insurance
+      surname,
+      email,
+      idNum,
+      street,
+      number,
+      city,
+      state,
+      zip,
+      profession,
+      bornDate,
+      phone,
+      insurance,
+      insNumber,
+      GDPR
   } = req.body;
   if (name === "" || email === "") {
     res.json({ message: "Please enter all values" });
@@ -52,6 +54,8 @@ router.post("/create", (req, res, next) => {
       bornDate,
       phone,
       insurance,
+      insNumber,
+      GDPR,
       password: hashPass,
       role: "CUSTOMER"
     });

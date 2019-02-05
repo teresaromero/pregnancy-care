@@ -27,13 +27,15 @@ export default class PatientsApi {
     idNum,
     street,
     number,
-    zip,
-    state,
     city,
+    state,
+    zip,
     profession,
     bornDate,
     phone,
-    insurance
+    insurance,
+    insNumber,
+    GDPR
   ) {
     return instance
       .post("/api/patients/create", {
@@ -43,13 +45,15 @@ export default class PatientsApi {
         idNum,
         street,
         number,
-        zip,
-        state,
         city,
+        state,
+        zip,
         profession,
         bornDate,
         phone,
-        insurance
+        insurance,
+        insNumber,
+        GDPR
       })
       .then(res => console.log(res.data))
       .catch(res => console.log(res.data));

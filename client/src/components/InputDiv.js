@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export const InputF = ({
+export const InputDiv = ({
   htmlFor,
   id,
   name,
@@ -31,6 +31,6 @@ export const InputF = ({
   );
 };
 
-InputF.propTypes={
+InputDiv.propTypes={
   handleChange: PropTypes.func
 }

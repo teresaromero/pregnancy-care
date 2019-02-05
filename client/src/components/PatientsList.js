@@ -2,7 +2,7 @@ import React from "react";
 
 import PatientsApi from "../lib/patientsApi.js";
 import { PatientsListCard } from "./PatientsListCard.js";
-import { InputF } from "./Input.js";
+import { InputDiv } from "./InputDiv.js";
 
 export default class PatientsList extends React.Component {
   constructor() {
@@ -45,7 +45,7 @@ export default class PatientsList extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <InputF
+        <InputDiv
           name="Search"
           title="Search"
           label="Quick Search"

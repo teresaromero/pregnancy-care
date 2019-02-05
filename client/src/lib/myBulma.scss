@@ -41,7 +41,7 @@ $section-padding-large:6rem 1.5rem;
 
 //Navbar
 $navbar-breakpoint: 769px;
-$navbar-height: 2vh;
+$navbar-height: 3rem;
 $navbar-burger-color: $yellow;
 
 
@@ -84,3 +84,4 @@ aside {
 @import "../../node_modules/bulma/bulma.sass";
 @import "../../node_modules/bulma-badge/dist/css/bulma-badge.sass";
 @import "../../node_modules/bulma-tooltip/dist/css/bulma-tooltip.sass";
+@import "../../node_modules/cool-checkboxes-for-bulma.io/dist/css/bulma-radio-checkbox.css";
