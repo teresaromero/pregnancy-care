@@ -8,51 +8,76 @@ $dark-blue: #105acc;
 $green: #a4cf7c;
 $yellow: #f9e939;
 $light-blue: #91d4f2;
-$blue:#0393DF;
+$blue: #0393df;
 $beige-light: #d0d1cd;
 $beige-lighter: #eff0eb;
-
 
 //bulma colors
 $primary: $dark-blue;
 $info: $light-blue;
-$success:$green;
-$warning:$yellow;
+$success: $green;
+$warning: $yellow;
 $link: $dark-blue;
 
 //Body
-body{
-  min-height:100vh;
+body {
+  min-height: 100vh;
   max-height: 100vh;
 }
 
-#root, .App{
+#root,
+.App {
   min-height: 100%;
   max-height: 100%;
 }
 
 //User Card
-.card-header.userCard{
+.card-header.userCard {
   justify-content: space-evenly;
 }
 
-  
-
 //Navbar
-$navbar-breakpoint:769px;
+$navbar-breakpoint: 769px;
 $navbar-height: 3.7rem;
 $navbar-burger-color: $yellow;
 
+
+
 //Aside
-aside{
+aside {
   min-height: 85vh;
   max-height: 85vh;
   overflow-y: scroll;
 }
 
-//Dashboard Conteiner
+//Footer Nav
 
+@media screen and (min-width: 769px) {
+  
+  #footer-nav {
+    display: none;
+  }
+  html.has-navbar-fixed-bottom {
+    padding-bottom: 0rem;
+  }
+}
 
-@import "../../node-modules/bulma/bulma.sass";
-@import "../../node-modules/bulma-badge/dist/css/bulma-badge.sass";
-@import "../../node-modules/bulma-tooltip/dist/css/bulma-tooltip.sass";
+@media screen and (max-width: 768px) {
+  
+  #footer-nav{
+    bottom:-1px;
+  }
+  #footer-nav.navbar-menu {
+    align-items: stretch;
+    display: flex;
+  }
+  #footer-content{
+    justify-content: space-between;
+  }
+    
+    
+}
+
+@import "../../node_modules/bulma/bulma.sass";
+@import "../../node_modules/bulma-badge/dist/css/bulma-badge.sass";
+@import "../../node_modules/bulma-tooltip/dist/css/bulma-tooltip.sass";

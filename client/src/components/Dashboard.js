@@ -9,6 +9,7 @@ import { withRouter } from "react-router-dom";
 import { AddPatientPage } from "../pages/AddPatientPage";
 import { AdvancedSearchPage } from "../pages/AdvancedSearchPage";
 import {VademecumPage} from '../pages/VademecumPage'
+import { FooterNav } from "./FooterNav";
 
 
 
@@ -68,6 +69,7 @@ const _Dashboard = ({ match, children, user }) => {
           </div>
         </div>
       </div>
+      <FooterNav/>
     </React.Fragment>
   );
 };
