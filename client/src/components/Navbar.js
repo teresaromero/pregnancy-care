@@ -1,5 +1,4 @@
 import React from "react";
-import cx from "classnames";
 import { withRouter, NavLink } from "react-router-dom";
 import authApi from "../lib/authApi";
 import { connect } from "react-redux";
@@ -17,19 +16,16 @@ class _Navbar extends React.Component {
     let { dispatch, history } = this.props;
     authApi.logout().then(() => {
       dispatch(logout());
-      history.push("/logout");
+      history.push("/");
     });
   }
 
   render() {
-    let { isActive } = this.state;
-    const burgerClass = cx("navbar-burger burger", { "is-active": isActive });
-    const menuClass = cx("navbar-menu", { "is-active": isActive });
     let { user } = this.props;
     return (
       <React.Fragment>
         <nav
-        id="top-nav"
+          id="top-nav"
           className="navbar is-primary is-fixed-top"
           role="navigation"
           aria-label="main navigation"

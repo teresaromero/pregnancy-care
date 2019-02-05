@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { UserCard } from "./UserCard";
 
-const _Aside = ({ path }) => {
+const _Aside = () => {
   return (
     <React.Fragment>
       <aside className="menu">
@@ -13,7 +13,7 @@ const _Aside = ({ path }) => {
         <p className="menu-label">General</p>
         <ul className="menu-list">
           <li>
-            <NavLink to={`${path}`} activeClassName="is-active">
+            <NavLink to={"/dashboard"} activeClassName="is-active">
               <span className="icon">
                 <i className="fas fa-home" />
               </span>
@@ -21,7 +21,7 @@ const _Aside = ({ path }) => {
             </NavLink>
           </li>
           <li>
-            <NavLink to={`${path}/patients`} activeClassName="is-active">
+            <NavLink to={`/dashboard/patients`} activeClassName="is-active">
               <span className="icon">
                 <i className="fas fa-users" />
               </span>
@@ -30,7 +30,7 @@ const _Aside = ({ path }) => {
             <ul>
               <li>
                 <NavLink
-                  to={`${path}/patients/add`}
+                  to={`/dashboard/patients/add`}
                   activeClassName="is-active"
                 >
                   <span>Add Patient</span>
@@ -38,7 +38,7 @@ const _Aside = ({ path }) => {
               </li>
               <li>
                 <NavLink
-                  to={`${path}/patients/advancedSearch`}
+                  to={`/dashboard/patients/advancedSearch`}
                   activeClassName="is-active"
                 >
                   <span>Advanced Search</span>
@@ -50,7 +50,7 @@ const _Aside = ({ path }) => {
         <p className="menu-label">Agenda</p>
         <ul className="menu-list">
           <li>
-            <NavLink to="/overview" activeClassName="is-active">
+            <NavLink to="/dashboard/overview" activeClassName="is-active">
               <span className="icon">
                 <i className="fas fa-calendar-alt" />
               </span>
@@ -58,7 +58,7 @@ const _Aside = ({ path }) => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/new-appointment" activeClassName="is-active">
+            <NavLink to="/dashboard/new-appointment" activeClassName="is-active">
               <span className="icon">
                 <i className="fas fa-calendar-plus" />
               </span>
@@ -69,7 +69,7 @@ const _Aside = ({ path }) => {
         <p className="menu-label">Data</p>
         <ul className="menu-list">
           <li>
-            <NavLink to={`${path}/vademecum`} activeClassName="is-active">
+            <NavLink to={`/dashboard/vademecum`} activeClassName="is-active">
               <span className="icon">
                 <i className="fas fa-search" />
               </span>
@@ -77,7 +77,7 @@ const _Aside = ({ path }) => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/research" activeClassName="is-active">
+            <NavLink to="/dashboard/research" activeClassName="is-active">
               <span className="icon">
                 <i className="fas fa-book-medical" />
               </span>
@@ -88,7 +88,7 @@ const _Aside = ({ path }) => {
         <p className="menu-label">Settings</p>
         <ul className="menu-list">
           <li>
-            <NavLink to={`${path}/profile`} activeClassName="is-active">
+            <NavLink to={`/dashboard/profile`} activeClassName="is-active">
               <span className="icon">
                 <i className="fas fa-cog" />
               </span>

@@ -9,21 +9,20 @@ import { withRouter } from "react-router-dom";
 import { AddPatientPage } from "../pages/AddPatientPage";
 import { AdvancedSearchPage } from "../pages/AdvancedSearchPage";
 import { VademecumPage } from "../pages/VademecumPage";
-import { FooterNav } from "./FooterNav";
 
-const _Dashboard = ({ match, children, user }) => {
-  let { path } = match;
-  console.log(children);
+const _Dashboard = ({ user }) => {
   return (
     <React.Fragment>
       <div className="mainLayout">
         {user ? (
           <React.Fragment>
             <div className="columns is-marginless">
-              <div className="column is-hidden-mobile	
- is-one-quarter is-paddingless is-marginless">
+              <div
+                className="column is-hidden-mobile	
+ is-one-quarter is-paddingless is-marginless"
+              >
                 <div className="section">
-                  <Aside path={path} />
+                  <Aside />
                 </div>
               </div>
               <div className="column is-paddingless is-marginless">
@@ -33,39 +32,30 @@ const _Dashboard = ({ match, children, user }) => {
                       <Route
                         exact
                         strict
-                        path={`${path}`}
+                        path={`/dashboard`}
                         component={DashboardPage}
                       />
                       <Route
                         exact
-                        strict
-                        path={`${path}/patients`}
+                        path={`/dashboard/patients`}
                         component={PatientsPage}
                       />
                       <Route
                         exact
-                        strict
-                        path={`${path}/patients/add`}
+                        path={`/dashboard/patients/add`}
                         component={AddPatientPage}
                       />
                       <Route
                         exact
-                        strict
-                        path={`${path}/patients/advancedSearch`}
+                        path={`/dashboard/patients/advancedSearch`}
                         component={AdvancedSearchPage}
                       />
                       <Route
                         exact
-                        strict
-                        path={`${path}/vademecum`}
+                        path={`/dashboard/vademecum`}
                         component={VademecumPage}
                       />
-                      <Route
-                        exact
-                        strict
-                        path={`${path}/profile`}
-                        component={ProfilePage}
-                      />
+                      <Route exact path={`/profile`} component={ProfilePage} />
                     </Switch>
                   </div>
                 </div>

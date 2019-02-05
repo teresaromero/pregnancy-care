@@ -2,17 +2,17 @@ import React from "react";
 import { withRouter, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
-const _FooterNav = ({path}) => {
+const _FooterNav = () => {
   return (
     <nav
-      class="navbar is-fixed-bottom is-primary"
+      className="navbar is-fixed-bottom is-primary"
       id="footer-nav"
       role="navigation"
       aria-label="footer navigation"
     >
       <div id="footer-content" className="navbar-brand">
         <NavLink
-          to={`${path}`}
+          to={`/`}
           activeClassName="is-active"
           className="navbar-item"
         >
@@ -21,7 +21,7 @@ const _FooterNav = ({path}) => {
           </span>
         </NavLink>
         <NavLink
-          to={`${path}/patients/add`}
+          to={`/patients/add`}
           activeClassName="is-active"
           className="navbar-item"
         >
@@ -30,7 +30,7 @@ const _FooterNav = ({path}) => {
           </span>
         </NavLink>
         <NavLink
-          to={`${path}/calendar`}
+          to={`/calendar`}
           activeClassName="is-active"
           className="navbar-item"
         >
@@ -39,7 +39,7 @@ const _FooterNav = ({path}) => {
           </span>
         </NavLink>
         <NavLink
-          to={`${path}/vademecum`}
+          to={`/vademecum`}
           activeClassName="is-active"
           className="navbar-item"
         >
@@ -48,7 +48,7 @@ const _FooterNav = ({path}) => {
           </span>
         </NavLink>
         <NavLink
-          to={`${path}/profile`}
+          to={`/profile`}
           activeClassName="is-active"
           className="navbar-item"
         >

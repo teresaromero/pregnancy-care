@@ -7,10 +7,12 @@ const initialStore = {
 export const rootReducer = (store = initialStore, action) => {
   switch (action.type) {
     case "LOGIN":
+    console.log(action.user)
       store = {
         ...store,
         user: action.user
       };
+  
       break;
     case "LOGOUT":
       store = {

@@ -10,6 +10,7 @@ export const store = createStore(
 
 AuthAPI.currentUser()
   .then(user => {
+    console.log(user)
     store.dispatch(login(user));
   })
   .catch(e => store.dispatch(errorMessageAction("YOU HAVE TO LOGIN")));

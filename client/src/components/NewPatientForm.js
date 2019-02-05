@@ -226,10 +226,10 @@ class _NewPatientForm extends React.Component {
           <div className="section">
             <p>Additional Information</p>
             <div className="field-body">
-              <div class="field">
-                <label class="label">Insurance Company</label>
-                <p class="control">
-                  <div class="select is-fullwidth">
+              <div className="field">
+                <label className="label">Insurance Company</label>
+                <p className="control">
+                  <div className="select is-fullwidth">
                     <select
                       value={insurance}
                       onChange={e =>
@@ -237,7 +237,7 @@ class _NewPatientForm extends React.Component {
                       }
                     >
                       {insurances.map(company => (
-                        <option value={company}>{company}</option>
+                        <option value={company} key={company}>{company}</option>
                       ))}
                     </select>
                   </div>
@@ -263,9 +263,9 @@ class _NewPatientForm extends React.Component {
               handleChange={e => this.setState({ profession: e.target.value })}
             />
           </div>
-          <div class="field">
-            <div class="control">
-              <label class="checkbox">
+          <div className="field">
+            <div className="control">
+              <label className="checkbox">
                 <input
                   type="checkbox"
                   value={GDPR}

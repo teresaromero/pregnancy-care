@@ -22,16 +22,16 @@ export default class VademecumSearch extends React.Component {
   }
 
   handleSearch(e) {
-    console.log(this.state.query);
+
     if (e.target.value !== "") {
-      let param = e.target.name;
       this.setState({ query: e.target.value }, () => {
-        VademecumApi.drugs(param, this.state.query).then(results => {
+        console.log(this.state.query)
+        VademecumApi.drugs("nombre", this.state.query).then(results => {
           this.setState({ data: results });
         });
       });
     } else {
-      this.setState({ query: "" });
+      this.setState({ query:"",data:null });
     }
   }
 
@@ -49,22 +49,22 @@ export default class VademecumSearch extends React.Component {
             handleChange={e => this.handleSearch(e)}
           />
 
-          <nav class="level is-mobile">
-            <div class="level-item has-text-centered">
-              <span class="icon is-large has-text-danger">
-                <i class="fas fa-user-md" aria-hidden="true" />
+          <nav className="level is-mobile">
+            <div className="level-item has-text-centered">
+              <span className="icon is-large has-text-danger">
+                <i className="fas fa-user-md" aria-hidden="true" />
               </span>
               <span>With medical reciept</span>
             </div>
-            <div class="level-item has-text-centered">
-              <span class="icon is-large has-text-danger">
-                <i class="fas fa-car-crash" aria-hidden="true" />
+            <div className="level-item has-text-centered">
+              <span className="icon is-large has-text-danger">
+                <i className="fas fa-car-crash" aria-hidden="true" />
               </span>
               <span>Driving effects</span>
             </div>
-            <div class="level-item has-text-centered">
-              <span class="icon is-large has-text-danger">
-                <i class="fas fa-caret-down" aria-hidden="true" />
+            <div className="level-item has-text-centered">
+              <span className="icon is-large has-text-danger">
+                <i className="fas fa-caret-down" aria-hidden="true" />
               </span>
               <span>Black triangle</span>
             </div>
@@ -88,11 +88,11 @@ export default class VademecumSearch extends React.Component {
               )
             ) : (
               <div className="section">
-                <article class="message">
-                  <div class="message-header">
+                <article className="message">
+                  <div className="message-header">
                     <p>No data</p>
                   </div>
-                  <div class="message-body">
+                  <div className="message-body">
                     Search for drugs by name and get information.
                   </div>
                 </article>

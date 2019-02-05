@@ -6,8 +6,8 @@ const _Message = ({ messages, dispatch }) => {
   return (
     <div>
       {messages.map((m, i) => (
-        <div class="notification" key={i}>
-          <button class="delete" onClick={() => dispatch(clearMessages())} />
+        <div className="notification" key={i}>
+          <button className="delete" onClick={() => dispatch(clearMessages())} />
           {m}
         </div>
       ))}

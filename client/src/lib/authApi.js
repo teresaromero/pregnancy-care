@@ -5,15 +5,14 @@ import axios from 'axios';
 const instance = axios.create({
     baseURL: 'http://localhost:3000',
     timeout: 1000,
-    withCredentials: true,
-    validateStatus:false
+    withCredentials: true
 });
 
 
 export default class AuthApi {
   static currentUser() {
     return instance.get("/api/auth/currentUser")
-      .then(res => res.data.user)
+      .then(res => res.data)
       .catch(err => console.log(err));
   }
   static signup(name, surname, email, password) {

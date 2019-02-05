@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route } from "react-router";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import { Dashboard } from "./components/Dashboard";
 
 import { Navbar } from "./components/Navbar";
@@ -21,10 +21,17 @@ class _App extends Component {
 
             {this.props.children}
 
-            <Route exact strict path="/" component={HomePage} />
+            <Route
+              exact
+              strict
+              path="/"
+              render={() =>
+                user ? <Redirect to="/dashboard" /> : <HomePage />
+              }
+            />
             <Route path="/logout" component={LogoutPage} />
             <Route path="/dashboard" component={Dashboard} />
-            {user ? <FooterNav path="/dashboard"/> : null}
+            {user ? <FooterNav path="/dashboard" /> : null}
           </div>
         )}
       />

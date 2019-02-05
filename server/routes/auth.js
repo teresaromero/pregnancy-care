@@ -94,8 +94,11 @@ router.get("/confirm/:confirmationCode", (req, res) => {
 });
 
 router.get("/logout", (req, res) => {
-  req.logout();
-  res.json({ success: "Ok! Loged out" });
+  req.logOut()
+  console.log("logout")
+  res.json({ success: "Ok! Loged out" })
+  
+  
 });
 
 module.exports = router;

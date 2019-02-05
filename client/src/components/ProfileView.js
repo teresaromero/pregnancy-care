@@ -7,8 +7,8 @@ import { withRouter } from "react-router-dom";
 const _ProfileView = ({ user }) => {
   return (
     <div className="section">
-      <div class="columns is-mobile is-centered has-text-centered	">
-        <div class="column is-half">
+      <div className="columns is-mobile is-centered has-text-centered	">
+        <div className="column is-half">
           <div className="section" />
           <p>
             {user.name} {user.surname}

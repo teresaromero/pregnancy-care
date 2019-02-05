@@ -72,11 +72,11 @@ export default class PatientsList extends React.Component {
             )
           ) : (
             <div className="section">
-              <article class="message">
-                <div class="message-header">
+              <article className="message">
+                <div className="message-header">
                   <p>No data</p>
                 </div>
-                <div class="message-body">
+                <div className="message-body">
                   Search for drugs by name and get information.
                 </div>
               </article>
