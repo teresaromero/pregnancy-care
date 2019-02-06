@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter, NavLink } from "react-router-dom";
-import authApi from "../lib/authApi";
+import authApi from "../lib/APIs/authApi";
 import { connect } from "react-redux";
 import { logout } from "../lib/redux/actions";
 

@@ -8,7 +8,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET
 });
 
-const storageProfilePictures = cloudinaryStorage({
+const profilePictures = cloudinaryStorage({
   cloudinary,
   folder: "pregnancy-care/profile-pictures",
   allowedFormats: ["jpg", "png"],
@@ -17,6 +17,6 @@ const storageProfilePictures = cloudinaryStorage({
   }
 });
 
-const uploadProfilePicture = multer({ storage: storageProfilePictures });
+const parser = multer({ storage: profilePictures });
 
-module.exports = { uploadProfilePicture };
+module.exports = { parser };

@@ -4,7 +4,7 @@ import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { errorMessageAction, clearMessages } from "../lib/redux/actions";
 
-import PatientsApi from "../lib/patientsApi";
+import PatientsApi from "../lib/APIs/patientsApi";
 import { InputP } from "./InputP";
 import { InputDiv } from "./InputDiv";
 

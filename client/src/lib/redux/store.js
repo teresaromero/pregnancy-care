@@ -1,6 +1,6 @@
 import { createStore } from "redux";
 import { rootReducer } from "./reducer";
-import AuthAPI from "../authApi";
+import AuthAPI from "../APIs/authApi";
 import { login, errorMessageAction } from "./actions";
 
 export const store = createStore(

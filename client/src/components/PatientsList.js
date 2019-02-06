@@ -1,6 +1,6 @@
 import React from "react";
 
-import PatientsApi from "../lib/patientsApi.js";
+import PatientsApi from "../lib/APIs/patientsApi.js";
 import { PatientsListCard } from "./PatientsListCard.js";
 import { InputDiv } from "./InputDiv.js";
 

@@ -73,40 +73,6 @@ router.post("/signup", (req, res, next) => {
   });
 });
 
-router.put("/edit", (req, res, next) => {
-  const {
-    name,
-    surname,
-    email,
-    idNum,
-    street,
-    number,
-    city,
-    state,
-    zip,
-    bornDate,
-    phone,
-    id
-  } = req.body;
-
-  let address = { street, number, city, state, zip };
-
-  User.findByIdAndUpdate(
-    id,
-    {
-      name,
-      surname,
-      email,
-      idNum,
-      address,
-      bornDate,
-      phone
-    },
-    { new: true }
-  )
-    .then(user => res.json({ user }))
-    .catch(e => console.log(e));
-});
 
 router.get("/currentUser", (req, res) => {
   if (req.isAuthenticated()) {

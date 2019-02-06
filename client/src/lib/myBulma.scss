@@ -19,13 +19,22 @@ $success: $green;
 $warning: $yellow;
 $link: $dark-blue;
 
-html{
 
-}
 //Body
 body,#root,.App{
   background-color:hsl(0, 0%, 98%);
   
+}
+
+//upload icon
+
+#uploadFile{
+  top:-36px;
+  left:58px;
+  .icon.is-large {
+    background-color: $light-blue;
+    border-radius: 50%;
+  }
 }
 
 //User Card

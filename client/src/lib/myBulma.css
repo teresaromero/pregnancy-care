@@ -4,6 +4,13 @@
 body, #root, .App {
   background-color: #fafafa; }
 
+#uploadFile {
+  top: -36px;
+  left: 58px; }
+  #uploadFile .icon.is-large {
+    background-color: #91d4f2;
+    border-radius: 50%; }
+
 .card-header.userCard {
   justify-content: space-evenly; }
 

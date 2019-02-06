@@ -10,6 +10,7 @@ export const logout = () => {
     type: "LOGOUT"
   };
 };
+
 export const edit = user => {
   return {
     type: "EDIT",

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { InputDiv } from "./InputDiv.js";
-import VademecumApi from "../lib/vademecumApi.js";
+import VademecumApi from "../lib/APIs/vademecumApi.js";
 import { DrugListCard } from "./DrugListCard.js";
 
 export default class VademecumSearch extends React.Component {

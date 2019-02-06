@@ -70,8 +70,8 @@ app.use("/", index);
 
 const authRoutes = require("./routes/auth");
 app.use("/api/auth", authRoutes);
-const uploadRoutes = require("./routes/upload");
-app.use("/api/upload", uploadRoutes);
+const userRoutes = require("./routes/user");
+app.use("/api/user", userRoutes);
 const patientRoutes = require("./routes/patients");
 app.use("/api/patients", patientRoutes);
 

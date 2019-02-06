@@ -3,8 +3,10 @@ import moment from "moment";
 import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { InputP } from "./InputP";
-import AuthApi from "../lib/authApi";
+import AuthApi from "../lib/APIs/authApi";
 import { edit } from "../lib/redux/actions";
+
+import { ProfilePicture } from "./ProfilePicture";
 
 class _ProfileView extends React.Component {
   constructor(props) {
@@ -68,7 +70,8 @@ class _ProfileView extends React.Component {
       state: null,
       zip: null,
       bornDate: null,
-      phone: null
+      phone: null,
+      image: null
     });
   }
 
@@ -86,7 +89,8 @@ class _ProfileView extends React.Component {
       state,
       zip,
       bornDate,
-      phone
+      phone,
+      image
     } = this.state;
     let { _id } = user;
 
@@ -102,11 +106,14 @@ class _ProfileView extends React.Component {
       zip,
       bornDate,
       phone,
+      image,
       _id
     )
       .then(user => dispatch(edit(user)))
       .catch(e => console.log(e));
   }
+
+
 
   render() {
     let { user, match } = this.props;
@@ -122,7 +129,8 @@ class _ProfileView extends React.Component {
       state,
       zip,
       bornDate,
-      phone
+      phone,
+      image
     } = this.state;
     return (
       <React.Fragment>
@@ -155,11 +163,7 @@ class _ProfileView extends React.Component {
                   </h4>
                 </div>
               </div>
-              <figure className="media-right">
-                <p className="image is-96x96">
-                  <img className="is-rounded" src={user.image} alt="profile" />
-                </p>
-              </figure>
+              <ProfilePicture/>
             </article>
           </div>
         </section>
@@ -205,7 +209,7 @@ class _ProfileView extends React.Component {
                 id="born-date-patient"
                 name="born-date"
                 label="Born Date"
-                value={user.bornDate ? bornDate : ""}
+                value={bornDate}
                 type="date"
                 placeholder=""
                 handleChange={e => this.setState({ bornDate: e.target.value })}

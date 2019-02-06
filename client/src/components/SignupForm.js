@@ -1,5 +1,5 @@
 import React from "react";
-import AuthApi from "../lib/authApi";
+import AuthApi from "../lib/APIs/authApi";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { errorMessageAction, login, clearMessages } from "../lib/redux/actions";
