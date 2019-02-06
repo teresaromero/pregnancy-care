@@ -1,137 +1,51 @@
 import React from "react";
 import moment from "moment";
-import { NavLink, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { InputP } from "./InputP";
-import AuthApi from "../lib/APIs/authApi";
-import { edit } from "../lib/redux/actions";
 
 import { ProfilePicture } from "./ProfilePicture";
+import UserApi from "../lib/APIs/userApi";
+import { edit } from "../lib/redux/actions";
 
 class _ProfileView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       disabled: true,
-      name: null,
-      surname: null,
-      email: null,
-      idNum: null,
-      street: null,
-      number: null,
-      city: null,
-      state: null,
-      zip: null,
-      bornDate: null,
-      phone: null
+      user: null
     };
   }
 
   componentWillMount() {
-    let { user } = this.props;
-    user.address
-      ? this.setState({
-          name: user.name,
-          surname: user.surname,
-          email: user.email,
-          idNum: user.idNum,
-          street: user.address.street,
-          number: user.address.number,
-          city: user.address.city,
-          state: user.address.state,
-          zip: user.address.zip,
-          bornDate: user.bornDate,
-          phone: user.phone
-        })
-      : this.setState({
-          name: user.name,
-          surname: user.surname,
-          email: user.email,
-          street: "",
-          number: "",
-          city: "",
-          state: "",
-          zip: "",
-          bornDate: "",
-          phone: ""
-        });
+    this.setState({ user: this.props.user });
   }
 
   componentWillUnmount() {
-    this.setState({
-      disabled: true,
-      name: null,
-      surname: null,
-      email: null,
-      idNum: null,
-      street: null,
-      number: null,
-      city: null,
-      state: null,
-      zip: null,
-      bornDate: null,
-      phone: null,
-      image: null
-    });
+    this.setState({ user: null });
   }
-
+  handleUserChange(e) {
+    let uptUser = { ...this.state.user };
+    let { value } = e.target;
+    let field = e.target.name;
+    uptUser[field] = value;
+    this.setState({ user: uptUser });
+  }
+  handleAddressChange(e) {
+    let uptUser = { ...this.state.user };
+    let { value } = e.target;
+    let field = e.target.name;
+    uptUser["address"][field] = value;
+    this.setState({ user: uptUser });
+  }
   handleEdit() {
-    this.setState({ disabled: true });
-    let { user, dispatch } = this.props;
-    const {
-      name,
-      surname,
-      email,
-      idNum,
-      street,
-      number,
-      city,
-      state,
-      zip,
-      bornDate,
-      phone,
-      image
-    } = this.state;
-    let { _id } = user;
-
-    AuthApi.edit(
-      name,
-      surname,
-      email,
-      idNum,
-      street,
-      number,
-      city,
-      state,
-      zip,
-      bornDate,
-      phone,
-      image,
-      _id
-    )
-      .then(user => dispatch(edit(user)))
-      .catch(e => console.log(e));
+    let { dispatch } = this.props;
+    console.log(this.state.user);
+    UserApi.editProfile(this.state.user).then(user => dispatch(edit(user)));
   }
-
-
 
   render() {
-    let { user, match } = this.props;
-    let {
-      disabled,
-      name,
-      surname,
-      email,
-      idNum,
-      street,
-      number,
-      city,
-      state,
-      zip,
-      bornDate,
-      phone,
-      image
-    } = this.state;
+    let { user, disabled } = this.state;
     return (
       <React.Fragment>
         <section className="hero">
@@ -145,7 +59,7 @@ class _ProfileView extends React.Component {
                   <h4 className="subtitle">
                     {disabled ? (
                       <button
-                        class="button is-light"
+                        className="button is-light"
                         onClick={() => {
                           this.setState({ disabled: false });
                         }}
@@ -153,66 +67,74 @@ class _ProfileView extends React.Component {
                         Edit Profile
                       </button>
                     ) : (
-                      <button
-                        class="button is-warning"
-                        onClick={() => this.handleEdit()}
-                      >
-                        Confirm Changes
-                      </button>
+                      <React.Fragment>
+                        <button
+                          className="button is-warning"
+                          onClick={() => this.handleEdit()}
+                        >
+                          Confirm Changes
+                        </button>
+                        <button
+                          className="button is-danger"
+                          onClick={() => this.setState({ disabled: true })}
+                        >
+                          Cancel
+                        </button>
+                      </React.Fragment>
                     )}
                   </h4>
                 </div>
               </div>
-              <ProfilePicture/>
+              <ProfilePicture />
             </article>
           </div>
         </section>
         <hr />
 
-        <form method="POST" onSubmit={e => this.handleSubmit(e)}>
+        <form>
           <div className="section">
             <p>Identification</p>
             <div className="field-body">
               <InputP
-                id="name-patient"
+                id="name"
                 name="name"
                 label="Name"
-                value={name}
+                value={user.name}
                 type="text"
                 placeholder="Name"
-                handleChange={e => this.setState({ name: e.target.value })}
+                handleChange={e => this.handleUserChange(e)}
                 disabled={disabled}
               />
               <InputP
-                id="surname-patient"
+                id="surname"
                 name="surname"
                 label="Surname"
-                value={surname}
+                value={user.surname}
                 type="text"
                 placeholder="Surname"
-                handleChange={e => this.setState({ surname: e.target.value })}
+                handleChange={e => this.handleUserChange(e)}
                 disabled={disabled}
               />
             </div>
             <div className="field-body">
               <InputP
-                id="id-patient"
-                name="id"
+                id="id"
+                name="idNum"
                 label="ID"
-                value={user.idNum ? idNum : ""}
+                value={user.idNum}
                 type="text"
                 placeholder="ID"
-                handleChange={e => this.setState({ idNum: e.target.value })}
+                handleChange={e => this.handleUserChange(e)}
                 disabled={disabled}
               />
               <InputP
-                id="born-date-patient"
-                name="born-date"
+                id="born-date"
+                name="bornDate"
                 label="Born Date"
-                value={bornDate}
+                value={moment(user.bornDate).format("YYYY-MM-DD")}
                 type="date"
                 placeholder=""
-                handleChange={e => this.setState({ bornDate: e.target.value })}
+                handleChange={e => this.handleUserChange(e)}
                 disabled={disabled}
               />
             </div>
@@ -221,77 +143,77 @@ class _ProfileView extends React.Component {
             <p>Contact Information</p>
             <div className="field-body">
               <InputP
-                id="street-patient"
+                id="street"
                 name="street"
                 label="Street"
-                value={street}
+                value={user.address.street}
                 type="text"
                 placeholder="Street"
-                handleChange={e => this.setState({ street: e.target.value })}
+                handleChange={e => this.handleAddressChange(e)}
                 disabled={disabled}
               />
               <InputP
-                id="number-patient"
+                id="number"
                 name="number"
                 label="Number"
-                value={number}
+                value={user.address.number}
                 type="text"
                 placeholder="24"
-                handleChange={e => this.setState({ number: e.target.value })}
+                handleChange={e => this.handleAddressChange(e)}
                 disabled={disabled}
               />
             </div>
             <div className="field-body">
               <InputP
-                id="city-patient"
+                id="city"
                 name="city"
                 label="City"
-                value={city}
+                value={user.address.city}
                 type="text"
                 placeholder="City"
-                handleChange={e => this.setState({ city: e.target.value })}
+                handleChange={e => this.handleAddressChange(e)}
                 disabled={disabled}
               />
               <InputP
-                id="state-patient"
+                id="state"
                 name="state"
                 label="State"
-                value={state}
+                value={user.address.state}
                 type="text"
                 placeholder="State"
-                handleChange={e => this.setState({ state: e.target.value })}
+                handleChange={e => this.handleAddressChange(e)}
                 disabled={disabled}
               />
               <InputP
-                id="zip-patient"
+                id="zip"
                 name="zip"
                 label="Zip"
-                value={zip}
+                value={user.address.zip}
                 type="text"
                 placeholder="Zip"
-                handleChange={e => this.setState({ zip: e.target.value })}
+                handleChange={e => this.handleAddressChange(e)}
                 disabled={disabled}
               />
             </div>
             <div className="field-body">
               <InputP
-                id="phone-patient"
+                id="phone"
                 name="phone"
                 label="Phone"
-                value={phone}
+                value={user.phone}
                 type="text"
                 placeholder="Phone"
-                handleChange={e => this.setState({ phone: e.target.value })}
+                handleChange={e => this.handleUserChange(e)}
                 disabled={disabled}
               />
               <InputP
-                id="email-patient"
+                id="email"
                 name="email"
                 label="Email"
-                value={email}
+                value={user.email}
                 type="email"
                 placeholder="Email"
-                handleChange={e => this.setState({ email: e.target.value })}
+                handleChange={e => this.handleUserChange(e)}
                 disabled={disabled}
               />
             </div>

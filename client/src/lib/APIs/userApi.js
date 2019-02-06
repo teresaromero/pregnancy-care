@@ -2,6 +2,7 @@ import axios from "axios";
 
 const instance = axios.create({
   baseURL: "http://localhost:3000/api/user",
+  timeout:1000,
   withCredentials: true
 });
 
@@ -31,6 +32,13 @@ export default class UserApi {
     return instance
       .put("/editProfilePicture", { file, id })
       .then(user => console.log(user))
-      .catch(e=>console.log(e))
+      .catch(e => console.log(e));
+  }
+
+  static editProfile(user) {
+    return instance
+      .put("/editProfile", { user })
+      .then(user => console.log(user))
+      .catch(e => console.log(e));
   }
 }

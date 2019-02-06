@@ -31,11 +31,11 @@ class _ProfilePicture extends React.Component {
           <img className="is-rounded" src={user.image} alt="profile" />
         </p>
 
-        <div id="uploadFile" class="file">
-          <label class="file-label" onChange={e => this.handlePhoto(e)}>
-            <input class="file-input" type="file" name="resume" />
-            <span class="file-icon icon is-large">
-              <i class="fas fa-lg fa-camera" />
+        <div id="uploadFile" className="file">
+          <label className="file-label" onChange={e => this.handlePhoto(e)}>
+            <input className="file-input" type="file" name="resume" />
+            <span className="file-icon icon is-large">
+              <i className="fas fa-lg fa-camera" />
             </span>
           </label>
         </div>

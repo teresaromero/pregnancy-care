@@ -9,7 +9,7 @@ const _Aside = ({match}) => {
     <React.Fragment>
       <aside className="menu">
         <UserCard />
-        <hr class="navbar-divider"/>
+        <hr className="navbar-divider"/>
         <p className="menu-label">General</p>
         <ul className="menu-list">
           <li>

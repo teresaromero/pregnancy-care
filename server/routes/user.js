@@ -23,38 +23,28 @@ router.put("/editProfilePicture", (req, res, next) => {
     .catch(e => console.log(e));
 });
 
-router.put("/edit", (req, res, next) => {
+router.put("/editProfile", (req, res, next) => {
   const {
     name,
     surname,
     email,
-    idNum,
-    street,
-    number,
-    city,
-    state,
-    zip,
     bornDate,
+    address,
     phone,
-    id
-  } = req.body;
-
-  let address = { street, number, city, state, zip };
+    idNum,
+    _id
+  } = req.body.user;
+  
 
   User.findByIdAndUpdate(
-    id,
-    {
-      name,
-      surname,
-      email,
-      idNum,
-      address,
-      bornDate,
-      phone
-    },
+    _id,
+    { name, surname, email, bornDate, address, phone, idNum },
     { new: true }
   )
-    .then(user => res.json({ user }))
+    .then(user => {
+      console.log(user);
+      res.json({ user });
+    })
     .catch(e => console.log(e));
 });
 
