@@ -29,7 +29,7 @@ class _SignupForm extends React.Component {
       .then(user => {
         dispatch(clearMessages());
         dispatch(login(user));
-        history.push("/dashboard");
+        history.push("/admin");
       })
       .catch(e => {
         dispatch(errorMessageAction("Invalid credentials"));

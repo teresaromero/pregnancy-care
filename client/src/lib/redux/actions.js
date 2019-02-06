@@ -10,6 +10,12 @@ export const logout = () => {
     type: "LOGOUT"
   };
 };
+export const edit = user => {
+  return {
+    type: "EDIT",
+    user
+  };
+};
 
 export const errorMessageAction = message => {
   return {
@@ -23,5 +29,3 @@ export const clearMessages = () => {
     type: "DELETE_ALL_MESSAGES"
   };
 };
-
-

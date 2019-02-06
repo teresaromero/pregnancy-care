@@ -9,7 +9,8 @@ export const InputP = ({
   type,
   placeholder,
   label,
-  handleChange
+  handleChange,
+  disabled
 }) => {
   return (
     <React.Fragment>
@@ -24,6 +25,7 @@ export const InputP = ({
             type={type}
             placeholder={placeholder}
             onChange={e => handleChange(e)}
+            disabled={disabled}
           />
         </p>
       </div>

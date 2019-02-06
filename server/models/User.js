@@ -8,9 +8,9 @@ const userSchema = new Schema(
     email: { type: String, required: true, lowercase: true },
     password: { type: String, required: true },
     gender: { type: String, enum: ["Male", "Female"] },
-    bornDate: { type: Date, default: Date.now },
+    bornDate: { type: Date},
     confirmationCode: String,
-    image: String,
+    image: {type:"String", default: "https://res.cloudinary.com/dpid82d4m/image/upload/v1549438809/user-placeholder.svg"},
     isActive: { type: Boolean, default: false },
     role: {
       type: String,
@@ -19,18 +19,18 @@ const userSchema = new Schema(
     },
     //only customer data
     address: {
-      street: { type: String, required: true },
-      city: { type: String, required: true },
-      state: { type: String, required: true },
-      zip: { type: String, required: true }
+      street: { type: String },
+      city: { type: String },
+      state: { type: String },
+      zip: { type: String }
     },
-    phone: { type: String, required: true },
+    phone: { type: String },
     profession: { type: String },
     insurance: { type: String },
     insNumber: { type: String },
-    GDPR: { type: Boolean, default: false, required: true },
+    GDPR: { type: Boolean, default: false },
     GDPRdoc: { type: String },
-    idNum: { type: String, required: true },
+    idNum: { type: String },
     business: [{ type: Schema.Types.ObjectId, ref: "Business" }]
   },
   {

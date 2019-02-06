@@ -5,8 +5,6 @@ import { withRouter, Redirect } from "react-router-dom";
 import { Dashboard } from "./components/Dashboard";
 
 import { Navbar } from "./components/Navbar";
-
-import { LogoutPage } from "./pages/LogoutPage";
 import HomePage from "./pages/HomePage";
 import { FooterNav } from "./components/FooterNav";
 
@@ -20,18 +18,16 @@ class _App extends Component {
             <Navbar />
 
             {this.props.children}
-
             <Route
               exact
               strict
               path="/"
               render={() =>
-                user ? <Redirect to="/dashboard" /> : <HomePage />
+                user ? <Redirect to="/admin" /> : <HomePage />
               }
             />
-            <Route path="/logout" component={LogoutPage} />
-            <Route path="/dashboard" component={Dashboard} />
-            {user ? <FooterNav path="/dashboard" /> : null}
+            <Route path="/admin" component={Dashboard} />
+            {user ? <FooterNav /> : null}
           </div>
         )}
       />

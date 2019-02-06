@@ -4,42 +4,33 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { UserBadge } from "./UserBadge";
 
-const _UserCard = ({ user }) => {
+const _UserCard = ({ user, match }) => {
   return (
     <React.Fragment>
-      <div className="card">
-        <div className="card-content">
-          <div className="media">
-            <div className="media-left">
-              <figure className="image is-64x64">
-                <img
-                  className="is-rounded"
-                  src="https://bulma.io/images/placeholders/96x96.png"
-                  alt="profile"
-                />
-              </figure>
-            </div>
-            <div className="media-content">
-              <p className="title is-5">
-                {user.name} {user.surname}
-              </p>
-              <p className="subtitle is-7">Role: {user.role}</p>
-            </div>
-          </div>
+      <article className="media">
+        <div className="media-left">
+          <figure className="image is-64x64">
+            <img
+              className="is-rounded"
+              src={user.image}
+              alt="profile"
+            />
+          </figure>
         </div>
-        <header className="card-header userCard">
-        <UserBadge/>
-          <NavLink to="/profile">
-            <span className="card-header-icon" aria-label="more options">
-              <span className="icon">
-                <i className="fas fa-user-edit" aria-hidden="true" />
-              </span>
-            </span>
+        <div className="media-content">
+          <NavLink to={`${match.url}/profile`}>
+            <p className="title is-6">
+              {user.name} {user.surname}
+            </p>
           </NavLink>
-        </header>
-      </div>
+
+          <UserBadge />
+        </div>
+      </article>
     </React.Fragment>
   );
 };
 
-export const UserCard = withRouter(connect(store => ({ user: store.user }))(_UserCard));
+export const UserCard = withRouter(
+  connect(store => ({ user: store.user }))(_UserCard)
+);

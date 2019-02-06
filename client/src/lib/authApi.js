@@ -21,6 +21,32 @@ export default class AuthApi {
       .catch(err => console.log(err));
   }
 
+  static edit(name,
+    surname,
+    email,
+    idNum,
+    street,
+    number,
+    city,
+    state,
+    zip,
+    bornDate,
+    phone,id) {
+    return instance.put("/api/auth/edit", { name,
+      surname,
+      email,
+      idNum,
+      street,
+      number,
+      city,
+      state,
+      zip,
+      bornDate,
+      phone, id})
+      .then(res => res.data.user)
+      .catch(err => console.log(err));
+  }
+
   static login(email, password) {
     return instance.post("/api/auth/login", { email, password })
       .then(res => res.data.user)
@@ -29,7 +55,7 @@ export default class AuthApi {
 
   static logout() {
     return instance.get("/api/auth/logout")
-      .then(res => console.log("logout"))
+      .then(res => console.log(res))
       .catch(err => console.log(err));
   }
 }

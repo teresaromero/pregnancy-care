@@ -57,6 +57,7 @@ router.post("/signup", (req, res, next) => {
       .save()
       .then(user =>
         loginPromise(req, user).then(user => {
+          console.log(user);
           activateUserMail(
             user.email,
             user.name,
@@ -67,9 +68,44 @@ router.post("/signup", (req, res, next) => {
         })
       )
       .catch(err => {
-        res.json({ message: "Something went wrong creating user" });
+        res.json({ err });
       });
   });
+});
+
+router.put("/edit", (req, res, next) => {
+  const {
+    name,
+    surname,
+    email,
+    idNum,
+    street,
+    number,
+    city,
+    state,
+    zip,
+    bornDate,
+    phone,
+    id
+  } = req.body;
+
+  let address = { street, number, city, state, zip };
+
+  User.findByIdAndUpdate(
+    id,
+    {
+      name,
+      surname,
+      email,
+      idNum,
+      address,
+      bornDate,
+      phone
+    },
+    { new: true }
+  )
+    .then(user => res.json({ user }))
+    .catch(e => console.log(e));
 });
 
 router.get("/currentUser", (req, res) => {
@@ -94,11 +130,8 @@ router.get("/confirm/:confirmationCode", (req, res) => {
 });
 
 router.get("/logout", (req, res) => {
-  req.logOut()
-  console.log("logout")
-  res.json({ success: "Ok! Loged out" })
-  
-  
+  req.logOut();
+  res.json({ success: "Ok! Loged out" });
 });
 
 module.exports = router;

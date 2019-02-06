@@ -13,9 +13,9 @@ const _UserBadge = ({ user }) => {
   return (
     <span
       className={userTagClass}
-      data-tooltip="Activate your account with the email we sent! 📩"
+      data-tooltip="Activate your account! 📩"
     >
-      {user.isActive ? <span>Active Acount</span> : <span>Not Active</span>}
+      {user.isActive ? <span>Active</span> : <span>Not Active</span>}
     </span>
   );
 };

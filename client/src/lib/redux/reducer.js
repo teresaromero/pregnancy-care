@@ -1,28 +1,30 @@
 const initialStore = {
   user: null,
-  isAuth:false,
   messages: []
 };
 
 export const rootReducer = (store = initialStore, action) => {
   switch (action.type) {
     case "LOGIN":
-    console.log(action.user)
       store = {
         ...store,
         user: action.user
       };
-  
+
       break;
     case "LOGOUT":
       store = {
         ...store,
-        user: null,
-        isAuth:false
+        user: null
       };
       break;
-    default:
-      return store;
+
+      case "EDIT":
+      store = {
+        ...store,
+        user: action.user
+      };
+      break;
 
     case "ADD_MESSAGE":
       store = {
@@ -36,6 +38,9 @@ export const rootReducer = (store = initialStore, action) => {
         messages: []
       };
       break;
+
+    default:
+      return store;
   }
 
   return store;

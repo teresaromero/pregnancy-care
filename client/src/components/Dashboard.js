@@ -9,8 +9,9 @@ import { withRouter } from "react-router-dom";
 import { AddPatientPage } from "../pages/AddPatientPage";
 import { AdvancedSearchPage } from "../pages/AdvancedSearchPage";
 import { VademecumPage } from "../pages/VademecumPage";
+import HomePage from "../pages/HomePage";
 
-const _Dashboard = ({ user }) => {
+const _Dashboard = ({ user, location, match }) => {
   return (
     <React.Fragment>
       <div className="mainLayout">
@@ -32,30 +33,30 @@ const _Dashboard = ({ user }) => {
                       <Route
                         exact
                         strict
-                        path={`/dashboard`}
+                        path={`${match.url}`}
                         component={DashboardPage}
                       />
                       <Route
-                        exact
-                        path={`/dashboard/patients`}
-                        component={PatientsPage}
-                      />
-                      <Route
-                        exact
-                        path={`/dashboard/patients/add`}
+                        path={`${match.url}/patients/add`}
                         component={AddPatientPage}
                       />
                       <Route
-                        exact
-                        path={`/dashboard/patients/advancedSearch`}
+                        path={`${match.url}patients/advancedSearch`}
                         component={AdvancedSearchPage}
                       />
                       <Route
-                        exact
-                        path={`/dashboard/vademecum`}
+                        path={`${match.url}/patients`}
+                        component={PatientsPage}
+                      />
+                      <Route
+                        path={`${match.url}/vademecum`}
                         component={VademecumPage}
                       />
-                      <Route exact path={`/profile`} component={ProfilePage} />
+                      <Route
+                        exact
+                        path={`${match.url}/profile`}
+                        component={ProfilePage}
+                      />
                     </Switch>
                   </div>
                 </div>
@@ -64,9 +65,7 @@ const _Dashboard = ({ user }) => {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <div>
-              <p>not allowed</p>
-            </div>
+            <HomePage />
           </React.Fragment>
         )}
       </div>

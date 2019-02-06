@@ -4,16 +4,16 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { UserCard } from "./UserCard";
 
-const _Aside = () => {
+const _Aside = ({match}) => {
   return (
     <React.Fragment>
       <aside className="menu">
         <UserCard />
-
+        <hr class="navbar-divider"/>
         <p className="menu-label">General</p>
         <ul className="menu-list">
           <li>
-            <NavLink to={"/dashboard"} activeClassName="is-active">
+            <NavLink to={`${match.url}`}>
               <span className="icon">
                 <i className="fas fa-home" />
               </span>
@@ -21,7 +21,7 @@ const _Aside = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to={`/dashboard/patients`} activeClassName="is-active">
+            <NavLink to={`${match.url}/patients`} activeClassName="is-active">
               <span className="icon">
                 <i className="fas fa-users" />
               </span>
@@ -30,7 +30,7 @@ const _Aside = () => {
             <ul>
               <li>
                 <NavLink
-                  to={`/dashboard/patients/add`}
+                  to={`${match.url}/patients/add`}
                   activeClassName="is-active"
                 >
                   <span>Add Patient</span>
@@ -38,7 +38,7 @@ const _Aside = () => {
               </li>
               <li>
                 <NavLink
-                  to={`/dashboard/patients/advancedSearch`}
+                  to={`${match.url}/patients/advancedSearch`}
                   activeClassName="is-active"
                 >
                   <span>Advanced Search</span>
@@ -50,7 +50,7 @@ const _Aside = () => {
         <p className="menu-label">Agenda</p>
         <ul className="menu-list">
           <li>
-            <NavLink to="/dashboard/overview" activeClassName="is-active">
+            <NavLink to={`${match.url}/overview`} activeClassName="is-active">
               <span className="icon">
                 <i className="fas fa-calendar-alt" />
               </span>
@@ -58,7 +58,7 @@ const _Aside = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/new-appointment" activeClassName="is-active">
+            <NavLink to={`${match.url}/new-appointment`} activeClassName="is-active">
               <span className="icon">
                 <i className="fas fa-calendar-plus" />
               </span>
@@ -69,7 +69,7 @@ const _Aside = () => {
         <p className="menu-label">Data</p>
         <ul className="menu-list">
           <li>
-            <NavLink to={`/dashboard/vademecum`} activeClassName="is-active">
+            <NavLink to={`${match.url}/vademecum`} activeClassName="is-active">
               <span className="icon">
                 <i className="fas fa-search" />
               </span>
@@ -77,7 +77,7 @@ const _Aside = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/research" activeClassName="is-active">
+            <NavLink to={`${match.url}/research`} activeClassName="is-active">
               <span className="icon">
                 <i className="fas fa-book-medical" />
               </span>
@@ -88,7 +88,7 @@ const _Aside = () => {
         <p className="menu-label">Settings</p>
         <ul className="menu-list">
           <li>
-            <NavLink to={`/dashboard/profile`} activeClassName="is-active">
+            <NavLink to={`${match.url}/profile`} activeClassName="is-active">
               <span className="icon">
                 <i className="fas fa-cog" />
               </span>

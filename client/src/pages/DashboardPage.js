@@ -2,7 +2,8 @@ import React from "react";
 import Calendar from "react-calendar";
 import { Messages } from "../components/Message";
 
-export const DashboardPage = () => {
+export const DashboardPage = ({location,match}) => {
+  console.log(match,location)
   return (
     <React.Fragment>
       <Messages />
