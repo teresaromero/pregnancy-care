@@ -11,7 +11,7 @@ export const PatientsListCard = ({ patient }) => {
               <figure className="image is-48x48">
                 <img
                   className="is-rounded"
-                  src="https://bulma.io/images/placeholders/96x96.png"
+                  src={patient.image}
                   alt="patient"
                 />
               </figure>
@@ -25,13 +25,13 @@ export const PatientsListCard = ({ patient }) => {
           </div>
         </div>
         <footer className="card-footer">
-          <NavLink to="" className="card-footer-item">
+          <NavLink to={`/admin/patients/record/${patient._id}`} className="card-footer-item">
             Record
             <span className="icon">
               <i className="fas fa-file-alt" aria-hidden="true" />
             </span>
           </NavLink>
-          <NavLink to="" className="card-footer-item">
+          <NavLink to={`/admin/patients/edit/${patient._id}`} className="card-footer-item">
             Edit
             <span className="icon">
               <i className="fas fa-user-edit" aria-hidden="true" />

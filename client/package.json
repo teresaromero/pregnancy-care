@@ -14,6 +14,7 @@
     "axios": "^0.18.0",
     "bulma": "^0.7.2",
     "bulma-badge": "^0.2.0",
+    "bulma-steps": "^2.2.1",
     "bulma-tooltip": "^2.0.2",
     "classnames": "^2.2.6",
     "cool-checkboxes-for-bulma.io": "^1.1.0",

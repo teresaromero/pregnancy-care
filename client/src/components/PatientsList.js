@@ -3,6 +3,7 @@ import React from "react";
 import PatientsApi from "../lib/APIs/patientsApi.js";
 import { PatientsListCard } from "./PatientsListCard.js";
 import { InputDiv } from "./InputDiv.js";
+import { Messages } from "./Messages"
 
 export default class PatientsList extends React.Component {
   constructor() {
@@ -54,6 +55,7 @@ export default class PatientsList extends React.Component {
           value={this.state.query}
           handleChange={e => this.handleSearch(e)}
         />
+        <Messages />
         <div className="section">
           {this.state.data ? (
             this.state.data.length === 0 ? (

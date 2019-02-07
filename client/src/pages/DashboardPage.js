@@ -1,6 +1,6 @@
 import React from "react";
 import Calendar from "react-calendar";
-import { Messages } from "../components/Message";
+import { Messages } from "../components/Messages";
 
 export const DashboardPage = ({location,match}) => {
   console.log(match,location)

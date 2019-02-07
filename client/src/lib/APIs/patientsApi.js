@@ -20,6 +20,23 @@ export default class PatientsApi {
       .then(res => res.data.patients)
       .catch(err => console.log(err));
   }
+
+  static getPatientRecord(id) {
+    return instance
+      .get(`/api/patients/record/${id}`)
+      .then(res => res.data)
+      .catch(err => console.log(err));
+  }
+
+
+  static addRecord(record,id) {
+    return instance
+      .post(`/api/patients/record/add`,{record,id})
+      .then(res => res.data)
+      .catch(err => console.log(err));
+  }
+
+  
   static addPatient(
     name,
     surname,

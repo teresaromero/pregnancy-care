@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { clearMessages } from "../lib/redux/actions";
 
-const _Message = ({ messages, dispatch }) => {
+const _Messages = ({ messages, dispatch }) => {
   return (
     <div>
       {messages.map((m, i) => (
@@ -16,5 +16,5 @@ const _Message = ({ messages, dispatch }) => {
 };
 
 export const Messages = connect(state => ({ messages: state.messages }))(
-  _Message
+  _Messages
 );

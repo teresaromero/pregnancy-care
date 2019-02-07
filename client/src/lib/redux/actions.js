@@ -30,3 +30,16 @@ export const clearMessages = () => {
     type: "DELETE_ALL_MESSAGES"
   };
 };
+
+export const viewPatient = patient => {
+  return {
+    type: "VIEW_PATIENT",
+    patient
+  };
+};
+
+export const exitPatient = () => {
+  return {
+    type: "EXIT_PATIENT"
+  };
+};

@@ -8,9 +8,13 @@ const userSchema = new Schema(
     email: { type: String, required: true, lowercase: true },
     password: { type: String, required: true },
     gender: { type: String, enum: ["Male", "Female"] },
-    bornDate: { type: Date},
+    bornDate: { type: Date },
     confirmationCode: String,
-    image: {type:"String", default: "https://res.cloudinary.com/dpid82d4m/image/upload/v1549438809/user-placeholder.svg"},
+    image: {
+      type: "String",
+      default:
+        "https://res.cloudinary.com/dpid82d4m/image/upload/v1549438809/user-placeholder.svg"
+    },
     isActive: { type: Boolean, default: false },
     role: {
       type: String,
@@ -31,7 +35,7 @@ const userSchema = new Schema(
     GDPR: { type: Boolean, default: false },
     GDPRdoc: { type: String },
     idNum: { type: String },
-    business: [{ type: Schema.Types.ObjectId, ref: "Business" }]
+    recordId: { type: Schema.Types.ObjectId, ref: "Record" }
   },
   {
     timestamps: true

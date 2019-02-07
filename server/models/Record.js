@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const recordSchema = new Schema(
   {
-    userId: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    userId: { type: Schema.Types.ObjectId, ref: "User" },
 
     lastMenstruationDate: { type: Date },
     birthDate: { type: Date },
@@ -15,10 +15,10 @@ const recordSchema = new Schema(
     prevBirths: { type: Number },
     prevCSec: { type: Number },
 
-    prevDeseases: { type: Array },
-    prevSurgery: { type: Array },
+    prevDeseases: { type: String },
+    prevSurgery: { type: String },
 
-    alergies: { type: Array },
+    alergies: { type: String },
     riskHistory: { type: String },
 
     IgG: { type: Number },

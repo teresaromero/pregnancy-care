@@ -10,6 +10,7 @@ import { AddPatientPage } from "../pages/AddPatientPage";
 import { AdvancedSearchPage } from "../pages/AdvancedSearchPage";
 import { VademecumPage } from "../pages/VademecumPage";
 import HomePage from "../pages/HomePage";
+import { RecordPage } from "../pages/RecordPage";
 
 const _Dashboard = ({ user, location, match }) => {
   return (
@@ -35,6 +36,10 @@ const _Dashboard = ({ user, location, match }) => {
                         strict
                         path={`${match.url}`}
                         component={DashboardPage}
+                      />
+                       <Route
+                        path={`${match.url}/patients/record/:id`}
+                        component={RecordPage}
                       />
                       <Route
                         path={`${match.url}/patients/add`}

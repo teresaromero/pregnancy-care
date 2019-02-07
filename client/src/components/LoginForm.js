@@ -33,7 +33,7 @@ class _LoginForm extends React.Component {
   render() {
     let { email, password } = this.state;
     return (
-      <form method="POST" onSubmit={e => this.handleSubmit(e)}>
+      <div className="section is-large">
         <InputDiv
           id="email-login"
           name="email"
@@ -52,10 +52,10 @@ class _LoginForm extends React.Component {
           placeholder=""
           handleChange={e => this.setState({ password: e.target.value })}
         />
-        <button type="submit" className="button is-info">
+        <button className="button is-info" onClick={e => this.handleSubmit(e)}>
           Login
         </button>
-      </form>
+      </div>
     );
   }
 }
