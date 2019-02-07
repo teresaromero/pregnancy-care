@@ -21,7 +21,7 @@ export default class PatientsApi {
       .catch(err => console.log(err));
   }
 
-  static getPatientRecord(id) {
+  static getPatient(id) {
     return instance
       .get(`/api/patients/record/${id}`)
       .then(res => res.data)

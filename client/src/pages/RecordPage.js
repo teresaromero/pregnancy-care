@@ -4,6 +4,8 @@ import PatientsApi from "../lib/APIs/patientsApi";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { NewRecordForm } from "../components/NewRecordForm";
+import { viewPatient, exitPatient } from "../lib/redux/actions";
+import { RecordView } from "../components/RecordView";
 
 class _RecordPage extends React.Component {
   constructor() {
@@ -14,20 +16,25 @@ class _RecordPage extends React.Component {
   }
 
   componentDidMount() {
+    let {dispatch}= this.props
     console.log("Component did mount");
-    PatientsApi.getPatientRecord(`${this.props.match.params.id}`).then(res => {
-      this.setState({ data: res.data });
-      console.log(this.state.data);
+    PatientsApi.getPatient(`${this.props.match.params.id}`).then(res => {
+      let {data} = res
+      this.setState({ data: data },()=>{
+        dispatch(viewPatient(this.state.data))
+      });
+      
     });
   }
 
   componentWillUnmount() {
+    let {dispatch} = this.props
     console.log("Component will unmount");
+    dispatch(exitPatient())
   }
 
   render() {
     let { data } = this.state;
-    let {patient} = this.props
     return (
       <React.Fragment>
         <section className="hero">
@@ -55,7 +62,7 @@ class _RecordPage extends React.Component {
             data.recordId === undefined ? (
               <NewRecordForm patientId={data._id}/>
             ) : (
-              <p></p>
+              <RecordView />
             )
           ) : (
             <p>loading</p>
