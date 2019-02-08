@@ -45,7 +45,6 @@ export const rootReducer = (store = initialStore, action) => {
         ...store,
         patient: action.patient
       };
-      console.log(store)
       break;
 
     case "EXIT_PATIENT":

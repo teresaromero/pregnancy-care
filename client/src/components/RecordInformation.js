@@ -1,5 +1,5 @@
 import React from "react";
-import moment, { now } from "moment";
+import moment from "moment";
 import "moment-precise-range-plugin";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -14,11 +14,11 @@ const _RecordInformation = ({ patient }) => {
             <p className="title is-5">Information</p>
           </div>
 
-          <nav class="level">
-            <div class="level-left">
-              <article class="media">
-                <div class="media-content">
-                  <div class="content">
+          <nav className="level">
+            <div className="level-left">
+              <article className="media">
+                <div className="media-content">
+                  <div className="content">
                     <p className="heading">Name and surname</p>
                     <p className="is-6">
                       {patient.name} {patient.surname}
@@ -28,9 +28,9 @@ const _RecordInformation = ({ patient }) => {
               </article>
             </div>
             <div className="level-right">
-              <article class="media">
-                <div class="media-content">
-                  <div class="content">
+              <article className="media">
+                <div className="media-content">
+                  <div className="content">
                     <p className="heading">ID</p>
                     <p className="is-6">{patient.idNum}</p>
                   </div>
@@ -41,9 +41,9 @@ const _RecordInformation = ({ patient }) => {
 
           <nav className="level">
             <div className="level-left">
-              <article class="media">
-                <div class="media-content">
-                  <div class="content">
+              <article className="media">
+                <div className="media-content">
+                  <div className="content">
                     <p className="heading">Born Date</p>
                     <p className="is-6">
                       {moment(patient.bornDate).format("Do MMM YY")} (
@@ -58,9 +58,9 @@ const _RecordInformation = ({ patient }) => {
           <nav className="level">
             <div className="level-left">
               <div className="level-item">
-                <article class="media">
-                  <div class="media-content">
-                    <div class="content">
+                <article className="media">
+                  <div className="media-content">
+                    <div className="content">
                       <p className="heading">Address</p>
                       <p className="is-6  is-marginless">
                         {patient.address.street}
@@ -84,9 +84,9 @@ const _RecordInformation = ({ patient }) => {
             </div>
             <div className="level-right">
               <div className="level-item">
-                <article class="media">
-                  <div class="media-content">
-                    <div class="content">
+                <article className="media">
+                  <div className="media-content">
+                    <div className="content">
                       <p className="heading">Phone</p>
                       <p className="is-6">{patient.phone}</p>
                     </div>
@@ -94,9 +94,9 @@ const _RecordInformation = ({ patient }) => {
                 </article>
               </div>
               <div className="level-item">
-                <article class="media">
-                  <div class="media-content">
-                    <div class="content">
+                <article className="media">
+                  <div className="media-content">
+                    <div className="content">
                       <p className="heading">Email</p>
                       <p className="is-6">{patient.email}</p>
                     </div>
@@ -109,9 +109,9 @@ const _RecordInformation = ({ patient }) => {
           <nav className="level">
             <div className="level-left">
               <div className="level-item">
-                <article class="media">
-                  <div class="media-content">
-                    <div class="content">
+                <article className="media">
+                  <div className="media-content">
+                    <div className="content">
                       <p className="heading">Insurance Company</p>
                       <p className="is-6  is-marginless">{patient.insurance}</p>
                       <p className="is-6  is-marginless">
@@ -124,9 +124,9 @@ const _RecordInformation = ({ patient }) => {
             </div>
             <div className="level-right">
               <div className="level-item">
-                <article class="media">
-                  <div class="media-content">
-                    <div class="content">
+                <article className="media">
+                  <div className="media-content">
+                    <div className="content">
                       <p className="heading">Profession</p>
                       <p className="is-6 is-paddingless is-marginless">
                         {patient.profession}

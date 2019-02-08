@@ -11,6 +11,7 @@ import { AdvancedSearchPage } from "../pages/AdvancedSearchPage";
 import { VademecumPage } from "../pages/VademecumPage";
 import HomePage from "../pages/HomePage";
 import { RecordPage } from "../pages/RecordPage";
+import { AgendaOverviewPage } from "../pages/AgendaOverviewPage";
 
 const _Dashboard = ({ user, location, match }) => {
   return (
@@ -37,7 +38,7 @@ const _Dashboard = ({ user, location, match }) => {
                         path={`${match.url}`}
                         component={DashboardPage}
                       />
-                       <Route
+                      <Route
                         path={`${match.url}/patients/record/:id`}
                         component={RecordPage}
                       />
@@ -49,9 +50,14 @@ const _Dashboard = ({ user, location, match }) => {
                         path={`${match.url}patients/advancedSearch`}
                         component={AdvancedSearchPage}
                       />
+
                       <Route
                         path={`${match.url}/patients`}
                         component={PatientsPage}
+                      />
+                      <Route
+                        path={`${match.url}/overview`}
+                        component={AgendaOverviewPage}
                       />
                       <Route
                         path={`${match.url}/vademecum`}

@@ -4652,6 +4652,23 @@ fstream@^1.0.0, fstream@^1.0.2:
     mkdirp ">=0.5 0"
     rimraf "2"
 
+fullcalendar-scheduler@^1.9.4:
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/fullcalendar-scheduler/-/fullcalendar-scheduler-1.9.4.tgz#15acc98aa0f2b80330b1e93cc768343404827b92"
+  integrity sha512-QJ5p/qRnK+vuiNRTbsxKCytiCu2adUn1dSlRSlPSivR/FOUL4J5XQA/4o/h6YCpIMWnmLTXPOuyqBTbsG3ydyg==
+  dependencies:
+    fullcalendar "~3.9.0"
+    jquery "2 - 3"
+    moment "^2.20.1"
+
+fullcalendar@~3.9.0:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/fullcalendar/-/fullcalendar-3.9.0.tgz#b608a9989f3416f0b1d526c6bdfeeaf2ac79eda5"
+  integrity sha512-bbALDK8+SBqluv8SKPDeVNtaSr87NYblte/pRgV5NnDJWCEARpRlQ1qQ/XEakcAXbMZov6rWYIvLOrtKwQo2Bg==
+  dependencies:
+    jquery "2 - 3"
+    moment "^2.20.1"
+
 function-bind@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
@@ -6214,6 +6231,11 @@ joi@^11.1.1:
     isemail "3.x.x"
     topo "2.x.x"
 
+"jquery@2 - 3":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
+  integrity sha512-Ubldcmxp5np52/ENotGxlLe6aGMvmF4R8S6tZjsP6Knsaxd/xp3Zrh50cG93lR6nPXyUFwzN3ZSOQI0wRJNdGg==
+
 js-base64@^2.1.8:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.5.1.tgz#1efa39ef2c5f7980bb1784ade4a8af2de3291121"
@@ -7037,7 +7059,7 @@ moment-precise-range-plugin@^1.3.0:
   resolved "https://registry.yarnpkg.com/moment-precise-range-plugin/-/moment-precise-range-plugin-1.3.0.tgz#60ac075fdfd14689f6d102af751d171a80b4ab60"
   integrity sha1-YKwHX9/RRon20QKvdR0XGoC0q2A=
 
-moment@^2.24.0:
+moment@^2.20.1, moment@^2.24.0:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
   integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==

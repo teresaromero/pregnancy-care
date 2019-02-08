@@ -1,9 +1,7 @@
 import React from "react";
-import moment from "moment";
-import "moment-precise-range-plugin";
+
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { Loader } from "./Loader";
 
 const _RecordAppointments = ({ patient, user }) => {
   return (

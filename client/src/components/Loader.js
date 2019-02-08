@@ -2,8 +2,8 @@ import React from "react";
 
 export const Loader = () => {
   return (
-    <div class="pageloader is-primary">
-      <span class="title">Loading...</span>
+    <div className="pageloader is-primary">
+      <span className="title">Loading...</span>
     </div>
   );
 };
