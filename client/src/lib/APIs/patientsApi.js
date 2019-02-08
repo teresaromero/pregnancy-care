@@ -4,7 +4,7 @@ const instance = axios.create({
   baseURL: "http://localhost:3000",
   timeout: 1000,
   withCredentials: true,
-  validateStatus: false
+  validateStatus:false,
 });
 
 export default class PatientsApi {
@@ -24,55 +24,21 @@ export default class PatientsApi {
   static getPatient(id) {
     return instance
       .get(`/api/patients/record/${id}`)
+      .then(res => res)
+      .catch(err => console.log(err));
+  }
+
+  static addRecord(record, id) {
+    return instance
+      .post(`/api/patients/record/add`, { record, id })
       .then(res => res.data)
       .catch(err => console.log(err));
   }
 
-
-  static addRecord(record,id) {
+  static addPatient(patient) {
     return instance
-      .post(`/api/patients/record/add`,{record,id})
+      .post("/api/patients/create", { patient })
       .then(res => res.data)
-      .catch(err => console.log(err));
-  }
-
-  
-  static addPatient(
-    name,
-    surname,
-    email,
-    idNum,
-    street,
-    number,
-    city,
-    state,
-    zip,
-    profession,
-    bornDate,
-    phone,
-    insurance,
-    insNumber,
-    GDPR
-  ) {
-    return instance
-      .post("/api/patients/create", {
-        name,
-        surname,
-        email,
-        idNum,
-        street,
-        number,
-        city,
-        state,
-        zip,
-        profession,
-        bornDate,
-        phone,
-        insurance,
-        insNumber,
-        GDPR
-      })
-      .then(res => console.log(res.data))
-      .catch(res => console.log(res.data));
+      .catch(e => console.log(e));
   }
 }

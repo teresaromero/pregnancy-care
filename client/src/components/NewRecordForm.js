@@ -39,16 +39,16 @@ class _NewRecordForm extends React.Component {
     let uptRecord = { ...this.state.record };
     let { value } = e.target;
     let field = e.target.name;
-    if (field === "lastMenstruationDate") {
+    if (field === "LMP") {
       uptRecord[field] = value;
-      uptRecord["birthDate"] = moment(value)
+      uptRecord["EDC"] = moment(value)
         .clone()
         .add(40, "week")
         .format("YYYY-MM-DD");
-      this.setState({ record: uptRecord }, () => {});
+      this.setState({ record: uptRecord });
     }
     uptRecord[field] = value;
-    this.setState({ record: uptRecord }, () => {});
+    this.setState({ record: uptRecord });
   }
 
   render() {
@@ -61,19 +61,19 @@ class _NewRecordForm extends React.Component {
             <p>Births Information</p>
             <div className="field-body">
               <InputP
-                id="lastMenstruationDate"
-                name="lastMenstruationDate"
+                id="LMP"
+                name="LMP"
                 label="Last Menstruation Date"
-                value={moment(record.lastMenstruationDate).format("YYYY-MM-DD")}
+                value={moment(record.LMP).format("YYYY-MM-DD")}
                 type="date"
                 placeholder=""
                 handleChange={e => this.handleRecordChange(e)}
               />
               <InputP
-                id="birthDate"
-                name="birthDate"
+                id="EDC"
+                name="EDC"
                 label="Birth Day"
-                value={record.birthDate}
+                value={record.EDC}
                 type="date"
                 placeholder=""
                 disabled
@@ -81,19 +81,19 @@ class _NewRecordForm extends React.Component {
             </div>
             <div className="field-body">
               <InputP
-                id="prevPregnancies"
-                name="prevPregnancies"
+                id="pregnancies"
+                name="pregnancies"
                 label="Previous Pregnancies Nº"
-                value={record.prevPregnancies}
+                value={record.pregnancies}
                 type="number"
                 placeholder="0"
                 handleChange={e => this.handleRecordChange(e)}
               />
               <InputP
-                id="prevMiss"
-                name="prevMiss"
+                id="abortions"
+                name="abortions"
                 label="Previous Miscarriage Nº"
-                value={record.prevMiss}
+                value={record.abortions}
                 type="number"
                 placeholder=""
                 handleChange={e => this.handleRecordChange(e)}
@@ -110,19 +110,19 @@ class _NewRecordForm extends React.Component {
             </div>
             <div className="field-body">
               <InputP
-                id="prevBirths"
-                name="prevBirths"
+                id="labours"
+                name="labours"
                 label="Total Births Nº"
-                value={record.prevBirths}
+                value={record.labours}
                 type="number"
                 placeholder="0"
                 handleChange={e => this.handleRecordChange(e)}
               />
               <InputP
-                id="prevCSec"
-                name="prevCSec"
+                id="caesareanSections"
+                name="caesareanSections"
                 label="Total C-Section"
-                value={record.prevCSec}
+                value={record.caesareanSections}
                 type="number"
                 placeholder=""
                 handleChange={e => this.handleRecordChange(e)}
@@ -133,17 +133,17 @@ class _NewRecordForm extends React.Component {
             <p>Background</p>
 
             <TextArea
-              label="Previous Deseases"
-              value={record.prevDeseases}
-              name="prevDeseases"
+              label="Previous Diseases"
+              value={record.diseases}
+              name="diseases"
               handleChange={e => this.handleRecordChange(e)}
               placeholder=""
             />
 
             <TextArea
               label="Previous Surgeries"
-              value={record.prevSurgery}
-              name="prevSurgery"
+              value={record.surgeries}
+              name="surgeries"
               handleChange={e => this.handleRecordChange(e)}
               placeholder=""
             />

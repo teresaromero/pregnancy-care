@@ -33,7 +33,7 @@ const _Aside = ({match}) => {
                   to={`${match.url}/patients/add`}
                   activeClassName="is-active"
                 >
-                  <span>Add Patient</span>
+                  <span>New Patient</span>
                 </NavLink>
               </li>
               <li>

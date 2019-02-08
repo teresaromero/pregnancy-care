@@ -1,8 +1,12 @@
 import React from "react";
-
+import moment, { now } from "moment";
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { errorMessageAction, clearMessages } from "../lib/redux/actions";
+import {
+  errorMessageAction,
+  clearMessages,
+  viewPatient
+} from "../lib/redux/actions";
 
 import PatientsApi from "../lib/APIs/patientsApi";
 import { InputP } from "./InputP";
@@ -15,98 +19,72 @@ class _NewPatientForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      name: "",
-      surname: "",
-      email: "",
-      idNum: "",
-
-      street: "",
-      number: "",
-      city: "",
-      state: "",
-      zip: "",
-
-      profession: "",
-      bornDate: "",
-      phone: "",
-      insurance: "",
-      insNumber: "",
-      GDPR: false
+      patient: {
+        name: "",
+        surname: "",
+        idNum: "",
+        bornDate: moment(now()).format("YYYY-MM-DD"),
+        address: {
+          street: "",
+          number: "",
+          city: "",
+          zip: "",
+          state: ""
+        },
+        phone: "",
+        email: "",
+        insurance: "",
+        insNumber: "",
+        profession: "",
+        GDPR: false
+      }
     };
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    const {
-      name,
-      surname,
-      email,
-      idNum,
-      street,
-      number,
-      city,
-      state,
-      zip,
-      profession,
-      bornDate,
-      phone,
-      insurance,
-      insNumber,
-      GDPR
-    } = this.state;
-    const { dispatch,history } = this.props;
+    const { patient } = this.state;
+    const { dispatch, history } = this.props;
     if (!e.target.checkValidity()) {
       return;
     }
 
-    PatientsApi.addPatient(
-      name,
-      surname,
-      email,
-      idNum,
-      street,
-      number,
-      zip,
-      state,
-      city,
-      profession,
-      bornDate,
-      phone,
-      insurance,
-      insNumber,
-      GDPR
-    )
-      .then(res => {
-        dispatch(errorMessageAction("New Patient Created"));
-        history.push('/admin/patients')
+    PatientsApi.addPatient(patient)
+      .then(res => {       
+        history.push(`/admin/patients/`);
       })
       .catch(e => {
-        dispatch(errorMessageAction("Invalid credentials"));
+        console.log(e);
       });
   }
 
+  handleRecordChange(e) {
+    let uptPatient = { ...this.state.patient };
+    let { value } = e.target;
+    let field = e.target.name;
+    if (
+      field === "street" ||
+      field === "number" ||
+      field === "city" ||
+      field === "state" ||
+      field === "zip"
+    ) {
+      uptPatient["address"][field] = value;
+      this.setState({ patient: uptPatient });
+    }
+    if (field === "GDPR") {
+      uptPatient[field] = e.target.checked;
+    }
+    uptPatient[field] = value;
+    this.setState({ patient: uptPatient });
+  }
+
   render() {
-    let {
-      name,
-      surname,
-      email,
-      idNum,
-      street,
-      number,
-      zip,
-      state,
-      city,
-      profession,
-      bornDate,
-      phone,
-      insurance,
-      insNumber,
-      GDPR
-    } = this.state;
+    let { patient } = this.state;
 
     return (
       <div className="section">
-      <Messages/>
+        <Messages />
         <form method="POST" onSubmit={e => this.handleSubmit(e)}>
           <div className="section">
             <p>Identification</p>
@@ -115,39 +93,39 @@ class _NewPatientForm extends React.Component {
                 id="name-patient"
                 name="name"
                 label="Name"
-                value={name}
+                value={patient.name}
                 type="text"
                 placeholder="Name"
-                handleChange={e => this.setState({ name: e.target.value })}
+                handleChange={e => this.handleRecordChange(e)}
               />
               <InputP
                 id="surname-patient"
                 name="surname"
                 label="Surname"
-                value={surname}
+                value={patient.surname}
                 type="text"
                 placeholder="Surname"
-                handleChange={e => this.setState({ surname: e.target.value })}
+                handleChange={e => this.handleRecordChange(e)}
               />
             </div>
             <div className="field-body">
               <InputP
                 id="id-patient"
-                name="id"
+                name="idNum"
                 label="ID"
-                value={idNum}
+                value={patient.idNum}
                 type="text"
                 placeholder="ID"
-                handleChange={e => this.setState({ idNum: e.target.value })}
+                handleChange={e => this.handleRecordChange(e)}
               />
               <InputP
                 id="born-date-patient"
-                name="born-date"
+                name="bornDate"
                 label="Born Date"
-                value={bornDate}
+                value={moment(patient.bornDate).format("YYYY-MM-DD")}
                 type="date"
                 placeholder=""
-                handleChange={e => this.setState({ bornDate: e.target.value })}
+                handleChange={e => this.handleRecordChange(e)}
               />
             </div>
           </div>
@@ -158,19 +136,19 @@ class _NewPatientForm extends React.Component {
                 id="street-patient"
                 name="street"
                 label="Street"
-                value={street}
+                value={patient.address.street}
                 type="text"
                 placeholder="Street"
-                handleChange={e => this.setState({ street: e.target.value })}
+                handleChange={e => this.handleRecordChange(e)}
               />
               <InputP
                 id="number-patient"
                 name="number"
                 label="Number"
-                value={number}
+                value={patient.address.number}
                 type="text"
                 placeholder="24"
-                handleChange={e => this.setState({ number: e.target.value })}
+                handleChange={e => this.handleRecordChange(e)}
               />
             </div>
             <div className="field-body">
@@ -178,28 +156,28 @@ class _NewPatientForm extends React.Component {
                 id="city-patient"
                 name="city"
                 label="City"
-                value={city}
+                value={patient.address.city}
                 type="text"
                 placeholder="City"
-                handleChange={e => this.setState({ city: e.target.value })}
+                handleChange={e => this.handleRecordChange(e)}
               />
               <InputP
                 id="state-patient"
                 name="state"
                 label="State"
-                value={state}
+                value={patient.address.state}
                 type="text"
                 placeholder="State"
-                handleChange={e => this.setState({ state: e.target.value })}
+                handleChange={e => this.handleRecordChange(e)}
               />
               <InputP
                 id="zip-patient"
                 name="zip"
                 label="Zip"
-                value={zip}
+                value={patient.address.zip}
                 type="text"
                 placeholder="Zip"
-                handleChange={e => this.setState({ zip: e.target.value })}
+                handleChange={e => this.handleRecordChange(e)}
               />
             </div>
             <div className="field-body">
@@ -207,19 +185,19 @@ class _NewPatientForm extends React.Component {
                 id="phone-patient"
                 name="phone"
                 label="Phone"
-                value={phone}
+                value={patient.phone}
                 type="text"
                 placeholder="Phone"
-                handleChange={e => this.setState({ phone: e.target.value })}
+                handleChange={e => this.handleRecordChange(e)}
               />
               <InputP
                 id="email-patient"
                 name="email"
                 label="Email"
-                value={email}
+                value={patient.email}
                 type="email"
                 placeholder="Email"
-                handleChange={e => this.setState({ email: e.target.value })}
+                handleChange={e => this.handleRecordChange(e)}
               />
             </div>
           </div>
@@ -231,13 +209,14 @@ class _NewPatientForm extends React.Component {
                 <p className="control">
                   <div className="select is-fullwidth">
                     <select
-                      value={insurance}
-                      onChange={e =>
-                        this.setState({ insurance: e.target.value })
-                      }
+                      name="insurance"
+                      value={patient.insurance}
+                      onChange={e => this.handleRecordChange(e)}
                     >
                       {insurances.map(company => (
-                        <option value={company} key={company}>{company}</option>
+                        <option value={company} key={company}>
+                          {company}
+                        </option>
                       ))}
                     </select>
                   </div>
@@ -245,31 +224,32 @@ class _NewPatientForm extends React.Component {
               </div>
               <InputP
                 id="insurance-patient"
-                name="insurance"
+                name="insNumber"
                 label="Insurance Number"
-                value={insNumber}
+                value={patient.insNumber}
                 type="text"
                 placeholder="12544785"
-                handleChange={e => this.setState({ insNumber: e.target.value })}
+                handleChange={e => this.handleRecordChange(e)}
               />
             </div>
             <InputDiv
               id="profession-patient"
               name="profession"
               label="Profession"
-              value={profession}
+              value={patient.profession}
               type="text"
               placeholder=""
-              handleChange={e => this.setState({ profession: e.target.value })}
+              handleChange={e => this.handleRecordChange(e)}
             />
           </div>
           <div className="field">
             <div className="control">
               <label className="checkbox">
                 <input
+                  name="GDPR"
                   type="checkbox"
-                  value={GDPR}
-                  onChange={e => this.setState({ GDPR: e.target.checked })}
+                  value={patient.GDPR}
+                  onChange={e => this.handleRecordChange(e)}
                 />
                 Patient agrees with <Link to="">GDPR</Link> and has signed it.
               </label>

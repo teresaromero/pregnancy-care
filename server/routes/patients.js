@@ -8,64 +8,27 @@ const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
 router.post("/create", (req, res, next) => {
-  const {
-    name,
-    surname,
-    email,
-    idNum,
-    street,
-    number,
-    city,
-    state,
-    zip,
-    profession,
-    bornDate,
-    phone,
-    insurance,
-    insNumber,
-    GDPR
-  } = req.body;
-  if (name === "" || email === "") {
-    res.json({ message: "Please enter all values" });
-    return;
-  }
-
-  User.findOne({ email }, "email", (err, user) => {
-    if (user !== null) {
+  const { patient } = req.body;
+  const emailCheck = patient.email;
+  User.find({ email: emailCheck, role: "CUSTOMER" }, (err, user) => {
+    if (user.length !== 0) {
       res.json({ message: "The email already exists" });
       return;
     }
-    let address = {
-      street: street,
-      number: number,
-      city: city,
-      state: state,
-      zip: zip
-    };
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync("12345", salt);
 
     const newPatient = new User({
-      name,
-      surname,
-      email,
-      idNum,
-      address,
-      profession,
-      bornDate,
-      phone,
-      insurance,
-      insNumber,
-      GDPR,
+      ...patient,
       password: hashPass,
       role: "CUSTOMER"
     });
 
     newPatient
       .save()
-      .then(user => res.json({ message: user }))
+      .then(patient => res.json({ patient }))
       .catch(err => {
-        res.json({ message: err });
+        res.json(err);
       });
   });
 });
@@ -109,8 +72,8 @@ router.get("/record/:id", (req, res, next) => {
 
   User.findById(id)
     .populate("recordId")
-    .then(data => {
-      res.json({ data });
+    .then(patient => {
+      res.json({ patient });
     })
     .catch(e => console.log(e));
 });
