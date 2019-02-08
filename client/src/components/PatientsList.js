@@ -30,8 +30,9 @@ export default class PatientsList extends React.Component {
   handleSearch(e) {
     if (e.target.value !== "") {
       this.setState({ query: e.target.value }, () => {
-        PatientsApi.search(this.state.query).then(results => {
-          this.setState({ data: results });
+        PatientsApi.search(this.state.query).then(res => {
+          let {patients} = res
+          this.setState({ data: patients });
         });
       });
     } else {

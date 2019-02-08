@@ -17,7 +17,7 @@ export default class PatientsApi {
   static search(query) {
     return instance
       .get(`/api/patients/search?q=${query}`)
-      .then(res => res.data.patients)
+      .then(res => res.data)
       .catch(err => console.log(err));
   }
 
