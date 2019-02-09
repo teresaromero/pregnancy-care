@@ -74,5 +74,7 @@ const userRoutes = require("./routes/user");
 app.use("/api/user", userRoutes);
 const patientRoutes = require("./routes/patients");
 app.use("/api/patients", patientRoutes);
+const appointmentsRoutes = require("./routes/appointments");
+app.use("/api/appointments", appointmentsRoutes);
 
 module.exports = app;

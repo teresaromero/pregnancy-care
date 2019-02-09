@@ -69,10 +69,15 @@ class _NewPatientForm extends React.Component {
       this.setState({ patient: uptPatient });
     }
     if (field === "GDPR") {
-      uptPatient[field] = e.target.checked;
-      console.log(uptPatient[field]);
-      this.setState({ patient: uptPatient }, () =>
-        console.log(this.state.patient)
+      let checked = e.target.value;
+   uptPatient[field] = checked
+      
+      console.log(uptPatient);
+      this.setState({ patient: uptPatient},()=>{
+        console.log(this.state)
+         
+      }
+    
       );
     }
     uptPatient[field] = value;
