@@ -2,7 +2,7 @@
 @import url(../../node_modules/@fortawesome/fontawesome-free/css/all.css);
 @import url(../../node_modules/cool-checkboxes-for-bulma.io/dist/css/bulma-radio-checkbox.css);
 body, #root, .App {
-  background-color: #fafafa; }
+  background-color: whitesmoke; }
 
 #uploadFile {
   top: -36px;
@@ -12,7 +12,7 @@ body, #root, .App {
     border-radius: 50%; }
 
 .field-wrapper {
-  background-color: #eff0eb;
+  background-color: #dbdbdb;
   border-radius: 5px; }
 
 .card-header.userCard {

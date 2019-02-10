@@ -40,9 +40,9 @@ class _RecordPage extends React.Component {
       <React.Fragment>
         {patient ? (
           <React.Fragment>
-            <section class="hero">
-              <div class="hero-body">
-                <h1 class="title">
+            <section className="hero">
+              <div className="hero-body">
+                <h1 className="title">
                   {patient.name} {patient.surname}
                 </h1>
               </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import PatientsApi from "../lib/APIs/patientsApi";
 
 export const PatientsListCard = ({ patient }) => {
   return (
@@ -37,12 +38,12 @@ export const PatientsListCard = ({ patient }) => {
               <i className="fas fa-user-edit" aria-hidden="true" />
             </span>
           </NavLink>
-          <NavLink to="" className="card-footer-item is-danger">
+          <span onClick={()=>PatientsApi.deletePatient(patient._id)} className="card-footer-item is-danger">
             Delete
             <span className="icon is-danger">
               <i className="fas fa-user-times" aria-hidden="true" />
             </span>
-          </NavLink>
+          </span>
         </footer>
       </div>
     </div>

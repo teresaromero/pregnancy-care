@@ -5,15 +5,14 @@ const recordSchema = new Schema(
   {
     userId: { type: Schema.Types.ObjectId, ref: "User" },
 
-    backgroundReproductive: { type: String, default: "" },
     backgroundDiseases: { type: String, default: "" },
     backgroundPsychiatricIll: { type: String, default: "" },
     backgroundAddictions: { type: String, default: "" },
+    backgroundReproductive: { type: String, default: "" },
 
-    
     diseases: { type: String, default: "" },
-    surgeries: { type: String, default: "" },
     allergies: { type: String, default: "" },
+
     addictions: [
       {
         type: String,
@@ -48,13 +47,6 @@ const recordSchema = new Schema(
     ],
     contraceptiveOther: { type: String, default: "" },
 
-    pregnancies: { type: Number, default: 0 },
-    abortions: { type: Number, default: 0 },
-    ectopics: { type: Number, default: 0 },
-    labours: { type: Number, default: 0 },
-    caesareanSections: { type: Number, default: 0 },
-
-
     STD: [
       {
         type: String,
@@ -79,18 +71,22 @@ const recordSchema = new Schema(
     ],
     STDother: { type: String, default: "" },
     STDovercome: { type: String, default: "NotCurrently" },
-    sexHabits: { type: String, default: "" },
 
-    HPVvaccine: { type: Boolean, default: false },
+    HPVvaccine: { type: String, enum: ["Yes", "No"], default: "No" },
 
     menstrualCycleDays: { type: Number, default: "" },
     menstrualCycleFrequency: { type: Number, default: "" },
 
-   
     bloodGroup: { type: String, enum: ["A", "B", "AB", "0"] },
     rh: { type: String, enum: ["+", "-"] },
 
-    partnerBirthDate: { type: Date },
+    pregnancies: { type: Number, default: 0 },
+    labours: { type: Number, default: 0 },
+    caesareanSections: { type: Number, default: 0 },
+    abortions: { type: Number, default: 0 },
+    ectopics: { type: Number, default: 0 },
+
+    partnerBirthDate: { type: Date, dafault: Date.now() },
     rubella: { type: Boolean, default: false },
     LUES: { type: Boolean, default: false },
     HBsAg: { type: Boolean, default: false },
@@ -114,7 +110,8 @@ const recordSchema = new Schema(
             "stress",
             "toxics",
             "cold",
-            "standing up"
+            "standing up",
+            "none"
           ]
         }
       ]
@@ -122,7 +119,8 @@ const recordSchema = new Schema(
 
     diet: {
       type: String,
-      enum: ["Mediterranean", "Vegetarian", "Vegan", "Other"]
+      enum: ["Mediterranean", "Vegetarian", "Vegan", "Other"],
+      default: "Mediterranean"
     },
     dietOther: { type: String, default: "" },
 
@@ -137,10 +135,10 @@ const recordSchema = new Schema(
 
     physics: [
       {
-        weight: { type: Number },
-        ICM: { type: Number },
-        bloodPressureSystolic: { type: Number },
-        bloodPressureDiastolic: { type: Number }
+        weight: { type: Number, default: 0 },
+        ICM: { type: Number, default: 0 },
+        bloodPressureSystolic: { type: Number, default: 0 },
+        bloodPressureDiastolic: { type: Number, default: 0 }
       }
     ],
 
@@ -159,11 +157,9 @@ const recordSchema = new Schema(
       }
     ],
 
-    pregnancyRisk: { type: String, enum: ["Low", "High"] },
-    pregnancyRiskReason: { type: String, enum: ["", "Other"] },
-    pregnancyRiskReasonOther: { type: String },
+    pregnancyRisk: { type: String, enum: ["Low", "High"], default: "Low" },
+    pregnancyRiskReason: { type: String, default: "" },
 
-    //actual pregnancy information LMP - last menstruation ; EDC - estimated labour day ; HPT - home pregnancy test
     pregnancy: {
       LMP: { type: Date },
       LMPrev: { type: Date },

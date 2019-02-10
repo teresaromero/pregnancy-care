@@ -9,6 +9,7 @@ import { InputDiv } from "./InputDiv";
 
 import { insurances } from "../lib/insuranceCompany";
 import { Messages } from "./Messages";
+import { viewPatient } from "../lib/redux/actions";
 
 class _NewPatientForm extends React.Component {
   constructor() {
@@ -18,7 +19,7 @@ class _NewPatientForm extends React.Component {
         name: "",
         surname: "",
         idNum: "",
-        bornDate: "",
+        bornDate: moment().format("YYYY-MM-DD"),
         address: {
           street: "",
           number: "",
@@ -39,7 +40,7 @@ class _NewPatientForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const { patient } = this.state;
-    const { history } = this.props;
+    const { history, dispatch } = this.props;
     if (!e.target.checkValidity()) {
       return;
     }
@@ -47,7 +48,10 @@ class _NewPatientForm extends React.Component {
     PatientsApi.addPatient(patient)
       .then(res => {
         let { patient } = res;
-        history.push(`/admin/patients/record/${patient._id}`);
+        PatientsApi.createRecord(patient._id).then(res => {
+          dispatch(viewPatient(res.patient));
+          history.push(`/admin/patients/record/${patient._id}`);
+        });
       })
       .catch(e => {
         console.log(e);
@@ -70,15 +74,12 @@ class _NewPatientForm extends React.Component {
     }
     if (field === "GDPR") {
       let checked = e.target.value;
-   uptPatient[field] = checked
-      
+      uptPatient[field] = checked;
+
       console.log(uptPatient);
-      this.setState({ patient: uptPatient},()=>{
-        console.log(this.state)
-         
-      }
-    
-      );
+      this.setState({ patient: uptPatient }, () => {
+        console.log(this.state);
+      });
     }
     uptPatient[field] = value;
     this.setState({ patient: uptPatient });

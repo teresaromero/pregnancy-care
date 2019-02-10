@@ -24,7 +24,7 @@ export const TextArea = ({
           onChange={e => handleChange(e)}
           placeholder={placeholder}
         />
-        <p class="help">{help}</p>
+        <p className="help">{help}</p>
       </div>
     </div>
   );

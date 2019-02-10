@@ -28,9 +28,23 @@ export default class PatientsApi {
       .catch(err => console.log(err));
   }
 
-  static addRecord(record, id) {
+  static deletePatient(id) {
     return instance
-      .post(`/api/patients/record/add`, { record, id })
+      .get(`/api/patients/record/delete/${id}`)
+      .then(res => res)
+      .catch(err => console.log(err));
+  }
+
+  static createRecord(id) {
+    return instance
+      .post(`/api/patients/record/create`, { id })
+      .then(res => res.data)
+      .catch(err => console.log(err));
+  }
+
+  static updateRecord(record,idRecord,idPatient) {
+    return instance
+      .put(`/api/patients/record/update`, { record,idRecord,idPatient })
       .then(res => res.data)
       .catch(err => console.log(err));
   }

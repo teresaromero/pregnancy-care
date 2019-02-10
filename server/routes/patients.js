@@ -54,15 +54,28 @@ router.get("/search", (req, res, next) => {
     });
 });
 
-router.post("/record/add", (req, res, next) => {
-  let { record, id } = req.body;
+router.post("/record/create", (req, res, next) => {
+  let { id } = req.body;
 
-  const newRecord = new Record(record);
+  const newRecord = new Record();
   console.log(newRecord);
   newRecord.save().then(record =>
     User.findByIdAndUpdate(id, { recordId: record._id }, { new: true })
       .populate("recordId")
       .then(patient => res.json({ patient }))
+      .catch(e => console.log(e))
+  );
+});
+
+router.put("/record/update", (req, res, next) => {
+  let { record, idRecord } = req.body;
+
+  Record.findByIdAndUpdate(idRecord, record, { new: true }).then(record =>
+    User.findOne({ recordId: record._id })
+      .populate("recordId")
+      .then(patient => {
+        res.json({ patient });
+      })
       .catch(e => console.log(e))
   );
 });
@@ -78,4 +91,13 @@ router.get("/record/:id", (req, res, next) => {
     .catch(e => console.log(e));
 });
 
+router.get("/record/delete/:id", (req, res, next) => {
+  let { id } = req.params;
+
+  User.findByIdAndDelete(id)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(e => console.log(e));
+});
 module.exports = router;
