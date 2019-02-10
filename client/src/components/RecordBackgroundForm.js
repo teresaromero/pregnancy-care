@@ -292,7 +292,7 @@ class _RecordBackgroundForm extends React.Component {
                           <p className="control">
                             <div className="select">
                               <select
-                                name=""
+                                name="bloodGroup"
                                 value={record.bloodGroup}
                                 onChange={e => this.handleRecordChange(e)}
                               >
@@ -311,7 +311,7 @@ class _RecordBackgroundForm extends React.Component {
                           <p className="control">
                             <div className="select">
                               <select
-                                name=""
+                                name="rh"
                                 value={record.rh}
                                 onChange={e => this.handleRecordChange(e)}
                               >

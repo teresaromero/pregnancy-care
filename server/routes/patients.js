@@ -54,6 +54,15 @@ router.get("/search", (req, res, next) => {
     });
 });
 
+router.put("/update", (req, res, next) => {
+  let { patient, id } = req.body;
+
+  User.findByIdAndUpdate(id, patient, { new: true })
+    .populate("recordId")
+    .then(patient => res.json({ patient }))
+    .catch(e => console.log(e));
+});
+
 router.post("/record/create", (req, res, next) => {
   let { id } = req.body;
 

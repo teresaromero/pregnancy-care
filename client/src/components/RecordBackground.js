@@ -44,7 +44,7 @@ class _RecordBackground extends React.Component {
             >
               <RecordBackgroundForm
                 handleClose={() => this.closeModal()}
-                handleSave={(record) => this.saveUpdate(record)}
+                handleSave={record => this.saveUpdate(record)}
               />
             </ModalCard>
             <div className="section">
@@ -88,13 +88,13 @@ class _RecordBackground extends React.Component {
                 <p>
                   {record.addictions.length === 0
                     ? "Empty"
-                    : record.addictions.map(a => <span>{a}</span>)}
+                    : record.addictions.map(a => <span key={a}>{a}</span>)}
                 </p>
                 <p className="label">Contraceptive Methods</p>
                 <p>
                   {record.contraceptive.length === 0
                     ? "Empty"
-                    : record.contraceptive.map(a => <span>{a}</span>)}
+                    : record.contraceptive.map(a => <span key={a}>{a}</span>)}
                 </p>
                 <p>
                   {record.contraceptiveOther === "" ? (

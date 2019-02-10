@@ -60,7 +60,7 @@ class _RecordPage extends React.Component {
                   <RecordInformation />
                 </AccordionItemBody>
               </AccordionItem >
-              <AccordionItem expanded="true">
+              <AccordionItem>
                 <AccordionItemTitle>
                   <h3 className="u-position-relative">
                     Background
@@ -71,7 +71,7 @@ class _RecordPage extends React.Component {
                   <RecordBackground />
                 </AccordionItemBody>
               </AccordionItem>
-              <AccordionItem>
+              <AccordionItem expanded="true">
                 <AccordionItemTitle>
                   <h3 className="u-position-relative">
                     Pregnancies
