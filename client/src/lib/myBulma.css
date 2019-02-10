@@ -11,6 +11,10 @@ body, #root, .App {
     background-color: #91d4f2;
     border-radius: 50%; }
 
+.field-wrapper {
+  background-color: #eff0eb;
+  border-radius: 5px; }
+
 .card-header.userCard {
   justify-content: space-evenly; }
 

@@ -35,7 +35,8 @@ const userSchema = new Schema(
     GDPR: { type: Boolean, default: false },
     GDPRdoc: { type: String },
     idNum: { type: String },
-    recordId: { type: Schema.Types.ObjectId, ref: "Record" }
+    recordId: { type: Schema.Types.ObjectId, ref: "Record" },
+    appointmentsId:[{type:Schema.Types.ObjectId, ref: "Appointment"}]
   },
   {
     timestamps: true

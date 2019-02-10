@@ -29,47 +29,45 @@ const _Dashboard = ({ user, location, match }) => {
                 </div>
               </div>
               <div className="column is-paddingless is-marginless">
-                <div className="mainContent">
-                  <div className="section">
-                    <Switch>
-                      <Route
-                        exact
-                        strict
-                        path={`${match.url}`}
-                        component={DashboardPage}
-                      />
-                      <Route
-                        path={`${match.url}/patients/record/:id`}
-                        component={RecordPage}
-                      />
-                      <Route
-                        path={`${match.url}/patients/add`}
-                        component={AddPatientPage}
-                      />
-                      <Route
-                        path={`${match.url}patients/advancedSearch`}
-                        component={AdvancedSearchPage}
-                      />
+                <div className="section">
+                  <Switch>
+                    <Route
+                      exact
+                      strict
+                      path={`${match.url}`}
+                      component={DashboardPage}
+                    />
+                    <Route
+                      path={`${match.url}/patients/record/:id`}
+                      component={RecordPage}
+                    />
+                    <Route
+                      path={`${match.url}/patients/add`}
+                      component={AddPatientPage}
+                    />
+                    <Route
+                      path={`${match.url}patients/advancedSearch`}
+                      component={AdvancedSearchPage}
+                    />
 
-                      <Route
-                        path={`${match.url}/patients`}
-                        component={PatientsPage}
-                      />
-                      <Route
-                        path={`${match.url}/overview`}
-                        component={AgendaOverviewPage}
-                      />
-                      <Route
-                        path={`${match.url}/vademecum`}
-                        component={VademecumPage}
-                      />
-                      <Route
-                        exact
-                        path={`${match.url}/profile`}
-                        component={ProfilePage}
-                      />
-                    </Switch>
-                  </div>
+                    <Route
+                      path={`${match.url}/patients`}
+                      component={PatientsPage}
+                    />
+                    <Route
+                      path={`${match.url}/overview`}
+                      component={AgendaOverviewPage}
+                    />
+                    <Route
+                      path={`${match.url}/vademecum`}
+                      component={VademecumPage}
+                    />
+                    <Route
+                      exact
+                      path={`${match.url}/profile`}
+                      component={ProfilePage}
+                    />
+                  </Switch>
                 </div>
               </div>
             </div>

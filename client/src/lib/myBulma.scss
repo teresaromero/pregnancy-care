@@ -2,6 +2,7 @@
 // Import a Google Font
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
 @import "../../node_modules/@fortawesome/fontawesome-free/css/all.css";
+
 // Set your brand colors
 
 $dark-blue: #105acc;
@@ -35,6 +36,11 @@ body,#root,.App{
     background-color: $light-blue;
     border-radius: 50%;
   }
+}
+
+.field-wrapper{
+  background-color: $beige-lighter;
+  border-radius: 5px;
 }
 
 //User Card
@@ -73,6 +79,8 @@ aside {
   width: 0px;
   background: transparent; /* make scrollbar transparent */
 }
+
+
 //Footer Nav
 
 @media screen and (min-width: 769px) {
@@ -105,4 +113,4 @@ aside {
 @import "../../node_modules/bulma-badge/dist/css/bulma-badge.sass";
 @import "../../node_modules/bulma-tooltip/dist/css/bulma-tooltip.sass";
 @import "../../node_modules/cool-checkboxes-for-bulma.io/dist/css/bulma-radio-checkbox.css";
-@import "../../node_modules/bulma-pageloader/dist/css/bulma-pageloader.sass"
+@import "../../node_modules/bulma-pageloader/dist/css/bulma-pageloader.sass";

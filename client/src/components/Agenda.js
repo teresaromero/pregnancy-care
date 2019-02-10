@@ -21,11 +21,12 @@ export class Agenda extends React.Component {
           schedulerLicenseKey: "CC-Attribution-NonCommercial-NoDerivatives",
           defaultView: "agendaWeek",
           events: this.state.appointments,
-          weekends: false,
+          firstDay:1,
           columnHeaderFormat: "dddd D",
           slotLabelFormat: [
             "HH:mm" // top level of text
           ],
+          timezone:'local',
           businessHours: {
             // days of week. an array of zero-based day of week integers (0=Sunday)
             dow: [1, 2, 3, 4, 5], // Monday - Thursday
@@ -58,8 +59,13 @@ export class Agenda extends React.Component {
             );
           },
           editable: true,
+          eventClick:(e,element)=>{
+            console.log(e);
+            console.log(element)
+          },
+
           droppable: true, // this allows things to be dropped onto the calendar
-          drop: function() {
+          drop: ()=> {
             // is the "remove after drop" checkbox checked?
             if ($("#drop-remove").is(":checked")) {
               // if so, remove the element from the "Draggable Events" list

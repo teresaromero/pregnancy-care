@@ -5,10 +5,18 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { viewPatient, exitPatient } from "../lib/redux/actions";
 import { Loader } from "../components/Loader";
-import { RecordPreconceptional } from "../components/RecordPreconceptional";
+import { RecordBackground } from "../components/RecordBackground";
 import { RecordPregnancy } from "../components/RecordPregnancy";
 import { RecordAppointments } from "../components/RecordAppointments";
 import { RecordInformation } from "../components/RecordInformation";
+
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemTitle,
+  AccordionItemBody
+} from "react-accessible-accordion";
+import "../lib/accordion-styles.css";
 
 class _RecordPage extends React.Component {
   componentDidMount() {
@@ -32,12 +40,60 @@ class _RecordPage extends React.Component {
       <React.Fragment>
         {patient ? (
           <React.Fragment>
-            <div className="section">
-              <RecordInformation />
-              <RecordPreconceptional />
-              <RecordPregnancy />
-              <RecordAppointments />
-            </div>
+            <section class="hero">
+              <div class="hero-body">
+                <h1 class="title">
+                  {patient.name} {patient.surname}
+                </h1>
+              </div>
+            </section>
+
+            <Accordion>
+              <AccordionItem>
+                <AccordionItemTitle>
+                  <h3 className="u-position-relative">
+                    Information
+                    <div className="accordion__arrow" role="presentation" />
+                  </h3>
+                </AccordionItemTitle>
+                <AccordionItemBody>
+                  <RecordInformation />
+                </AccordionItemBody>
+              </AccordionItem >
+              <AccordionItem expanded="true">
+                <AccordionItemTitle>
+                  <h3 className="u-position-relative">
+                    Background
+                    <div className="accordion__arrow" role="presentation" />
+                  </h3>
+                </AccordionItemTitle>
+                <AccordionItemBody>
+                  <RecordBackground />
+                </AccordionItemBody>
+              </AccordionItem>
+              <AccordionItem>
+                <AccordionItemTitle>
+                  <h3 className="u-position-relative">
+                    Pregnancies
+                    <div className="accordion__arrow" role="presentation" />
+                  </h3>
+                </AccordionItemTitle>
+                <AccordionItemBody>
+                  <RecordPregnancy />
+                </AccordionItemBody>
+              </AccordionItem>
+              <AccordionItem>
+                <AccordionItemTitle>
+                  <h3 className="u-position-relative">
+                    Appointments
+                    <div className="accordion__arrow" role="presentation" />
+                  </h3>
+                </AccordionItemTitle>
+                <AccordionItemBody>
+                  <RecordAppointments />
+                </AccordionItemBody>
+              </AccordionItem>
+            </Accordion>
           </React.Fragment>
         ) : (
           <Loader />
