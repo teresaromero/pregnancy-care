@@ -12,6 +12,7 @@ import { VademecumPage } from "../pages/VademecumPage";
 import HomePage from "../pages/HomePage";
 import { RecordPage } from "../pages/RecordPage";
 import { AgendaOverviewPage } from "../pages/AgendaOverviewPage";
+import { PregnancyDetail } from "./PregnancyDetail";
 
 const _Dashboard = ({ user, location, match }) => {
   return (
@@ -41,6 +42,12 @@ const _Dashboard = ({ user, location, match }) => {
                       path={`${match.url}/patients/record/:id`}
                       component={RecordPage}
                     />
+
+                    <Route
+                      path={`${match.url}/patients/pregnancy/:id`}
+                      component={PregnancyDetail}
+                    />
+
                     <Route
                       path={`${match.url}/patients/add`}
                       component={AddPatientPage}

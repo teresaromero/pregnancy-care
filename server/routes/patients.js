@@ -89,7 +89,7 @@ router.post("/record/newPregnancy", (req, res, next) => {
         User.findOne({ recordId: record._id })
           .populate("recordId")
           .then(patient => {
-            console.log(patient)
+            console.log(patient);
             res.json({ patient });
           })
           .catch(e => console.log(e))
@@ -118,6 +118,17 @@ router.get("/record/:id", (req, res, next) => {
     .populate("recordId")
     .then(patient => {
       res.json({ patient });
+    })
+    .catch(e => console.log(e));
+});
+
+router.get("/pregnancy/:id", (req, res, next) => {
+  let { id } = req.params;
+console.log(id)
+  Pregnancy.findById(id)
+    .then(pregnancy => {
+      console.log(pregnancy);
+      res.json({ pregnancy });
     })
     .catch(e => console.log(e));
 });

@@ -42,6 +42,13 @@ export default class PatientsApi {
       .catch(err => console.log(err));
   }
 
+  static getPregnancy(id) {
+    return instance
+      .get(`/api/patients/pregnancy/${id}`)
+      .then(res => res)
+      .catch(err => console.log(err));
+  }
+
   static deletePatient(id) {
     return instance
       .get(`/api/patients/record/delete/${id}`)
