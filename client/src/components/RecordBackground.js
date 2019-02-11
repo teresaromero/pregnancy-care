@@ -8,44 +8,19 @@ import { RecordBackgroundForm } from "./RecordBackgroundForm";
 class _RecordBackground extends React.Component {
   constructor() {
     super();
-    this.state = {
-      edit: false
-    };
-  }
-
-  openModal() {
-    this.setState({ edit: true });
-  }
-
-  closeModal() {
-    this.setState({ edit: false });
+    this.state = {};
   }
 
   render() {
     let { patient } = this.props;
     let record = patient.recordId;
-    let { edit } = this.state;
+
     return (
       <React.Fragment>
         {patient ? (
           <React.Fragment>
-            <button
-              className="button is-rounded"
-              onClick={() => this.openModal()}
-            >
-              <span className="icon is-small">
-                <i className="fas fa-edit" />
-              </span>
-            </button>
-            <ModalCard
-              title="Edit Background"
-              isActive={edit}
-              handleClose={() => this.closeModal()}
-            >
-              <RecordBackgroundForm
-                handleClose={() => this.closeModal()}
-                handleSave={record => this.saveUpdate(record)}
-              />
+            <ModalCard title="Edit Background">
+              <RecordBackgroundForm />
             </ModalCard>
             <div className="section">
               <p className="label">Familiar</p>

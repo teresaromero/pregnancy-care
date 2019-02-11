@@ -15,13 +15,6 @@ class _RecordInformation extends React.Component {
     };
   }
 
-  openModal() {
-    this.setState({ edit: true });
-  }
-
-  closeModal() {
-    this.setState({ edit: false });
-  }
   render() {
     let { patient } = this.props;
     let { edit } = this.state;
@@ -29,23 +22,11 @@ class _RecordInformation extends React.Component {
       <React.Fragment>
         {patient ? (
           <React.Fragment>
-            <button
-              className="button is-rounded"
-              onClick={() => this.openModal()}
-            >
-              <span className="icon is-small">
-                <i className="fas fa-edit" />
-              </span>
-            </button>
             <ModalCard
               title="Edit Information"
               isActive={edit}
-              handleClose={() => this.closeModal()}
             >
-              <RecordInformationForm
-                handleClose={() => this.closeModal()}
-                handleSave={record => this.saveUpdate(record)}
-              />
+              <RecordInformationForm/>
             </ModalCard>
             <div className="section">
               <div className="columns">
