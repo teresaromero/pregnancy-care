@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const recordSchema = new Schema(
   {
     userId: { type: Schema.Types.ObjectId, ref: "User" },
-
+    pregnanciesId: [{ type: Schema.Types.ObjectId, ref: "Pregnancy" }],
+    
     backgroundDiseases: { type: String, default: "" },
     backgroundPsychiatricIll: { type: String, default: "" },
     backgroundAddictions: { type: String, default: "" },
@@ -86,96 +87,9 @@ const recordSchema = new Schema(
     abortions: { type: Number, default: 0 },
     ectopics: { type: Number, default: 0 },
 
-    partnerBirthDate: { type: Date, dafault: Date.now() },
-    rubella: { type: Boolean, default: false },
-    LUES: { type: Boolean, default: false },
-    HBsAg: { type: Boolean, default: false },
-    VHC: { type: Boolean, default: false },
-    VIH: { type: Boolean, default: false },
-    toxoplasmosis: { type: Boolean, default: false },
-    coombs: { type: Boolean, default: false },
-    citology: { type: Boolean, default: false },
+    lastCitology: { type: Date, default: Date.now() },
 
-    height: { type: Number, default: 0 },
-    TSH: { type: Number, default: 0 },
-    activity: {
-      sport: { type: Boolean, default: false },
-      profession: { type: String, default: "" },
-      workRisk: [
-        {
-          type: String,
-          enum: [
-            "noise",
-            "weight lifting",
-            "stress",
-            "toxics",
-            "cold",
-            "standing up",
-            "none"
-          ]
-        }
-      ]
-    },
-
-    diet: {
-      type: String,
-      enum: ["Mediterranean", "Vegetarian", "Vegan", "Other"],
-      default: "Mediterranean"
-    },
-    dietOther: { type: String, default: "" },
-
-    dietSuplements: [
-      {
-        polivitaminics: { type: Boolean, default: false },
-        iron: { type: Boolean, default: false },
-        folic: { type: Boolean, default: false },
-        iodine: { type: Boolean, default: false }
-      }
-    ],
-
-    physics: [
-      {
-        weight: { type: Number, default: 0 },
-        ICM: { type: Number, default: 0 },
-        bloodPressureSystolic: { type: Number, default: 0 },
-        bloodPressureDiastolic: { type: Number, default: 0 }
-      }
-    ],
-
-    tests: [
-      {
-        redBloodCell: { type: Number, default: 0 },
-        haemoglobin: { type: Number, default: 0 },
-        hematocrit: { type: Number, default: 0 },
-        platelet: { type: Number, default: 0 },
-        glucose: { type: Number, default: 0 },
-        urea: { type: Number, default: 0 },
-        uricAcid: { type: Number, default: 0 },
-        bilirubin: { type: Number, default: 0 },
-        AFT: { type: Number, default: 0 },
-        ALT: { type: Number, default: 0 }
-      }
-    ],
-
-    pregnancyRisk: { type: String, enum: ["Low", "High"], default: "Low" },
-    pregnancyRiskReason: { type: String, default: "" },
-
-    pregnancy: {
-      LMP: { type: Date },
-      LMPrev: { type: Date },
-      EDC: { type: Date },
-      HPT: { type: Date },
-      pregnancyType: {
-        type: String,
-        enum: [
-          "Spontaneus",
-          "In Vitro - Derived",
-          "In Vitro - Generated",
-          "Artificial Insemination - Donor",
-          "Artificial Insemination - Partner"
-        ]
-      }
-    }
+    height: { type: Number, default: 0 }
   },
   {
     timestamps: true

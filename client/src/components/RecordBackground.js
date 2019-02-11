@@ -139,6 +139,12 @@ class _RecordBackground extends React.Component {
                     {record.bloodGroup} {record.rh}
                   </div>
                 </div>
+                <div className="column">
+                  <p className="label">Height</p>
+                  <div className="field-wrapper section">
+                    {record.height} cm
+                  </div>
+                </div>
               </div>
             </div>
 

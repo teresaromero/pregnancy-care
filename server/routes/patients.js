@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const Record = require("../models/Record");
+const Pregnancy = require("../models/Pregnancy");
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -73,6 +74,27 @@ router.post("/record/create", (req, res, next) => {
       .populate("recordId")
       .then(patient => res.json({ patient }))
       .catch(e => console.log(e))
+  );
+});
+
+router.post("/record/newPregnancy", (req, res, next) => {
+  let { pregnancy, recordId } = req.body;
+
+  const newPregnancy = new Pregnancy(pregnancy);
+
+  newPregnancy.save().then(pregnancy =>
+    Record.findById(recordId).then(record => {
+      record.pregnanciesId.push(pregnancy);
+      record.save().then(record =>
+        User.findOne({ recordId: record._id })
+          .populate("recordId")
+          .then(patient => {
+            console.log(patient)
+            res.json({ patient });
+          })
+          .catch(e => console.log(e))
+      );
+    })
   );
 });
 

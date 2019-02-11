@@ -196,7 +196,7 @@ class _RecordInformationForm extends React.Component {
           <div className="field-body">
             <div className="field">
               <label className="label">Insurance Company</label>
-              <p className="control">
+              <div className="control">
                 <div className="select is-fullwidth">
                   <select
                     name="insurance"
@@ -210,7 +210,7 @@ class _RecordInformationForm extends React.Component {
                     ))}
                   </select>
                 </div>
-              </p>
+              </div>
             </div>
             <InputP
               id="insurance-patient"

@@ -21,6 +21,13 @@ export default class PatientsApi {
       .catch(err => console.log(err));
   }
 
+  static addPatient(patient) {
+    return instance
+      .post("/api/patients/create", { patient })
+      .then(res => res.data)
+      .catch(e => console.log(e));
+  }
+
   static updatePatient(patient,id) {
     return instance
       .put(`/api/patients/update`, { patient,id })
@@ -56,10 +63,13 @@ export default class PatientsApi {
       .catch(err => console.log(err));
   }
 
-  static addPatient(patient) {
+  static newPregnancy(pregnancy,recordId) {
     return instance
-      .post("/api/patients/create", { patient })
+      .post(`/api/patients/record/newPregnancy`, { pregnancy,recordId })
       .then(res => res.data)
-      .catch(e => console.log(e));
+      .catch(err => console.log(err));
   }
+
+
+  
 }

@@ -61,7 +61,7 @@ class _RecordBackgroundForm extends React.Component {
     if (!e.target.checkValidity()) {
       return;
     }
-    console.log(record)
+    console.log(record);
     PatientsApi.updateRecord(record, record._id, patient._id).then(res => {
       console.log(res);
       dispatch(viewPatient(res.patient));
@@ -289,7 +289,7 @@ class _RecordBackgroundForm extends React.Component {
                       <div className="field-body">
                         <div className="field">
                           <label className="label">Group</label>
-                          <p className="control">
+                          <div className="control">
                             <div className="select">
                               <select
                                 name="bloodGroup"
@@ -303,12 +303,12 @@ class _RecordBackgroundForm extends React.Component {
                                 ))}
                               </select>
                             </div>
-                          </p>
+                          </div>
                         </div>
 
                         <div className="field">
                           <label className="label">RH</label>
-                          <p className="control">
+                          <div className="control">
                             <div className="select">
                               <select
                                 name="rh"
@@ -322,11 +322,25 @@ class _RecordBackgroundForm extends React.Component {
                                 ))}
                               </select>
                             </div>
-                          </p>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+
+              <div className="field">
+                <label className="label">Height (cm)</label>
+                <div className="field-wrapper section">
+                  <InputP
+                    id="height"
+                    name="height"
+                    value={record.height}
+                    type="number"
+                    placeholder=""
+                    handleChange={e => this.handleRecordChange(e)}
+                  />
                 </div>
               </div>
 

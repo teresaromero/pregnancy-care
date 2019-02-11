@@ -21,7 +21,7 @@ export const InputP = ({
             className="input"
             id={id}
             name={name}
-            value={value}
+            value={value || ''}
             type={type}
             placeholder={placeholder}
             onChange={e => handleChange(e)}

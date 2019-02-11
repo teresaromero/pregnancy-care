@@ -8,93 +8,290 @@ import PatientsApi from "../lib/APIs/patientsApi";
 import { InputP } from "./InputP";
 
 import { Messages } from "./Messages";
+import CheckboxContainer from "./CheckboxContainer";
 
+const optionsPregnancy = [
+  "",
+  "Spontaneus",
+  "In Vitro - Derived",
+  "In Vitro - Generated",
+  "Artificial Insemination - Donor",
+  "Artificial Insemination - Partner"
+];
+
+const optionsDiet = ["", "Mediterranean", "Vegetarian", "Vegan", "Other"];
+
+const optionsSuplements = ["polivitaminics", "iron", "folic", "iodine", "none"];
+
+const optionsWorkRisk = [
+  "noise",
+  "weight lifting",
+  "stress",
+  "toxics",
+  "cold",
+  "standing up",
+  "none"
+];
+
+const optionsRisk = ["", "Low", "High"];
 
 class _PregnancyForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      record: {
-        LMP: "",
-        HPT: "",
-        EDC: ""
-      }
+      pregnancyRecord: {}
     };
   }
 
   handleSave(e) {
     e.preventDefault();
-    const { record } = this.state;
-    const { dispatch } = this.props;
+    const { pregnancyRecord } = this.state;
+    const { dispatch,patient } = this.props;
     if (!e.target.checkValidity()) {
       return;
     }
-    PatientsApi.addRecord(record, this.props.patientId).then(res => {
+    PatientsApi.newPregnancy(pregnancyRecord, patient.recordId).then(res => {
       console.log(res.patient);
       dispatch(viewPatient(res.patient));
+      this.props.handleClose();
     });
   }
 
   handleRecordChange(e) {
-    let uptRecord = { ...this.state.record };
+    let uptRecord = { ...this.state.pregnancyRecord };
     let { value } = e.target;
     let field = e.target.name;
     if (field === "LMP") {
       uptRecord[field] = moment(value).format("DD-MM-YYYY");
       uptRecord["EDC"] = moment(value)
         .clone()
-        .add(40, "week")
+        .add(7, "days")
+        .subtract(3, "months")
+        .add(1, "years")
         .format("YYYY-MM-DD");
-      this.setState({ record: uptRecord }, () =>
-        console.log(this.state.record)
+      this.setState({ pregnancyRecord: uptRecord }, () =>
+        console.log(this.state.pregnancyRecord)
       );
     }
     uptRecord[field] = value;
-    this.setState({ record: uptRecord }, () => console.log(this.state.record));
+    this.setState({ pregnancyRecord: uptRecord }, () =>
+      console.log(this.state.pregnancyRecord)
+    );
+  }
+
+  handleSelection(s, field) {
+    let uptRecord = { ...this.state.pregnancyRecord };
+    let selected = [];
+    s.forEach((v, k) => {
+      if (v) {
+        selected.push(k);
+      }
+    });
+    uptRecord[field] = selected;
+    this.setState({ pregnancyRecord: uptRecord }, () =>
+      console.log(this.state.pregnancyRecord)
+    );
   }
 
   render() {
-    let { record } = this.state;
+    let { pregnancyRecord } = this.state;
     return (
-      <div className="section">
-        <Messages />
+      <React.Fragment>
+        <div className="section">
+          <p className="label" />
+          <div className="field-wrapper section">
+            <div className="columns has-text-centered">
+              <div className="column">
+                <InputP
+                  id="LMP"
+                  name="LMP"
+                  label="LMP"
+                  value={pregnancyRecord.LMP}
+                  type="date"
+                  placeholder=""
+                  handleChange={e => this.handleRecordChange(e)}
+                />
+                <InputP
+                  id="HPT"
+                  name="HPT"
+                  label="HPT"
+                  value={pregnancyRecord.HPT}
+                  type="date"
+                  placeholder=""
+                  handleChange={e => this.handleRecordChange(e)}
+                />
+              </div>
+              <div className="column">
+                <InputP
+                  id="EDC"
+                  name="EDC"
+                  label="EDC"
+                  value={pregnancyRecord.EDC}
+                  type="date"
+                  placeholder=""
+                  disabled
+                />
+              </div>
+              <div className="column" />
+              <div className="column">
+                <p className="label">Weeks</p>
+                <p className="">
+                  {" "}
+                  {moment().diff(pregnancyRecord.LMP, "weeks")}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div className="section">
-          <div className="field-body">
+          <p className="label" />
+          <div className="field-wrapper section">
             <InputP
-              id="LMP"
-              name="LMP"
-              label="LMP"
-              value={record.LMP}
+              id="partnerBirthDate"
+              name="partnerBirthDate"
+              label="Partner Born Date"
+              value={moment(pregnancyRecord.partnerBirthDate).format(
+                "YYYY-MM-DD"
+              )}
               type="date"
-              placeholder=""
               handleChange={e => this.handleRecordChange(e)}
-            />
-            <InputP
-              id="HPT"
-              name="HPT"
-              label="HPT"
-              value={record.HPT}
-              type="date"
-              placeholder=""
-              handleChange={e => this.handleRecordChange(e)}
-            />
-            <InputP
-              id="EDC"
-              name="EDC"
-              label="EDC"
-              value={record.EDC}
-              type="date"
-              placeholder=""
-              disabled
             />
           </div>
-          <div className="section">
-            <div className="level">
-              <div className="level-item">
-                <p className="title is-6">
-                  {moment().diff(record.LMP, "weeks")} weeks
-                </p>
+        </div>
+
+        <div className="section">
+          <p className="label" />
+          <div className="field-wrapper section">
+            <div className="field">
+              <label className="label">Pregnancy Type</label>
+              <div className="control">
+                <div className="select">
+                  <select
+                    name="pregnancyType"
+                    value={pregnancyRecord.pregnancyType}
+                    onChange={e => this.handleRecordChange(e)}
+                  >
+                    {optionsPregnancy.map(type => (
+                      <option value={type} key={type}>
+                        {type}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="section">
+          <p className="label" />
+          <div className="field-wrapper section">
+            <div className="columns">
+              <div className="column">
+                <div className="field">
+                  <label className="label">Diet</label>
+                  <div className="control">
+                    <div className="select">
+                      <select
+                        name="diet"
+                        value={pregnancyRecord.diet}
+                        onChange={e => this.handleRecordChange(e)}
+                      >
+                        {optionsDiet.map(type => (
+                          <option value={type} key={type}>
+                            {type}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {pregnancyRecord.diet === "Other" ? (
+                <div className="column">
+                  <InputP
+                    id="dietOther"
+                    name="dietOther"
+                    label="Other Diet"
+                    value={pregnancyRecord.dietOther}
+                    type="text"
+                    handleChange={e => this.handleRecordChange(e)}
+                  />
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </div>
+
+        <div className="field">
+          <label className="label">Diet Suplements</label>
+          <div className="field-wrapper section">
+            <CheckboxContainer
+              options={optionsSuplements}
+              selection={s => this.handleSelection(s, "dietSuplements")}
+            />
+          </div>
+        </div>
+
+        <div className="field">
+          <label className="label" />
+          <div className="field-wrapper section">
+            <InputP
+              id="sport"
+              name="sport"
+              label="Sports"
+              value={pregnancyRecord.sport}
+              type="text"
+              handleChange={e => this.handleRecordChange(e)}
+            />
+          </div>
+        </div>
+
+        <div className="field">
+          <label className="label">Work Risk</label>
+          <div className="field-wrapper section">
+            <CheckboxContainer
+              options={optionsWorkRisk}
+              selection={s => this.handleSelection(s, "workRisk")}
+            />
+          </div>
+        </div>
+
+        <div className="section">
+          <p className="label" />
+          <div className="field-wrapper section">
+            <div className="columns">
+              <div className="column">
+                <div className="field">
+                  <label className="label">Pregnancy Risk</label>
+                  <div className="control">
+                    <div className="select">
+                      <select
+                        name="risk"
+                        value={pregnancyRecord.risk}
+                        onChange={e => this.handleRecordChange(e)}
+                      >
+                        {optionsRisk.map(type => (
+                          <option value={type} key={type}>
+                            {type}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="column">
+                <InputP
+                  id="riskReason"
+                  name="riskReason"
+                  label="Reason"
+                  value={pregnancyRecord.riskReason}
+                  type="text"
+                  handleChange={e => this.handleRecordChange(e)}
+                />
               </div>
             </div>
           </div>
@@ -108,9 +305,11 @@ class _PregnancyForm extends React.Component {
             Save
           </button>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
 
-export const PregnancyForm = withRouter(connect()(_PregnancyForm));
+export const PregnancyForm = withRouter(
+  connect(store => ({ patient: store.patient }))(_PregnancyForm)
+);
