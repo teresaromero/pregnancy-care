@@ -19,8 +19,8 @@ export const PatientsListCard = ({ patient }) => {
       <div className="level-right">
         <div className="level-item">
           <NavLink to={`/admin/patients/record/${patient._id}`}>
-            <span class="icon has-text-primary">
-              <i class="fas fa-lg	fa-file-medical-alt" />
+            <span className="icon has-text-primary">
+              <i className="fas fa-lg	fa-file-medical-alt" />
             </span>
           </NavLink>
         </div>

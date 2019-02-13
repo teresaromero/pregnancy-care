@@ -7,16 +7,13 @@ import { viewPatient, exitPatient } from "../lib/redux/actions";
 import { Loader } from "../components/Loader";
 import { RecordBackground } from "../components/RecordBackground";
 import { RecordPregnancy } from "../components/RecordPregnancy";
-import { RecordAppointments } from "../components/RecordAppointments";
+
 import { RecordInformation } from "../components/RecordInformation";
 
-import {
-  Accordion,
-  AccordionItem,
-  AccordionItemTitle,
-  AccordionItemBody
-} from "react-accessible-accordion";
-import "../lib/accordion-styles.css";
+import { ModalCard } from "../components/ModalCard";
+import { RecordBackgroundForm } from "../components/RecordBackgroundForm";
+import { PregnancyForm } from "../components/RecordPregnancyForm";
+import { InformationForm } from "../components/InformationForm";
 
 class _RecordPage extends React.Component {
   componentDidMount() {
@@ -40,7 +37,7 @@ class _RecordPage extends React.Component {
       <React.Fragment>
         {patient ? (
           <React.Fragment>
-            <section className="hero">
+            <section className="hero box">
               <div className="hero-body">
                 <h1 className="title">
                   {patient.name} {patient.surname}
@@ -48,52 +45,55 @@ class _RecordPage extends React.Component {
               </div>
             </section>
 
-            <Accordion>
-              <AccordionItem>
-                <AccordionItemTitle>
-                  <h3 className="u-position-relative">
-                    Information
-                    <div className="accordion__arrow" role="presentation" />
-                  </h3>
-                </AccordionItemTitle>
-                <AccordionItemBody>
-                  <RecordInformation />
-                </AccordionItemBody>
-              </AccordionItem >
-              <AccordionItem>
-                <AccordionItemTitle>
-                  <h3 className="u-position-relative">
-                    Background
-                    <div className="accordion__arrow" role="presentation" />
-                  </h3>
-                </AccordionItemTitle>
-                <AccordionItemBody>
-                  <RecordBackground />
-                </AccordionItemBody>
-              </AccordionItem>
-              <AccordionItem expanded="true">
-                <AccordionItemTitle>
-                  <h3 className="u-position-relative">
-                    Pregnancies
-                    <div className="accordion__arrow" role="presentation" />
-                  </h3>
-                </AccordionItemTitle>
-                <AccordionItemBody>
-                  <RecordPregnancy />
-                </AccordionItemBody>
-              </AccordionItem>
-              <AccordionItem>
-                <AccordionItemTitle>
-                  <h3 className="u-position-relative">
-                    Appointments
-                    <div className="accordion__arrow" role="presentation" />
-                  </h3>
-                </AccordionItemTitle>
-                <AccordionItemBody>
-                  <RecordAppointments />
-                </AccordionItemBody>
-              </AccordionItem>
-            </Accordion>
+            <div className="level">
+              <div className="level-left">
+                <div className="level-item">
+                  <h3 className="label">Information</h3>
+                </div>
+              </div>
+              <div className="level-right">
+                <div className="level-item">
+                  <ModalCard button="edit" title="Edit Information">
+                    <InformationForm />
+                  </ModalCard>
+                </div>
+              </div>
+            </div>
+
+            <RecordInformation />
+
+            <div className="level">
+              <div className="level-left">
+                <div className="level-item">
+                  <h3 className="label">Background</h3>
+                </div>
+              </div>
+              <div className="level-right">
+                <div className="level-item">
+                  <ModalCard button="edit" title="Edit Information">
+                    <RecordBackgroundForm />
+                  </ModalCard>
+                </div>
+              </div>
+            </div>
+            <RecordBackground />
+
+            <div className="level">
+              <div className="level-left">
+                <div className="level-item">
+                  <h3 className="label">Pregnancies</h3>
+                </div>
+              </div>
+              <div className="level-right">
+                <div className="level-item">
+                  <ModalCard title="Add Pregnancy" button="Add Pregnancy">
+                    <PregnancyForm />
+                  </ModalCard>
+                </div>
+              </div>
+            </div>
+
+            <RecordPregnancy />
           </React.Fragment>
         ) : (
           <Loader />

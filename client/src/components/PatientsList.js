@@ -13,14 +13,14 @@ const _PatientsList = ({ allPatients, filtered }) => {
 
       {filtered ? (
         filtered.map(patient => (
-          <div className="box">
-            <PatientsListCard key={patient._id} patient={patient} />
+          <div key={patient.name} className="box">
+            <PatientsListCard patient={patient} />
           </div>
         ))
       ) : allPatients ? (
         allPatients.map(patient => (
-          <div className="box">
-            <PatientsListCard key={patient._id} patient={patient} />
+          <div key={patient.name} className="box">
+            <PatientsListCard patient={patient} />
           </div>
         ))
       ) : (

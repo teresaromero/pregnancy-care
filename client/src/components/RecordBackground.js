@@ -2,8 +2,7 @@ import React from "react";
 
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { ModalCard } from "./ModalCard";
-import { RecordBackgroundForm } from "./RecordBackgroundForm";
+
 
 class _RecordBackground extends React.Component {
   constructor() {
@@ -19,61 +18,43 @@ class _RecordBackground extends React.Component {
       <React.Fragment>
         {patient ? (
           <React.Fragment>
-            <ModalCard title="Edit Background">
-              <RecordBackgroundForm />
-            </ModalCard>
-            <div className="section">
+            
+            <div className="box">
               <p className="label">Familiar</p>
               <div className="field-wrapper section">
                 <p className="label">Diseases</p>
-                <p>
-                  {record.backgroundDiseases === ""
-                    ? "Empty"
-                    : record.backgroundDiseases}
-                </p>
+                <p>{record.backgroundDiseases || "N/A"}</p>
                 <p className="label">Psychiatric Illness</p>
-                <p>
-                  {record.backgroundPsychiatricIll === ""
-                    ? "Empty"
-                    : record.backgroundPsychiatricIll}
-                </p>
+                <p>{record.backgroundPsychiatricIll || "N/A"}</p>
                 <p className="label">Addictions</p>
-                <p>
-                  {record.backgroundAddictions === ""
-                    ? "Empty"
-                    : record.backgroundAddictions}
-                </p>
+                <p>{record.backgroundAddictions || "N/A"}</p>
                 <p className="label">Reproductive Issues</p>
-                <p>
-                  {record.backgroundReproductive === ""
-                    ? "Empty"
-                    : record.backgroundReproductive}
-                </p>
+                <p>{record.backgroundReproductive || "N/A"}</p>
               </div>
             </div>
 
-            <div className="section">
+            <div className="box">
               <p className="label">Patient</p>
               <div className="field-wrapper section">
                 <p className="label">Diseases</p>
-                <p>{record.diseases === "" ? "Empty" : record.diseases}</p>
+                <p>{record.diseases || "N/A"}</p>
                 <p className="label">Allergies</p>
-                <p>{record.allergies === "" ? "Empty" : record.allergies}</p>
+                <p>{record.allergies || "N/A"}</p>
                 <p className="label">Addictions</p>
                 <p>
                   {record.addictions.length === 0
-                    ? "Empty"
+                    ? ""
                     : record.addictions.map(a => <span key={a}>{a}</span>)}
                 </p>
                 <p className="label">Contraceptive Methods</p>
                 <p>
                   {record.contraceptive.length === 0
-                    ? "Empty"
+                    ? ""
                     : record.contraceptive.map(a => <span key={a}>{a}</span>)}
                 </p>
                 <p>
                   {record.contraceptiveOther === "" ? (
-                    ""
+                    "N/A"
                   ) : (
                     <span>Other: {record.contraceptiveOther}</span>
                   )}
@@ -81,71 +62,72 @@ class _RecordBackground extends React.Component {
                 <p className="label">STD</p>
                 <p>
                   {record.STD.length === 0
-                    ? "Empty"
+                    ? "N/A"
                     : record.STD.map(a => <span>{a}</span>)}
                 </p>
                 <p>
                   {record.STDother === "" ? (
-                    ""
+                    "N/A"
                   ) : (
                     <span>Other: {record.STDother}</span>
                   )}
                 </p>
-                <p>Ended?: {record.STDovercome}</p>
+                <p>STD Status: {record.STDovercome || "N/A"}</p>
               </div>
             </div>
-            <div className="section">
+            <div className="box">
               <div className="columns">
                 <div className="column">
                   <p className="label">HPV Vaccine</p>
                   <div className="field-wrapper section">
-                    {record.HPVvaccine}
+                    {record.HPVvaccine || "N/A"}
                   </div>
                 </div>
                 <div className="column">
                   <p className="label">Period Cycle</p>
                   <div className="field-wrapper section">
-                    {record.menstrualCycleDays}/{record.menstrualCycleFrequency}
+                    {record.menstrualCycleDays || "N/A"}/
+                    {record.menstrualCycleFrequency || "N/A"}
                   </div>
                 </div>
                 <div className="column">
                   <p className="label">Blood Type</p>
                   <div className="field-wrapper section">
-                    {record.bloodGroup} {record.rh}
+                    {record.bloodGroup || "N/A"} {record.rh || "N/A"}
                   </div>
                 </div>
                 <div className="column">
                   <p className="label">Height</p>
                   <div className="field-wrapper section">
-                    {record.height} cm
+                    {record.height || "N/A"} cm
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="section">
+            <div className="box">
               <p className="label">Pregnancy History</p>
               <div className="field-wrapper section">
                 <div className="columns has-text-centered">
                   <div className="column">
                     <p className="label">Pregnancies</p>
-                    <p>{record.pregnancies}</p>
+                    <p>{record.pregnancies || "N/A"}</p>
                   </div>
                   <div className="column">
                     <p className="label">Labours</p>
-                    <p>{record.labours}</p>
+                    <p>{record.labours || "N/A"}</p>
                   </div>
                   <div className="column">
                     <p className="label">C-Sections</p>
-                    <p>{record.caesareanSections}</p>
+                    <p>{record.caesareanSections || "N/A"}</p>
                   </div>
                   <div className="column">
                     <p className="label">Abortions</p>
-                    <p>{record.abortions}</p>
+                    <p>{record.abortions || "N/A"}</p>
                   </div>
                   <div className="column">
                     <p className="label">Ectopics</p>
-                    <p>{record.ectopics}</p>
+                    <p>{record.ectopics || "N/A"}</p>
                   </div>
                 </div>
               </div>

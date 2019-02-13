@@ -44,6 +44,19 @@ export const exitPatient = () => {
   };
 };
 
+export const viewPregnancy = pregnancy => {
+  return {
+    type: "VIEW_PATIENT",
+    pregnancy
+  };
+};
+
+export const exitPregnancy = () => {
+  return {
+    type: "EXIT_PATIENT"
+  };
+};
+
 export const fetchPatients = data => {
   return {
     type: "FETCH_PATIENTS",

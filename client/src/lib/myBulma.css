@@ -14,8 +14,7 @@ body,
     border-radius: 50%; }
 
 .field-wrapper {
-  background-color: #dbdbdb;
-  border-radius: 5px; }
+  background-color: #dbdbdb; }
 
 .card-header.userCard {
   justify-content: space-evenly; }

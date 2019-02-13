@@ -7,32 +7,46 @@ import { PregnancyForm } from "./RecordPregnancyForm";
 import { PregnancyDetail } from "./PregnancyDetail";
 
 class _RecordPregnancy extends React.Component {
-
-
   render() {
     let { patient } = this.props;
     let { pregnanciesId } = patient.recordId;
 
     return (
-      <React.Fragment>
-        <ModalCard title="Add Pregnancy">
-          <PregnancyForm />
-        </ModalCard>
-
+      <div className="box">
         {pregnanciesId.length !== 0 ? (
           <div className="section">
             {pregnanciesId.map((pId, i) => (
               <div key={pId} className="section">
-                <ModalCard title={`Pregnancy ${i + 1}`}>
-                  <PregnancyDetail id={pId} />
-                </ModalCard>
+                <div className="level">
+                  <div className="level-left">
+                    <div className="level-item">
+                      <p>Pregnancy {i + 1}</p>
+                    </div>
+                  </div>
+
+                  <div className="level-right">
+                    <div className="level-item">
+                      <ModalCard title={`Pregnancy ${i + 1}`} button="View">
+                        <PregnancyDetail id={pId} />
+                      </ModalCard>
+                    </div>
+                    <div className="level-item">
+                      <ModalCard
+                        title={`Edit Pregnancy ${i + 1}`}
+                        button="Edit"
+                      >
+                        <PregnancyForm />
+                      </ModalCard>
+                    </div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         ) : (
           <p>No pregnancies in your record</p>
         )}
-      </React.Fragment>
+      </div>
     );
   }
 }

@@ -42,21 +42,44 @@ class _PregnancyForm extends React.Component {
     };
   }
 
-  handleSave(e) {
+  componentWillMount() {
+    let { pregnancyEdit } = this.props;
+    if (pregnancyEdit) {
+      this.setState({ pregnancyRecord: pregnancyEdit });
+    }
+  }
+
+  handleCreate(e) {
     e.preventDefault();
     const { pregnancyRecord } = this.state;
-    const { dispatch,patient } = this.props;
+    const { dispatch, patient } = this.props;
     if (!e.target.checkValidity()) {
       return;
     }
     PatientsApi.newPregnancy(pregnancyRecord, patient.recordId).then(res => {
-      
       dispatch(viewPatient(res.patient));
       this.props.handleClose();
     });
   }
 
-  handleRecordChange(e) {
+  // handleUpdate(e) {
+  //   e.preventDefault();
+  //   const { patient } = this.state;
+  //   const { dispatch } = this.props;
+  //   if (!e.target.checkValidity()) {
+  //     return;
+  //   }
+
+  //   PatientsApi.updatePregnancy(patient, patient._id)
+  //     .then(res => {
+  //       dispatch(viewPatient(res.patient));
+  //     })
+  //     .catch(e => {
+  //       console.log(e);
+  //     });
+  // }
+
+  handleFieldChange(e) {
     let uptRecord = { ...this.state.pregnancyRecord };
     let { value } = e.target;
     let field = e.target.name;
@@ -87,6 +110,7 @@ class _PregnancyForm extends React.Component {
   }
 
   render() {
+    let { pregnancyEdit } = this.props;
     let { pregnancyRecord } = this.state;
     return (
       <React.Fragment>
@@ -102,7 +126,7 @@ class _PregnancyForm extends React.Component {
                   value={pregnancyRecord.LMP}
                   type="date"
                   placeholder=""
-                  handleChange={e => this.handleRecordChange(e)}
+                  handleChange={e => this.handleFieldChange(e)}
                 />
                 <InputP
                   id="HPT"
@@ -111,7 +135,7 @@ class _PregnancyForm extends React.Component {
                   value={pregnancyRecord.HPT}
                   type="date"
                   placeholder=""
-                  handleChange={e => this.handleRecordChange(e)}
+                  handleChange={e => this.handleFieldChange(e)}
                 />
               </div>
               <div className="column">
@@ -148,7 +172,7 @@ class _PregnancyForm extends React.Component {
                 "YYYY-MM-DD"
               )}
               type="date"
-              handleChange={e => this.handleRecordChange(e)}
+              handleChange={e => this.handleFieldChange(e)}
             />
           </div>
         </div>
@@ -163,7 +187,7 @@ class _PregnancyForm extends React.Component {
                   <select
                     name="pregnancyType"
                     value={pregnancyRecord.pregnancyType}
-                    onChange={e => this.handleRecordChange(e)}
+                    onChange={e => this.handleFieldChange(e)}
                   >
                     {optionsPregnancy.map(type => (
                       <option value={type} key={type}>
@@ -189,7 +213,7 @@ class _PregnancyForm extends React.Component {
                       <select
                         name="diet"
                         value={pregnancyRecord.diet}
-                        onChange={e => this.handleRecordChange(e)}
+                        onChange={e => this.handleFieldChange(e)}
                       >
                         {optionsDiet.map(type => (
                           <option value={type} key={type}>
@@ -209,7 +233,7 @@ class _PregnancyForm extends React.Component {
                     label="Other Diet"
                     value={pregnancyRecord.dietOther}
                     type="text"
-                    handleChange={e => this.handleRecordChange(e)}
+                    handleChange={e => this.handleFieldChange(e)}
                   />
                 </div>
               ) : null}
@@ -236,7 +260,7 @@ class _PregnancyForm extends React.Component {
               label="Sports"
               value={pregnancyRecord.sport}
               type="text"
-              handleChange={e => this.handleRecordChange(e)}
+              handleChange={e => this.handleFieldChange(e)}
             />
           </div>
         </div>
@@ -263,7 +287,7 @@ class _PregnancyForm extends React.Component {
                       <select
                         name="risk"
                         value={pregnancyRecord.risk}
-                        onChange={e => this.handleRecordChange(e)}
+                        onChange={e => this.handleFieldChange(e)}
                       >
                         {optionsRisk.map(type => (
                           <option value={type} key={type}>
@@ -283,7 +307,7 @@ class _PregnancyForm extends React.Component {
                   label="Reason"
                   value={pregnancyRecord.riskReason}
                   type="text"
-                  handleChange={e => this.handleRecordChange(e)}
+                  handleChange={e => this.handleFieldChange(e)}
                 />
               </div>
             </div>
@@ -291,12 +315,21 @@ class _PregnancyForm extends React.Component {
         </div>
 
         <div className="has-text-centered">
-          <button
-            className="button is-primary"
-            onClick={e => this.handleSave(e)}
-          >
-            Save
-          </button>
+          {pregnancyEdit ? (
+            <button
+              className="button is-primary"
+              onClick={e => this.handleUpdate(e)}
+            >
+              Update
+            </button>
+          ) : (
+            <button
+              className="button is-primary"
+              onClick={e => this.handleCreate(e)}
+            >
+              Save
+            </button>
+          )}
         </div>
       </React.Fragment>
     );
@@ -304,5 +337,8 @@ class _PregnancyForm extends React.Component {
 }
 
 export const PregnancyForm = withRouter(
-  connect(store => ({ patient: store.patient }))(_PregnancyForm)
+  connect(store => ({
+    patient: store.patient,
+    pregnancyEdit: store.pregnancy
+  }))(_PregnancyForm)
 );

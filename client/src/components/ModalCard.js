@@ -22,13 +22,13 @@ export class ModalCard extends React.Component {
   }
 
   render() {
-    let { children, title } = this.props;
+    let { children, title,button } = this.props;
     let { isActive } = this.state;
     let modalClass = cx("modal", { "is-active": isActive });
     return (
       <React.Fragment>
         <button className="button" onClick={() => this.openModal()}>
-          {title}
+          {button}
         </button>
 
         <div className={modalClass}>

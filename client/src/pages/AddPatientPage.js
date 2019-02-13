@@ -1,9 +1,9 @@
 import React from 'react';
-import { NewPatientForm } from '../components/NewPatientForm';
+import { InformationForm } from '../components/InformationForm';
 
 
 export const AddPatientPage =()=>{
   return(
-    <NewPatientForm/>
+    <InformationForm/>
   )
 }
