@@ -7,7 +7,6 @@ import { viewPatient } from "../lib/redux/actions";
 import PatientsApi from "../lib/APIs/patientsApi";
 import { InputP } from "./InputP";
 
-import { Messages } from "./Messages";
 import CheckboxContainer from "./CheckboxContainer";
 
 const optionsPregnancy = [
@@ -51,7 +50,7 @@ class _PregnancyForm extends React.Component {
       return;
     }
     PatientsApi.newPregnancy(pregnancyRecord, patient.recordId).then(res => {
-      console.log(res.patient);
+      
       dispatch(viewPatient(res.patient));
       this.props.handleClose();
     });
@@ -69,14 +68,10 @@ class _PregnancyForm extends React.Component {
         .subtract(3, "months")
         .add(1, "years")
         .format("YYYY-MM-DD");
-      this.setState({ pregnancyRecord: uptRecord }, () =>
-        console.log(this.state.pregnancyRecord)
-      );
+      this.setState({ pregnancyRecord: uptRecord });
     }
     uptRecord[field] = value;
-    this.setState({ pregnancyRecord: uptRecord }, () =>
-      console.log(this.state.pregnancyRecord)
-    );
+    this.setState({ pregnancyRecord: uptRecord });
   }
 
   handleSelection(s, field) {
@@ -88,9 +83,7 @@ class _PregnancyForm extends React.Component {
       }
     });
     uptRecord[field] = selected;
-    this.setState({ pregnancyRecord: uptRecord }, () =>
-      console.log(this.state.pregnancyRecord)
-    );
+    this.setState({ pregnancyRecord: uptRecord });
   }
 
   render() {

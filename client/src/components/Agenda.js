@@ -2,7 +2,6 @@ import React from "react";
 import $ from "jquery";
 import "fullcalendar";
 import "fullcalendar/dist/fullcalendar.css";
-import { calendarFormat } from "moment";
 import AppointmentsAPI from "../lib/APIs/appointmentsAPI";
 
 export class Agenda extends React.Component {
@@ -51,7 +50,6 @@ export class Agenda extends React.Component {
               start: start,
               end: end
             };
-            console.log(appointment);
             $("#calendar").fullCalendar("renderEvent", appointment, true);
 
             AppointmentsAPI.addAppointment(appointment).then(res =>

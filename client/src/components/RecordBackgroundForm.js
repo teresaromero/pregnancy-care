@@ -61,9 +61,9 @@ class _RecordBackgroundForm extends React.Component {
     if (!e.target.checkValidity()) {
       return;
     }
-    console.log(record);
+   
     PatientsApi.updateRecord(record, record._id, patient._id).then(res => {
-      console.log(res);
+    
       dispatch(viewPatient(res.patient));
       this.props.handleClose();
     });

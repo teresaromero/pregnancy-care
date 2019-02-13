@@ -43,3 +43,17 @@ export const exitPatient = () => {
     type: "EXIT_PATIENT"
   };
 };
+
+export const fetchPatients = data => {
+  return {
+    type: "FETCH_PATIENTS",
+    data
+  };
+};
+
+export const filterPatients = dataFiltered => {
+  return {
+    type: "FILTER_PATIENTS",
+    dataFiltered
+  };
+};

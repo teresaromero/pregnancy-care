@@ -24,6 +24,7 @@ const userSchema = new Schema(
     //only customer data
     address: {
       street: { type: String },
+      number: { type: String },
       city: { type: String },
       state: { type: String },
       zip: { type: String }
@@ -36,7 +37,7 @@ const userSchema = new Schema(
     GDPRdoc: { type: String },
     idNum: { type: String },
     recordId: { type: Schema.Types.ObjectId, ref: "Record" },
-    appointmentsId:[{type:Schema.Types.ObjectId, ref: "Appointment"}]
+    appointmentsId: [{ type: Schema.Types.ObjectId, ref: "Appointment" }]
   },
   {
     timestamps: true

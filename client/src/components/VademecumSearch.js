@@ -25,7 +25,6 @@ export default class VademecumSearch extends React.Component {
 
     if (e.target.value !== "") {
       this.setState({ query: e.target.value }, () => {
-        console.log(this.state.query)
         VademecumApi.drugs("nombre", this.state.query).then(results => {
           this.setState({ data: results });
         });

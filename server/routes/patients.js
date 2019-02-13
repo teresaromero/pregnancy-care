@@ -37,8 +37,8 @@ router.post("/create", (req, res, next) => {
 router.get("/all", (req, res, next) => {
   User.find({ role: "CUSTOMER" })
     .sort({ createdAt: -1 })
-    .then(users => {
-      res.json({ users });
+    .then(patients => {
+      res.json({ patients });
     });
 });
 
@@ -124,7 +124,7 @@ router.get("/record/:id", (req, res, next) => {
 
 router.get("/pregnancy/:id", (req, res, next) => {
   let { id } = req.params;
-console.log(id)
+  console.log(id);
   Pregnancy.findById(id)
     .then(pregnancy => {
       console.log(pregnancy);

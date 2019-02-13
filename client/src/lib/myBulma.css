@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
 @import url(../../node_modules/@fortawesome/fontawesome-free/css/all.css);
 @import url(../../node_modules/cool-checkboxes-for-bulma.io/dist/css/bulma-radio-checkbox.css);
-body, #root, .App {
+body,
+#root,
+.App {
   background-color: whitesmoke; }
 
 #uploadFile {
@@ -1144,8 +1146,8 @@ a.has-text-danger:hover, a.has-text-danger:focus {
 
 .box {
   background-color: white;
-  border-radius: 6px;
-  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+  border-radius: 0px;
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 0px rgba(10, 10, 10, 0.1);
   color: #4a4a4a;
   display: block;
   padding: 1.25rem; }

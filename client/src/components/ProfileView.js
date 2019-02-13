@@ -40,7 +40,7 @@ class _ProfileView extends React.Component {
   }
   handleEdit() {
     let { dispatch } = this.props;
-    console.log(this.state.user);
+  
     UserApi.editProfile(this.state.user).then(user => dispatch(edit(user)));
   }
 

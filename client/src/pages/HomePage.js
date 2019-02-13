@@ -2,6 +2,7 @@ import React from "react";
 import cx from "classnames";
 import { LoginForm } from "../components/LoginForm";
 import { SignupForm } from "../components/SignupForm";
+import {Link} from 'react-router-dom'
 
 export default class HomePage extends React.Component {
   constructor() {
@@ -30,7 +31,7 @@ export default class HomePage extends React.Component {
                     })
                   }
                 >
-                  <a>Login</a>
+                  <Link to="">Login</Link>
                 </li>
                 <li
                   className={signupTabClass}
@@ -41,7 +42,7 @@ export default class HomePage extends React.Component {
                     })
                   }
                 >
-                  <a>Signup</a>
+                  <Link to="">Signup</Link>
                 </li>
               </ul>
             </div>

@@ -17,7 +17,7 @@ class _PregnancyDetail extends React.Component {
 
     PatientsApi.getPregnancy(id).then(res => {
       let { pregnancy } = res.data;
-      console.log(pregnancy);
+    
       this.setState({ pregnancy: pregnancy });
     });
   }
@@ -30,7 +30,6 @@ class _PregnancyDetail extends React.Component {
   render() {
     let { pregnancy } = this.state;
     let { patient } = this.props;
-    console.log(this.props);
     return (
       <React.Fragment>
         {pregnancy && patient ? (
@@ -99,7 +98,7 @@ class _PregnancyDetail extends React.Component {
 
                     <ul>
                       {pregnancy.dietSuplements.map(supl => (
-                        <li>{supl}</li>
+                        <li key={supl}>{supl}</li>
                       ))}
                     </ul>
                   </div>
@@ -110,7 +109,7 @@ class _PregnancyDetail extends React.Component {
             <div className="section">
               <div className="field-wrapper section">
                 <p className="label">
-                  Sports <p>{pregnancy.sport}</p>
+                  Sports <span>{pregnancy.sport}</span>
                 </p>
               </div>
             </div>
@@ -127,7 +126,7 @@ class _PregnancyDetail extends React.Component {
                     <p className="label">Work Risk</p>
                     <ul>
                       {pregnancy.workRisk.map(risk => (
-                        <li>{risk}</li>
+                        <li key={risk}>{risk}</li>
                       ))}
                     </ul>
                   </div>

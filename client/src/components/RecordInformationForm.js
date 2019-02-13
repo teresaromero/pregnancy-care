@@ -1,6 +1,6 @@
 import React from "react";
-import moment, { now } from "moment";
-import { withRouter, Link } from "react-router-dom";
+import moment from "moment";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import PatientsApi from "../lib/APIs/patientsApi";
@@ -27,7 +27,7 @@ class _RecordInformationForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const { patient } = this.state;
-    const { history, dispatch } = this.props;
+    const {  dispatch } = this.props;
     if (!e.target.checkValidity()) {
       return;
     }
@@ -60,10 +60,8 @@ class _RecordInformationForm extends React.Component {
       let checked = e.target.value;
       uptPatient[field] = checked;
 
-      console.log(uptPatient);
-      this.setState({ patient: uptPatient }, () => {
-        console.log(this.state);
-      });
+      
+      this.setState({ patient: uptPatient });
     }
     uptPatient[field] = value;
     this.setState({ patient: uptPatient });

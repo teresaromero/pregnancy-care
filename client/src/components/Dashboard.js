@@ -14,7 +14,7 @@ import { RecordPage } from "../pages/RecordPage";
 import { AgendaOverviewPage } from "../pages/AgendaOverviewPage";
 import { PregnancyDetail } from "./PregnancyDetail";
 
-const _Dashboard = ({ user, location, match }) => {
+const _Dashboard = ({ user, match }) => {
   return (
     <React.Fragment>
       <div className="mainLayout">

@@ -1,6 +1,8 @@
 const initialStore = {
   user: null,
-  patient:null,
+  patient: null,
+  patientList: null,
+  filteredPatientList: null,
   messages: []
 };
 
@@ -45,7 +47,7 @@ export const rootReducer = (store = initialStore, action) => {
         ...store,
         patient: action.patient
       };
-      console.log(store)
+
       break;
 
     case "EXIT_PATIENT":
@@ -53,7 +55,22 @@ export const rootReducer = (store = initialStore, action) => {
         ...store,
         patient: null
       };
-      console.log(store)
+
+      break;
+
+    case "FETCH_PATIENTS":
+      store = {
+        ...store,
+        patientList: action.data
+      };
+      break;
+      
+    case "FILTER_PATIENTS":
+      store = {
+        ...store,
+        filteredPatientList: action.dataFiltered
+      };
+
       break;
 
     default:

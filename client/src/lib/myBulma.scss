@@ -20,25 +20,25 @@ $success: $green;
 $warning: $yellow;
 $link: $dark-blue;
 
-
 //Body
-body,#root,.App{
-  background-color:hsl(0, 0%, 96%);
-  
+body,
+#root,
+.App {
+  background-color: hsl(0, 0%, 96%);
 }
 
 //upload icon
 
-#uploadFile{
-  top:-36px;
-  left:58px;
+#uploadFile {
+  top: -36px;
+  left: 58px;
   .icon.is-large {
     background-color: $light-blue;
     border-radius: 50%;
   }
 }
 
-.field-wrapper{
+.field-wrapper {
   background-color: hsl(0, 0%, 86%);
   border-radius: 5px;
 }
@@ -49,18 +49,19 @@ body,#root,.App{
 }
 
 //section padding
-$section-padding:1rem 1.5rem;
-$section-padding-medium:3.75rem 1.5rem;
-$section-padding-large:6rem 1.5rem;
+$section-padding: 1rem 1.5rem;
+$section-padding-medium: 3.75rem 1.5rem;
+$section-padding-large: 6rem 1.5rem;
 
+//Box and card
+$box-radius: 0px;
+$box-shadow:0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 0px rgba(10, 10, 10, 0.1);
 
 
 //Navbar
 $navbar-breakpoint: 769px;
 $navbar-height: 3rem;
 $navbar-burger-color: $yellow;
-
-
 
 //Aside
 aside {
@@ -70,7 +71,7 @@ aside {
 }
 
 //main content scroll
-.mainContent{
+.mainContent {
   min-height: 85vh;
   max-height: 85vh;
   overflow-y: scroll;
@@ -80,11 +81,9 @@ aside {
   background: transparent; /* make scrollbar transparent */
 }
 
-
 //Footer Nav
 
 @media screen and (min-width: 769px) {
-  
   #footer-nav {
     display: none;
   }
@@ -94,19 +93,16 @@ aside {
 }
 
 @media screen and (max-width: 768px) {
-  
-  #footer-nav{
-    bottom:-1px;
+  #footer-nav {
+    bottom: -1px;
   }
   #footer-nav.navbar-menu {
     align-items: stretch;
     display: flex;
   }
-  #footer-content{
+  #footer-content {
     justify-content: space-between;
   }
-    
-    
 }
 
 @import "../../node_modules/bulma/bulma.sass";
