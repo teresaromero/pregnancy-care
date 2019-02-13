@@ -40,7 +40,6 @@ body,
 
 .field-wrapper {
   background-color: hsl(0, 0%, 86%);
-  
 }
 
 //User Card
@@ -55,8 +54,7 @@ $section-padding-large: 6rem 1.5rem;
 
 //Box and card
 $box-radius: 0px;
-$box-shadow:0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 0px rgba(10, 10, 10, 0.1);
-
+$box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 0px rgba(10, 10, 10, 0.1);
 
 //Navbar
 $navbar-breakpoint: 769px;
@@ -69,6 +67,8 @@ aside {
   max-height: 85vh;
   overflow-y: scroll;
 }
+
+
 
 //main content scroll
 .mainContent {
@@ -110,3 +110,4 @@ aside {
 @import "../../node_modules/bulma-tooltip/dist/css/bulma-tooltip.sass";
 @import "../../node_modules/cool-checkboxes-for-bulma.io/dist/css/bulma-radio-checkbox.css";
 @import "../../node_modules/bulma-pageloader/dist/css/bulma-pageloader.sass";
+
