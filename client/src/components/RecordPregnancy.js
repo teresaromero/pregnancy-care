@@ -31,12 +31,7 @@ class _RecordPregnancy extends React.Component {
                       </ModalCard>
                     </div>
                     <div className="level-item">
-                      <ModalCard
-                        title={`Edit Pregnancy ${i + 1}`}
-                        button="Edit"
-                      >
-                        <PregnancyForm />
-                      </ModalCard>
+                     
                     </div>
                   </div>
                 </div>

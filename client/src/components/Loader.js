@@ -1,4 +1,5 @@
 import React from "react";
+import 'bulma-pageloader'
 
 export const Loader = () => {
   return (

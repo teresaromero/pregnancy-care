@@ -2,153 +2,124 @@ import React from "react";
 import moment from "moment";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import PatientsApi from "../lib/APIs/patientsApi";
+import { Loader } from "./Loader";
 
 class _PregnancyDetail extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      pregnancy: null
-    };
-  }
-
-  componentWillMount() {
-    let { id } = this.props;
-
-    PatientsApi.getPregnancy(id).then(res => {
-      let { pregnancy } = res.data;
-    
-      this.setState({ pregnancy: pregnancy });
-    });
-  }
-
-  componentWillUnmount() {
-    console.log("Component will unmount");
-    this.setState({ pregnancy: null });
-  }
-
   render() {
-    let { pregnancy } = this.state;
     let { patient } = this.props;
+    let patientRecord = this.props.patient.recordId;
+    console.log(patient);
     return (
       <React.Fragment>
-        {pregnancy && patient ? (
-          <React.Fragment>
-            <div className="section">
-              <p className="label" />
-              <div className="field-wrapper section">
-                <div className="columns has-text-centered">
-                  <div className="column">
-                    <p className="label">LMP</p>
-                    <p className="">
-                      {moment(pregnancy.LMP).format("Do MMM YY")}
+        {patient ? (
+          <div className="box">
+            <p className="label" />
+            <div className="field-wrapper section">
+              <div className="columns has-text-centered">
+                <div className="column">
+                  <p className="label">LMP</p>
+                  <p className="">
+                    {moment(patientRecord.LMP).format("Do MMM YY")}
+                  </p>
+                </div>
+                <div className="column">
+                  <p className="label">EDC</p>
+                  <p className="">
+                    {moment(patientRecord.EDC).format("Do MMM YY")}
+                  </p>
+                </div>
+                <div className="column">
+                  <p className="label">Weeks</p>
+                  <p className="">
+                    {moment().diff(patientRecord.LMP, "weeks")}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <p className="label" />
+            <div className="field-wrapper section">
+              <div className="columns">
+                <div className="column">
+                  <p className="label">Mother Age</p>
+                  <p className="">
+                    {moment().diff(patient.bornDate, "years")} years
+                  </p>
+
+                  <p className="label">Father Age</p>
+                  <p className="">
+                    {moment().diff(patientRecord.partnerBirthDate, "years")}{" "}
+                    years
+                  </p>
+                </div>
+                <div className="column">
+                  <p className="label">Pregnancy Type</p>
+                  <p className="">{patientRecord.pregnancyType}</p>
+                </div>
+              </div>
+            </div>
+
+            <p className="label" />
+            <div className="field-wrapper section">
+              <div className="columns">
+                <div className="column">
+                  <p className="label">Diet</p>
+                  <p className="">{patientRecord.diet}</p>
+                  {patient.diet === "Other" ? (
+                    <p className="label">
+                      Other: <p>{patientRecord.dietOther}</p>
                     </p>
-                  </div>
-                  <div className="column">
-                    <p className="label">EDC</p>
-                    <p className="">
-                      {moment(pregnancy.EDC).format("Do MMM YY")}
-                    </p>
-                  </div>
-                  <div className="column">
-                    <p className="label">Weeks</p>
-                    <p className="">{moment().diff(pregnancy.LMP, "weeks")}</p>
-                  </div>
+                  ) : null}
                 </div>
-              </div>
-            </div>
-            <div className="section">
-              <p className="label" />
-              <div className="field-wrapper section">
-                <div className="columns">
-                  <div className="column">
-                    <p className="label">Mother Age</p>
-                    <p className="">
-                      {moment().diff(patient.bornDate, "years")} years
-                    </p>
+                <div className="column">
+                  <p className="label">Diet Suplements</p>
 
-                    <p className="label">Father Age</p>
-                    <p className="">
-                      {moment().diff(pregnancy.partnerBirthDate, "years")} years
-                    </p>
-                  </div>
-                  <div className="column">
-                    <p className="label">Pregnancy Type</p>
-                    <p className="">{pregnancy.pregnancyType}</p>
-                  </div>
+                  <ul>
+                    {patientRecord.dietSuplements.map(supl => (
+                      <li key={supl}>{supl}</li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>
 
-            <div className="section">
-              <p className="label" />
-              <div className="field-wrapper section">
-                <div className="columns">
-                  <div className="column">
-                    <p className="label">Diet</p>
-                    <p className="">{pregnancy.diet}</p>
-                    {pregnancy.diet === "Other" ? (
-                      <p className="label">
-                        Other: <p>{pregnancy.dietOther}</p>
-                      </p>
-                    ) : null}
-                  </div>
-                  <div className="column">
-                    <p className="label">Diet Suplements</p>
+            <div className="field-wrapper section">
+              <p className="label">
+                Sports <span>{patientRecord.sport}</span>
+              </p>
+            </div>
 
-                    <ul>
-                      {pregnancy.dietSuplements.map(supl => (
-                        <li key={supl}>{supl}</li>
-                      ))}
-                    </ul>
-                  </div>
+            <p className="label" />
+            <div className="field-wrapper section">
+              <div className="columns">
+                <div className="column">
+                  <p className="label">Profession</p>
+                  <p className="">{patient.profession}</p>
+                </div>
+                <div className="column">
+                  <p className="label">Work Risk</p>
+                  <ul>
+                    {patientRecord.workRisk.map(risk => (
+                      <li key={risk}>{risk}</li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>
 
-            <div className="section">
-              <div className="field-wrapper section">
-                <p className="label">
-                  Sports <span>{pregnancy.sport}</span>
-                </p>
-              </div>
-            </div>
-
-            <div className="section">
-              <p className="label" />
-              <div className="field-wrapper section">
-                <div className="columns">
-                  <div className="column">
-                    <p className="label">Profession</p>
-                    <p className="">{patient.profession}</p>
-                  </div>
-                  <div className="column">
-                    <p className="label">Work Risk</p>
-                    <ul>
-                      {pregnancy.workRisk.map(risk => (
-                        <li key={risk}>{risk}</li>
-                      ))}
-                    </ul>
-                  </div>
+            <p className="label" />
+            <div className="field-wrapper section">
+              <div className="columns">
+                <div className="column">
+                  <p className="label">Pregnancy Risk</p>
+                  <p className="">{patientRecord.risk}</p>
+                  <p className="">{patientRecord.riskReason}</p>
                 </div>
               </div>
             </div>
-
-            <div className="section">
-              <p className="label" />
-              <div className="field-wrapper section">
-                <div className="columns">
-                  <div className="column">
-                    <p className="label">Pregnancy Risk</p>
-                    <p className="">{pregnancy.risk}</p>
-                    <p className="">{pregnancy.riskReason}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </React.Fragment>
+          </div>
         ) : (
-          <p>Loading</p>
+          <Loader/>
         )}
       </React.Fragment>
     );

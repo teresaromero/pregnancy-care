@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 const recordSchema = new Schema(
   {
     userId: { type: Schema.Types.ObjectId, ref: "User" },
-    pregnanciesId: [{ type: Schema.Types.ObjectId, ref: "Pregnancy" }],
-    
+    pregnanciesId: { type: Schema.Types.ObjectId, ref: "Pregnancy" },
+
     backgroundDiseases: { type: String, default: "" },
     backgroundPsychiatricIll: { type: String, default: "" },
     backgroundAddictions: { type: String, default: "" },
@@ -89,7 +89,103 @@ const recordSchema = new Schema(
 
     lastCitology: { type: Date, default: Date.now() },
 
-    height: { type: Number, default: 0 }
+    height: { type: Number, default: 0 },
+
+    partnerBirthDate: { type: Date },
+
+    LMP: { type: Date },
+    EDC: { type: Date },
+    HPT: { type: Date },
+    pregnancyType: {
+      type: String,
+      enum: [
+        "Spontaneus",
+        "In Vitro - Derived",
+        "In Vitro - Generated",
+        "Artificial Insemination - Donor",
+        "Artificial Insemination - Partner"
+      ]
+    },
+
+    diet: {
+      type: String,
+      enum: ["Mediterranean", "Vegetarian", "Vegan", "Other"],
+      default: "Mediterranean"
+    },
+    dietOther: { type: String, default: "" },
+
+    dietSuplements: [
+      {
+        type: String,
+        enum: ["polivitaminics", "iron", "folic", "iodine", "none"],
+        default: "none"
+      }
+    ],
+
+    sport: { type: String, default: "" },
+    workRisk: [
+      {
+        type: String,
+        enum: [
+          "noise",
+          "weight lifting",
+          "stress",
+          "toxics",
+          "cold",
+          "standing up",
+          "none"
+        ],
+        default: "none"
+      }
+    ],
+
+    risk: { type: String, enum: ["Low", "High"], default: "Low" },
+    riskReason: { type: String, default: "" },
+
+    weight: [
+      {
+        value: { type: Number, default: 0 },
+        date: { type: Date, default: Date.now }
+      }
+    ],
+    IMC: [
+      {
+        value: { type: Number, default: 0 },
+        date: { type: Date, default: Date.now }
+      }
+    ],
+
+    bloodPressure: [
+      {
+        Systolic: { type: Number, default: 0 },
+        Diastolic: { type: Number, default: 0 },
+        date: { type: Date, default: Date.now }
+      }
+    ],
+
+    visits: [
+      {
+        medicalTest: [
+          {
+            type: String,
+            enum: [
+              "none",
+              "Ultrasound 1Term",
+              "Ultrasound 2Term",
+              "Ultrasound 3Term",
+              "Blood Test 1Term",
+              "Blood Test 2Term",
+              "Blood Test 3Term"
+            ],
+            default: "none"
+          }
+        ],
+
+        notes: { type: String, default: "" },
+        notesOut: { type: String, default: "" },
+        date: { type: Date, dafault: Date.now }
+      }
+    ]
   },
   {
     timestamps: true

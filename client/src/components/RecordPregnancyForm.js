@@ -34,53 +34,35 @@ const optionsWorkRisk = [
 
 const optionsRisk = ["", "Low", "High"];
 
-class _PregnancyForm extends React.Component {
+class _RecordPregnancyForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      pregnancyRecord: {}
+      record: {}
     };
   }
 
   componentWillMount() {
-    let { pregnancyEdit } = this.props;
-    if (pregnancyEdit) {
-      this.setState({ pregnancyRecord: pregnancyEdit });
-    }
+    let { patient } = this.props;
+
+    this.setState({ record: patient.recordId });
   }
 
-  handleCreate(e) {
+  handleUpdate(e) {
     e.preventDefault();
-    const { pregnancyRecord } = this.state;
+    const { record } = this.state;
     const { dispatch, patient } = this.props;
     if (!e.target.checkValidity()) {
       return;
     }
-    PatientsApi.newPregnancy(pregnancyRecord, patient.recordId).then(res => {
+
+    PatientsApi.updateRecord(record, record._id, patient._id).then(res => {
       dispatch(viewPatient(res.patient));
-      this.props.handleClose();
     });
   }
 
-  // handleUpdate(e) {
-  //   e.preventDefault();
-  //   const { patient } = this.state;
-  //   const { dispatch } = this.props;
-  //   if (!e.target.checkValidity()) {
-  //     return;
-  //   }
-
-  //   PatientsApi.updatePregnancy(patient, patient._id)
-  //     .then(res => {
-  //       dispatch(viewPatient(res.patient));
-  //     })
-  //     .catch(e => {
-  //       console.log(e);
-  //     });
-  // }
-
   handleFieldChange(e) {
-    let uptRecord = { ...this.state.pregnancyRecord };
+    let uptRecord = { ...this.state.record };
     let { value } = e.target;
     let field = e.target.name;
     if (field === "LMP") {
@@ -91,14 +73,14 @@ class _PregnancyForm extends React.Component {
         .subtract(3, "months")
         .add(1, "years")
         .format("YYYY-MM-DD");
-      this.setState({ pregnancyRecord: uptRecord });
+      this.setState({ record: uptRecord });
     }
     uptRecord[field] = value;
-    this.setState({ pregnancyRecord: uptRecord });
+    this.setState({ record: uptRecord });
   }
 
   handleSelection(s, field) {
-    let uptRecord = { ...this.state.pregnancyRecord };
+    let uptRecord = { ...this.state.record };
     let selected = [];
     s.forEach((v, k) => {
       if (v) {
@@ -106,12 +88,11 @@ class _PregnancyForm extends React.Component {
       }
     });
     uptRecord[field] = selected;
-    this.setState({ pregnancyRecord: uptRecord });
+    this.setState({ record: uptRecord });
   }
 
   render() {
-    let { pregnancyEdit } = this.props;
-    let { pregnancyRecord } = this.state;
+    let { record } = this.state;
     return (
       <React.Fragment>
         <div className="section">
@@ -123,7 +104,7 @@ class _PregnancyForm extends React.Component {
                   id="LMP"
                   name="LMP"
                   label="LMP"
-                  value={pregnancyRecord.LMP}
+                  value={record.LMP}
                   type="date"
                   placeholder=""
                   handleChange={e => this.handleFieldChange(e)}
@@ -132,7 +113,7 @@ class _PregnancyForm extends React.Component {
                   id="HPT"
                   name="HPT"
                   label="HPT"
-                  value={pregnancyRecord.HPT}
+                  value={record.HPT}
                   type="date"
                   placeholder=""
                   handleChange={e => this.handleFieldChange(e)}
@@ -143,7 +124,7 @@ class _PregnancyForm extends React.Component {
                   id="EDC"
                   name="EDC"
                   label="EDC"
-                  value={pregnancyRecord.EDC}
+                  value={record.EDC}
                   type="date"
                   placeholder=""
                   disabled
@@ -152,10 +133,7 @@ class _PregnancyForm extends React.Component {
               <div className="column" />
               <div className="column">
                 <p className="label">Weeks</p>
-                <p className="">
-                  {" "}
-                  {moment().diff(pregnancyRecord.LMP, "weeks")}
-                </p>
+                <p className=""> {moment().diff(record.LMP, "weeks")}</p>
               </div>
             </div>
           </div>
@@ -168,9 +146,7 @@ class _PregnancyForm extends React.Component {
               id="partnerBirthDate"
               name="partnerBirthDate"
               label="Partner Born Date"
-              value={moment(pregnancyRecord.partnerBirthDate).format(
-                "YYYY-MM-DD"
-              )}
+              value={moment(record.partnerBirthDate).format("YYYY-MM-DD")}
               type="date"
               handleChange={e => this.handleFieldChange(e)}
             />
@@ -186,7 +162,7 @@ class _PregnancyForm extends React.Component {
                 <div className="select">
                   <select
                     name="pregnancyType"
-                    value={pregnancyRecord.pregnancyType}
+                    value={record.pregnancyType}
                     onChange={e => this.handleFieldChange(e)}
                   >
                     {optionsPregnancy.map(type => (
@@ -212,7 +188,7 @@ class _PregnancyForm extends React.Component {
                     <div className="select">
                       <select
                         name="diet"
-                        value={pregnancyRecord.diet}
+                        value={record.diet}
                         onChange={e => this.handleFieldChange(e)}
                       >
                         {optionsDiet.map(type => (
@@ -225,13 +201,13 @@ class _PregnancyForm extends React.Component {
                   </div>
                 </div>
               </div>
-              {pregnancyRecord.diet === "Other" ? (
+              {record.diet === "Other" ? (
                 <div className="column">
                   <InputP
                     id="dietOther"
                     name="dietOther"
                     label="Other Diet"
-                    value={pregnancyRecord.dietOther}
+                    value={record.dietOther}
                     type="text"
                     handleChange={e => this.handleFieldChange(e)}
                   />
@@ -258,7 +234,7 @@ class _PregnancyForm extends React.Component {
               id="sport"
               name="sport"
               label="Sports"
-              value={pregnancyRecord.sport}
+              value={record.sport}
               type="text"
               handleChange={e => this.handleFieldChange(e)}
             />
@@ -286,7 +262,7 @@ class _PregnancyForm extends React.Component {
                     <div className="select">
                       <select
                         name="risk"
-                        value={pregnancyRecord.risk}
+                        value={record.risk}
                         onChange={e => this.handleFieldChange(e)}
                       >
                         {optionsRisk.map(type => (
@@ -305,7 +281,7 @@ class _PregnancyForm extends React.Component {
                   id="riskReason"
                   name="riskReason"
                   label="Reason"
-                  value={pregnancyRecord.riskReason}
+                  value={record.riskReason}
                   type="text"
                   handleChange={e => this.handleFieldChange(e)}
                 />
@@ -315,30 +291,20 @@ class _PregnancyForm extends React.Component {
         </div>
 
         <div className="has-text-centered">
-          {pregnancyEdit ? (
-            <button
-              className="button is-primary"
-              onClick={e => this.handleUpdate(e)}
-            >
-              Update
-            </button>
-          ) : (
-            <button
-              className="button is-primary"
-              onClick={e => this.handleCreate(e)}
-            >
-              Save
-            </button>
-          )}
+          <button
+            className="button is-primary"
+            onClick={e => this.handleUpdate(e)}
+          >
+            Update
+          </button>
         </div>
       </React.Fragment>
     );
   }
 }
 
-export const PregnancyForm = withRouter(
+export const RecordPregnancyForm = withRouter(
   connect(store => ({
-    patient: store.patient,
-    pregnancyEdit: store.pregnancy
-  }))(_PregnancyForm)
+    patient: store.patient
+  }))(_RecordPregnancyForm)
 );

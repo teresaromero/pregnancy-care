@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const pregnancySchema = new Schema(
   {
     recordId: { type: Schema.Types.ObjectId, ref: "Record" },
+    pregnantId: { type: Schema.Types.ObjectId, ref: "User" },
 
     partnerBirthDate: { type: Date },
 
@@ -65,9 +66,24 @@ const pregnancySchema = new Schema(
           Systolic: { type: Number, default: 0 },
           Diastolic: { type: Number, default: 0 }
         },
-        glucose: { type: Number, default: 0 },
+        medicalTest: [
+          {
+            type: String,
+            enum: [
+              "none",
+              "Ultrasound 1Term",
+              "Ultrasound 2Term",
+              "Ultrasound 3Term",
+              "Blood Test 1Term",
+              "Blood Test 2Term",
+              "Blood Test 3Term"
+            ],
+            default: "none"
+          }
+        ],
 
         notes: { type: String, default: "" },
+        notesOut: { type: String, default: "" },
         date: { type: Date, dafault: Date.now }
       }
     ]

@@ -24,6 +24,9 @@ aside {
   max-height: 85vh;
   overflow-y: scroll; }
 
+.timeline-content {
+  width: 100%; }
+
 .mainContent {
   min-height: 85vh;
   max-height: 85vh;

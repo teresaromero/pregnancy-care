@@ -68,7 +68,11 @@ aside {
   overflow-y: scroll;
 }
 
+//timeline
 
+.timeline-content{
+  width:100%
+}
 
 //main content scroll
 .mainContent {
@@ -109,5 +113,4 @@ aside {
 @import "../../node_modules/bulma-badge/dist/css/bulma-badge.sass";
 @import "../../node_modules/bulma-tooltip/dist/css/bulma-tooltip.sass";
 @import "../../node_modules/cool-checkboxes-for-bulma.io/dist/css/bulma-radio-checkbox.css";
-@import "../../node_modules/bulma-pageloader/dist/css/bulma-pageloader.sass";
 
