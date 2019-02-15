@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const recordSchema = new Schema(
   {
     userId: { type: Schema.Types.ObjectId, ref: "User" },
-    pregnanciesId: { type: Schema.Types.ObjectId, ref: "Pregnancy" },
 
     backgroundDiseases: { type: String, default: "" },
     backgroundPsychiatricIll: { type: String, default: "" },
@@ -178,7 +177,7 @@ const recordSchema = new Schema(
             ]
           }
         ],
-        testResults:{type:String,default:""},
+        testResults: { type: String, default: "" },
         notes: { type: String, default: "" },
         notesOut: { type: String, default: "" },
         date: { type: Date, dafault: Date.now }

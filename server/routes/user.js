@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
-
+const { isLoggedIn } = require("../middlewares/isLogged");
 const uploadMethods = require("../config/cloudinary.js");
 const { parser } = uploadMethods;
 
 router.post(
   "/profile-picture",
+  isLoggedIn(),
   parser.single("profile-picture"),
   (req, res, next) => {
     res.json({
@@ -16,14 +17,14 @@ router.post(
   }
 );
 
-router.put("/editProfilePicture", (req, res, next) => {
+router.put("/editProfilePicture", isLoggedIn(), (req, res, next) => {
   let { id, file } = req.body;
   User.findByIdAndUpdate(id, { image: file }, { new: true })
     .then(user => res.json(user))
     .catch(e => console.log(e));
 });
 
-router.put("/editProfile", (req, res, next) => {
+router.put("/editProfile", isLoggedIn(), (req, res, next) => {
   const {
     name,
     surname,
@@ -34,7 +35,6 @@ router.put("/editProfile", (req, res, next) => {
     idNum,
     _id
   } = req.body.user;
-  
 
   User.findByIdAndUpdate(
     _id,

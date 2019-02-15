@@ -4,6 +4,7 @@ const router = express.Router();
 const User = require("../models/User");
 const getCode = require("../email/ConfirmationCode");
 const activateUserMail = require("../email/sendMail");
+const {isLoggedOut, isLoggedIn} = require('../middlewares/isLogged');
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -15,7 +16,7 @@ const loginPromise = (req, user) => {
   });
 };
 
-router.post("/login", (req, res, next) => {
+router.post("/login", isLoggedOut(),(req, res, next) => {
   passport.authenticate("local", (err, user, failureDetails) => {
     if (err) return res.status(500).json({ message: err });
     if (!user) return res.status(401).json({ failureDetails });
@@ -27,7 +28,7 @@ router.post("/login", (req, res, next) => {
   })(req, res, next);
 });
 
-router.post("/signup", (req, res, next) => {
+router.post("/signup", isLoggedOut(),(req, res, next) => {
   const { name, surname, email, password } = req.body;
   if (name === "" || surname === "" || email === "" || password === "") {
     res.json({ message: "Please enter all values" });
@@ -95,8 +96,8 @@ router.get("/confirm/:confirmationCode", (req, res) => {
     .catch(err => console.log("error in activation"));
 });
 
-router.get("/logout", (req, res) => {
-  req.logOut();
+router.get("/logout", isLoggedIn(),(req, res) => {
+  req.logout();
   res.json({ success: "Ok! Loged out" });
 });
 
