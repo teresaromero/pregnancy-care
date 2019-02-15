@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const Appointment = require("../models/Appointment");
+const { isLoggedIn} = require('../middlewares/isLogged');
 
 router.post("/add", isLoggedIn(), (req, res, next) => {
   const { appointment } = req.body;
