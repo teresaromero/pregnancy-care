@@ -77,27 +77,6 @@ router.post("/record/create", (req, res, next) => {
   );
 });
 
-router.post("/record/newPregnancy", (req, res, next) => {
-  let { pregnancy, recordId } = req.body;
-
-  const newPregnancy = new Pregnancy(pregnancy);
-
-  newPregnancy.save().then(pregnancy =>
-    Record.findById(recordId).then(record => {
-      record.pregnanciesId.push(pregnancy);
-      record.save().then(record =>
-        User.findOne({ recordId: record._id })
-          .populate("recordId")
-          .then(patient => {
-            console.log(patient);
-            res.json({ patient });
-          })
-          .catch(e => console.log(e))
-      );
-    })
-  );
-});
-
 router.put("/record/update", (req, res, next) => {
   let { record, idRecord } = req.body;
 
@@ -109,6 +88,27 @@ router.put("/record/update", (req, res, next) => {
       })
       .catch(e => console.log(e))
   );
+});
+
+router.put("/record/visit", (req, res, next) => {
+  let { visit, weight, bloodPressure, IMC, idRecord, idPatient } = req.body;
+
+  Record.findById(idRecord).then(record => {
+    Promise.all([
+      record.visits.push(visit),
+      record.weight.push(weight),
+      record.bloodPressure.push(bloodPressure),
+      record.IMC.push(IMC)
+    ]).then(() => {
+      record.save();
+      User.findOne({ _id: idPatient })
+        .populate("recordId")
+        .then(patient => {
+          res.json({ patient });
+        })
+        .catch(e => console.log(e));
+    });
+  });
 });
 
 router.get("/record/:id", (req, res, next) => {
@@ -142,4 +142,5 @@ router.get("/record/delete/:id", (req, res, next) => {
     })
     .catch(e => console.log(e));
 });
+
 module.exports = router;

@@ -169,18 +169,16 @@ const recordSchema = new Schema(
           {
             type: String,
             enum: [
-              "none",
               "Ultrasound 1Term",
               "Ultrasound 2Term",
               "Ultrasound 3Term",
               "Blood Test 1Term",
               "Blood Test 2Term",
               "Blood Test 3Term"
-            ],
-            default: "none"
+            ]
           }
         ],
-
+        testResults:{type:String,default:""},
         notes: { type: String, default: "" },
         notesOut: { type: String, default: "" },
         date: { type: Date, dafault: Date.now }

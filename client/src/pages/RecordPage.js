@@ -17,6 +17,7 @@ import { InformationForm } from "../components/InformationForm";
 import "bulma-timeline";
 import { Timeline } from "../components/Timeline";
 import { PregnancyDetail } from "../components/PregnancyDetail";
+import { VisitForm } from "../components/VisitForm";
 
 class _RecordPage extends React.Component {
   componentDidMount() {
@@ -104,12 +105,10 @@ class _RecordPage extends React.Component {
                 </div>
               </div>
               <div className="level-right">
-                <div className="level-item">
-                  <ModalCard title="Add Visit" button="Add Visit" />
-                </div>
               </div>
             </div>
             <Timeline />
+            <VisitForm/>
           </React.Fragment>
         ) : (
           <Loader />

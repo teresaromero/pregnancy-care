@@ -63,7 +63,7 @@ class _RecordBackground extends React.Component {
                 <p>
                   {record.STD.length === 0
                     ? "N/A"
-                    : record.STD.map(a => <span>{a}</span>)}
+                    : record.STD.map(a => <span key={a}>{a}</span>)}
                 </p>
                 <p>
                   {record.STDother === "" ? (

@@ -4,7 +4,7 @@ const instance = axios.create({
   baseURL: "http://localhost:3000",
   timeout: 1000,
   withCredentials: true,
-  validateStatus:false,
+  validateStatus: false
 });
 
 export default class PatientsApi {
@@ -28,9 +28,9 @@ export default class PatientsApi {
       .catch(e => console.log(e));
   }
 
-  static updatePatient(patient,id) {
+  static updatePatient(patient, id) {
     return instance
-      .put(`/api/patients/update`, { patient,id })
+      .put(`/api/patients/update`, { patient, id })
       .then(res => res.data)
       .catch(err => console.log(err));
   }
@@ -63,20 +63,17 @@ export default class PatientsApi {
       .catch(err => console.log(err));
   }
 
-  static updateRecord(record,idRecord,idPatient) {
+  static updateRecord(record, idRecord, idPatient) {
     return instance
-      .put(`/api/patients/record/update`, { record,idRecord,idPatient })
+      .put(`/api/patients/record/update`, { record, idRecord, idPatient })
       .then(res => res.data)
       .catch(err => console.log(err));
   }
 
-  static newPregnancy(pregnancy,recordId) {
+  static addVisit(visit, weight, bloodPressure, IMC, idRecord, idPatient) {
     return instance
-      .post(`/api/patients/record/newPregnancy`, { pregnancy,recordId })
+      .put(`/api/patients/record/visit`, { visit, weight, bloodPressure, IMC, idRecord, idPatient })
       .then(res => res.data)
       .catch(err => console.log(err));
   }
-
-
-  
 }
