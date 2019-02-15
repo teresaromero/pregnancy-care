@@ -5,6 +5,13 @@ export const login = user => {
   };
 };
 
+export const isAuth = status => {
+  return {
+    type: "IS_AUTH",
+    status
+  };
+};
+
 export const logout = () => {
   return {
     type: "LOGOUT"

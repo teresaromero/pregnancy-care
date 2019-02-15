@@ -1,7 +1,7 @@
 import { createStore } from "redux";
 import { rootReducer } from "./reducer";
 import AuthAPI from "../APIs/authApi";
-import { login, errorMessageAction } from "./actions";
+import { login, errorMessageAction, isAuth } from "./actions";
 
 export const store = createStore(
   rootReducer,
@@ -12,4 +12,4 @@ AuthAPI.currentUser()
   .then(user => {
     store.dispatch(login(user));
   })
-  .catch(e => store.dispatch(errorMessageAction("YOU HAVE TO LOGIN")));
+  .catch(e => store.dispatch(isAuth(false)));

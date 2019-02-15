@@ -14,6 +14,7 @@ import { RecordPage } from "../pages/RecordPage";
 import { AgendaOverviewPage } from "../pages/AgendaOverviewPage";
 import { PregnancyDetail } from "./PregnancyDetail";
 
+
 const _Dashboard = ({ user, match }) => {
   return (
     <React.Fragment>
@@ -52,17 +53,13 @@ const _Dashboard = ({ user, match }) => {
                       path={`${match.url}/patients/add`}
                       component={AddPatientPage}
                     />
-                    <Route
-                      path={`${match.url}patients/advancedSearch`}
-                      component={AdvancedSearchPage}
-                    />
-
+                    
                     <Route
                       path={`${match.url}/patients`}
                       component={PatientsPage}
                     />
                     <Route
-                      path={`${match.url}/overview`}
+                      path={`${match.url}/agenda`}
                       component={AgendaOverviewPage}
                     />
                     <Route
@@ -74,6 +71,7 @@ const _Dashboard = ({ user, match }) => {
                       path={`${match.url}/profile`}
                       component={ProfilePage}
                     />
+
                   </Switch>
                 </div>
               </div>
