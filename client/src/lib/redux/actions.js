@@ -44,16 +44,15 @@ export const exitPatient = () => {
   };
 };
 
-export const viewPregnancy = pregnancy => {
+export const closeModal = () => {
   return {
-    type: "VIEW_PATIENT",
-    pregnancy
+    type: "CLOSE_MODAL"
   };
 };
 
-export const exitPregnancy = () => {
+export const openModal = () => {
   return {
-    type: "EXIT_PATIENT"
+    type: "OPEN_MODAL"
   };
 };
 

@@ -1,7 +1,7 @@
 const initialStore = {
   user: null,
   patient: null,
-  pregnancy:null,
+  modal: false,
   patientList: null,
   filteredPatientList: null,
   messages: []
@@ -59,22 +59,7 @@ export const rootReducer = (store = initialStore, action) => {
 
       break;
 
-    case "VIEW_PREGNANCY":
-      store = {
-        ...store,
-        pregnancy: action.pregnancy
-      };
-
-      break;
-
-    case "EXIT_PREGNANCY":
-      store = {
-        ...store,
-        pregnancy: null
-      };
-
-      break;
-
+    
     case "FETCH_PATIENTS":
       store = {
         ...store,

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import PatientsApi from "../lib/APIs/patientsApi";
 import { InputP } from "./InputP";
 import { InputDiv } from "./InputDiv";
-
+import moment from "moment";
 import { insurances } from "../lib/insuranceCompany";
 import { viewPatient } from "../lib/redux/actions";
 
@@ -128,7 +128,7 @@ class _InformationForm extends React.Component {
               id="born-date-patient"
               name="bornDate"
               label="Born Date"
-              value={patient.bornDate || ""}
+              value={moment(patient.bornDate).format("YYYY-MM-DD") || ""}
               type="date"
               handleChange={e => this.handleFieldChange(e)}
             />

@@ -82,8 +82,10 @@ class _VisitForm extends React.Component {
       let uptIMC = { ...this.state.IMC };
       let IMC = value / Math.pow(patient.recordId.height / 100, 2);
       uptIMC["value"] = IMC.toFixed(2);
-
-      this.setState({ weight: uptWeight, IMC: uptIMC });
+      console.log(uptIMC.value)
+      this.setState({ weight: uptWeight, IMC: uptIMC }, () =>
+        console.log(this.state)
+      );
     } else if (name === "bloodPressureD" || name === "bloodPressureS") {
       let uptRecord = { ...this.state.bloodPressure };
       let { value } = e.target;

@@ -1,7 +1,9 @@
 import React from "react";
 import cx from "classnames";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
-export class ModalCard extends React.Component {
+class _ModalCard extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -22,7 +24,7 @@ export class ModalCard extends React.Component {
   }
 
   render() {
-    let { children, title,button } = this.props;
+    let { children, title, button } = this.props;
     let { isActive } = this.state;
     let modalClass = cx("modal", { "is-active": isActive });
     return (
@@ -49,3 +51,7 @@ export class ModalCard extends React.Component {
     );
   }
 }
+
+export const ModalCard = withRouter(
+  connect(store => ({ modal: store.modal }))(_ModalCard)
+);

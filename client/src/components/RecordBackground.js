@@ -3,7 +3,6 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-
 class _RecordBackground extends React.Component {
   constructor() {
     super();
@@ -18,7 +17,6 @@ class _RecordBackground extends React.Component {
       <React.Fragment>
         {patient ? (
           <React.Fragment>
-            
             <div className="box">
               <p className="label">Familiar</p>
               <div className="field-wrapper section">
@@ -111,23 +109,23 @@ class _RecordBackground extends React.Component {
                 <div className="columns has-text-centered">
                   <div className="column">
                     <p className="label">Pregnancies</p>
-                    <p>{record.pregnancies || "N/A"}</p>
+                    <p>{record.pregnancies || 0}</p>
                   </div>
                   <div className="column">
                     <p className="label">Labours</p>
-                    <p>{record.labours || "N/A"}</p>
+                    <p>{record.labours || 0}</p>
                   </div>
                   <div className="column">
                     <p className="label">C-Sections</p>
-                    <p>{record.caesareanSections || "N/A"}</p>
+                    <p>{record.caesareanSections || 0}</p>
                   </div>
                   <div className="column">
                     <p className="label">Abortions</p>
-                    <p>{record.abortions || "N/A"}</p>
+                    <p>{record.abortions || 0}</p>
                   </div>
                   <div className="column">
                     <p className="label">Ectopics</p>
-                    <p>{record.ectopics || "N/A"}</p>
+                    <p>{record.ectopics || 0}</p>
                   </div>
                 </div>
               </div>

@@ -66,7 +66,7 @@ class _RecordPregnancyForm extends React.Component {
     let { value } = e.target;
     let field = e.target.name;
     if (field === "LMP") {
-      uptRecord[field] = moment(value).format("DD-MM-YYYY");
+      uptRecord[field] = moment(value).format("YYYY-MM-DD");
       uptRecord["EDC"] = moment(value)
         .clone()
         .add(7, "days")
