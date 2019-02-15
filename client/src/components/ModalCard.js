@@ -29,7 +29,7 @@ class _ModalCard extends React.Component {
     let modalClass = cx("modal", { "is-active": isActive });
     return (
       <React.Fragment>
-        <button className="button" onClick={() => this.openModal()}>
+        <button className="button is-primary is-outlined" onClick={() => this.openModal()}>
           {button}
         </button>
 

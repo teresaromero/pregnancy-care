@@ -10,7 +10,8 @@ export const InputP = ({
   placeholder,
   label,
   handleChange,
-  disabled
+  disabled,
+  required
 }) => {
   return (
     <React.Fragment>
@@ -18,14 +19,15 @@ export const InputP = ({
         <label className="label">{label}</label>
         <p className="control">
           <input
-            className="input"
+            className="input is-shadowless is-radiusless	"
             id={id}
             name={name}
-            value={value || ''}
+            value={value}
             type={type}
             placeholder={placeholder}
             onChange={e => handleChange(e)}
             disabled={disabled}
+            required={required}
           />
         </p>
       </div>
@@ -33,6 +35,6 @@ export const InputP = ({
   );
 };
 
-InputP.propTypes={
+InputP.propTypes = {
   handleChange: PropTypes.func
-}
+};

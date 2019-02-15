@@ -37,6 +37,7 @@ class _InformationForm extends React.Component {
 
     PatientsApi.addPatient(patient)
       .then(res => {
+        console.log(res.patient)
         let { patient } = res;
         PatientsApi.createRecord(patient._id).then(res => {
           dispatch(viewPatient(res.patient));
@@ -94,115 +95,141 @@ class _InformationForm extends React.Component {
     let { patientEdit } = this.props;
 
     return (
-      <div className="section">
-        <div className="box">
-          <p className="label">Identification</p>
-          <div className="field-body">
-            <InputP
-              id="name-patient"
-              name="name"
-              label="Name"
-              value={patient.name || ""}
-              type="text"
-              handleChange={e => this.handleFieldChange(e)}
-            />
-            <InputP
-              id="surname-patient"
-              name="surname"
-              label="Surname"
-              value={patient.surname || ""}
-              type="text"
-              handleChange={e => this.handleFieldChange(e)}
-            />
+      <div className="box">
+        <p className="label label-heading">Identification</p>
+        <div className="field-wrapper section">
+          <div className="columns">
+            <div className="column is-one-third">
+              <InputP
+                id="name-patient"
+                name="name"
+                label="Name"
+                value={patient.name || ""}
+                type="text"
+                handleChange={e => this.handleFieldChange(e)}
+                required
+              />
+            </div>
+            <div className="column is-one-third">
+              <InputP
+                id="surname-patient"
+                name="surname"
+                label="Surname"
+                value={patient.surname || ""}
+                type="text"
+                handleChange={e => this.handleFieldChange(e)}
+              />
+            </div>
+
+            <div className="column is-one-third">
+              <InputP
+                id="id-patient"
+                name="idNum"
+                label="ID"
+                value={patient.idNum || ""}
+                type="text"
+                handleChange={e => this.handleFieldChange(e)}
+              />
+            </div>
           </div>
-          <div className="field-body">
-            <InputP
-              id="id-patient"
-              name="idNum"
-              label="ID"
-              value={patient.idNum || ""}
-              type="text"
-              handleChange={e => this.handleFieldChange(e)}
-            />
-            <InputP
-              id="born-date-patient"
-              name="bornDate"
-              label="Born Date"
-              value={moment(patient.bornDate).format("YYYY-MM-DD") || ""}
-              type="date"
-              handleChange={e => this.handleFieldChange(e)}
-            />
-          </div>
-        </div>
-        <div className="box">
-          <p className="label">Contact Information</p>
-          <div className="field-body">
-            <InputP
-              id="street-patient"
-              name="street"
-              label="Street"
-              value={patient.address.street || ""}
-              type="text"
-              handleChange={e => this.handleFieldChange(e)}
-            />
-            <InputP
-              id="number-patient"
-              name="number"
-              label="Number"
-              value={patient.address.number || ""}
-              type="text"
-              handleChange={e => this.handleFieldChange(e)}
-            />
-          </div>
-          <div className="field-body">
-            <InputP
-              id="city-patient"
-              name="city"
-              label="City"
-              value={patient.address.city || ""}
-              type="text"
-              handleChange={e => this.handleFieldChange(e)}
-            />
-            <InputP
-              id="state-patient"
-              name="state"
-              label="State"
-              value={patient.address.state || ""}
-              type="text"
-              handleChange={e => this.handleFieldChange(e)}
-            />
-            <InputP
-              id="zip-patient"
-              name="zip"
-              label="Zip"
-              value={patient.address.zip || ""}
-              type="text"
-              handleChange={e => this.handleFieldChange(e)}
-            />
-          </div>
-          <div className="field-body">
-            <InputP
-              id="phone-patient"
-              name="phone"
-              label="Phone"
-              value={patient.phone || ""}
-              type="text"
-              handleChange={e => this.handleFieldChange(e)}
-            />
-            <InputP
-              id="email-patient"
-              name="email"
-              label="Email"
-              value={patient.email || ""}
-              type="email"
-              handleChange={e => this.handleFieldChange(e)}
-            />
+          <div className="columns">
+            <div className="column is-one-third">
+              <InputP
+                id="born-date-patient"
+                name="bornDate"
+                label="Born Date"
+                value={moment(patient.bornDate).format("YYYY-MM-DD") || ""}
+                type="date"
+                handleChange={e => this.handleFieldChange(e)}
+              />
+            </div>
           </div>
         </div>
-        <div className="box">
-          <p className="label">Additional Information</p>
-          <div className="field-body">
-            <div className="field">
+
+        <p className="label label-heading">Contact Information</p>
+        <div className="field-wrapper section">
+          <div className="columns">
+            <div className="column">
+              <InputP
+                id="street-patient"
+                name="street"
+                label="Street"
+                value={patient.address.street || ""}
+                type="text"
+                handleChange={e => this.handleFieldChange(e)}
+              />
+            </div>
+            <div className="column is-one-fifth">
+              <InputP
+                id="number-patient"
+                name="number"
+                label="Number"
+                value={patient.address.number || ""}
+                type="text"
+                handleChange={e => this.handleFieldChange(e)}
+              />
+            </div>
+          </div>
+          <div className="columns">
+            <div className="column">
+              <InputP
+                id="city-patient"
+                name="city"
+                label="City"
+                value={patient.address.city || ""}
+                type="text"
+                handleChange={e => this.handleFieldChange(e)}
+              />
+            </div>
+            <div className="column">
+              <InputP
+                id="state-patient"
+                name="state"
+                label="State"
+                value={patient.address.state || ""}
+                type="text"
+                handleChange={e => this.handleFieldChange(e)}
+              />
+            </div>
+            <div className="column">
+              <InputP
+                id="zip-patient"
+                name="zip"
+                label="Zip"
+                value={patient.address.zip || ""}
+                type="text"
+                handleChange={e => this.handleFieldChange(e)}
+              />
+            </div>
+          </div>
+          <div className="columns">
+            <div className="column is-two-fifths">
+              <InputP
+                id="phone-patient"
+                name="phone"
+                label="Phone"
+                value={patient.phone || ""}
+                type="text"
+                handleChange={e => this.handleFieldChange(e)}
+              />
+            </div>
+            <div className="column">
+              <InputP
+                id="email-patient"
+                name="email"
+                label="Email"
+                value={patient.email || ""}
+                type="email"
+                handleChange={e => this.handleFieldChange(e)}
+              />
+            </div>
+          </div>
+        </div>
+
+        <p className="label label-heading">Additional Information</p>
+        <div className="field-wrapper section">
+          <div className="columns">
+            <div className="column">
               <label className="label">Insurance Company</label>
               <div className="control">
                 <div className="select is-fullwidth">
@@ -220,26 +247,33 @@ class _InformationForm extends React.Component {
                 </div>
               </div>
             </div>
-            <InputP
-              id="insurance-patient"
-              name="insNumber"
-              label="Insurance Number"
-              value={patient.insNumber || ""}
-              type="text"
-              handleChange={e => this.handleFieldChange(e)}
-            />
+            <div className="column is-one-third">
+              <InputP
+                id="insurance-patient"
+                name="insNumber"
+                label="Insurance Number"
+                value={patient.insNumber || ""}
+                type="text"
+                handleChange={e => this.handleFieldChange(e)}
+              />
+            </div>
           </div>
-          <InputDiv
-            id="profession-patient"
-            name="profession"
-            label="Profession"
-            value={patient.profession || ""}
-            type="text"
-            placeholder=""
-            handleChange={e => this.handleFieldChange(e)}
-          />
+          <div className="columns">
+            <div className="column is-one-third">
+              <InputDiv
+                id="profession-patient"
+                name="profession"
+                label="Profession"
+                value={patient.profession || ""}
+                type="text"
+                placeholder=""
+                handleChange={e => this.handleFieldChange(e)}
+              />
+            </div>
+          </div>
         </div>
-        <div className="field">
+
+        <div className="section has-text-centered">
           <div className="control">
             <label className="checkbox">
               <input
@@ -251,6 +285,7 @@ class _InformationForm extends React.Component {
             </label>
           </div>
         </div>
+
         <div className="has-text-centered">
           {patientEdit ? (
             <button

@@ -14,15 +14,25 @@ $beige-light: #d0d1cd;
 $beige-lighter: #eff0eb;
 
 //bulma colors
-$primary: $dark-blue;
+$primary: $blue;
 $info: $light-blue;
 $success: $green;
 $warning: $yellow;
-$link: $dark-blue;
+$link: $blue;
 
 //fonts
+$family-primary:'Source Sans Pro', sans-serif;
 
-$family-primary:'Source Sans Pro', sans-serif;;
+
+$label-weight:600;	
+//label-heading
+.label.label-heading{
+  background:$primary;
+    padding: 0.5rem;
+    color: white;
+}
+
+
 //Body
 body,
 #root,
@@ -43,6 +53,7 @@ body,
 
 .field-wrapper {
   background-color: hsl(0, 0%, 86%);
+  margin:1rem 0rem;
 }
 
 //User Card
