@@ -6,6 +6,9 @@
   padding: 0.5rem;
   color: white; }
 
+.is-hidden {
+  display: none; }
+
 body,
 #root,
 .App {

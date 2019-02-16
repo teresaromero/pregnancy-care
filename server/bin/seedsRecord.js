@@ -461,7 +461,7 @@ let records = [
   }
 ];
 
-const createRecord = (idUser, idx) => {
+const createRecord = (idUser,idx) => {
   return Record.create({ ...records[idx], userId: idUser })
     .then(record => {
       return record;
