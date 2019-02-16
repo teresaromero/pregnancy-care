@@ -21,7 +21,6 @@ const userSchema = new Schema(
       enum: ["ADMIN", "CUSTOMER", "EMPLOYEE"],
       default: "ADMIN"
     },
-    //only customer data
     address: {
       street: { type: String },
       number: { type: String },

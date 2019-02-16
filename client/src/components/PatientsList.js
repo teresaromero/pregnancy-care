@@ -9,7 +9,7 @@ import { SearchBarPatients } from "./SearchBarPatients.js";
 const _PatientsList = ({ allPatients, filtered }) => {
   return (
     <React.Fragment>
-      <div className="columns is-vcentered has-text-centered	">
+      <div className="columns is-vcentered has-text-centered	is-mobile">
         <div className="column">
           <SearchBarPatients />
         </div>

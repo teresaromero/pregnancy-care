@@ -5,14 +5,14 @@ import { Switch, Route } from "react-router";
 import { PatientsPage } from "../pages/PatientsPage";
 import { ProfilePage } from "../pages/ProfilePage";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter,Redirect } from "react-router-dom";
 import { AddPatientPage } from "../pages/AddPatientPage";
-import { AdvancedSearchPage } from "../pages/AdvancedSearchPage";
 import { VademecumPage } from "../pages/VademecumPage";
-import HomePage from "../pages/HomePage";
+
 import { RecordPage } from "../pages/RecordPage";
 import { AgendaOverviewPage } from "../pages/AgendaOverviewPage";
 import { PregnancyDetail } from "./PregnancyDetail";
+
 
 
 const _Dashboard = ({ user, match }) => {
@@ -44,10 +44,6 @@ const _Dashboard = ({ user, match }) => {
                       component={RecordPage}
                     />
 
-                    <Route
-                      path={`${match.url}/patients/pregnancy/:id`}
-                      component={PregnancyDetail}
-                    />
 
                     <Route
                       path={`${match.url}/patients/add`}
@@ -79,7 +75,7 @@ const _Dashboard = ({ user, match }) => {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <HomePage />
+           <Redirect to="/" />
           </React.Fragment>
         )}
       </div>

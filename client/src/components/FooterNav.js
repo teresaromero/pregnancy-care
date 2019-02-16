@@ -21,16 +21,16 @@ const _FooterNav = ({match}) => {
           </span>
         </NavLink>
         <NavLink
-          to={`/admin/patients/add`}
+          to={`/admin/patients`}
           activeClassName="is-active"
           className="navbar-item"
         >
           <span className="icon is-large">
-            <i className="fas fa-lg	 fa-user-plus" />
+            <i className="fas fa-lg	 fa-female" />
           </span>
         </NavLink>
         <NavLink
-          to={`/admin/calendar`}
+          to={`/admin/agenda`}
           activeClassName="is-active"
           className="navbar-item"
         >

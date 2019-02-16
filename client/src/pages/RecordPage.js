@@ -49,7 +49,7 @@ class _RecordPage extends React.Component {
               </div>
             </section>
 
-            <div className="level">
+            <div className="level is-mobile">
               <div className="level-left">
                 <div className="level-item">
                   <h3 className="label">Information</h3>
@@ -66,7 +66,7 @@ class _RecordPage extends React.Component {
 
             <RecordInformation />
 
-            <div className="level">
+            <div className="level is-mobile">
               <div className="level-left">
                 <div className="level-item">
                   <h3 className="label">Background</h3>
@@ -82,7 +82,7 @@ class _RecordPage extends React.Component {
             </div>
             <RecordBackground />
 
-            <div className="level">
+            <div className="level is-mobile">
               <div className="level-left">
                 <div className="level-item">
                   <h3 className="label">Pregnancy</h3>
@@ -98,7 +98,7 @@ class _RecordPage extends React.Component {
             </div>
             <PregnancyDetail />
 
-            <div className="level">
+            <div className="level is-mobile">
               <div className="level-left">
                 <div className="level-item">
                   <h3 className="label">Visits</h3>
