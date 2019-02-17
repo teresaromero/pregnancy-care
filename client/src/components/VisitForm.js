@@ -82,7 +82,7 @@ class _VisitForm extends React.Component {
       let uptIMC = { ...this.state.IMC };
       let IMC = value / Math.pow(patient.recordId.height / 100, 2);
       uptIMC["value"] = IMC.toFixed(2);
-      console.log(uptIMC.value)
+      console.log(uptIMC.value);
       this.setState({ weight: uptWeight, IMC: uptIMC }, () =>
         console.log(this.state)
       );
@@ -119,110 +119,104 @@ class _VisitForm extends React.Component {
     let { visit, weight, IMC, bloodPressure } = this.state;
     let { patient } = this.props;
     return (
-      <article className="media box">
-        <div className="media-content">
-          <p className="subtitle">New Visit</p>
-          <div className="field-wrapper columns">
-            <div className="column">
-              <p className="label">Patient: {patient.name}</p>
-            </div>
-            <div className="column">
-              <p className="label">
-                Week:{moment().diff(patient.recordId.LMP, "weeks")}
-              </p>
-            </div>
+      <div className="box">
+        <div className="field-wrapper columns">
+          <div className="column">
+            <p className="label">Patient: {patient.name}</p>
           </div>
-
-          <div className="field-wrapper columns">
-            <div className="column">
-              <InputP
-                id="weight"
-                name="weight"
-                label="Weight"
-                value={weight.value || 0}
-                type="number"
-                handleChange={e => this.handleFieldChange(e)}
-              />
-            </div>
-            <div className="column">
-              <InputP
-                id="IMC"
-                name="IMC"
-                label="IMC"
-                value={IMC.value || 0}
-                type="number"
-                handleChange={e => this.handleFieldChange(e)}
-                disabled
-              />
-            </div>
-            <div className="column">
-              <InputP
-                id="bloodPressureS"
-                name="bloodPressureS"
-                label="Pressure - Systolic"
-                value={bloodPressure.Systolic || 0}
-                type="number"
-                handleChange={e => this.handleFieldChange(e)}
-              />
-            </div>
-            <div className="column">
-              <InputP
-                id="bloodPressureD"
-                name="bloodPressureD"
-                label="Pressure - Diastolic"
-                value={bloodPressure.Diastolic || 0}
-                type="number"
-                handleChange={e => this.handleFieldChange(e)}
-              />
-            </div>
+          <div className="column">
+            <p className="label">
+              Week:{moment().diff(patient.recordId.LMP, "weeks")}
+            </p>
           </div>
-
-          <div className="field">
-            <p className="label">Requested Medical Test</p>
-            <div className="field-wrapper section">
-              <CheckboxContainer
-                options={optionsRequest}
-                selection={s => this.handleSelection(s, "medicalTest")}
-              />
-            </div>
-          </div>
-
-          <div className="field-wrapper section">
-            <TextArea
-              label="Notes"
-              value={visit.notes || ""}
-              name="notes"
-              handleChange={e => this.handleFieldChange(e)}
-              rows="2"
-            />
-          </div>
-          <div className="field-wrapper section">
-            <TextArea
-              label="Test Results"
-              value={visit.testResults || ""}
-              name="testResults"
-              handleChange={e => this.handleFieldChange(e)}
-              rows="2"
-            />
-          </div>
-          <div className="field-wrapper section">
-            <TextArea
-              label="Recommendations"
-              value={visit.notesOut || ""}
-              name="notesOut"
-              handleChange={e => this.handleFieldChange(e)}
-              rows="2"
-            />
-          </div>
-
-          <button
-            className="button is-info"
-            onClick={e => this.handleUpdate(e)}
-          >
-            Submit
-          </button>
         </div>
-      </article>
+
+        <div className="field-wrapper columns">
+          <div className="column">
+            <InputP
+              id="weight"
+              name="weight"
+              label="Weight"
+              value={weight.value || 0}
+              type="number"
+              handleChange={e => this.handleFieldChange(e)}
+            />
+          </div>
+          <div className="column">
+            <InputP
+              id="IMC"
+              name="IMC"
+              label="IMC"
+              value={IMC.value || 0}
+              type="number"
+              handleChange={e => this.handleFieldChange(e)}
+              disabled
+            />
+          </div>
+          <div className="column">
+            <InputP
+              id="bloodPressureS"
+              name="bloodPressureS"
+              label="Pressure - Systolic"
+              value={bloodPressure.Systolic || 0}
+              type="number"
+              handleChange={e => this.handleFieldChange(e)}
+            />
+          </div>
+          <div className="column">
+            <InputP
+              id="bloodPressureD"
+              name="bloodPressureD"
+              label="Pressure - Diastolic"
+              value={bloodPressure.Diastolic || 0}
+              type="number"
+              handleChange={e => this.handleFieldChange(e)}
+            />
+          </div>
+        </div>
+
+        <div className="field">
+          <p className="label">Requested Medical Test</p>
+          <div className="field-wrapper section">
+            <CheckboxContainer
+              options={optionsRequest}
+              selection={s => this.handleSelection(s, "medicalTest")}
+            />
+          </div>
+        </div>
+
+        <div className="field-wrapper section">
+          <TextArea
+            label="Notes"
+            value={visit.notes || ""}
+            name="notes"
+            handleChange={e => this.handleFieldChange(e)}
+            rows="2"
+          />
+        </div>
+        <div className="field-wrapper section">
+          <TextArea
+            label="Test Results"
+            value={visit.testResults || ""}
+            name="testResults"
+            handleChange={e => this.handleFieldChange(e)}
+            rows="2"
+          />
+        </div>
+        <div className="field-wrapper section">
+          <TextArea
+            label="Recommendations"
+            value={visit.notesOut || ""}
+            name="notesOut"
+            handleChange={e => this.handleFieldChange(e)}
+            rows="2"
+          />
+        </div>
+
+        <button className="button is-info" onClick={e => this.handleUpdate(e)}>
+          Submit
+        </button>
+      </div>
     );
   }
 }

@@ -20,12 +20,14 @@ export class Agenda extends React.Component {
           schedulerLicenseKey: "CC-Attribution-NonCommercial-NoDerivatives",
           defaultView: "agendaWeek",
           events: this.state.appointments,
-          firstDay:1,
+          firstDay: 1,
+          weekends:false,
           columnHeaderFormat: "dddd D",
           slotLabelFormat: [
             "HH:mm" // top level of text
           ],
-          timezone:'local',
+          slotDuration:'00:15:00',
+          timezone: "local",
           businessHours: {
             // days of week. an array of zero-based day of week integers (0=Sunday)
             dow: [1, 2, 3, 4, 5], // Monday - Thursday
@@ -57,13 +59,34 @@ export class Agenda extends React.Component {
             );
           },
           editable: true,
-          eventClick:(e,element)=>{
-            console.log(e);
-            console.log(element)
+          eventClick: (e, jsEv, view) => {
+            if(window.confirm("Delete appointment?")){
+              $("#calendar").fullCalendar("removeEvents", e._id);
+              AppointmentsAPI.delete(e._id).then(res=>{
+                console.log("deleted")
+              })
+            } else {
+              $("#calendar").fullCalendar("unselect")
+            }
+            
+          },
+          eventResize: (event, delta, revertFunc) => {
+            let { start, end } = event;
+            console.log(event.end, start, end);
+            AppointmentsAPI.update(event._id, start, end).then(res =>
+              $("#calendar").fullCalendar("unselect")
+            );
+          },
+          eventDrop: (event, delta, revertFunc) => {
+            let { start, end } = event;
+            console.log(event.end, start, end);
+            AppointmentsAPI.update(event._id, start, end).then(res =>
+              $("#calendar").fullCalendar("unselect")
+            );
           },
 
           droppable: true, // this allows things to be dropped onto the calendar
-          drop: ()=> {
+          drop: () => {
             // is the "remove after drop" checkbox checked?
             if ($("#drop-remove").is(":checked")) {
               // if so, remove the element from the "Draggable Events" list

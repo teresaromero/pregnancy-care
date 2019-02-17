@@ -1,9 +1,6 @@
-import React from 'react';
-import { InformationForm } from '../components/InformationForm';
+import React from "react";
+import { InformationForm } from "../components/InformationForm";
 
-
-export const AddPatientPage =()=>{
-  return(
-    <InformationForm/>
-  )
-}
+export const AddPatientPage = () => {
+  return <InformationForm />;
+};

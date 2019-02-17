@@ -95,6 +95,7 @@ class _RecordPregnancyForm extends React.Component {
     let { record } = this.state;
     return (
       <React.Fragment>
+        <div className="box">
         <div className="section">
           <p className="label" />
           <div className="field-wrapper section">
@@ -298,6 +299,9 @@ class _RecordPregnancyForm extends React.Component {
             Update
           </button>
         </div>
+        
+        </div>
+       
       </React.Fragment>
     );
   }

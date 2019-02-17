@@ -7,17 +7,14 @@ import { UserBadge } from "./UserBadge";
 const _UserCard = ({ user, match }) => {
   return (
     <React.Fragment>
-      <article className="media">
-        <div className="media-left">
+      <div className="columns">
+        <div className="column">
           <figure className="image is-64x64">
-            <img
-              className="is-rounded"
-              src={user.image}
-              alt="profile"
-            />
+            <img className="is-rounded" src={user.image} alt="profile" />
           </figure>
         </div>
-        <div className="media-content">
+
+        <div className="column">
           <NavLink to={`${match.url}/profile`}>
             <p className="title is-6">
               {user.name} {user.surname}
@@ -26,7 +23,7 @@ const _UserCard = ({ user, match }) => {
 
           <UserBadge />
         </div>
-      </article>
+      </div>
     </React.Fragment>
   );
 };
