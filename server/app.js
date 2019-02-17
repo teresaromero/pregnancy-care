@@ -33,7 +33,7 @@ const debug = require("debug")(
 
 const app = express();
 
-const whitelist = ["http://localhost:3001"];
+const whitelist = ["http://localhost:3001","http://localhost:19002"];
 
 const corsOptions = {
   origin: function(origin, callback) {

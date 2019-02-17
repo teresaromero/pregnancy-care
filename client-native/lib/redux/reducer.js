@@ -1,0 +1,53 @@
+const initialStore = {
+  user: null,
+  isAuth: false,
+  messages: []
+};
+
+export const rootReducer = (store = initialStore, action) => {
+  switch (action.type) {
+    case "LOGIN":
+      store = {
+        ...store,
+        user: action.user,
+        isAuth: true
+      };
+      console.log(store)
+
+      break;
+
+    case "IS_AUTH":
+      store = {
+        ...store,
+        isAuth: action.status
+      };
+
+      break;
+    case "LOGOUT":
+      store = {
+        ...store,
+        user: null,
+        isAuth: false
+      };
+      console.log(store)
+      break;
+
+    case "ADD_MESSAGE":
+      store = {
+        ...store,
+        messages: [action.message]
+      };
+      break;
+    case "DELETE_ALL_MESSAGES":
+      store = {
+        ...store,
+        messages: []
+      };
+      break;
+
+    default:
+      return store;
+  }
+
+  return store;
+};

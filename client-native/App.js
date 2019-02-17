@@ -1,8 +1,9 @@
 import React from "react";
 import { createRootNavigator } from "./navigation/AppNavigator";
 import { createAppContainer } from "react-navigation";
+import { Provider, connect } from "react-redux";
+import { store } from "./lib/redux/store";
 import { isSignedIn } from "./auth/auth";
-
 
 class App extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class App extends React.Component {
   componentDidMount() {
     isSignedIn()
       .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
-      .catch(err => alert("An error occurred"));
+      .catch(e => alert("An error occurred"));
   }
 
   render() {
@@ -29,7 +30,11 @@ class App extends React.Component {
     }
 
     const Layout = createAppContainer(createRootNavigator(signedIn));
-    return <Layout />;
+    return (
+      <Provider store={store}>
+        <Layout />
+      </Provider>
+    );
   }
 }
 
