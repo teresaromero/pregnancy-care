@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { View } from "react-native";
-import { Card, Button, Input } from "react-native-elements";
+import { Card, Button, Input, Text } from "react-native-elements";
 import AuthApi from "../lib/APIs/authApi";
-import { login } from "../lib/redux/actions";
+import { login, errorMessageAction, clearMessages } from "../lib/redux/actions";
 
 class _SignIn extends React.Component {
   constructor() {
@@ -14,20 +14,33 @@ class _SignIn extends React.Component {
     };
   }
 
+  componentDidMount(){
+   let {dispatch} = this.props;
+   dispatch(clearMessages())
+  }
+
   handleSubmit() {
     let { dispatch, navigation } = this.props;
     let { email, password } = this.state;
 
-    AuthApi.login(email, password)
-      .then(user => {
-        console.log(user)
-        dispatch(login(user))
-        navigation.navigate("SignedIn")
-      })
-      .catch(e => console.log(e));
+    if (email === "" || password === "") {
+      dispatch(errorMessageAction("You have to enter data"));
+    } else {
+      AuthApi.login(email, password)
+        .then(user => {
+          if (user !== undefined || user !==null) {
+            dispatch(login(user));
+            navigation.navigate("SignedIn");
+          } else {
+            dispatch(errorMessageAction("User not found"));
+          }
+        })
+        .catch(e => console.log(e));
+    }
   }
 
   render() {
+    let { messages } = this.props;
     return (
       <View style={{ paddingVertical: 20 }}>
         <Card>
@@ -49,9 +62,12 @@ class _SignIn extends React.Component {
             onPress={() => this.handleSubmit()}
           />
         </Card>
+        {messages.map(m => (
+          <Text key={m}>{m}</Text>
+        ))}
       </View>
     );
   }
 }
 
-export const SignIn = connect()(_SignIn);
+export const SignIn = connect(store => ({ messages: store.messages }))(_SignIn);

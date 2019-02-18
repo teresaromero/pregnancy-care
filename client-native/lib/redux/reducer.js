@@ -12,7 +12,7 @@ export const rootReducer = (store = initialStore, action) => {
         user: action.user,
         isAuth: true
       };
-      console.log(store)
+      
 
       break;
 
@@ -29,7 +29,6 @@ export const rootReducer = (store = initialStore, action) => {
         user: null,
         isAuth: false
       };
-      console.log(store)
       break;
 
     case "ADD_MESSAGE":

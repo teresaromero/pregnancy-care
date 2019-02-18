@@ -1,11 +1,14 @@
 import React from "react";
+import { registerRootComponent } from "expo";
 import { createRootNavigator } from "./navigation/AppNavigator";
 import { createAppContainer } from "react-navigation";
 import { Provider, connect } from "react-redux";
 import { store } from "./lib/redux/store";
 import { isSignedIn } from "./auth/auth";
+import AuthApi from "./lib/APIs/authApi";
+import { login } from "./lib/redux/actions";
 
-class App extends React.Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
 
@@ -16,9 +19,15 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    isSignedIn()
-      .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
-      .catch(e => alert("An error occurred"));
+    AuthApi.currentUser()
+      .then(user => {
+       
+        if (user !== undefined || user !== null) {
+          store.dispatch(login(user));
+          this.setState({ signedIn: true, checkedSignIn: true });
+        }
+      })
+      .catch(e => console.log(e));
   }
 
   render() {
@@ -38,4 +47,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+registerRootComponent(App);

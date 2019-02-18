@@ -55,15 +55,20 @@ export default class AuthApi {
 
   static login(email, password) {
     return instance
-      .post("/api/auth/login", { email, password })
-      .then(res => res.data.user)
+      .post(
+        "/api/auth/login",
+        { email, password }
+      )
+      .then(res => {
+        res.data.user;
+      })
       .catch(err => console.log(err));
   }
 
   static logout() {
     return instance
       .get("/api/auth/logout")
-      .then(res => console.log(res))
+      .then(res => res)
       .catch(err => console.log(err));
   }
 }
