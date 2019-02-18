@@ -59,9 +59,7 @@ export default class AuthApi {
         "/api/auth/login",
         { email, password }
       )
-      .then(res => {
-        res.data.user;
-      })
+      .then(res => res.data.user)
       .catch(err => console.log(err));
   }
 

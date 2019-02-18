@@ -1,18 +1,14 @@
 import React from "react";
-import { View, ActivityIndicator } from "react-native";
-import { Card, Button, Text } from "react-native-elements";
+import { View, ActivityIndicator, StyleSheet } from "react-native";
+import { Card, Button, Image, Icon, Text } from "react-native-elements";
 
 import { connect } from "react-redux";
 import AuthApi from "../lib/APIs/authApi";
 import { logout } from "../lib/redux/actions";
 
 class _Profile extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      user: null
-    };
-  }
+  
+ 
 
   handleLogOut() {
     let { dispatch, navigation } = this.props;
@@ -24,10 +20,11 @@ class _Profile extends React.Component {
 
   render() {
     let { user } = this.props;
+
     return (
-      <View style={{ paddingVertical: 20 }}>
+      <View style={{ paddingTop: 50 }}>
         {user ? (
-          <Card title={user.name}>
+          <Card style={[styles.container, styles.horizontal]} title={user.name}>
             <View
               style={{
                 backgroundColor: "#bcbec1",
@@ -40,20 +37,50 @@ class _Profile extends React.Component {
                 marginBottom: 20
               }}
             >
-              <Text style={{ color: "white", fontSize: 28 }}>JD</Text>
+              <Image
+                source={{ uri: `${user.image}` }}
+                style={{ width: 80, height: 80 }}
+                PlaceholderContent={<ActivityIndicator />}
+              />
+            </View>
+            <View>
+              <Text>{user.email}</Text>
             </View>
             <Button
-              backgroundColor="#03A9F4"
-              title="SIGN OUT"
+              type="clear"
+              icon={
+                <Icon
+                  name="power-off"
+                  type="font-awesome"
+                  size={15}
+                  color="#FF3860"
+                />
+              }
+              title=" Logout"
+              titleStyle={{ color: "#FF3860" }}
               onPress={() => this.handleLogOut()}
             />
           </Card>
         ) : (
-          <ActivityIndicator />
+          <View style={[styles.container, styles.horizontal]}>
+            <ActivityIndicator />
+          </View>
         )}
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center"
+  },
+  horizontal: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 50
+  }
+});
 
 export const Profile = connect(store => ({ user: store.user }))(_Profile);

@@ -12,8 +12,7 @@ export const rootReducer = (store = initialStore, action) => {
         user: action.user,
         isAuth: true
       };
-      
-
+     
       break;
 
     case "IS_AUTH":
