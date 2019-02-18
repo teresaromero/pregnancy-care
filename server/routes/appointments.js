@@ -21,7 +21,9 @@ router.post("/delete", isLoggedIn(), (req, res, next) => {
   const { id } = req.body;
 
   Appointment.findByIdAndDelete(id).then(appointment => {
-    res.json({ appointment });
+    Appointment.find().then(appointments => {
+      res.json({ appointments });
+    });
   });
 });
 
@@ -33,8 +35,9 @@ router.put("/update", isLoggedIn(), (req, res, next) => {
     { start: start, end: end },
     { new: true }
   ).then(appointment => {
-    console.log(appointment);
-    res.json({ appointment });
+    Appointment.find().then(appointments => {
+      res.json({ appointments });
+    });
   });
 });
 

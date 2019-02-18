@@ -9,7 +9,17 @@ class _CalendarScreen extends React.Component {
     let { user } = this.props;
     return (
       <View style={{ flex: 1, paddingTop: 52 }}>
-        <Agenda selected={Date.now()} />
+        <CalendarList
+          selected={Date.now()}
+          markedDates={{
+            [Date.now()]: {selected: true, marked: true, selectedColor: 'blue'},
+          }}
+          firstDay={1}
+          showWeekNumbers={true}
+          onDayPress={day => {
+            console.log("selected day", day);
+          }}
+        />
       </View>
     );
   }

@@ -8,7 +8,7 @@ import {
 import { FontAwesome } from "react-native-vector-icons";
 
 import { SignIn } from "../screens/SignInScreen";
-import Home from "../screens/HomeScreen";
+import {Home} from "../screens/HomeScreen";
 
 import { Profile } from "../screens/ProfileScreen";
 import {CalendarScreen} from "../screens/CalendarScreen";

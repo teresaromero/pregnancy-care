@@ -25,14 +25,14 @@ export default class AppointmentsAPI {
   static update(id, start, end) {
     return instance
       .put(`/api/appointments/update`, { id, start, end })
-      .then(res => console.log(res))
+      .then(res => res.data)
       .catch(err => console.log(err));
   }
 
   static delete(id) {
     return instance
       .post(`/api/appointments/delete`, { id })
-      .then(res => console.log(res))
+      .then(res => res.data)
       .catch(err => console.log(err));
   }
 }
