@@ -7,8 +7,6 @@ import PatientsApi from "../lib/APIs/patientsApi";
 import moment from "moment";
 
 class _Home extends React.Component {
-
-
   constructor() {
     super();
     this.state = {
@@ -26,9 +24,8 @@ class _Home extends React.Component {
   }
 
   render() {
-    let { user } = this.props;
     let { patient } = this.state;
-    let {navigate} = this.props.navigation;
+    let { navigate } = this.props.navigation;
     return (
       <React.Fragment>
         <View style={{ flex: 1 }}>
@@ -69,7 +66,7 @@ class _Home extends React.Component {
                 }}
               >
                 <Slider
-                  value={5}
+                  value={moment().diff(patient.recordId.LMP, "weeks")}
                   maximumValue={40}
                   minimumValue={0}
                   minimumTrackTintColor="#13a9d6"
@@ -98,7 +95,7 @@ class _Home extends React.Component {
                     />
                   }
                   title=" See Progress"
-                  onPress={()=>navigate('Record')}
+                  onPress={() => navigate("Record")}
                 />
               </View>
             </ScrollView>

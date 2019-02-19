@@ -15,6 +15,8 @@ import { CalendarScreen } from "../screens/CalendarScreen";
 import { Text, Header, Card, Button, Icon } from "react-native-elements";
 import { Record } from "../screens/RecordScreen";
 
+import { LogoutBtn } from "../components/LogoutBtn";
+
 const headerStyle = {
   marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
 };
@@ -24,41 +26,48 @@ export const HomeNavigator = createStackNavigator({
     screen: Home,
     navigationOptions: () => ({
       headerTitle: `Pregnancy Care 🤰🏼`,
-      headerTintColor: '#fff',
+      headerTintColor: "#fff",
       headerTitleStyle: {
-        fontWeight: '100',
-        fontSize:15
+        fontWeight: "bold",
+        fontSize: 15,
+        color: "black"
       },
-      headerRight: (
-        <Button
-          type="clear"
-          icon={
-            <Icon
-              name="power-off"
-              type="font-awesome"
-              size={15}
-              color="#FF3860"
-            />
-          }
-          titleStyle={{ color: "#FF3860" }}
-          onPress={() => this.handleLogOut()}
-        />
-      ),
+      headerRight: <LogoutBtn />,
       headerStyle: {
-        backgroundColor: "#0393df"
+        backgroundColor: "#91d4f2"
       }
     })
   },
   Record: {
     screen: Record,
     navigationOptions: () => ({
-      headerTintColor: '#fff',
+      headerTintColor: "#fff",
       headerTitleStyle: {
-        fontWeight: '100',
-        fontSize:15
+        fontWeight: "bold",
+        fontSize: 15,
+        color: "black"
       },
       headerStyle: {
-        backgroundColor: "#0393df"
+        backgroundColor: "#91d4f2"
+      }
+    })
+  }
+});
+
+export const ProfileNavigator = createStackNavigator({
+  Profile: {
+    screen: Profile,
+    navigationOptions: () => ({
+      headerTitle: `Pregnancy Care 🤰🏼`,
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        fontWeight: "bold",
+        fontSize: 15,
+        color: "black"
+      },
+      headerRight: <LogoutBtn />,
+      headerStyle: {
+        backgroundColor: "#91d4f2"
       }
     })
   }
@@ -68,8 +77,7 @@ export const SignedOut = createStackNavigator({
   SignIn: {
     screen: SignIn,
     navigationOptions: {
-      title: "Sign In",
-      headerStyle
+      header: null
     }
   }
 });
@@ -80,8 +88,11 @@ export const SignedIn = createBottomTabNavigator(
       screen: HomeNavigator,
       navigationOptions: {
         tabBarLabel: "Home",
+        tabBarOptions: {
+          style: { paddingTop: 10, backgroundColor: "#91d4f2" }
+        },
         tabBarIcon: ({ tintColor }) => (
-          <FontAwesome name="home" size={30} color={tintColor} />
+          <FontAwesome name="home" size={20} color={tintColor} />
         )
       }
     },
@@ -89,17 +100,23 @@ export const SignedIn = createBottomTabNavigator(
       screen: CalendarScreen,
       navigationOptions: {
         tabBarLabel: "Calendar",
+        tabBarOptions: {
+          style: { paddingTop: 10, backgroundColor: "#91d4f2" }
+        },
         tabBarIcon: ({ tintColor }) => (
-          <FontAwesome name="calendar" size={30} color={tintColor} />
+          <FontAwesome name="calendar" size={20} color={tintColor} />
         )
       }
     },
     Profile: {
-      screen: Profile,
+      screen: ProfileNavigator,
       navigationOptions: {
         tabBarLabel: "Profile",
+        tabBarOptions: {
+          style: { paddingTop: 10, backgroundColor: "#91d4f2" }
+        },
         tabBarIcon: ({ tintColor }) => (
-          <FontAwesome name="user" size={30} color={tintColor} />
+          <FontAwesome name="user" size={20} color={tintColor} />
         )
       }
     }

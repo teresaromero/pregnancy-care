@@ -12,27 +12,48 @@ import {
   ContributionGraph
 } from "react-native-chart-kit";
 
-
 class _Record extends React.Component {
   constructor() {
     super();
     this.state = {
-      patient: null
+      patient: null,
+      dataWeight: null,
+      dataIMC: null,
+      bloodSistolic: null,
+      bloodDiastolic: null
     };
   }
 
   componentDidMount() {
     let { user } = this.props;
     PatientsApi.getPatient(user._id).then(patient => {
-      this.setState({ patient }, () => {
-        console.log(this.state.patient.recordId.LMP);
+      let dataWeight = patient.recordId.weight.map(w => {
+        return w.value;
       });
+      let dataIMC = patient.recordId.IMC.map(i => {
+        return i.value;
+      });
+      let bloodSistolic = patient.recordId.bloodPressure.map(b => {
+        return b.Systolic;
+      });
+      let bloodDiastolic = patient.recordId.bloodPressure.map(b => {
+        return b.Diastolic;
+      });
+      this.setState(
+        { patient, dataIMC, dataWeight, bloodDiastolic, bloodSistolic },
+        () => {}
+      );
     });
   }
 
   render() {
-    let { user } = this.props;
-    let { patient } = this.state;
+    let {
+      patient,
+      dataIMC,
+      dataWeight,
+      bloodDiastolic,
+      bloodSistolic
+    } = this.state;
     return (
       <React.Fragment>
         <View style={{ flex: 1 }}>
@@ -46,49 +67,115 @@ class _Record extends React.Component {
                   alignItems: "center"
                 }}
               >
-                <Text>Weight</Text>
+                <Text style={{ padding: 5, fontWeight: "bold" }} h6>
+                  Weight
+                </Text>
                 <LineChart
                   data={{
                     datasets: [
                       {
-                        data: [
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100
-                        ],
-                        color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`
-                      },
-                      {
-                        data: [
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100
-                        ]
+                        data: dataWeight
                       }
                     ]
                   }}
                   width={Dimensions.get("window").width * 0.9}
                   height={180}
                   chartConfig={{
-                    backgroundColor: "#e26a00",
-                    backgroundGradientFrom: "#fb8c00",
-                    backgroundGradientTo: "#ffa726",
+                    backgroundColor: "#f9e939",
+                    backgroundGradientFrom: "#f9e939",
+                    backgroundGradientTo: "#f9e939",
                     decimalPlaces: 0, // optional, defaults to 2dp
-                    strokeWidth:1,
-                    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                    strokeWidth: 1,
+                    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
                     style: {
-                      paddingRight:0,
-                      paddingLeft:0,
+                      paddingRight: 0,
+                      paddingLeft: 0,
                       borderRadius: 5
                     }
                   }}
-                 
+                  bezier
+                  style={{
+                    marginVertical: 1,
+                    borderRadius: 5
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  alignItems: "center"
+                }}
+              >
+                <Text style={{ padding: 5, fontWeight: "bold" }} h6>
+                  IMC
+                </Text>
+                <LineChart
+                  data={{
+                    datasets: [
+                      {
+                        data: dataIMC
+                      }
+                    ]
+                  }}
+                  width={Dimensions.get("window").width * 0.9}
+                  height={180}
+                  chartConfig={{
+                    backgroundColor: "#a4cf7c",
+                    backgroundGradientFrom: "#a4cf7c",
+                    backgroundGradientTo: "#a4cf7c",
+                    decimalPlaces: 0, // optional, defaults to 2dp
+                    strokeWidth: 1,
+                    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                    style: {
+                      paddingRight: 0,
+                      paddingLeft: 0,
+                      borderRadius: 5
+                    }
+                  }}
+                  bezier
+                  style={{
+                    marginVertical: 1,
+                    borderRadius: 5
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  alignItems: "center"
+                }}
+              >
+                <Text style={{ padding: 5, fontWeight: "bold" }} h6>
+                  Blood Pressure
+                </Text>
+                <LineChart
+                  data={{
+                    datasets: [
+                      {
+                        data: bloodDiastolic
+                      },
+                      { data: bloodSistolic }
+                    ]
+                  }}
+                  width={Dimensions.get("window").width * 0.9}
+                  height={180}
+                  chartConfig={{
+                    backgroundColor: "#91d4f2",
+                    backgroundGradientFrom: "#91d4f2",
+                    backgroundGradientTo: "#91d4f2",
+                    decimalPlaces: 0, // optional, defaults to 2dp
+                    strokeWidth: 1,
+                    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                    style: {
+                      paddingRight: 0,
+                      paddingLeft: 0,
+                      borderRadius: 5
+                    }
+                  }}
                   bezier
                   style={{
                     marginVertical: 1,
