@@ -1,8 +1,9 @@
 import React from "react";
-import { ScrollView, Text, ActivityIndicator, View } from "react-native";
-import { Card, Button } from "react-native-elements";
+import { ScrollView, ActivityIndicator, View } from "react-native";
+import { Card, Text, Header, Button, Icon, Tile } from "react-native-elements";
 import { connect } from "react-redux";
 import PatientsApi from "../lib/APIs/patientsApi";
+import moment from "moment";
 
 class _Home extends React.Component {
   constructor() {
@@ -15,7 +16,9 @@ class _Home extends React.Component {
   componentDidMount() {
     let { user } = this.props;
     PatientsApi.getPatient(user._id).then(patient => {
-      this.setState({ patient });
+      this.setState({ patient }, () => {
+        console.log(this.state.patient.recordId.LMP);
+      });
     });
   }
 
@@ -23,18 +26,69 @@ class _Home extends React.Component {
     let { user } = this.props;
     let { patient } = this.state;
     return (
-      <View style={{ flex: 1, paddingTop: 50 }}>
-        {patient ? (
-          <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
-            <Card>
-              <Text>Hola {user.name}</Text>
-              <Text>{patient.recordId.allergies}</Text>
-            </Card>
-          </ScrollView>
-        ) : (
-          <ActivityIndicator />
-        )}
-      </View>
+      <React.Fragment>
+        <Header
+          centerComponent={{
+            text: "Pregnancy Care 🤰🏼",
+            style: { color: "#fff" }
+          }}
+          rightComponent={
+            <Button
+              type="clear"
+              icon={
+                <Icon
+                  name="power-off"
+                  type="font-awesome"
+                  size={15}
+                  color="#FF3860"
+                />
+              }
+              titleStyle={{ color: "#FF3860" }}
+              onPress={() => this.handleLogOut()}
+            />
+          }
+          containerStyle={{
+            borderColor: "#0393df",
+            backgroundColor: "#0393df"
+          }}
+        />
+        <View style={{ flex: 1 }}>
+          {patient ? (
+            <ScrollView>
+              <Tile
+                imageSrc={require("../assets/images/pexels-photo-57529.jpeg")}
+                title={`Welcome ${patient.name}!!`}
+                featured
+                caption=""
+              />
+              <View
+                style={{
+                  paddingTop: 7,
+                  flex: 1,
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <Text h4>You are now</Text>
+                <Text h3>{moment().diff(patient.recordId.LMP, "weeks")}</Text>
+                <Text h4>weeks!!</Text>
+              </View>
+              <View
+                style={{
+                  paddingTop: 7,
+                  flex: 1,
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              ></View>
+            </ScrollView>
+          ) : (
+            <ActivityIndicator />
+          )}
+        </View>
+      </React.Fragment>
     );
   }
 }

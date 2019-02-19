@@ -8,14 +8,18 @@ import {
 import { FontAwesome } from "react-native-vector-icons";
 
 import { SignIn } from "../screens/SignInScreen";
-import {Home} from "../screens/HomeScreen";
+import { Home } from "../screens/HomeScreen";
 
 import { Profile } from "../screens/ProfileScreen";
-import {CalendarScreen} from "../screens/CalendarScreen";
+import { CalendarScreen } from "../screens/CalendarScreen";
+import { Text, Header, Card } from "react-native-elements";
 
 const headerStyle = {
   marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
 };
+
+
+
 
 export const SignedOut = createStackNavigator({
   SignIn: {
@@ -70,14 +74,16 @@ export const createRootNavigator = (signedIn = false) => {
   return createSwitchNavigator(
     {
       SignedIn: {
-        screen: SignedIn
+        screen: SignedIn,
+        
       },
       SignedOut: {
-        screen: SignedOut
+        screen: SignedOut,
       }
     },
     {
-      initialRouteName: signedIn ? "SignedIn" : "SignedOut"
+      initialRouteName: signedIn ? "SignedIn" : "SignedOut",
+     
     }
   );
 };

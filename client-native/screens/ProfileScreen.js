@@ -1,15 +1,21 @@
 import React from "react";
 import { View, ActivityIndicator, StyleSheet } from "react-native";
-import { Card, Button, Image, Icon, Text } from "react-native-elements";
+import {
+  Card,
+  Button,
+  Image,
+  Icon,
+  Text,
+  Avatar,
+  ListItem,
+  Header
+} from "react-native-elements";
 
 import { connect } from "react-redux";
 import AuthApi from "../lib/APIs/authApi";
 import { logout } from "../lib/redux/actions";
 
 class _Profile extends React.Component {
-  
- 
-
   handleLogOut() {
     let { dispatch, navigation } = this.props;
     AuthApi.logout().then(() => {
@@ -22,30 +28,13 @@ class _Profile extends React.Component {
     let { user } = this.props;
 
     return (
-      <View style={{ paddingTop: 50 }}>
-        {user ? (
-          <Card style={[styles.container, styles.horizontal]} title={user.name}>
-            <View
-              style={{
-                backgroundColor: "#bcbec1",
-                alignItems: "center",
-                justifyContent: "center",
-                width: 80,
-                height: 80,
-                borderRadius: 40,
-                alignSelf: "center",
-                marginBottom: 20
-              }}
-            >
-              <Image
-                source={{ uri: `${user.image}` }}
-                style={{ width: 80, height: 80 }}
-                PlaceholderContent={<ActivityIndicator />}
-              />
-            </View>
-            <View>
-              <Text>{user.email}</Text>
-            </View>
+      <React.Fragment>
+        <Header
+          centerComponent={{
+            text: "Pregnancy Care 🤰🏼",
+            style: { color: "#fff" }
+          }}
+          rightComponent={
             <Button
               type="clear"
               icon={
@@ -56,17 +45,55 @@ class _Profile extends React.Component {
                   color="#FF3860"
                 />
               }
-              title=" Logout"
               titleStyle={{ color: "#FF3860" }}
               onPress={() => this.handleLogOut()}
             />
-          </Card>
-        ) : (
-          <View style={[styles.container, styles.horizontal]}>
-            <ActivityIndicator />
-          </View>
-        )}
-      </View>
+          }
+          containerStyle={{
+            borderColor: "#0393df",
+            backgroundColor: "#0393df"
+          }}
+        />
+
+        <View>
+          {user ? (
+            <React.Fragment>
+              <Card
+                style={[styles.container, styles.horizontal]}
+                title={user.name}
+              >
+                <View
+                  style={{
+                    backgroundColor: "#bcbec1",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: 80,
+                    height: 80,
+                    borderRadius: 40,
+                    alignSelf: "center",
+                    marginBottom: 20
+                  }}
+                >
+                  <Avatar
+                    rounded
+                    source={{
+                      uri: user.image
+                    }}
+                  />
+                </View>
+              </Card>
+              <View>
+                <ListItem title="Email" subtitle={user.email} />
+                <ListItem title="Phone" subtitle={user.phone} />
+              </View>
+            </React.Fragment>
+          ) : (
+            <View style={[styles.container, styles.horizontal]}>
+              <ActivityIndicator />
+            </View>
+          )}
+        </View>
+      </React.Fragment>
     );
   }
 }
