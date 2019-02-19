@@ -12,14 +12,57 @@ import { Home } from "../screens/HomeScreen";
 
 import { Profile } from "../screens/ProfileScreen";
 import { CalendarScreen } from "../screens/CalendarScreen";
-import { Text, Header, Card } from "react-native-elements";
+import { Text, Header, Card, Button, Icon } from "react-native-elements";
+import { Record } from "../screens/RecordScreen";
 
 const headerStyle = {
   marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
 };
 
-
-
+export const HomeNavigator = createStackNavigator({
+  Home: {
+    screen: Home,
+    navigationOptions: () => ({
+      headerTitle: `Pregnancy Care 🤰🏼`,
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: '100',
+        fontSize:15
+      },
+      headerRight: (
+        <Button
+          type="clear"
+          icon={
+            <Icon
+              name="power-off"
+              type="font-awesome"
+              size={15}
+              color="#FF3860"
+            />
+          }
+          titleStyle={{ color: "#FF3860" }}
+          onPress={() => this.handleLogOut()}
+        />
+      ),
+      headerStyle: {
+        backgroundColor: "#0393df"
+      }
+    })
+  },
+  Record: {
+    screen: Record,
+    navigationOptions: () => ({
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: '100',
+        fontSize:15
+      },
+      headerStyle: {
+        backgroundColor: "#0393df"
+      }
+    })
+  }
+});
 
 export const SignedOut = createStackNavigator({
   SignIn: {
@@ -34,7 +77,7 @@ export const SignedOut = createStackNavigator({
 export const SignedIn = createBottomTabNavigator(
   {
     Home: {
-      screen: Home,
+      screen: HomeNavigator,
       navigationOptions: {
         tabBarLabel: "Home",
         tabBarIcon: ({ tintColor }) => (
@@ -74,16 +117,14 @@ export const createRootNavigator = (signedIn = false) => {
   return createSwitchNavigator(
     {
       SignedIn: {
-        screen: SignedIn,
-        
+        screen: SignedIn
       },
       SignedOut: {
-        screen: SignedOut,
+        screen: SignedOut
       }
     },
     {
-      initialRouteName: signedIn ? "SignedIn" : "SignedOut",
-     
+      initialRouteName: signedIn ? "SignedIn" : "SignedOut"
     }
   );
 };

@@ -1,11 +1,14 @@
 import React from "react";
 import { ScrollView, ActivityIndicator, View } from "react-native";
-import { Card, Text, Header, Button, Icon, Tile } from "react-native-elements";
+import { Text, Header, Button, Icon, Tile } from "react-native-elements";
+import Slider from "react-native-slider";
 import { connect } from "react-redux";
 import PatientsApi from "../lib/APIs/patientsApi";
 import moment from "moment";
 
 class _Home extends React.Component {
+
+
   constructor() {
     super();
     this.state = {
@@ -25,39 +28,20 @@ class _Home extends React.Component {
   render() {
     let { user } = this.props;
     let { patient } = this.state;
+    let {navigate} = this.props.navigation;
     return (
       <React.Fragment>
-        <Header
-          centerComponent={{
-            text: "Pregnancy Care 🤰🏼",
-            style: { color: "#fff" }
-          }}
-          rightComponent={
-            <Button
-              type="clear"
-              icon={
-                <Icon
-                  name="power-off"
-                  type="font-awesome"
-                  size={15}
-                  color="#FF3860"
-                />
-              }
-              titleStyle={{ color: "#FF3860" }}
-              onPress={() => this.handleLogOut()}
-            />
-          }
-          containerStyle={{
-            borderColor: "#0393df",
-            backgroundColor: "#0393df"
-          }}
-        />
         <View style={{ flex: 1 }}>
           {patient ? (
             <ScrollView>
               <Tile
                 imageSrc={require("../assets/images/pexels-photo-57529.jpeg")}
                 title={`Welcome ${patient.name}!!`}
+                titleStyle={{
+                  textShadowColor: "black",
+                  textShadowOffset: { width: -1, height: 1 },
+                  textShadowRadius: 1
+                }}
                 featured
                 caption=""
               />
@@ -76,13 +60,47 @@ class _Home extends React.Component {
               </View>
               <View
                 style={{
-                  paddingTop: 7,
+                  paddingTop: 2,
                   flex: 1,
-                  flexDirection: "column",
+                  marginLeft: 15,
+                  marginRight: 15,
+                  justifyContent: "center",
+                  alignItems: "stretch"
+                }}
+              >
+                <Slider
+                  value={5}
+                  maximumValue={40}
+                  minimumValue={0}
+                  minimumTrackTintColor="#13a9d6"
+                  thumbImage={require("../assets/images/baby.png")}
+                  thumbTintColor="transparent"
+                  disabled={true}
+                />
+              </View>
+              <View
+                style={{
+                  paddingTop: 15,
+                  flex: 1,
+                  marginLeft: 20,
+                  marginRight: 20,
                   justifyContent: "center",
                   alignItems: "center"
                 }}
-              ></View>
+              >
+                <Button
+                  icon={
+                    <Icon
+                      type="font-awesome"
+                      name="user-md"
+                      size={20}
+                      color="white"
+                    />
+                  }
+                  title=" See Progress"
+                  onPress={()=>navigate('Record')}
+                />
+              </View>
             </ScrollView>
           ) : (
             <ActivityIndicator />
