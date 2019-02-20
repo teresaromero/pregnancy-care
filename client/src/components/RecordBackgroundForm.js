@@ -25,14 +25,11 @@ const optionsContraceptive = [
 const optionsSTD = [
   "None",
   "Chlamydia",
-  "Genital Warts (HPV)",
   "Gonorrhea",
   "Hepatitis B",
   "Herpes",
   "VIH",
   "HPV",
-  "Molluscum Contagiosum",
-  "Pubic Lice",
   "Scabies",
   "Syphilis",
   "Trichomoniasis",
@@ -99,7 +96,7 @@ class _RecordBackgroundForm extends React.Component {
               <div className="field-wrapper section">
                 <TextArea
                   label="Familiar Background"
-                  value={record.backgroundDiseases}
+                  value={record.background}
                   name="backgroundDiseases"
                   handleChange={e => this.handleRecordChange(e)}
                   rows="4"
@@ -110,7 +107,7 @@ class _RecordBackgroundForm extends React.Component {
               <div className="field-wrapper section">
                 <TextArea
                   label="Patient Background"
-                  value={record.diseases}
+                  value={record.patientBackground}
                   name="diseases"
                   handleChange={e => this.handleRecordChange(e)}
                   help="Diseases, Cronical Illness, Surgeries, Allergies"
@@ -170,8 +167,8 @@ class _RecordBackgroundForm extends React.Component {
                         <input
                           type="radio"
                           name="STDovercome"
-                          value="yes"
-                          checked={record.STDovercome === "yes"}
+                          value="Yes"
+                          checked={record.STDovercome === "Yes"}
                           onChange={e => this.handleRecordChange(e)}
                         />
                         <span> Yes</span>
@@ -180,8 +177,8 @@ class _RecordBackgroundForm extends React.Component {
                         <input
                           type="radio"
                           name="STDovercome"
-                          value="no"
-                          checked={record.STDovercome === "no"}
+                          value="No"
+                          checked={record.STDovercome === "No"}
                           onChange={e => this.handleRecordChange(e)}
                         />
                         <span>No</span>
@@ -294,7 +291,6 @@ class _RecordBackgroundForm extends React.Component {
               </div>
 
               <div className="field-wrapper section">
-              
                 <div className="columns is-marginless is-paddingless">
                   <div className="column">
                     <InputP

@@ -5,19 +5,14 @@ const recordSchema = new Schema(
   {
     userId: { type: Schema.Types.ObjectId, ref: "User" },
 
-    backgroundDiseases: { type: String, default: "" },
-    backgroundPsychiatricIll: { type: String, default: "" },
-    backgroundAddictions: { type: String, default: "" },
-    backgroundReproductive: { type: String, default: "" },
+    background: { type: String },
 
-    diseases: { type: String, default: "" },
-    allergies: { type: String, default: "" },
+    patientBackground: { type: String },
 
     addictions: [
       {
         type: String,
-        enum: ["alcohol", "tobacco", "drugs", "none"],
-        default: "none"
+        enum: ["alcohol", "tobacco", "drugs", "none"]
       }
     ],
     contraceptive: [
@@ -27,25 +22,16 @@ const recordSchema = new Schema(
           "None",
           "Implant",
           "IUD",
-          "Shot",
           "Vaginal Ring",
           "Patch",
           "Pill",
           "Condom",
-          "Internal Condom",
           "Diaphragm",
-          "Sponge",
-          "Cervical Cap",
-          "Spermicide",
-          "Withdrawal",
-          "Breastfeeding",
-          "Abstinence",
           "Other"
-        ],
-        default: "None"
+        ]
       }
     ],
-    contraceptiveOther: { type: String, default: "" },
+    contraceptiveOther: { type: String },
 
     STD: [
       {
@@ -53,42 +39,38 @@ const recordSchema = new Schema(
         enum: [
           "None",
           "Chlamydia",
-          "Genital Warts (HPV)",
           "Gonorrhea",
           "Hepatitis B",
           "Herpes",
           "VIH",
           "HPV",
-          "Molluscum Contagiosum",
-          "Pubic Lice",
           "Scabies",
           "Syphilis",
           "Trichomoniasis",
           "Other"
-        ],
-        default: "None"
+        ]
       }
     ],
-    STDother: { type: String, default: "" },
-    STDovercome: { type: String, default: "NotCurrently" },
+    STDother: { type: String },
+    STDovercome: { type: String, enum: ["Yes", "No"] },
 
-    HPVvaccine: { type: String, enum: ["Yes", "No"], default: "No" },
+    HPVvaccine: { type: String, enum: ["Yes", "No"] },
 
-    menstrualCycleDays: { type: Number, default: "" },
-    menstrualCycleFrequency: { type: Number, default: "" },
+    menstrualCycleDays: { type: Number },
+    menstrualCycleFrequency: { type: Number },
 
     bloodGroup: { type: String, enum: ["A", "B", "AB", "0"] },
     rh: { type: String, enum: ["+", "-"] },
 
-    pregnancies: { type: Number, default: 0 },
-    labours: { type: Number, default: 0 },
-    caesareanSections: { type: Number, default: 0 },
-    abortions: { type: Number, default: 0 },
-    ectopics: { type: Number, default: 0 },
+    pregnancies: { type: Number },
+    labours: { type: Number },
+    caesareanSections: { type: Number },
+    abortions: { type: Number },
+    ectopics: { type: Number },
 
-    lastCitology: { type: Date, default: Date.now() },
+    lastCitology: { type: Date },
 
-    height: { type: Number, default: 0 },
+    height: { type: Number },
 
     partnerBirthDate: { type: Date },
 
@@ -108,16 +90,14 @@ const recordSchema = new Schema(
 
     diet: {
       type: String,
-      enum: ["Mediterranean", "Vegetarian", "Vegan", "Other"],
-      default: "Mediterranean"
+      enum: ["Mediterranean", "Vegetarian", "Vegan", "Other"]
     },
-    dietOther: { type: String, default: "" },
+    dietOther: { type: String },
 
     dietSuplements: [
       {
         type: String,
-        enum: ["polivitaminics", "iron", "folic", "iodine", "none"],
-        default: "none"
+        enum: ["polivitaminics", "iron", "folic", "iodine", "none"]
       }
     ],
 
@@ -133,31 +113,30 @@ const recordSchema = new Schema(
           "cold",
           "standing up",
           "none"
-        ],
-        default: "none"
+        ]
       }
     ],
 
-    risk: { type: String, enum: ["Low", "High"], default: "Low" },
-    riskReason: { type: String, default: "" },
+    risk: { type: String, enum: ["Low", "High"] },
+    riskReason: { type: String },
 
     weight: [
       {
-        value: { type: Number, default: 0 },
+        value: { type: Number },
         date: { type: Date, default: Date.now }
       }
     ],
     IMC: [
       {
-        value: { type: Number, default: 0 },
+        value: { type: Number },
         date: { type: Date, default: Date.now }
       }
     ],
 
     bloodPressure: [
       {
-        Systolic: { type: Number, default: 0 },
-        Diastolic: { type: Number, default: 0 },
+        Systolic: { type: Number },
+        Diastolic: { type: Number },
         date: { type: Date, default: Date.now }
       }
     ],
@@ -167,19 +146,12 @@ const recordSchema = new Schema(
         medicalTest: [
           {
             type: String,
-            enum: [
-              "Ultrasound 1Term",
-              "Ultrasound 2Term",
-              "Ultrasound 3Term",
-              "Blood Test 1Term",
-              "Blood Test 2Term",
-              "Blood Test 3Term"
-            ]
+            enum: ["📺 Ultrasound", "💉 Blood Test"]
           }
         ],
-        testResults: { type: String, default: "" },
-        notes: { type: String, default: "" },
-        notesOut: { type: String, default: "" },
+        testResults: { type: String },
+        notes: { type: String },
+        notesOut: { type: String },
         date: { type: Date, dafault: Date.now }
       }
     ]

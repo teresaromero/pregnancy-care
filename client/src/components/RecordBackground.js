@@ -2,13 +2,9 @@ import React from "react";
 
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import {Loader} from "./Loader";
 
 class _RecordBackground extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-
   render() {
     let { patient } = this.props;
     let record = patient.recordId;
@@ -20,70 +16,103 @@ class _RecordBackground extends React.Component {
             <div className="field-wrapper section">
               <p className="label">Familiar Background:</p>
               <p>{record.backgroundDiseases}</p>
-              <p className="help">Help Text</p>
+              {record.backgroundDiseases === "" ? (
+                <p className="help has-text-danger">
+                  Enter information about the family background
+                </p>
+              ) : null}
             </div>
 
             <div className="field-wrapper section">
               <p className="label">Patient Background:</p>
               <p>{record.diseases}</p>
+              {record.diseases === "" ? (
+                <span className="help has-text-danger">
+                  Enter information about the patient background
+                </span>
+              ) : null}
             </div>
 
             <div className="field-wrapper section">
               <p className="label">Actual Addictions:</p>
               <p>
-                {record.addictions.length === 0
-                  ? "None"
-                  : record.addictions.map(a => <span key={a}>{a}</span>)}
+                {record.addictions.length === 0 ? (
+                  <span className="help has-text-danger">
+                    Enter information about the addictions
+                  </span>
+                ) : (
+                  record.addictions.map(a => <span key={a}>{a}</span>)
+                )}
               </p>
             </div>
 
             <div className="field-wrapper section">
               <p className="label">Contraceptive Methods:</p>
-              <p>
-                {record.contraceptive.length === 0
-                  ? ""
-                  : record.contraceptive.map(a => <span key={a}>{a}</span>)}
-              </p>
-              <p>
+             
+                {record.contraceptive.length === 0 ? (
+                  <p className="help has-text-danger">
+                    Enter information about the contraceptive methods
+                  </p>
+                ) : (
+                  record.contraceptive.map(a => <span key={a}>{a}</span>)
+                )}
+            
+            
                 {record.contraceptiveOther === "" ? (
                   ""
                 ) : (
                   <span>Other: {record.contraceptiveOther}</span>
                 )}
-              </p>
+           
             </div>
 
             <div className="field-wrapper section">
               <p className="label">STD:</p>
-              <p>
-                {record.STD.length === 0
-                  ? ""
-                  : record.STD.map(a => <span key={a}> {a}</span>)}
-              </p>
-              <p>
+              
+                {record.STD.length === 0 ? (
+                  <p className="help has-text-danger">
+                    Enter information about the sexual transmited diseases
+                    methods
+                  </p>
+                ) : (
+                  record.STD.map(a => <span key={a}> {a}</span>)
+                )}
+              
+              
                 {record.STDother === "" ? (
                   ""
                 ) : (
                   <span>Other: {record.STDother}</span>
                 )}
-              </p>
-              <p className="label">STD Overcome:</p>
-              <p>{record.STDovercome}</p>
+            
+              {record.STD.length !== 0 ? (
+                <React.Fragment>
+                  <p className="label">STD Overcome:</p>
+                  <p>{record.STDovercome}</p>
+                </React.Fragment>
+              ) : null}
             </div>
 
             <div className="field-wrapper section">
               <div className="columns">
                 <div className="column">
                   <p className="label">HPV Vaccine</p>
-
-                  {record.HPVvaccine}
+                  {record.HPVvaccine === "" ? (
+                    <p className="help has-text-danger">Edit</p>
+                  ) : (
+                    <p>{record.HPVvaccine}</p>
+                  )}
                 </div>
                 <div className="column">
                   <p className="label">Period Cycle</p>
-
-                  <span>
-                    {record.menstrualCycleDays}/{record.menstrualCycleFrequency}
-                  </span>
+                  {record.menstrualCycleDays ? (
+                    <p className="help has-text-danger">Edit</p>
+                  ) : (
+                    <span>
+                      {record.menstrualCycleDays}/
+                      {record.menstrualCycleFrequency}
+                    </span>
+                  )}
                 </div>
                 <div className="column">
                   <p className="label">Blood Type</p>
@@ -126,7 +155,7 @@ class _RecordBackground extends React.Component {
             </div>
           </React.Fragment>
         ) : (
-          <p>Loading</p>
+          <Loader />
         )}
       </React.Fragment>
     );

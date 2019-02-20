@@ -13,8 +13,8 @@ class _PregnancyDetail extends React.Component {
       <React.Fragment>
         {patient ? (
           <React.Fragment>
-            <div className="field-wrapper section">
-              <div className="columns has-text-centered">
+            <div className="field-wrapper">
+              <div className="columns has-text-centered is-marginless is-paddingless">
                 <div className="column">
                   <p className="label">LMP</p>
                   <p className="">
@@ -37,8 +37,8 @@ class _PregnancyDetail extends React.Component {
             </div>
 
             <p className="label" />
-            <div className="field-wrapper section">
-              <div className="columns">
+            <div className="field-wrapper">
+              <div className="columns is-marginless is-paddingless">
                 <div className="column">
                   <p className="label">Mother Age</p>
                   <p className="">
@@ -59,8 +59,8 @@ class _PregnancyDetail extends React.Component {
             </div>
 
             <p className="label" />
-            <div className="field-wrapper section">
-              <div className="columns">
+            <div className="field-wrapper">
+              <div className="columns is-marginless is-paddingless">
                 <div className="column">
                   <p className="label">Diet</p>
                   <p className="">{patientRecord.diet}</p>
@@ -79,18 +79,15 @@ class _PregnancyDetail extends React.Component {
                     ))}
                   </ul>
                 </div>
+                <div className="column">
+                  <p className="label">Sports </p>
+                  <p>{patientRecord.sport}</p>
+                </div>
               </div>
             </div>
 
-            <div className="field-wrapper section">
-              <p className="label">
-                Sports <span>{patientRecord.sport}</span>
-              </p>
-            </div>
-
-            <p className="label" />
-            <div className="field-wrapper section">
-              <div className="columns">
+            <div className="field-wrapper">
+              <div className="columns is-marginless is-paddingless">
                 <div className="column">
                   <p className="label">Profession</p>
                   <p className="">{patient.profession}</p>
@@ -103,12 +100,6 @@ class _PregnancyDetail extends React.Component {
                     ))}
                   </ul>
                 </div>
-              </div>
-            </div>
-
-            <p className="label" />
-            <div className="field-wrapper section">
-              <div className="columns">
                 <div className="column">
                   <p className="label">Pregnancy Risk</p>
                   <p className="">{patientRecord.risk}</p>

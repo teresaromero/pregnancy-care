@@ -19,9 +19,9 @@ mongoose
 
 let usersAdmin = [
   {
-    name: "Unicorn",
-    surname: "Administrator",
-    email: "admin@pregnancy-care.com",
+    name: "Teresa",
+    surname: "Parser",
+    email: "admin@admin.com",
     password: bcrypt.hashSync("1234", bcrypt.genSaltSync(bcryptSalt)),
     bornDate: "1988-01-16 00:00:00.000",
     isActive: true,
@@ -29,9 +29,9 @@ let usersAdmin = [
     address: {
       street: "Lorem Ipsum",
       number: "5",
-      city: "consectetur",
-      state: "adipiscing",
-      zip: "34007"
+      city: "Madrid",
+      state: "Comunidad de Madrid",
+      zip: "28045"
     },
     phone: "99000999",
     idNum: "1234453Y"
@@ -42,17 +42,17 @@ let usersCustomer = [
   {
     name: "Leanora",
     surname: "Hardstaff",
-    email: "lhardstaff0@blogs.com",
+    email: "leonora@leonora.com",
     password: bcrypt.hashSync("1234", bcrypt.genSaltSync(bcryptSalt)),
-    bornDate: "1988-01-16 00:00:00.000",
+    bornDate: "1987-06-18 00:00:00.000",
     isActive: true,
     role: "CUSTOMER",
     address: {
       street: "Lorem Ipsum",
-      number: "5",
-      city: "consectetur",
-      state: "adipiscing",
-      zip: "34007"
+      number: "6",
+      city: "Madrid",
+      state: "Comunidad de Madrid",
+      zip: "28047"
     },
     phone: "99000999",
     idNum: "1234567Y"
@@ -60,17 +60,17 @@ let usersCustomer = [
   {
     name: "Gottfried",
     surname: "Redmile",
-    email: "gredmile1@mayoclinic.com",
+    email: "gottfried@gottfried.com",
     password: bcrypt.hashSync("1234", bcrypt.genSaltSync(bcryptSalt)),
-    bornDate: "1986-06-16 00:00:00.000",
+    bornDate: "1986-06-15 00:00:00.000",
     isActive: true,
     role: "CUSTOMER",
     address: {
       street: "Lorem Ipsum",
       number: "5",
-      city: "consectetur",
-      state: "adipiscing",
-      zip: "34007"
+      city: "Zaragoza",
+      state: "Aragón",
+      zip: "50020"
     },
     phone: "99000999",
     idNum: "1234568Y"
@@ -78,7 +78,7 @@ let usersCustomer = [
   {
     name: "Saunders",
     surname: "Clemoes",
-    email: "sclemoes3@indiegogo.com",
+    email: "saunders@saunders.com",
     password: bcrypt.hashSync("1234", bcrypt.genSaltSync(bcryptSalt)),
     bornDate: "1970-06-10 00:00:00.000",
     isActive: true,
@@ -86,48 +86,12 @@ let usersCustomer = [
     address: {
       street: "Lorem Ipsum",
       number: "5",
-      city: "consectetur",
-      state: "adipiscing",
-      zip: "34007"
+      city: "Zaragoza",
+      state: "Aragón",
+      zip: "50002"
     },
     phone: "99000999",
     idNum: "1234569Y"
-  },
-  {
-    name: "Shayne",
-    surname: "Moorcraft",
-    email: "smoorcraft4@yellowpages.com",
-    password: bcrypt.hashSync("1234", bcrypt.genSaltSync(bcryptSalt)),
-    bornDate: "1975-06-19 00:00:00.000",
-    isActive: true,
-    role: "CUSTOMER",
-    address: {
-      street: "Lorem Ipsum",
-      number: "5",
-      city: "consectetur",
-      state: "adipiscing",
-      zip: "34007"
-    },
-    phone: "99000999",
-    idNum: "1234570Y"
-  },
-  {
-    name: "Jock",
-    surname: "Gannaway",
-    email: "jgannaway5@microsoft.com",
-    password: bcrypt.hashSync("1234", bcrypt.genSaltSync(bcryptSalt)),
-    bornDate: "1987-09-25 00:00:00.000",
-    isActive: true,
-    role: "CUSTOMER",
-    address: {
-      street: "Lorem Ipsum",
-      number: "5",
-      city: "consectetur",
-      state: "adipiscing",
-      zip: "34007"
-    },
-    phone: "99000999",
-    idNum: "1234571Y"
   }
 ];
 

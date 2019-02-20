@@ -10,12 +10,8 @@ import { TextArea } from "./TextArea";
 import CheckboxContainer from "./CheckboxContainer";
 
 const optionsRequest = [
-  "Ultrasound 1Term",
-  "Ultrasound 2Term",
-  "Ultrasound 3Term",
-  "Blood Test 1Term",
-  "Blood Test 2Term",
-  "Blood Test 3Term"
+  "📺 Ultrasound",
+  "💉 Blood Test",
 ];
 
 class _VisitForm extends React.Component {
@@ -122,77 +118,78 @@ class _VisitForm extends React.Component {
           </div>
         </div>
 
-        <div className="field-wrapper columns">
-          <div className="column">
-            <InputP
-              id="weight"
-              name="weight"
-              label="Weight"
-              value={weight.value}
-              type="number"
-              handleChange={e => this.handleFieldChange(e)}
-              min={0}
-            />
-          </div>
-          <div className="column">
-            <InputP
-              id="IMC"
-              name="IMC"
-              label="IMC"
-              value={IMC.value}
-              type="number"
-              handleChange={e => this.handleFieldChange(e)}
-              disabled
-            />
-          </div>
-          <div className="column">
-            <InputP
-              id="bloodPressureS"
-              name="bloodPressureS"
-              label="Pressure - Systolic"
-              value={bloodPressure.Systolic}
-              type="number"
-              handleChange={e => this.handleFieldChange(e)}
-              min={0}
-            />
-          </div>
-          <div className="column">
-            <InputP
-              id="bloodPressureD"
-              name="bloodPressureD"
-              label="Pressure - Diastolic"
-              value={bloodPressure.Diastolic}
-              type="number"
-              handleChange={e => this.handleFieldChange(e)}
-              min={0}
-            />
-          </div>
-        </div>
-
-        <div className="field">
-          <p className="label">Requested Medical Test</p>
-          <div className="field-wrapper section">
-            <CheckboxContainer
-              options={optionsRequest}
-              selection={s => this.handleSelection(s, "medicalTest")}
-            />
+        <div className="field-wrapper">
+          <div className="columns is-marginless is-paddingless">
+            <div className="column">
+              <InputP
+                id="weight"
+                name="weight"
+                label="Weight"
+                value={weight.value}
+                type="number"
+                handleChange={e => this.handleFieldChange(e)}
+                min={0}
+              />
+            </div>
+            <div className="column">
+              <InputP
+                id="IMC"
+                name="IMC"
+                label="IMC"
+                value={IMC.value}
+                type="number"
+                handleChange={e => this.handleFieldChange(e)}
+                disabled
+              />
+            </div>
+            <div className="column">
+              <InputP
+                id="bloodPressureS"
+                name="bloodPressureS"
+                label="Systolic"
+                value={bloodPressure.Systolic}
+                type="number"
+                handleChange={e => this.handleFieldChange(e)}
+                min={0}
+              />
+            </div>
+            <div className="column">
+              <InputP
+                id="bloodPressureD"
+                name="bloodPressureD"
+                label="Diastolic"
+                value={bloodPressure.Diastolic}
+                type="number"
+                handleChange={e => this.handleFieldChange(e)}
+                min={0}
+              />
+            </div>
           </div>
         </div>
 
         <div className="field-wrapper section">
+          <p className="label">Requested Medical Test</p>
+
+          <CheckboxContainer
+            options={optionsRequest}
+            selection={s => this.handleSelection(s, "medicalTest")}
+          />
+        </div>
+
+        <div className="field-wrapper section">
           <TextArea
-            label="Notes"
-            value={visit.notes || ""}
-            name="notes"
+            label="Test Results"
+            value={visit.testResults || ""}
+            name="testResults"
             handleChange={e => this.handleFieldChange(e)}
             rows="2"
           />
         </div>
         <div className="field-wrapper section">
           <TextArea
-            label="Test Results"
-            value={visit.testResults || ""}
-            name="testResults"
+            label="Notes"
+            value={visit.notes || ""}
+            name="notes"
             handleChange={e => this.handleFieldChange(e)}
             rows="2"
           />

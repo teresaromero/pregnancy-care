@@ -16,7 +16,7 @@ export const TextArea = ({
 
       <div className="control">
         <textarea
-          className="textarea"
+          className="textarea is-shadowless is-radiusless"
           name={name}
           rows={rows}
           cols={cols}

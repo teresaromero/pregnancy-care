@@ -29,7 +29,7 @@ class CheckboxContainer extends React.Component {
       <React.Fragment>
         <div className="columns is-multiline">
           {options.map(item => (
-            <div key={item} className="column is-one-fifth">
+            <div key={item} className="column">
               <label>
                 <Checkbox
                   name={item}
