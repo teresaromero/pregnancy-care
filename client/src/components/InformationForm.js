@@ -14,7 +14,8 @@ class _InformationForm extends React.Component {
     super();
     this.state = {
       patient: {
-        address: {}
+        address: {},
+        GDPR:false
       }
     };
   }
@@ -37,7 +38,7 @@ class _InformationForm extends React.Component {
 
     PatientsApi.addPatient(patient)
       .then(res => {
-        console.log(res.patient)
+        console.log(res.patient);
         let { patient } = res;
         PatientsApi.createRecord(patient._id).then(res => {
           dispatch(viewPatient(res.patient));
@@ -80,14 +81,21 @@ class _InformationForm extends React.Component {
       uptPatient["address"][field] = value;
       this.setState({ patient: uptPatient });
     }
-    if (field === "GDPR") {
-      let checked = e.target.value;
-      uptPatient[field] = checked;
 
-      this.setState({ patient: uptPatient });
-    }
     uptPatient[field] = value;
     this.setState({ patient: uptPatient });
+  }
+
+  handleSelection(s) {
+    let uptPatient = { ...this.state.patient };
+    if (s.target.checked) {
+      uptPatient.GDPR = true;
+    } else {
+      uptPatient.GDPR = false;
+    }
+    this.setState({ patient: uptPatient }, () => {
+      console.log(this.state.patient.GDPR);
+    });
   }
 
   render() {
@@ -279,7 +287,8 @@ class _InformationForm extends React.Component {
               <input
                 name="GDPR"
                 type="checkbox"
-                onChange={e => this.handleFieldChange(e)}
+                onChange={e => this.handleSelection(e)}
+                checked={patient.GDPR}
               />
               Patient agrees with <Link to="">GDPR</Link> and has signed it.
             </label>

@@ -22,11 +22,11 @@ class _LogoutBtn extends React.Component {
           <Icon
             name="power-off"
             type="font-awesome"
-            size={15}
+            size={20}
             color="#FF3860"
           />
         }
-        titleStyle={{ color: "#FF3860" }}
+        
         onPress={() => this.handleLogOut()}
       />
     );

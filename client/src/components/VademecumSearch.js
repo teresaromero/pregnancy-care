@@ -22,15 +22,15 @@ export default class VademecumSearch extends React.Component {
   }
 
   handleSearch(e) {
-
     if (e.target.value !== "") {
       this.setState({ query: e.target.value }, () => {
         VademecumApi.drugs("nombre", this.state.query).then(results => {
+          console.log(results);
           this.setState({ data: results });
         });
       });
     } else {
-      this.setState({ query:"",data:null });
+      this.setState({ query: "", data: null });
     }
   }
 
@@ -44,30 +44,32 @@ export default class VademecumSearch extends React.Component {
             label="Drug Name"
             inputtype="text"
             placeholder=""
-            value={this.state.queryName}
+            value={this.state.query}
             handleChange={e => this.handleSearch(e)}
           />
 
-          <nav className="level is-mobile">
-            <div className="level-item has-text-centered">
+          <div className="columns">
+            <div className="column">
               <span className="icon is-large has-text-danger">
                 <i className="fas fa-user-md" aria-hidden="true" />
               </span>
               <span>With medical reciept</span>
             </div>
-            <div className="level-item has-text-centered">
+            <div className="column">
               <span className="icon is-large has-text-danger">
                 <i className="fas fa-car-crash" aria-hidden="true" />
               </span>
               <span>Driving effects</span>
             </div>
-            <div className="level-item has-text-centered">
+            <div className="column">
               <span className="icon is-large has-text-danger">
                 <i className="fas fa-caret-down" aria-hidden="true" />
               </span>
               <span>Black triangle</span>
             </div>
-          </nav>
+          </div>
+
+          
 
           <div className="section">
             {this.state.data ? (
@@ -82,7 +84,7 @@ export default class VademecumSearch extends React.Component {
                 </div>
               ) : (
                 this.state.data.map(drug => (
-                  <DrugListCard key={drug._id} drug={drug} />
+                  <DrugListCard key={drug.nregistro} drug={drug} />
                 ))
               )
             ) : (

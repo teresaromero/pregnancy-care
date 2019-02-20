@@ -34,7 +34,8 @@ export const HomeNavigator = createStackNavigator({
       },
       headerRight: <LogoutBtn />,
       headerStyle: {
-        backgroundColor: "#91d4f2"
+        backgroundColor: "#91d4f2",
+        marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
       }
     })
   },
