@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 export const PatientsListCard = ({ patient }) => {
   return (
-    <div className="level">
+    <div className="level is-mobile">
       <div className="level-left">
         <div className="level-item">
           <figure className="image is-48x48">

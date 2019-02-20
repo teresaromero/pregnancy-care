@@ -2,7 +2,7 @@ import React from "react";
 import cx from "classnames";
 import { LoginForm } from "../components/LoginForm";
 import { SignupForm } from "../components/SignupForm";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 export default class HomePage extends React.Component {
   constructor() {
@@ -17,9 +17,17 @@ export default class HomePage extends React.Component {
     let loginTabClass = cx({ "is-active": loginActive });
     let signupTabClass = cx({ "is-active": signupActive });
     return (
-      <React.Fragment>
+      <div className="section has-text-centered	">
         <div className="section is-large">
-          <div className="section">
+          <img
+            src="https://res.cloudinary.com/dpid82d4m/image/upload/v1550654923/Logo.png"
+            alt="logo"
+          />
+        </div>
+
+        <div className="columns is-marginless is-paddingless">
+          <div className="column" />
+          <div className="column is-half is-centered has-background-light	">
             <div className="tabs is-centered">
               <ul>
                 <li
@@ -49,8 +57,9 @@ export default class HomePage extends React.Component {
 
             {loginActive ? <LoginForm /> : <SignupForm />}
           </div>
+          <div className="column" />
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }

@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { errorMessageAction, login, clearMessages } from "../lib/redux/actions";
 
-import { InputDiv } from "./InputDiv";
+import { InputP } from "./InputP";
 
 class _SignupForm extends React.Component {
   constructor() {
@@ -40,8 +40,8 @@ class _SignupForm extends React.Component {
     let { name, surname, email, password } = this.state;
 
     return (
-      <form method="POST" onSubmit={e => this.handleSubmit(e)}>
-        <InputDiv
+      <div className="section">
+        <InputP
           id="name-signup"
           name="name"
           value={name}
@@ -50,7 +50,8 @@ class _SignupForm extends React.Component {
           placeholder=""
           handleChange={e => this.setState({ name: e.target.value })}
         />
-        <InputDiv
+
+        <InputP
           id="surname-signup"
           name="surname"
           value={surname}
@@ -59,7 +60,8 @@ class _SignupForm extends React.Component {
           placeholder=""
           handleChange={e => this.setState({ surname: e.target.value })}
         />
-        <InputDiv
+
+        <InputP
           id="email-signup"
           name="email"
           value={email}
@@ -68,7 +70,7 @@ class _SignupForm extends React.Component {
           placeholder=""
           handleChange={e => this.setState({ email: e.target.value })}
         />
-        <InputDiv
+        <InputP
           id="password-signup"
           name="password"
           value={password}
@@ -78,10 +80,14 @@ class _SignupForm extends React.Component {
           handleChange={e => this.setState({ password: e.target.value })}
         />
 
-        <button type="submit" className="button is-info">
+        <button
+          type="submit"
+          className="button is-info"
+          onSubmit={e => this.handleSubmit(e)}
+        >
           Sign Up
         </button>
-      </form>
+      </div>
     );
   }
 }

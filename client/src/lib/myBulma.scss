@@ -1,48 +1,45 @@
 @charset "utf-8";
 // Import a Google Font
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700');
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700");
 @import "../../node_modules/@fortawesome/fontawesome-free/css/all.css";
 
 // Set your brand colors
 
-$dark-blue: #105acc;
-$green: #a4cf7c;
-$yellow: #f9e939;
-$light-blue: #91d4f2;
-$blue: #0393df;
-$beige-light: #d0d1cd;
-$beige-lighter: #eff0eb;
+$dark-blue: #01395c;
+$green: #8ac6bf;
+$blue: #7c96c8;
+$beige: #f0e5d6;
+$pink: #f28c81;
 
 //bulma colors
-$primary: $blue;
-$info: $light-blue;
+$primary: $dark-blue;
+$info: $blue;
 $success: $green;
-$warning: $yellow;
+$warning: $pink;
+$danger: $pink;
 $link: $blue;
 
 //fonts
-$family-primary:'Source Sans Pro', sans-serif;
+$family-primary: "Source Sans Pro", sans-serif;
 
-
-$label-weight:600;	
+$label-weight: 600;
 //label-heading
-.label.label-heading{
-  background:$primary;
-    padding: 0.5rem;
-    color: white;
+.label.label-heading {
+  background: $primary;
+  padding: 0.5rem;
+  color: white;
 }
 //hidden elements
 
-.is-hidden{
-  display:none;
+.is-hidden {
+  display: none;
 }
-
+body {
+  min-height: 100vh;
+  max-height: 100vh;
+  background-color: $primary;
+}
 //Body
-body,
-#root,
-.App {
-  background-color: hsl(0, 0%, 96%);
-}
 
 //upload icon
 
@@ -50,14 +47,14 @@ body,
   top: -36px;
   left: 58px;
   .icon.is-large {
-    background-color: $light-blue;
+    background-color: $link;
     border-radius: 50%;
   }
 }
 
 .field-wrapper {
   background-color: hsl(0, 0%, 86%);
-  margin:1rem 0rem;
+  margin: 1rem 0rem;
 }
 
 //User Card
@@ -77,7 +74,6 @@ $box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 0px rgba(10, 10, 10, 0.1);
 //Navbar
 $navbar-breakpoint: 769px;
 $navbar-height: 3rem;
-$navbar-burger-color: $yellow;
 
 //Aside
 aside {
@@ -88,8 +84,8 @@ aside {
 
 //timeline
 
-.timeline-content{
-  width:100%
+.timeline-content {
+  width: 100%;
 }
 
 //main content scroll
@@ -131,4 +127,3 @@ aside {
 @import "../../node_modules/bulma-badge/dist/css/bulma-badge.sass";
 @import "../../node_modules/bulma-tooltip/dist/css/bulma-tooltip.sass";
 @import "../../node_modules/cool-checkboxes-for-bulma.io/dist/css/bulma-radio-checkbox.css";
-

@@ -2,10 +2,6 @@ import React from "react";
 import "fullcalendar-reactwrapper/dist/css/fullcalendar.min.css";
 import FullCalendar from "fullcalendar-reactwrapper";
 import AppointmentsAPI from "../lib/APIs/appointmentsAPI";
-import { InputP } from "./InputP";
-import moment from "moment";
-
-const visitOptions = ["Option1", "Option2"];
 
 export class Agenda extends React.Component {
   constructor() {

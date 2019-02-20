@@ -11,7 +11,10 @@ export const InputP = ({
   label,
   handleChange,
   disabled,
-  required
+  required,
+  min,
+  max,
+  help
 }) => {
   return (
     <React.Fragment>
@@ -28,7 +31,12 @@ export const InputP = ({
             onChange={e => handleChange(e)}
             disabled={disabled}
             required={required}
+            min={min}
+            max={max}
           />
+        </p>
+        <p className="help">
+        {help}
         </p>
       </div>
     </React.Fragment>

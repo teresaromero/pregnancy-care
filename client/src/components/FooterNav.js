@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 const _FooterNav = ({match}) => {
   return (
     <nav
-      className="navbar is-fixed-bottom is-primary"
+      className="navbar is-fixed-bottom is-info"
       id="footer-nav"
       role="navigation"
       aria-label="footer navigation"

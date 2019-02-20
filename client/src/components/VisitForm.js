@@ -26,13 +26,17 @@ class _VisitForm extends React.Component {
         date: Date.now()
       },
       weight: {
-        date: Date.now()
+        date: Date.now(),
+        value: 0
       },
       bloodPressure: {
-        date: Date.now()
+        date: Date.now(),
+        Systolic: 0,
+        Diastolic: 0
       },
       IMC: {
-        date: Date.now()
+        date: Date.now(),
+        value: 0
       }
     };
   }
@@ -63,16 +67,16 @@ class _VisitForm extends React.Component {
     let { name } = e.target;
     if (name === "weight") {
       let uptWeight = { ...this.state.weight };
+      let uptIMC = { ...this.state.IMC };
       let { value } = e.target;
       uptWeight["value"] = value;
 
-      let uptIMC = { ...this.state.IMC };
-      let IMC = value / Math.pow(patient.recordId.height / 100, 2);
+      let IMC =
+        value /
+        ((patient.recordId.height / 100) * (patient.recordId.height / 100));
       uptIMC["value"] = IMC.toFixed(2);
-      console.log(uptIMC.value);
-      this.setState({ weight: uptWeight, IMC: uptIMC }, () =>
-        console.log(this.state)
-      );
+
+      this.setState({ weight: uptWeight, IMC: uptIMC });
     } else if (name === "bloodPressureD" || name === "bloodPressureS") {
       let uptRecord = { ...this.state.bloodPressure };
       let { value } = e.target;
@@ -124,9 +128,10 @@ class _VisitForm extends React.Component {
               id="weight"
               name="weight"
               label="Weight"
-              value={weight.value || 0}
+              value={weight.value}
               type="number"
               handleChange={e => this.handleFieldChange(e)}
+              min={0}
             />
           </div>
           <div className="column">
@@ -134,7 +139,7 @@ class _VisitForm extends React.Component {
               id="IMC"
               name="IMC"
               label="IMC"
-              value={IMC.value || 0}
+              value={IMC.value}
               type="number"
               handleChange={e => this.handleFieldChange(e)}
               disabled
@@ -145,9 +150,10 @@ class _VisitForm extends React.Component {
               id="bloodPressureS"
               name="bloodPressureS"
               label="Pressure - Systolic"
-              value={bloodPressure.Systolic || 0}
+              value={bloodPressure.Systolic}
               type="number"
               handleChange={e => this.handleFieldChange(e)}
+              min={0}
             />
           </div>
           <div className="column">
@@ -155,9 +161,10 @@ class _VisitForm extends React.Component {
               id="bloodPressureD"
               name="bloodPressureD"
               label="Pressure - Diastolic"
-              value={bloodPressure.Diastolic || 0}
+              value={bloodPressure.Diastolic}
               type="number"
               handleChange={e => this.handleFieldChange(e)}
+              min={0}
             />
           </div>
         </div>

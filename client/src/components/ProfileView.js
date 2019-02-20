@@ -1,5 +1,5 @@
 import React from "react";
-import moment from "moment";
+
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { InputP } from "./InputP";

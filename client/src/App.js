@@ -4,11 +4,9 @@ import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
 import { Dashboard } from "./components/Dashboard";
 
-import { Navbar } from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import { FooterNav } from "./components/FooterNav";
 import { ProtectedRoute } from "./components/ProtectedRoute";
-import { NotFoundPage } from "./pages/NotFoundPage";
 
 class _App extends Component {
   render() {
@@ -16,8 +14,6 @@ class _App extends Component {
       <Route
         render={({ location }) => (
           <div className="App">
-            <Navbar />
-
             {this.props.children}
             <Route
               exact

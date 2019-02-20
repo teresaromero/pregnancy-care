@@ -33,15 +33,16 @@ class _Navbar extends React.Component {
           <div className="navbar-brand">
             <div className="navbar-item">
               <NavLink to="/">
-                <h1 className="title has-text-centered has-text-white-bis">
-                  Pregnancy Care
-                </h1>
+                <img
+                  src="https://res.cloudinary.com/dpid82d4m/image/upload/v1550654923/Logo.png"
+                  alt="logo"
+                />
               </NavLink>
             </div>
             {user ? (
               <div className="navbar-item">
                 <button
-                  className="button is-danger"
+                  className="button is-danger is-outlined"
                   onClick={() => {
                     this.handleLogout();
                   }}

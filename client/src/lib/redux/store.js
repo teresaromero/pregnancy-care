@@ -1,7 +1,7 @@
 import { createStore } from "redux";
 import { rootReducer } from "./reducer";
 import AuthAPI from "../APIs/authApi";
-import { login, errorMessageAction, isAuth } from "./actions";
+import { login, isAuth } from "./actions";
 
 export const store = createStore(
   rootReducer,
