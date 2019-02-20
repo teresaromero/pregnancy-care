@@ -1,8 +1,11 @@
 const initialStore = {
   user: null,
-  isAuth:false,
+  isAuth: false,
   patient: null,
-  modal: false,
+  modalInfo: false,
+  modalBack: false,
+  modalPregn: false,
+  modalVisit: false,
   patientList: null,
   filteredPatientList: null,
   messages: []
@@ -14,12 +17,12 @@ export const rootReducer = (store = initialStore, action) => {
       store = {
         ...store,
         user: action.user,
-        isAuth:true
+        isAuth: true
       };
 
       break;
 
-      case "IS_AUTH":
+    case "IS_AUTH":
       store = {
         ...store,
         isAuth: action.status
@@ -30,7 +33,7 @@ export const rootReducer = (store = initialStore, action) => {
       store = {
         ...store,
         user: null,
-        isAuth:false
+        isAuth: false
       };
       break;
 
@@ -70,7 +73,6 @@ export const rootReducer = (store = initialStore, action) => {
 
       break;
 
-    
     case "FETCH_PATIENTS":
       store = {
         ...store,
@@ -84,6 +86,44 @@ export const rootReducer = (store = initialStore, action) => {
         filteredPatientList: action.dataFiltered
       };
 
+      break;
+
+    case "OPEN_MODAL_INFO":
+      store = {
+        ...store,
+        modalInfo: true
+      };
+      break;
+
+    case "OPEN_MODAL_BACK":
+      store = {
+        ...store,
+        modalBack: true
+      };
+      break;
+
+    case "OPEN_MODAL_PREGN":
+      store = {
+        ...store,
+        modalPregn: true
+      };
+      break;
+
+    case "OPEN_MODAL_VISIT":
+      store = {
+        ...store,
+        modalVisit: true
+      };
+      break;
+
+    case "CLOSE_MODAL":
+      store = {
+        ...store,
+        modalInfo: false,
+        modalBack: false,
+        modalPregn: false,
+        modalVisit: false
+      };
       break;
 
     default:

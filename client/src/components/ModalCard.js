@@ -24,5 +24,5 @@ class _ModalCard extends React.Component {
 }
 
 export const ModalCard = withRouter(
-  connect(store => ({ modal: store.modal }))(_ModalCard)
+  connect()(_ModalCard)
 );

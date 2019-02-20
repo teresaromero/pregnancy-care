@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { viewPatient } from "../lib/redux/actions";
+import { viewPatient, closeModal } from "../lib/redux/actions";
 
 import PatientsApi from "../lib/APIs/patientsApi";
 import { InputP } from "./InputP";
@@ -37,7 +37,7 @@ class _VisitForm extends React.Component {
     };
   }
 
-  handleUpdate(e) {
+  handleSubmit(e) {
     e.preventDefault();
     const { visit, weight, bloodPressure, IMC } = this.state;
     const { dispatch, patient } = this.props;
@@ -54,20 +54,7 @@ class _VisitForm extends React.Component {
       patient._id
     ).then(res => {
       dispatch(viewPatient(res.patient));
-      this.setState({
-        visit: {
-          date: Date.now()
-        },
-        weight: {
-          date: Date.now()
-        },
-        bloodPressure: {
-          date: Date.now()
-        },
-        IMC: {
-          date: Date.now()
-        }
-      });
+      dispatch(closeModal());
     });
   }
 
@@ -213,7 +200,7 @@ class _VisitForm extends React.Component {
           />
         </div>
 
-        <button className="button is-info" onClick={e => this.handleUpdate(e)}>
+        <button className="button is-info" onClick={e => this.handleSubmit(e)}>
           Submit
         </button>
       </div>

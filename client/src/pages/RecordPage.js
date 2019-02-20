@@ -3,7 +3,15 @@ import PatientsApi from "../lib/APIs/patientsApi";
 import cx from "classnames";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { viewPatient, exitPatient } from "../lib/redux/actions";
+import {
+  viewPatient,
+  exitPatient,
+  openModalInfo,
+  openModalBack,
+  openModalPregn,
+  openModalVisit,
+  closeModal
+} from "../lib/redux/actions";
 import { Loader } from "../components/Loader";
 import { RecordBackground } from "../components/RecordBackground";
 
@@ -23,10 +31,6 @@ class _RecordPage extends React.Component {
   constructor() {
     super();
     this.state = {
-      modalInfo: false,
-      modalBack: false,
-      modalPregnancy: false,
-      modalVisit: false,
       infoIsActive: true,
       backIsActive: true,
       pregIsActive: true,
@@ -49,33 +53,26 @@ class _RecordPage extends React.Component {
   }
 
   openModal(id) {
+    let { dispatch } = this.props;
     if (id === "info") {
-      this.setState({ modalInfo: true });
+      dispatch(openModalInfo());
     } else if (id === "back") {
-      this.setState({ modalBack: true });
+      dispatch(openModalBack());
     } else if (id === "pregnancy") {
-      this.setState({ modalPregnancy: true });
+      dispatch(openModalPregn());
     } else if (id === "visit") {
-      this.setState({ modalVisit: true });
+      dispatch(openModalVisit());
     }
   }
 
   closeModal() {
-    this.setState({
-      modalInfo: false,
-      modalBack: false,
-      modalPregnancy: false,
-      modalVisit: false
-    });
+    let { dispatch } = this.props;
+    dispatch(closeModal());
   }
 
   render() {
-    let { patient } = this.props;
+    let { patient, modalBack, modalInfo, modalPregn, modalVisit } = this.props;
     let {
-      modalInfo,
-      modalBack,
-      modalPregnancy,
-      modalVisit,
       infoIsActive,
       backIsActive,
       pregIsActive,
@@ -223,7 +220,7 @@ class _RecordPage extends React.Component {
 
                   <ModalCard
                     id="pregnancy-modal"
-                    isActive={modalPregnancy}
+                    isActive={modalPregn}
                     closeModal={() => this.closeModal()}
                   >
                     <RecordPregnancyForm />
@@ -291,5 +288,11 @@ class _RecordPage extends React.Component {
 }
 
 export const RecordPage = withRouter(
-  connect(store => ({ patient: store.patient }))(_RecordPage)
+  connect(store => ({
+    patient: store.patient,
+    modalBack: store.modalBack,
+    modalInfo: store.modalInfo,
+    modalPregn: store.modalPregn,
+    modalVisit: store.modalVisit
+  }))(_RecordPage)
 );

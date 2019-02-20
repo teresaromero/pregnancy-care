@@ -51,17 +51,42 @@ export const exitPatient = () => {
   };
 };
 
+
+
+export const openModalInfo = () => {
+  return {
+    type: "OPEN_MODAL_INFO"
+  };
+};
+
 export const closeModal = () => {
   return {
     type: "CLOSE_MODAL"
   };
 };
 
-export const openModal = () => {
+export const openModalBack = () => {
   return {
-    type: "OPEN_MODAL"
+    type: "OPEN_MODAL_BACK"
   };
 };
+
+
+
+export const openModalPregn = () => {
+  return {
+    type: "OPEN_MODAL_PREGN"
+  };
+};
+
+
+
+export const openModalVisit = () => {
+  return {
+    type: "OPEN_MODAL_VISIT"
+  };
+};
+
 
 export const fetchPatients = data => {
   return {

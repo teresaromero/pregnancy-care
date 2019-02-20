@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { viewPatient } from "../lib/redux/actions";
+import { viewPatient, closeModal } from "../lib/redux/actions";
 
 import PatientsApi from "../lib/APIs/patientsApi";
 import { InputP } from "./InputP";
@@ -58,6 +58,7 @@ class _RecordPregnancyForm extends React.Component {
 
     PatientsApi.updateRecord(record, record._id, patient._id).then(res => {
       dispatch(viewPatient(res.patient));
+      dispatch(closeModal())
     });
   }
 

@@ -7,7 +7,7 @@ import { InputP } from "./InputP";
 import { InputDiv } from "./InputDiv";
 import moment from "moment";
 import { insurances } from "../lib/insuranceCompany";
-import { viewPatient } from "../lib/redux/actions";
+import { viewPatient, closeModal } from "../lib/redux/actions";
 
 class _InformationForm extends React.Component {
   constructor() {
@@ -15,7 +15,7 @@ class _InformationForm extends React.Component {
     this.state = {
       patient: {
         address: {},
-        GDPR:false
+        GDPR: false
       }
     };
   }
@@ -61,6 +61,7 @@ class _InformationForm extends React.Component {
     PatientsApi.updatePatient(patient, patient._id)
       .then(res => {
         dispatch(viewPatient(res.patient));
+        dispatch(closeModal())
       })
       .catch(e => {
         console.log(e);
