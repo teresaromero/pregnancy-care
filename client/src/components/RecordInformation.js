@@ -5,14 +5,13 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { Loader } from "./Loader";
 
-
 const _RecordInformation = ({ patient }) => {
   return (
     <React.Fragment>
       {patient ? (
         <React.Fragment>
-          <div className="box">
-            <div className="columns">
+          <div className="field-wrapper section">
+            <div className="columns is-marginless is-paddingless">
               <div className="column">
                 <p className="label">Name and surname</p>
                 <p>
@@ -32,14 +31,16 @@ const _RecordInformation = ({ patient }) => {
               </div>
             </div>
 
-            <div className="columns">
+            <div className="columns is-marginless is-paddingless">
               <div className="column">
                 <p className="label">Address</p>
-                <p className="is-marginless">{patient.address.street}</p>
-                <p className="is-marginless">{patient.address.number}</p>
-                <p className="is-marginless">{patient.address.city}</p>
+                <p className="is-marginless">
+                  {patient.address.street} <span>{patient.address.number}</span>
+                </p>
+                <p className="is-marginless">
+                  {patient.address.city} <span>{patient.address.zip}</span>
+                </p>
                 <p className="is-marginless">{patient.address.state}</p>
-                <p className="is-marginless">{patient.address.zip}</p>
               </div>
               <div className="column">
                 <p className="label">Phone</p>
@@ -49,19 +50,10 @@ const _RecordInformation = ({ patient }) => {
                 <p className="label">Email</p>
                 <p>{patient.email}</p>
               </div>
-            </div>
-
-            <div className="columns">
               <div className="column">
                 <p className="label">Insurance Company</p>
-                <p className="is-marginless">{patient.insurance}</p>
-                <p className="is-marginless">Policy Nª{patient.insNumber}</p>
-              </div>
-              <div className="column">
-                <p className="label">Profession</p>
-                <p className="is-6 is-paddingless is-marginless">
-                  {patient.profession}
-                </p>
+                <p>{patient.insurance}</p>
+                <p>Policy Nª{patient.insNumber}</p>
               </div>
             </div>
           </div>

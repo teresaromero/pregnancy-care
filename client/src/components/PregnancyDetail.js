@@ -12,8 +12,7 @@ class _PregnancyDetail extends React.Component {
     return (
       <React.Fragment>
         {patient ? (
-          <div className="box">
-            <p className="label" />
+          <React.Fragment>
             <div className="field-wrapper section">
               <div className="columns has-text-centered">
                 <div className="column">
@@ -117,9 +116,9 @@ class _PregnancyDetail extends React.Component {
                 </div>
               </div>
             </div>
-          </div>
+          </React.Fragment>
         ) : (
-          <Loader/>
+          <Loader />
         )}
       </React.Fragment>
     );

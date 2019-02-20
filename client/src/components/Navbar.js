@@ -33,26 +33,31 @@ class _Navbar extends React.Component {
           <div className="navbar-brand">
             <div className="navbar-item">
               <NavLink to="/">
-                <img
-                  src="https://res.cloudinary.com/dpid82d4m/image/upload/v1550654923/Logo.png"
-                  alt="logo"
-                />
+                <span className="title has-text-white">
+                  Pregnancy Care
+                </span>
               </NavLink>
             </div>
-            {user ? (
-              <div className="navbar-item">
-                <button
-                  className="button is-danger is-outlined"
-                  onClick={() => {
-                    this.handleLogout();
-                  }}
-                >
-                  <span className="icon is-small">
-                    <i className="fas fa-power-off" />
-                  </span>
-                </button>
-              </div>
-            ) : null}
+          </div>
+
+          <div className="navbar-menu-custom">
+            <div className="navbar-start" />
+            <div className="navbar-end">
+              {user ? (
+                <div className="navbar-item">
+                  <button
+                    className="button is-danger is-outlined"
+                    onClick={() => {
+                      this.handleLogout();
+                    }}
+                  >
+                    <span className="icon is-small">
+                      <i className="fas fa-power-off" />
+                    </span>
+                  </button>
+                </div>
+              ) : null}
+            </div>
           </div>
         </nav>
       </React.Fragment>

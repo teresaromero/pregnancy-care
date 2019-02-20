@@ -227,7 +227,6 @@ class _RecordBackgroundForm extends React.Component {
                       label="Duration (Days)"
                       value={record.menstrualCycleDays}
                       type="number"
-                      placeholder=""
                       handleChange={e => this.handleRecordChange(e)}
                     />
 
@@ -237,7 +236,6 @@ class _RecordBackgroundForm extends React.Component {
                       label="Frequency (Days)"
                       value={record.menstrualCycleFrequency}
                       type="number"
-                      placeholder=""
                       handleChange={e => this.handleRecordChange(e)}
                     />
                   </div>

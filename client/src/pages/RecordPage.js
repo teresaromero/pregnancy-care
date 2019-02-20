@@ -86,38 +86,12 @@ class _RecordPage extends React.Component {
       <React.Fragment>
         {patient ? (
           <React.Fragment>
-            <section className="hero box">
-              <div className="hero-body">
-                <h1 className="title">
-                  {patient.name} {patient.surname}
-                </h1>
-              </div>
-            </section>
-
-            <div className="level is-mobile">
-              <div className="level-left">
-                <div className="level-item">
+            <div className="box">
+              <div className="section-header has-background-primary">
+                <p className="label label-heading is-marginless">Information</p>
+                <div className="modal-section">
                   <button
-                    className="button is-primary is-inverted"
-                    onClick={() =>
-                      this.setState({ infoIsActive: !this.state.infoIsActive })
-                    }
-                  >
-                    <span className="icon">
-                      {infoIsActive ? (
-                        <i className="fas fa-folder" />
-                      ) : (
-                        <i className="fas fa-folder-open" />
-                      )}
-                    </span>
-                    <span>
-                      <h3 className="label">Information</h3>
-                    </span>
-                  </button>
-                </div>
-                <div className="level-item">
-                  <button
-                    className="button is-primary is-inverted"
+                    className="button is-primary is-outlined is-inverted"
                     onClick={() => this.openModal("info")}
                     data-target="info-modal"
                   >
@@ -135,35 +109,13 @@ class _RecordPage extends React.Component {
                   </ModalCard>
                 </div>
               </div>
-            </div>
-            <div className={infoClass}>
               <RecordInformation />
-            </div>
 
-            <div className="level is-mobile">
-              <div className="level-left">
-                <div className="level-item">
+              <div className="section-header has-background-primary">
+                <p className="label label-heading is-marginless">Background</p>
+                <div className="modal-section">
                   <button
-                    className="button is-primary is-inverted"
-                    onClick={() =>
-                      this.setState({ backIsActive: !this.state.backIsActive })
-                    }
-                  >
-                    <span className="icon">
-                      {backIsActive ? (
-                        <i className="fas fa-folder" />
-                      ) : (
-                        <i className="fas fa-folder-open" />
-                      )}
-                    </span>
-                    <span>
-                      <h3 className="label">Background</h3>
-                    </span>
-                  </button>
-                </div>
-                <div className="level-item">
-                  <button
-                    className="button is-primary is-inverted"
+                    className="button is-primary is-inverted is-outlined"
                     onClick={() => this.openModal("back")}
                     data-target="background-modal"
                   >
@@ -181,35 +133,13 @@ class _RecordPage extends React.Component {
                   </ModalCard>
                 </div>
               </div>
-            </div>
-            <div className={backClass}>
               <RecordBackground />
-            </div>
 
-            <div className="level is-mobile">
-              <div className="level-left">
-                <div className="level-item">
+              <div className="section-header has-background-primary">
+                <p className="label label-heading is-marginless">Pregnancy</p>
+                <div className="modal-section">
                   <button
-                    className="button is-primary is-inverted"
-                    onClick={() =>
-                      this.setState({ pregIsActive: !this.state.pregIsActive })
-                    }
-                  >
-                    <span className="icon">
-                      {pregIsActive ? (
-                        <i className="fas fa-folder" />
-                      ) : (
-                        <i className="fas fa-folder-open" />
-                      )}
-                    </span>
-                    <span>
-                      <h3 className="label">Pregnancy</h3>
-                    </span>
-                  </button>
-                </div>
-                <div className="level-item">
-                  <button
-                    className="button is-primary is-inverted"
+                    className="button is-primary is-inverted is-outlined"
                     onClick={() => this.openModal("pregnancy")}
                     data-target="pregnancy-modal"
                   >
@@ -227,37 +157,13 @@ class _RecordPage extends React.Component {
                   </ModalCard>
                 </div>
               </div>
-            </div>
-            <div className={pregClass}>
               <PregnancyDetail />
-            </div>
 
-            <div className="level is-mobile">
-              <div className="level-left">
-                <div className="level-item">
+              <div className="section-header has-background-primary">
+                <p className="label label-heading is-marginless">Visits</p>
+                <div className="modal-section">
                   <button
-                    className="button is-primary is-inverted"
-                    onClick={() =>
-                      this.setState({
-                        visitsIsActive: !this.state.visitsIsActive
-                      })
-                    }
-                  >
-                    <span className="icon">
-                      {visitsIsActive ? (
-                        <i className="fas fa-folder" />
-                      ) : (
-                        <i className="fas fa-folder-open" />
-                      )}
-                    </span>
-                    <span>
-                      <h3 className="label">Visits</h3>
-                    </span>
-                  </button>
-                </div>
-                <div className="level-item">
-                  <button
-                    className="button is-primary is-inverted"
+                    className="button is-primary is-inverted is-outlined"
                     onClick={() => this.openModal("visit")}
                     data-target="visit-modal"
                   >
@@ -265,6 +171,7 @@ class _RecordPage extends React.Component {
                       <i className={`far fa-plus-square`} />
                     </span>
                   </button>
+
                   <ModalCard
                     id="visit-modal"
                     isActive={modalVisit}
@@ -274,8 +181,6 @@ class _RecordPage extends React.Component {
                   </ModalCard>
                 </div>
               </div>
-            </div>
-            <div className={visitsClass}>
               <Timeline />
             </div>
           </React.Fragment>

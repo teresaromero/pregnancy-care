@@ -28,6 +28,16 @@ body {
 .card-header.userCard {
   justify-content: space-evenly; }
 
+#top-nav {
+  display: flex;
+  justify-content: space-between; }
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem; }
+
 aside {
   min-height: 85vh;
   max-height: 85vh;
@@ -37,8 +47,8 @@ aside {
   width: 100%; }
 
 .mainContent {
-  min-height: 85vh;
-  max-height: 85vh;
+  min-height: 87vh;
+  max-height: 87vh;
   overflow-y: scroll; }
 
 ::-webkit-scrollbar {

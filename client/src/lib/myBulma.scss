@@ -75,6 +75,21 @@ $box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 0px rgba(10, 10, 10, 0.1);
 $navbar-breakpoint: 769px;
 $navbar-height: 3rem;
 
+#top-nav{
+  display:flex;
+  justify-content: space-between;
+}
+
+.section-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+
+}
+
+
+
 //Aside
 aside {
   min-height: 85vh;
@@ -90,8 +105,8 @@ aside {
 
 //main content scroll
 .mainContent {
-  min-height: 85vh;
-  max-height: 85vh;
+  min-height: 87vh;
+  max-height: 87vh;
   overflow-y: scroll;
 }
 ::-webkit-scrollbar {
