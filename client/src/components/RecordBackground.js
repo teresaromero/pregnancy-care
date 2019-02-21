@@ -2,7 +2,7 @@ import React from "react";
 
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import {Loader} from "./Loader";
+import { Loader } from "./Loader";
 
 class _RecordBackground extends React.Component {
   render() {
@@ -34,57 +34,61 @@ class _RecordBackground extends React.Component {
             </div>
 
             <div className="field-wrapper section">
-              <p className="label">Actual Addictions:</p>
+              <p className="label">
+                {" "}
+                <span role="img" aria-label="emoji">
+                  ⚠️
+                </span>{" "}
+                Actual Addictions:
+              </p>
               <p>
                 {record.addictions.length === 0 ? (
                   <span className="help has-text-danger">
                     Enter information about the addictions
                   </span>
                 ) : (
-                  record.addictions.map(a => <span key={a}>{a}</span>)
+                  record.addictions.map(a => <span key={a}> {a}</span>)
                 )}
               </p>
             </div>
 
             <div className="field-wrapper section">
-              <p className="label">Contraceptive Methods:</p>
-             
-                {record.contraceptive.length === 0 ? (
-                  <p className="help has-text-danger">
-                    Enter information about the contraceptive methods
-                  </p>
-                ) : (
-                  record.contraceptive.map(a => <span key={a}>{a}</span>)
-                )}
-            
-            
-                {record.contraceptiveOther === "" ? (
-                  ""
-                ) : (
-                  <span>Other: {record.contraceptiveOther}</span>
-                )}
-           
+              <p className="label"><span role="img" aria-label="emoji">
+                  👫
+                </span>{" "}Contraceptive Methods:</p>
+
+              {record.contraceptive.length === 0 ? (
+                <p className="help has-text-danger">
+                  Enter information about the contraceptive methods
+                </p>
+              ) : (
+                record.contraceptive.map(a => <span key={a}> {a}</span>)
+              )}
+
+              {record.contraceptiveOther === "" ? (
+                ""
+              ) : (
+                <p>Other: {record.contraceptiveOther}</p>
+              )}
             </div>
 
             <div className="field-wrapper section">
               <p className="label">STD:</p>
-              
-                {record.STD.length === 0 ? (
-                  <p className="help has-text-danger">
-                    Enter information about the sexual transmited diseases
-                    methods
-                  </p>
-                ) : (
-                  record.STD.map(a => <span key={a}> {a}</span>)
-                )}
-              
-              
-                {record.STDother === "" ? (
-                  ""
-                ) : (
-                  <span>Other: {record.STDother}</span>
-                )}
-            
+
+              {record.STD.length === 0 ? (
+                <p className="help has-text-danger">
+                  Enter information about the sexual transmited diseases methods
+                </p>
+              ) : (
+                record.STD.map(a => <span key={a}> {a}</span>)
+              )}
+
+              {record.STDother === "" ? (
+                ""
+              ) : (
+                <span>Other: {record.STDother}</span>
+              )}
+
               {record.STD.length !== 0 ? (
                 <React.Fragment>
                   <p className="label">STD Overcome:</p>
@@ -96,7 +100,9 @@ class _RecordBackground extends React.Component {
             <div className="field-wrapper section">
               <div className="columns">
                 <div className="column">
-                  <p className="label">HPV Vaccine</p>
+                  <p className="label"><span role="img" aria-label="emoji">
+                  💉
+                </span>{" "}HPV Vaccine</p>
                   {record.HPVvaccine === "" ? (
                     <p className="help has-text-danger">Edit</p>
                   ) : (
@@ -104,7 +110,9 @@ class _RecordBackground extends React.Component {
                   )}
                 </div>
                 <div className="column">
-                  <p className="label">Period Cycle</p>
+                  <p className="label"><span role="img" aria-label="emoji">
+                  ⏰
+                </span>{" "}Period Cycle</p>
                   {record.menstrualCycleDays ? (
                     <p className="help has-text-danger">Edit</p>
                   ) : (

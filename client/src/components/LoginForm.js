@@ -8,8 +8,7 @@ import {
   clearMessages,
   signupAct
 } from "../lib/redux/actions";
-
-import { InputDiv } from "./InputDiv";
+import { InputP } from "./InputP";
 class _LoginForm extends React.Component {
   constructor() {
     super();
@@ -46,7 +45,7 @@ class _LoginForm extends React.Component {
     return (
       <React.Fragment>
         <div className="section">
-          <InputDiv
+          <InputP
             id="email-login"
             name="email"
             label="Email"
@@ -55,7 +54,7 @@ class _LoginForm extends React.Component {
             placeholder=""
             handleChange={e => this.setState({ email: e.target.value })}
           />
-          <InputDiv
+          <InputP
             id="password-login"
             name="password"
             label="Password"
@@ -71,7 +70,7 @@ class _LoginForm extends React.Component {
             Login
           </button>
         </div>
-        <div className="section">
+        <div className="section is-paddingless">
           <p className="help">
             If you don't have an account please{" "}
             <Link
@@ -85,7 +84,7 @@ class _LoginForm extends React.Component {
             </Link>
           </p>
         </div>
-        <div className="section has-text-centered">
+        <div className="section has-text-centered is-paddingless">
           <p className="help has-text-danger">{messages}</p>
         </div>
       </React.Fragment>

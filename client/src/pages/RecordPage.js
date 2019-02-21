@@ -1,6 +1,6 @@
 import React from "react";
 import PatientsApi from "../lib/APIs/patientsApi";
-import cx from "classnames";
+
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -28,15 +28,6 @@ import { PregnancyDetail } from "../components/PregnancyDetail";
 import { VisitForm } from "../components/VisitForm";
 
 class _RecordPage extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      infoIsActive: true,
-      backIsActive: true,
-      pregIsActive: true,
-      visitsIsActive: true
-    };
-  }
   componentDidMount() {
     let { dispatch } = this.props;
     console.log("Component did mount");
@@ -65,23 +56,17 @@ class _RecordPage extends React.Component {
     }
   }
 
-  closeModal() {
-    let { dispatch } = this.props;
-    dispatch(closeModal());
-  }
 
   render() {
-    let { patient, modalBack, modalInfo, modalPregn, modalVisit } = this.props;
     let {
-      infoIsActive,
-      backIsActive,
-      pregIsActive,
-      visitsIsActive
-    } = this.state;
-    let infoClass = cx("section", { "is-hidden": infoIsActive });
-    let backClass = cx("section", { "is-hidden": backIsActive });
-    let pregClass = cx("section", { "is-hidden": pregIsActive });
-    let visitsClass = cx("section", { "is-hidden": visitsIsActive });
+      patient,
+      modalBack,
+      modalInfo,
+      modalPregn,
+      modalVisit,
+      dispatch
+    } = this.props;
+
     return (
       <React.Fragment>
         {patient ? (
@@ -103,7 +88,7 @@ class _RecordPage extends React.Component {
                   <ModalCard
                     id="info-modal"
                     isActive={modalInfo}
-                    closeModal={() => this.closeModal()}
+                    closeModal={() => dispatch(closeModal())}
                   >
                     <InformationForm />
                   </ModalCard>
@@ -127,7 +112,7 @@ class _RecordPage extends React.Component {
                   <ModalCard
                     id="background-modal"
                     isActive={modalBack}
-                    closeModal={() => this.closeModal()}
+                    closeModal={() => dispatch(closeModal())}
                   >
                     <RecordBackgroundForm />
                   </ModalCard>
@@ -151,7 +136,7 @@ class _RecordPage extends React.Component {
                   <ModalCard
                     id="pregnancy-modal"
                     isActive={modalPregn}
-                    closeModal={() => this.closeModal()}
+                    closeModal={() => dispatch(closeModal())}
                   >
                     <RecordPregnancyForm />
                   </ModalCard>
@@ -175,7 +160,7 @@ class _RecordPage extends React.Component {
                   <ModalCard
                     id="visit-modal"
                     isActive={modalVisit}
-                    closeModal={() => this.closeModal()}
+                    closeModal={() => dispatch(closeModal())}
                   >
                     <VisitForm />
                   </ModalCard>

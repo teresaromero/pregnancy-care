@@ -92,10 +92,10 @@ class _SignupForm extends React.Component {
             className="button is-info is-outlined"
             onClick={e => this.handleSubmit(e)}
           >
-            Sign Up
+            Signup
           </button>
         </div>
-        <div className="section">
+        <div className="section is-paddingless">
           <p className="help">
             If you already have an account please{" "}
             <Link
@@ -109,7 +109,7 @@ class _SignupForm extends React.Component {
             </Link>
           </p>
         </div>
-        <div className="section has-text-centered">
+        <div className="section has-text-centered is-paddingless">
           <p className="help has-text-danger">{messages}</p>
         </div>
       </React.Fragment>

@@ -50,6 +50,31 @@ export const clearMessages = () => {
   };
 };
 
+export const getAppointments = appointments => {
+  return {
+    type: "FETCH_APPOINTMENTS",
+    appointments
+  };
+};
+export const openModalAppointment = () => {
+  return {
+    type: "OPEN_MODAL_APPOINTMENT"
+  };
+};
+
+export const selectDay = event => {
+  return {
+    type: "SELECT_DAY",
+    event
+  };
+};
+
+export const unSelectDay = () => {
+  return {
+    type: "UNSELECT_DAY"
+  };
+};
+
 export const viewPatient = patient => {
   return {
     type: "VIEW_PATIENT",
@@ -62,8 +87,6 @@ export const exitPatient = () => {
     type: "EXIT_PATIENT"
   };
 };
-
-
 
 export const openModalInfo = () => {
   return {
@@ -83,22 +106,17 @@ export const openModalBack = () => {
   };
 };
 
-
-
 export const openModalPregn = () => {
   return {
     type: "OPEN_MODAL_PREGN"
   };
 };
 
-
-
 export const openModalVisit = () => {
   return {
     type: "OPEN_MODAL_VISIT"
   };
 };
-
 
 export const fetchPatients = data => {
   return {

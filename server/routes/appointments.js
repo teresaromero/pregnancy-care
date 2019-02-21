@@ -11,7 +11,9 @@ router.post("/add", isLoggedIn(), (req, res, next) => {
 
   newAppointment
     .save()
-    .then(appointment => res.json({ appointment }))
+    .then(appointment => {
+      Appointment.find().then(appointments => res.json({ appointments }));
+    })
     .catch(err => {
       res.json(err);
     });

@@ -5,7 +5,7 @@ import { SignupForm } from "../components/SignupForm";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { loginAct, signupAct } from "../lib/redux/actions";
+import { loginAct, signupAct, clearMessages } from "../lib/redux/actions";
 
 class _HomePage extends React.Component {
   render() {
@@ -26,13 +26,13 @@ class _HomePage extends React.Component {
               <ul>
                 <li
                   className={loginTabClass}
-                  onClick={() => dispatch(loginAct())}
+                  onClick={() => {dispatch(loginAct());dispatch(clearMessages())}}
                 >
                   <Link to="">Login</Link>
                 </li>
                 <li
                   className={signupTabClass}
-                  onClick={() => dispatch(signupAct())}
+                  onClick={() => {dispatch(signupAct());dispatch(clearMessages())}}
                 >
                   <Link to="">Signup</Link>
                 </li>

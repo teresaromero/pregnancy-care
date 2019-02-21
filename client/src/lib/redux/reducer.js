@@ -7,14 +7,18 @@ const initialStore = {
   modalBack: false,
   modalPregn: false,
   modalVisit: false,
+  modalAppointment: false,
 
   patientList: null,
   filteredPatientList: null,
 
+  appointments: null,
+  selectedDay: null,
+
   messages: [],
 
-  loginActive:true,
-  signupActive:false
+  loginActive: true,
+  signupActive: false
 };
 
 export const rootReducer = (store = initialStore, action) => {
@@ -28,20 +32,20 @@ export const rootReducer = (store = initialStore, action) => {
 
       break;
 
-      case "LOGIN_ACTIVE":
+    case "LOGIN_ACTIVE":
       store = {
         ...store,
-        loginActive:true,
-        signupActive:false
+        loginActive: true,
+        signupActive: false
       };
 
       break;
 
-      case "SIGNUP_ACTIVE":
+    case "SIGNUP_ACTIVE":
       store = {
         ...store,
-       signupActive:true,
-       loginActive:false
+        signupActive: true,
+        loginActive: false
       };
 
       break;
@@ -79,6 +83,30 @@ export const rootReducer = (store = initialStore, action) => {
         ...store,
         messages: []
       };
+      break;
+
+    case "FETCH_APPOINTMENTS":
+      store = {
+        ...store,
+        appointments: action.appointments
+      };
+      break;
+
+    case "SELECT_DAY":
+      store = {
+        ...store,
+        selectedDay: action.event,
+        modalAppointment:true
+      };
+      console.log(store.selectedDay)
+      break;
+
+    case "UNSELECT_DAY":
+      store = {
+        ...store,
+        selectedDay: null
+      };
+      console.log(store.selectedDay)
       break;
 
     case "VIEW_PATIENT":
@@ -140,13 +168,21 @@ export const rootReducer = (store = initialStore, action) => {
       };
       break;
 
+    case "OPEN_MODAL_APPOINTMENT":
+      store = {
+        ...store,
+        modalAppointment: true
+      };
+      break;
+
     case "CLOSE_MODAL":
       store = {
         ...store,
         modalInfo: false,
         modalBack: false,
         modalPregn: false,
-        modalVisit: false
+        modalVisit: false,
+        modalAppointment: false
       };
       break;
 
