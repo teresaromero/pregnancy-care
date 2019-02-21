@@ -6,9 +6,7 @@ const { isLoggedIn } = require("../middlewares/isLogged");
 
 router.post("/add", isLoggedIn(), (req, res, next) => {
   const { appointment } = req.body;
-
   const newAppointment = new Appointment(appointment);
-
   newAppointment
     .save()
     .then(appointment => {
@@ -19,24 +17,20 @@ router.post("/add", isLoggedIn(), (req, res, next) => {
     });
 });
 
-router.post("/delete", isLoggedIn(), (req, res, next) => {
-  const { id } = req.body;
-
-  Appointment.findByIdAndDelete(id).then(appointment => {
-    Appointment.find().then(appointments => {
-      res.json({ appointments });
-    });
-  });
+router.put("/update", isLoggedIn(), (req, res, next) => {
+  let { appointment } = req.body;
+  Appointment.findByIdAndUpdate(appointment._id, appointment, { new: true })
+    .then(appointment => {
+      Appointment.find().then(appointments => {
+        res.json({ appointments });
+      });
+    })
+    .catch(err => console.log(err));
 });
 
-router.put("/update", isLoggedIn(), (req, res, next) => {
-  const { start, end, id } = req.body;
-  console.log(id);
-  Appointment.findByIdAndUpdate(
-    id,
-    { start: start, end: end },
-    { new: true }
-  ).then(appointment => {
+router.post("/delete", isLoggedIn(), (req, res, next) => {
+  const { id } = req.body;
+  Appointment.findByIdAndDelete(id).then(appointment => {
     Appointment.find().then(appointments => {
       res.json({ appointments });
     });

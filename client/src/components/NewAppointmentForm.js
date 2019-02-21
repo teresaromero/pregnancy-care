@@ -2,7 +2,8 @@ import React from "react";
 
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { closeModal } from "../lib/redux/actions";
+import moment from "moment";
+import { closeModal, getAppointments } from "../lib/redux/actions";
 
 import PatientsApi from "../lib/APIs/patientsApi";
 import { InputP } from "./InputP";
@@ -10,6 +11,8 @@ import { InputP } from "./InputP";
 import { TextArea } from "./TextArea";
 
 import { Loader } from "./Loader";
+import Example from "./AutosuggestSelector";
+import AppointmentsAPI from "../lib/APIs/appointmentsAPI";
 
 class _NewAppointmentForm extends React.Component {
   constructor() {
@@ -24,29 +27,66 @@ class _NewAppointmentForm extends React.Component {
     this.setState({ appointment: selectedDay });
   }
 
+  componentWillUnmount() {
+    this.setState({ appointment: null });
+  }
+
   handleSave(e) {
+    let { dispatch } = this.props;
     e.preventDefault();
-    console.log(this.state.appointment);
+    let {
+      _id,
+      start,
+      end,
+      title,
+      description,
+      userId
+    } = this.state.appointment;
+    let uptApp = { _id, start, end, title, description, userId };
+    AppointmentsAPI.update(uptApp)
+      .then(res => {
+        let { appointments } = res;
+        dispatch(getAppointments(appointments));
+        dispatch(closeModal());
+      })
+      .catch(e => console.log(e));
   }
 
-  handleRecordChange(e) {
-    let uptRecord = { ...this.state.record };
-    let { value } = e.target;
-    let field = e.target.name;
-    uptRecord[field] = value;
-    this.setState({ record: uptRecord });
-  }
-
-  handleSelection(s, field) {
-    let uptRecord = { ...this.state.record };
-    let selected = [];
-    s.forEach((v, k) => {
-      if (v) {
-        selected.push(k);
-      }
+  handleDelete(e) {
+    e.preventDefault();
+    let { appointment } = this.state;
+    let { dispatch } = this.props;
+    AppointmentsAPI.delete(appointment._id).then(res => {
+      let { appointments } = res;
+      dispatch(getAppointments(appointments));
+      dispatch(closeModal());
     });
-    uptRecord[field] = selected;
-    this.setState({ record: uptRecord });
+  }
+
+  handleDateChange(e) {
+    let upt = { ...this.state.appointment };
+    let { value, name } = e.target;
+    console.log(e.target);
+    upt[name] = moment(moment(value).toISOString());
+    this.setState({ appointment: upt }, () =>
+      console.log(this.state.appointment)
+    );
+  }
+
+  handleChange(e) {
+    let upt = { ...this.state.appointment };
+    let { value, name } = e.target;
+    upt[name] = value;
+    this.setState({ appointment: upt }, () =>
+      console.log(this.state.appointment)
+    );
+  }
+
+  patientSelection(p) {
+    let upt = { ...this.state.appointment };
+    upt.userId = p._id;
+    upt.title = `${p.name} ${p.surname}`;
+    this.setState({ appointment: upt });
   }
 
   render() {
@@ -57,16 +97,59 @@ class _NewAppointmentForm extends React.Component {
         {selectedDay ? (
           <React.Fragment>
             <div className="box">
-            
+              <div className="columns">
+                <div className="column">
+                  <InputP
+                    id="start"
+                    name="start"
+                    label="Start"
+                    value={moment(appointment.start).format(
+                      "YYYY-MM-DDTHH:mm:ss"
+                    )}
+                    type="datetime-local"
+                    placeholder=""
+                    handleChange={e => this.handleDateChange(e)}
+                  />
+                </div>
+                <div className="column">
+                  <InputP
+                    id="end"
+                    name="end"
+                    label="End"
+                    value={moment(appointment.end).format(
+                      "YYYY-MM-DDTHH:mm:ss"
+                    )}
+                    type="datetime-local"
+                    placeholder=""
+                    handleChange={e => this.handleDateChange(e)}
+                  />
+                </div>
+              </div>
+              <Example onChange={p => this.patientSelection(p)} />
+              <p>Patient: {appointment.title}</p>
+              <InputP
+                id="description"
+                name="description"
+                label="Description"
+                value={appointment.description}
+                type="text"
+                placeholder=""
+                handleChange={e => this.handleChange(e)}
+              />
 
-              <p>{selectedDay._id}</p>
-
-              <div className="section has-text-centered">
+              <div className="buttons">
                 <button
                   className="button is-primary"
                   onClick={e => this.handleSave(e)}
                 >
                   Save
+                </button>
+
+                <button
+                  className="button is-danger"
+                  onClick={e => this.handleDelete(e)}
+                >
+                  Delete
                 </button>
               </div>
             </div>

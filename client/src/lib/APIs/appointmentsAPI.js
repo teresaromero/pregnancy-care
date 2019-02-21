@@ -22,9 +22,9 @@ export default class AppointmentsAPI {
       .catch(err => console.log(err));
   }
 
-  static update(id, start, end) {
+  static update(appointment) {
     return instance
-      .put(`/api/appointments/update`, { id, start, end })
+      .put(`/api/appointments/update`, { appointment })
       .then(res => res.data)
       .catch(err => console.log(err));
   }

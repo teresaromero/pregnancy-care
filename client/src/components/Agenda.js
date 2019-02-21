@@ -5,7 +5,12 @@ import "fullcalendar-reactwrapper/dist/css/fullcalendar.min.css";
 import FullCalendar from "fullcalendar-reactwrapper";
 import AppointmentsAPI from "../lib/APIs/appointmentsAPI";
 import { ModalCard } from "./ModalCard";
-import { getAppointments, closeModal, selectDay, unSelectDay } from "../lib/redux/actions";
+import {
+  getAppointments,
+  closeModal,
+  selectDay,
+  unSelectDay
+} from "../lib/redux/actions";
 import { NewAppointmentForm } from "./NewAppointmentForm";
 
 class _Agenda extends React.Component {
@@ -22,18 +27,13 @@ class _Agenda extends React.Component {
   handleClick(e, jsEv, view) {
     let { dispatch } = this.props;
     dispatch(selectDay(e));
-
-    // AppointmentsAPI.delete(e._id).then(res => {
-    //   let { appointments } = res;
-    //   this.setState({ appointments });
-    // });
   }
 
   handleUpdate(e, delta, revertFunc) {
     let { dispatch } = this.props;
-    let { start, end } = e;
-
-    AppointmentsAPI.update(e._id, start, end).then(res => {
+    let { start, end, _id } = e;
+    let updApp = { start, end, _id };
+    AppointmentsAPI.update(updApp).then(res => {
       let { appointments } = res;
       dispatch(getAppointments(appointments));
     });
@@ -41,8 +41,9 @@ class _Agenda extends React.Component {
 
   handleDrop(event, delta, revertFunc) {
     let { dispatch } = this.props;
-    let { start, end } = event;
-    AppointmentsAPI.update(event._id, start, end).then(res => {
+    let { start, end, _id } = event;
+    let updApp = { start, end, _id };
+    AppointmentsAPI.update(updApp).then(res => {
       let { appointments } = res;
       dispatch(getAppointments(appointments));
     });
@@ -97,9 +98,12 @@ class _Agenda extends React.Component {
         <ModalCard
           id="appointment-modal"
           isActive={modalAppointment}
-          closeModal={() => {dispatch(closeModal());dispatch(unSelectDay())}}
+          closeModal={() => {
+            dispatch(closeModal());
+            dispatch(unSelectDay());
+          }}
         >
-         <NewAppointmentForm/>
+          <NewAppointmentForm />
         </ModalCard>
       </React.Fragment>
     );
