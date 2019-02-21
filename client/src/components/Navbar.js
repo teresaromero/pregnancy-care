@@ -33,7 +33,7 @@ class _Navbar extends React.Component {
           <div className="navbar-brand">
             <div className="navbar-item">
               <NavLink to="/">
-                <span className="title has-text-white">
+                <span className="title has-text-danger">
                   Pregnancy Care
                 </span>
               </NavLink>

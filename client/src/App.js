@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
 import { Dashboard } from "./components/Dashboard";
 
-import HomePage from "./pages/HomePage";
+import {HomePage} from "./pages/HomePage";
 import { FooterNav } from "./components/FooterNav";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 

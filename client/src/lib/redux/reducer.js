@@ -2,13 +2,19 @@ const initialStore = {
   user: null,
   isAuth: false,
   patient: null,
+
   modalInfo: false,
   modalBack: false,
   modalPregn: false,
   modalVisit: false,
+
   patientList: null,
   filteredPatientList: null,
-  messages: []
+
+  messages: [],
+
+  loginActive:true,
+  signupActive:false
 };
 
 export const rootReducer = (store = initialStore, action) => {
@@ -18,6 +24,24 @@ export const rootReducer = (store = initialStore, action) => {
         ...store,
         user: action.user,
         isAuth: true
+      };
+
+      break;
+
+      case "LOGIN_ACTIVE":
+      store = {
+        ...store,
+        loginActive:true,
+        signupActive:false
+      };
+
+      break;
+
+      case "SIGNUP_ACTIVE":
+      store = {
+        ...store,
+       signupActive:true,
+       loginActive:false
       };
 
       break;

@@ -2,6 +2,7 @@ import React from "react";
 import "fullcalendar-reactwrapper/dist/css/fullcalendar.min.css";
 import FullCalendar from "fullcalendar-reactwrapper";
 import AppointmentsAPI from "../lib/APIs/appointmentsAPI";
+import { ModalCard } from "./ModalCard";
 
 export class Agenda extends React.Component {
   constructor() {
@@ -22,10 +23,11 @@ export class Agenda extends React.Component {
   }
 
   handleClick(e, jsEv, view) {
-    AppointmentsAPI.delete(e._id).then(res => {
-      let { appointments } = res;
-      this.setState({ appointments });
-    });
+    
+    // AppointmentsAPI.delete(e._id).then(res => {
+    //   let { appointments } = res;
+    //   this.setState({ appointments });
+    // });
   }
 
   handleUpdate(e, delta, revertFunc) {
@@ -56,40 +58,39 @@ export class Agenda extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        <div id="calendar">
-          <FullCalendar
-            schedulerLicenseKey={"CC-Attribution-NonCommercial-NoDerivatives"}
-            defaultView={"agendaWeek"}
-            visibleRange={{ start: Date.now }}
-            nowIndicator={true}
-            events={this.state.appointments}
-            firstDay="1"
-            weekends={false}
-            slotDuration={"00:15:00"}
-            minTime={"12:00:00"}
-            maxTime={"22:00:00"}
-            timezone="local"
-            header={{
-              left: "prev,next today",
-              center: "title",
-              right: "month,agendaWeek,agendaDay"
-            }}
-            allDaySlot={false}
-            selectable={true}
-            select={(start, end) => this.handleSelectDate(start, end)}
-            editable={true}
-            eventClick={(e, jsEv, view) => this.handleClick(e, jsEv, view)}
-            eventResize={(e, delta, revertFunc) =>
-              this.handleUpdate(e, delta, revertFunc)
-            }
-            eventDrop={(e, delta, revertFunc) =>
-              this.handleDrop(e, delta, revertFunc)
-            }
-            droppable={true}
-          />
-        </div>
-      </React.Fragment>
+      <div id="calendar">
+        <FullCalendar
+          schedulerLicenseKey={"CC-Attribution-NonCommercial-NoDerivatives"}
+          defaultView={"agendaWeek"}
+          handleWindowResize={true}
+          visibleRange={{ start: Date.now }}
+          nowIndicator={true}
+          events={this.state.appointments}
+          firstDay="1"
+          weekends={false}
+          slotDuration={"00:15:00"}
+          minTime={"12:00:00"}
+          maxTime={"22:00:00"}
+          timezone="local"
+          header={{
+            left: "prev,next today",
+            center: "title",
+            right: "month,agendaWeek,agendaDay"
+          }}
+          allDaySlot={false}
+          selectable={true}
+          select={(start, end) => this.handleSelectDate(start, end)}
+          editable={true}
+          eventClick={(e, jsEv, view) => this.handleClick(e, jsEv, view)}
+          eventResize={(e, delta, revertFunc) =>
+            this.handleUpdate(e, delta, revertFunc)
+          }
+          eventDrop={(e, delta, revertFunc) =>
+            this.handleDrop(e, delta, revertFunc)
+          }
+          droppable={true}
+        />
+      </div>
     );
   }
 }

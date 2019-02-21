@@ -5,6 +5,18 @@ export const login = user => {
   };
 };
 
+export const loginAct = () => {
+  return {
+    type: "LOGIN_ACTIVE"
+  };
+};
+
+export const signupAct = () => {
+  return {
+    type: "SIGNUP_ACTIVE"
+  };
+};
+
 export const isAuth = status => {
   return {
     type: "IS_AUTH",
