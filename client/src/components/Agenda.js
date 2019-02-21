@@ -72,8 +72,7 @@ class _Agenda extends React.Component {
             firstDay="1"
             weekends={false}
             slotDuration={"00:15:00"}
-            minTime={"12:00:00"}
-            maxTime={"22:00:00"}
+            slotLabelFormat="HH:mm"
             timezone="local"
             header={{
               left: "prev,next today",

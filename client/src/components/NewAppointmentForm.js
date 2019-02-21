@@ -11,7 +11,7 @@ import { InputP } from "./InputP";
 import { TextArea } from "./TextArea";
 
 import { Loader } from "./Loader";
-import Example from "./AutosuggestSelector";
+import AutosuggestSelector from "./AutosuggestSelector";
 import AppointmentsAPI from "../lib/APIs/appointmentsAPI";
 
 class _NewAppointmentForm extends React.Component {
@@ -97,7 +97,7 @@ class _NewAppointmentForm extends React.Component {
         {selectedDay ? (
           <React.Fragment>
             <div className="box">
-              <div className="columns">
+              <div className="columns is-paddingless is-marginless">
                 <div className="column">
                   <InputP
                     id="start"
@@ -125,8 +125,18 @@ class _NewAppointmentForm extends React.Component {
                   />
                 </div>
               </div>
-              <Example onChange={p => this.patientSelection(p)} />
-              <p>Patient: {appointment.title}</p>
+              <div className="columns is-marginless is-paddingless">
+                <div className="column">
+                  <p>Select patient for this appointment:</p>
+                  <AutosuggestSelector
+                    onChange={p => this.patientSelection(p)}
+                  />
+                </div>
+                <div className="column">
+                  <p>Patient: {appointment.title}</p>
+                </div>
+              </div>
+
               <InputP
                 id="description"
                 name="description"

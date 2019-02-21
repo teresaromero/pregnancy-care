@@ -1,8 +1,9 @@
 import React from "react";
 import Autosuggest from "react-autosuggest";
 import PatientsApi from "../lib/APIs/patientsApi";
+import { Link } from "react-router-dom";
 
-export default class Example extends React.Component {
+export default class AutosuggestSelector extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -19,15 +20,15 @@ export default class Example extends React.Component {
   }
 
   getSuggestionValue(suggestion) {
-    this.props.onChange(suggestion)
+    this.props.onChange(suggestion);
     return `${suggestion.name} ${suggestion.surname}`;
   }
 
   renderSuggestion(suggestion) {
     return (
-      <span>
+      <button class="button is-white">
         {suggestion.name} {suggestion.surname}
-      </span>
+      </button>
     );
   }
 
@@ -76,6 +77,14 @@ export default class Example extends React.Component {
         getSuggestionValue={sug => this.getSuggestionValue(sug)}
         renderSuggestion={sug => this.renderSuggestion(sug)}
         inputProps={inputProps}
+        theme={{
+          input: "input is-radiusless is-shadowless",
+          container: "control",
+          suggestionsContainer: "dropdown",
+          suggestionsContainerOpen: "dropdown is-active",
+          suggestionsList: "dropdown-content",
+          suggestion: "dropdown-item"
+        }}
       />
     );
   }
