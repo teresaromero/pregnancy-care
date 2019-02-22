@@ -58,10 +58,10 @@ class _Agenda extends React.Component {
   }
 
   render() {
-    let { appointments, modalAppointment, dispatch, selectedDay } = this.props;
+    let { appointments, modalAppointment, dispatch } = this.props;
     return (
       <React.Fragment>
-        <div id="calendar">
+        <div id="calendar" className="section">
           <FullCalendar
             schedulerLicenseKey={"CC-Attribution-NonCommercial-NoDerivatives"}
             defaultView={"agendaWeek"}
@@ -69,6 +69,8 @@ class _Agenda extends React.Component {
             visibleRange={{ start: Date.now }}
             nowIndicator={true}
             events={appointments}
+            gotoDate={Date.now()}
+            loading={(isLoading,view)=>this.handleLoading(isLoading,view)}
             firstDay="1"
             weekends={false}
             slotDuration={"00:15:00"}
@@ -91,6 +93,7 @@ class _Agenda extends React.Component {
               this.handleDrop(e, delta, revertFunc)
             }
             droppable={true}
+            eventOverlap={false}
           />
         </div>
 

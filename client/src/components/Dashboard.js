@@ -21,7 +21,7 @@ const _Dashboard = ({ user, match }) => {
           <Navbar />
          
             <div className="columns is-marginless has-background-light">
-              <div className="column is-hidden-mobile is-one-quarter is-paddingless is-marginless">
+              <div className="column is-narrow is-hidden-mobile is-3 is-paddingless is-marginless">
                 <div className="section">
                   <Aside />
                 </div>

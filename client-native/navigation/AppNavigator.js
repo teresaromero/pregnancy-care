@@ -18,7 +18,8 @@ import { Record } from "../screens/RecordScreen";
 import { LogoutBtn } from "../components/LogoutBtn";
 
 const headerStyle = {
-  marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+  backgroundColor: "#01395c",
+        marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
 };
 
 export const HomeNavigator = createStackNavigator({
@@ -33,10 +34,7 @@ export const HomeNavigator = createStackNavigator({
         color: "black"
       },
       headerRight: <LogoutBtn />,
-      headerStyle: {
-        backgroundColor: "#91d4f2",
-        marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
-      }
+      headerStyle: headerStyle
     })
   },
   Record: {
@@ -48,9 +46,7 @@ export const HomeNavigator = createStackNavigator({
         fontSize: 15,
         color: "black"
       },
-      headerStyle: {
-        backgroundColor: "#91d4f2"
-      }
+      headerStyle: headerStyle
     })
   }
 });
@@ -67,9 +63,24 @@ export const ProfileNavigator = createStackNavigator({
         color: "black"
       },
       headerRight: <LogoutBtn />,
-      headerStyle: {
-        backgroundColor: "#91d4f2"
-      }
+      headerStyle: headerStyle
+    })
+  }
+});
+
+export const CalendarNavigator = createStackNavigator({
+  Calendar: {
+    screen: CalendarScreen,
+    navigationOptions: () => ({
+      headerTitle: `Pregnancy Care 🤰🏼`,
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        fontWeight: "bold",
+        fontSize: 15,
+        color: "black"
+      },
+      headerRight: <LogoutBtn />,
+      headerStyle: headerStyle
     })
   }
 });
@@ -89,21 +100,15 @@ export const SignedIn = createBottomTabNavigator(
       screen: HomeNavigator,
       navigationOptions: {
         tabBarLabel: "Home",
-        tabBarOptions: {
-          style: { paddingTop: 10, backgroundColor: "#91d4f2" }
-        },
         tabBarIcon: ({ tintColor }) => (
           <FontAwesome name="home" size={20} color={tintColor} />
         )
       }
     },
     Calendar: {
-      screen: CalendarScreen,
+      screen: CalendarNavigator,
       navigationOptions: {
         tabBarLabel: "Calendar",
-        tabBarOptions: {
-          style: { paddingTop: 10, backgroundColor: "#91d4f2" }
-        },
         tabBarIcon: ({ tintColor }) => (
           <FontAwesome name="calendar" size={20} color={tintColor} />
         )
@@ -113,9 +118,6 @@ export const SignedIn = createBottomTabNavigator(
       screen: ProfileNavigator,
       navigationOptions: {
         tabBarLabel: "Profile",
-        tabBarOptions: {
-          style: { paddingTop: 10, backgroundColor: "#91d4f2" }
-        },
         tabBarIcon: ({ tintColor }) => (
           <FontAwesome name="user" size={20} color={tintColor} />
         )
@@ -125,7 +127,8 @@ export const SignedIn = createBottomTabNavigator(
   {
     tabBarOptions: {
       style: {
-        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+        backgroundColor: "#01395c"
       }
     }
   }

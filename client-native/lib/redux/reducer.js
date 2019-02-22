@@ -1,6 +1,7 @@
 const initialStore = {
   user: null,
   isAuth: false,
+  appointments:null,
   messages: []
 };
 

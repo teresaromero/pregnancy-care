@@ -37,8 +37,18 @@ router.post("/delete", isLoggedIn(), (req, res, next) => {
   });
 });
 
+
 router.get("/all", isLoggedIn(), (req, res, next) => {
   Appointment.find().then(appointments => {
+    res.json({ appointments });
+  });
+});
+
+
+router.get("/all/:userId", isLoggedIn(), (req, res, next) => {
+  let { userId } = req.params;
+
+  Appointment.find({ userId }).then(appointments => {
     res.json({ appointments });
   });
 });
