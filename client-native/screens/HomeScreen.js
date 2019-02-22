@@ -69,7 +69,7 @@ class _Home extends React.Component {
                   value={moment().diff(patient.recordId.LMP, "weeks")}
                   maximumValue={40}
                   minimumValue={0}
-                  minimumTrackTintColor="#13a9d6"
+                  minimumTrackTintColor="#01395c"
                   thumbImage={require("../assets/images/baby.png")}
                   thumbTintColor="transparent"
                   disabled={true}

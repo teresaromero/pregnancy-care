@@ -26,7 +26,9 @@ class _CalendarScreen extends Component {
         let displayItems = {};
         appointments.map(ap => {
           markedDates[moment(ap.start).format("YYYY-MM-DD")] = {
-            selected: true
+            marked: true,
+            dotColor: "#f28c81",
+            activeOpacity: 0
           };
           displayItems[moment(ap.start).format("YYYY-MM-DD")] = [
             { text: ap.description, time: moment(ap.start).format("HH:mm") }
@@ -59,7 +61,6 @@ class _CalendarScreen extends Component {
         items: newItems
       });
     }, 1000);
-    
   }
   renderDay(day, item) {
     return (
@@ -145,9 +146,7 @@ class _CalendarScreen extends Component {
       <Agenda
         items={this.state.items}
         loadItemsForMonth={day => this.loadItems(day)}
-        selected={Date.now()}
         rowHasChanged={(r1, r2) => this.rowHasChanged(r1, r2)}
-        markingType={"period"}
         markedDates={this.state.markedDates}
         monthFormat={"MMMM yyyy"}
         theme={{
@@ -155,9 +154,9 @@ class _CalendarScreen extends Component {
           backgroundColor: "hsl(0, 0%, 96%)",
           agendaKnobColor: "#01395c",
           dayTextColor: "#01395c",
-          dotColor: "red",
-          selectedDayBackgroundColor: "#7c96c8",
-          selectedDayTextColor: "#f28c81"
+          selectedDayBackgroundColor: "#f28c81",
+          selectedDayTextColor: "#01395c",
+          todayTextColor: "#f28c81"
         }}
         renderDay={(day, item) => this.renderDay(day, item)}
         renderItem={i => this.renderItem(i)}

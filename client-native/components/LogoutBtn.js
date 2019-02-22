@@ -23,7 +23,7 @@ class _LogoutBtn extends React.Component {
             name="power-off"
             type="font-awesome"
             size={20}
-            color="#FF3860"
+            color="#f28c81"
           />
         }
         

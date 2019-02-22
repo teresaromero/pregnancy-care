@@ -19,23 +19,26 @@ import { LogoutBtn } from "../components/LogoutBtn";
 
 const headerStyle = {
   backgroundColor: "#01395c",
-        marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+  marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
 };
+
+const navigationOption = {
+  headerTitle: `Pregnancy Care`,
+  headerTintColor: "#fff",
+  headerTitleStyle: {
+    fontWeight: "300",
+    fontSize: 30,
+    color: "hsl(0, 0%, 96%)",
+    paddingBottom:5
+  },
+  headerRight: <LogoutBtn />,
+  headerStyle: headerStyle
+}
 
 export const HomeNavigator = createStackNavigator({
   Home: {
     screen: Home,
-    navigationOptions: () => ({
-      headerTitle: `Pregnancy Care 🤰🏼`,
-      headerTintColor: "#fff",
-      headerTitleStyle: {
-        fontWeight: "bold",
-        fontSize: 15,
-        color: "black"
-      },
-      headerRight: <LogoutBtn />,
-      headerStyle: headerStyle
-    })
+    navigationOptions: () => (navigationOption)
   },
   Record: {
     screen: Record,
@@ -54,34 +57,14 @@ export const HomeNavigator = createStackNavigator({
 export const ProfileNavigator = createStackNavigator({
   Profile: {
     screen: Profile,
-    navigationOptions: () => ({
-      headerTitle: `Pregnancy Care 🤰🏼`,
-      headerTintColor: "#fff",
-      headerTitleStyle: {
-        fontWeight: "bold",
-        fontSize: 15,
-        color: "black"
-      },
-      headerRight: <LogoutBtn />,
-      headerStyle: headerStyle
-    })
+    navigationOptions: () => (navigationOption)
   }
 });
 
 export const CalendarNavigator = createStackNavigator({
   Calendar: {
     screen: CalendarScreen,
-    navigationOptions: () => ({
-      headerTitle: `Pregnancy Care 🤰🏼`,
-      headerTintColor: "#fff",
-      headerTitleStyle: {
-        fontWeight: "bold",
-        fontSize: 15,
-        color: "black"
-      },
-      headerRight: <LogoutBtn />,
-      headerStyle: headerStyle
-    })
+    navigationOptions: () => (navigationOption)
   }
 });
 
