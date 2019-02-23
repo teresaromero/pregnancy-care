@@ -11,12 +11,10 @@ const cors = require("cors");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const flash = require("connect-flash");
+const favicon = require("serve-favicon");
 
 mongoose
-  .connect(
-    `${process.env.DBURL}`,
-    { useNewUrlParser: true }
-  )
+  .connect(`${process.env.DBURL}`, { useNewUrlParser: true })
   .then(x => {
     console.log(
       `Connected to Mongo! Database name: "${x.connections[0].name}"`
@@ -33,7 +31,9 @@ const debug = require("debug")(
 
 const app = express();
 
-const whitelist = ["http://localhost:3001","http://localhost:19002"];
+// app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
+
+const whitelist = ["http://localhost:3001", "http://localhost:19002"];
 
 const corsOptions = {
   origin: function(origin, callback) {
@@ -65,9 +65,6 @@ app.use(flash());
 
 require("./passport")(app);
 
-const index = require("./routes/index");
-app.use("/", index);
-
 const authRoutes = require("./routes/auth");
 app.use("/api/auth", authRoutes);
 const userRoutes = require("./routes/user");
@@ -77,4 +74,7 @@ app.use("/api/patients", patientRoutes);
 const appointmentsRoutes = require("./routes/appointments");
 app.use("/api/appointments", appointmentsRoutes);
 
+app.use("*", (req, res) =>
+  res.sendFile(path.join(__dirname, "public/index.html"))
+);
 module.exports = app;

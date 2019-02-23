@@ -1,13 +1,12 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
-const Record = require("../models/Record");
 const createRecord = require("./seedsRecord");
 
 const bcryptSalt = 10;
 
 mongoose
-  .connect(`mongodb://localhost/pregnancy-care`, { useNewUrlParser: true })
+  .connect(`${process.env.DBURL}`, { useNewUrlParser: true })
   .then(x => {
     console.log(
       `Connected to Mongo! Database name: "${x.connections[0].name}"`

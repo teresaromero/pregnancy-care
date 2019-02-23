@@ -11,7 +11,7 @@
 
 body {
   min-height: 100vh;
-  max-height: 100vh;
+  max-height: 100%;
   background-color: #01395c; }
 
 .logo {
