@@ -14,6 +14,11 @@ body {
   max-height: 100vh;
   background-color: #01395c; }
 
+.logo {
+  padding-bottom: 2rem;
+  width: 80%;
+  max-width: 80%; }
+
 .button.is-primary.is-inverted.is-outlined {
   border-color: transparent !important;
   color: #fff; }

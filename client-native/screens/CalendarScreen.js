@@ -18,7 +18,6 @@ class _CalendarScreen extends Component {
 
   componentWillMount() {
     let { user } = this.props;
-
     AppointmentsApi.allAppointments(user._id).then(res => {
       let { appointments } = res;
       this.setState({ appointments }, () => {

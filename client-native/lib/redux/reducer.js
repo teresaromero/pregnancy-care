@@ -1,5 +1,6 @@
 const initialStore = {
   user: null,
+  patient:null,
   isAuth: false,
   appointments:null,
   messages: []
@@ -14,6 +15,14 @@ export const rootReducer = (store = initialStore, action) => {
         isAuth: true
       };
      
+      break;
+
+      case "GET_PATIENT":
+      store = {
+        ...store,
+        patient: action.patient,
+      };
+   
       break;
 
     case "IS_AUTH":

@@ -5,6 +5,13 @@ export const login = user => {
   };
 };
 
+export const getPatient = patient => {
+  return {
+    type: "GET_PATIENT",
+    patient
+  };
+};
+
 export const isAuth = status => {
   return {
     type: "IS_AUTH",

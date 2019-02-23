@@ -5,26 +5,18 @@ import Slider from "react-native-slider";
 import { connect } from "react-redux";
 import PatientsApi from "../lib/APIs/patientsApi";
 import moment from "moment";
+import { getPatient } from "../lib/redux/actions";
 
 class _Home extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      patient: null
-    };
-  }
-
   componentDidMount() {
-    let { user } = this.props;
+    let { user, dispatch } = this.props;
     PatientsApi.getPatient(user._id).then(patient => {
-      this.setState({ patient }, () => {
-        console.log(this.state.patient.recordId.LMP);
-      });
+      dispatch(getPatient(patient));
     });
   }
 
   render() {
-    let { patient } = this.state;
+    let { patient } = this.props;
     let { navigate } = this.props.navigation;
     return (
       <React.Fragment>
@@ -107,4 +99,7 @@ class _Home extends React.Component {
     );
   }
 }
-export const Home = connect(store => ({ user: store.user }))(_Home);
+export const Home = connect(store => ({
+  user: store.user,
+  patient: store.patient
+}))(_Home);

@@ -7,181 +7,73 @@ import moment from "moment";
 import {
   LineChart,
   BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph
-} from "react-native-chart-kit";
+  Grid,
+  YAxis,
+  XAxis,
+  Path
+} from "react-native-svg-charts";
 
 class _Record extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      patient: null,
-      dataWeight: null,
-      dataIMC: null,
-      bloodSistolic: null,
-      bloodDiastolic: null
-    };
+  getWeight() {
+    let { patient } = this.props;
+    let dataWeight = patient.recordId.weight.map(w => {
+      return w.value;
+    });
+    return dataWeight;
   }
 
-  componentDidMount() {
-    let { user } = this.props;
-    PatientsApi.getPatient(user._id).then(patient => {
-      let dataWeight = patient.recordId.weight.map(w => {
-        return w.value;
-      });
-      let dataIMC = patient.recordId.IMC.map(i => {
-        return i.value;
-      });
-      let bloodSistolic = patient.recordId.bloodPressure.map(b => {
-        return b.Systolic;
-      });
-      let bloodDiastolic = patient.recordId.bloodPressure.map(b => {
-        return b.Diastolic;
-      });
-      this.setState(
-        { patient, dataIMC, dataWeight, bloodDiastolic, bloodSistolic },
-        () => {}
-      );
+  getBloodSystolic() {
+    let { patient } = this.props;
+    return patient.recordId.bloodPressure.map(b => {
+      return b.Systolic;
+    });
+  }
+
+  getBloodDiastolic() {
+    let { patient } = this.props;
+    return patient.recordId.bloodPressure.map(b => {
+      return b.Diastolic;
+    });
+  }
+
+  getIMC() {
+    let { patient } = this.props;
+    return patient.recordId.IMC.map(i => {
+      return i.value;
     });
   }
 
   render() {
-    let {
-      patient,
-      dataIMC,
-      dataWeight,
-      bloodDiastolic,
-      bloodSistolic
-    } = this.state;
+    let { patient } = this.props;
     return (
       <React.Fragment>
         <View style={{ flex: 1 }}>
           {patient ? (
             <ScrollView>
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: "center",
-                  flexDirection: "column",
-                  alignItems: "center"
-                }}
-              >
-                <Text style={{ padding: 5, fontWeight: "bold" }} h6>
-                  Weight
-                </Text>
-                <LineChart
-                  data={{
-                    datasets: [
-                      {
-                        data: dataWeight
-                      }
-                    ]
-                  }}
-                  width={Dimensions.get("window").width * 0.9}
-                  height={180}
-                  chartConfig={{
-                    backgroundColor: "#f9e939",
-                    backgroundGradientFrom: "#f9e939",
-                    backgroundGradientTo: "#f9e939",
-                    decimalPlaces: 0, // optional, defaults to 2dp
-                    strokeWidth: 1,
-                    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-                    style: {
-                      paddingRight: 0,
-                      paddingLeft: 0,
-                      borderRadius: 5
-                    }
-                  }}
-                  bezier
-                  style={{
-                    marginVertical: 1,
-                    borderRadius: 5
-                  }}
+              <View style={{ height: 250, padding: 20, flexDirection: "row" }}>
+                <YAxis
+                  data={this.getWeight()}
+                  style={{ marginBottom: 30 }}
+                  contentInset={{ top: 10, bottom: 10 }}
+                  svg={{ fontSize: 10, fill: "grey" }}
                 />
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: "center",
-                  flexDirection: "column",
-                  alignItems: "center"
-                }}
-              >
-                <Text style={{ padding: 5, fontWeight: "bold" }} h6>
-                  IMC
-                </Text>
-                <LineChart
-                  data={{
-                    datasets: [
-                      {
-                        data: dataIMC
-                      }
-                    ]
-                  }}
-                  width={Dimensions.get("window").width * 0.9}
-                  height={180}
-                  chartConfig={{
-                    backgroundColor: "#a4cf7c",
-                    backgroundGradientFrom: "#a4cf7c",
-                    backgroundGradientTo: "#a4cf7c",
-                    decimalPlaces: 0, // optional, defaults to 2dp
-                    strokeWidth: 1,
-                    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-                    style: {
-                      paddingRight: 0,
-                      paddingLeft: 0,
-                      borderRadius: 5
-                    }
-                  }}
-                  bezier
-                  style={{
-                    marginVertical: 1,
-                    borderRadius: 5
-                  }}
-                />
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: "center",
-                  flexDirection: "column",
-                  alignItems: "center"
-                }}
-              >
-                <Text style={{ padding: 5, fontWeight: "bold" }} h6>
-                  Blood Pressure
-                </Text>
-                <LineChart
-                  data={{
-                    datasets: [
-                      {
-                        data: bloodDiastolic
-                      },
-                      { data: bloodSistolic }
-                    ]
-                  }}
-                  width={Dimensions.get("window").width * 0.9}
-                  height={180}
-                  chartConfig={{
-                    backgroundColor: "#91d4f2",
-                    backgroundGradientFrom: "#91d4f2",
-                    backgroundGradientTo: "#91d4f2",
-                    decimalPlaces: 0, // optional, defaults to 2dp
-                    strokeWidth: 1,
-                    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-                    style: {
-                      paddingRight: 0,
-                      paddingLeft: 0,
-                      borderRadius: 5
-                    }
-                  }}
-                  bezier
-                  style={{
-                    marginVertical: 1,
-                    borderRadius: 5
-                  }}
-                />
+                <View style={{ flex: 1, marginLeft: 10 }}>
+                  <LineChart
+                    style={{ flex: 1 }}
+                    data={this.getWeight()}
+                    contentInset={{ top: 10, bottom: 10 }}
+                    svg={{ strokeWidth: 2, stroke: "rgb(134, 65, 244)" }}
+                  >
+                    <Grid />
+                  </LineChart>
+                  <XAxis
+                    style={{ marginHorizontal: -10, height: 30 }}
+                    data={this.getWeight()}
+                    formatLabel={(value, index) => index}
+                    contentInset={{ left: 10, right: 10 }}
+                    svg={{ fontSize: 10, fill: "grey" }}
+                  />
+                </View>
               </View>
             </ScrollView>
           ) : (
@@ -192,4 +84,7 @@ class _Record extends React.Component {
     );
   }
 }
-export const Record = connect(store => ({ user: store.user }))(_Record);
+export const Record = connect(store => ({
+  user: store.user,
+  patient: store.patient
+}))(_Record);

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginAct, signupAct, clearMessages } from "../lib/redux/actions";
+import logo from "../assets/images/logo.png";
 
 class _HomePage extends React.Component {
   render() {
@@ -14,10 +15,9 @@ class _HomePage extends React.Component {
     let signupTabClass = cx({ "is-active": signupActive });
     return (
       <div className="section has-text-centered	">
-        <img
-          src="https://res.cloudinary.com/dpid82d4m/image/upload/v1550654923/Logo.png"
-          alt="logo"
-        />
+        
+          <img className="logo" src={logo} alt="logo" />
+       
 
         <div className="columns is-marginless is-paddingless">
           <div className="column" />
@@ -26,13 +26,19 @@ class _HomePage extends React.Component {
               <ul>
                 <li
                   className={loginTabClass}
-                  onClick={() => {dispatch(loginAct());dispatch(clearMessages())}}
+                  onClick={() => {
+                    dispatch(loginAct());
+                    dispatch(clearMessages());
+                  }}
                 >
                   <Link to="">Login</Link>
                 </li>
                 <li
                   className={signupTabClass}
-                  onClick={() => {dispatch(signupAct());dispatch(clearMessages())}}
+                  onClick={() => {
+                    dispatch(signupAct());
+                    dispatch(clearMessages());
+                  }}
                 >
                   <Link to="">Signup</Link>
                 </li>

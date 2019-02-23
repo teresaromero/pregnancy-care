@@ -22,6 +22,7 @@
     "react-native-chartjs": "^1.0.3",
     "react-native-elements": "^1.0.0",
     "react-native-slider": "^0.11.0",
+    "react-native-svg-charts": "^5.2.0",
     "react-navigation": "^3.0.9",
     "react-redux": "^6.0.0",
     "redux": "^4.0.1",
