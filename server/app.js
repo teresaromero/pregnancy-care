@@ -30,7 +30,7 @@ const debug = require("debug")(
 );
 
 const app = express();
-
+app.use(express.static(path.join(__dirname, 'public')));
 // app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
 
 const whitelist = ["http://localhost:3001", "http://localhost:19002"];
@@ -75,6 +75,6 @@ const appointmentsRoutes = require("./routes/appointments");
 app.use("/api/appointments", appointmentsRoutes);
 
 app.use("*", (req, res) =>
-  res.sendFile(path.join(__dirname, "./public/index.html"))
+  res.sendFile(path.join(__dirname, "/public/index.html"))
 );
 module.exports = app;
