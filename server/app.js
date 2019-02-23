@@ -75,6 +75,6 @@ const appointmentsRoutes = require("./routes/appointments");
 app.use("/api/appointments", appointmentsRoutes);
 
 app.use("*", (req, res) =>
-  res.sendFile(path.join(__dirname, "public"))
+  res.sendFile(path.join(__dirname, "./public/index.html"))
 );
 module.exports = app;
