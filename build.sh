@@ -3,7 +3,6 @@ rm -rf ./client/build
 rm -rf ./server/public/
 cd client
 npm install
-#npm audit fix --force
 npm run build
 cd ..
 cp -r ./client/build/ ./server/public
