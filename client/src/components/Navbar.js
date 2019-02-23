@@ -3,7 +3,6 @@ import { withRouter, NavLink } from "react-router-dom";
 import authApi from "../lib/APIs/authApi";
 import { connect } from "react-redux";
 import { logout } from "../lib/redux/actions";
-import logo from "../assets/images/logo.png"
 
 class _Navbar extends React.Component {
   constructor() {
@@ -34,8 +33,7 @@ class _Navbar extends React.Component {
           <div className="navbar-brand">
             <div className="navbar-item">
               <NavLink to="/">
-              <img src={logo}/>
-                
+                <img src="/images/logo.png" alt="logo pregnancy care" />
               </NavLink>
             </div>
           </div>
