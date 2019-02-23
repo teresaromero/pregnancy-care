@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import '@fortawesome/fontawesome-free/css/all.min.css'
 import "./lib/myBulma.css";
 import {App} from "./App";
 import * as serviceWorker from "./serviceWorker";
