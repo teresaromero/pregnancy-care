@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginAct, signupAct, clearMessages } from "../lib/redux/actions";
-import logo from "../assets/images/logo.png";
+//import logo from "../assets/images/logo.png";
 
 class _HomePage extends React.Component {
   render() {
@@ -16,7 +16,7 @@ class _HomePage extends React.Component {
     return (
       <div className="section has-text-centered	">
         
-          <img className="logo" src={logo} alt="logo" />
+        {/* <img className="logo" src={logo} alt="logo" /> */}
        
 
         <div className="columns is-marginless is-paddingless">
