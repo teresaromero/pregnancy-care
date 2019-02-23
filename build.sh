@@ -2,7 +2,7 @@
 rm -rf ./client/build
 rm -rf ./server/public/
 cd client
-yarn
+yarn install
 yarn build
 cd ..
 cp -r ./client/build/ ./server/public
