@@ -31,7 +31,7 @@ const debug = require("debug")(
 
 const app = express();
 
-// app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
+app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
 
 const whitelist = ["http://localhost:3001", "http://localhost:19002"];
 
