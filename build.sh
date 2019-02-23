@@ -2,8 +2,8 @@
 rm -rf ./client/build
 rm -rf ./server/public/
 cd client
-npm install
-npm run build
+yarn
+yarn build
 cd ..
 cp -r ./client/build/ ./server/public
 echo "*" > ./server/public/.gitignore
