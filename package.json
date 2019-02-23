@@ -1,11 +1,11 @@
 {
-  "name": "pregnancy-care",
+  "name": "server",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "node ./server/bin/www",
-    "dev": "DEBUG=server:* nodemon ./bin/www",
-    "dev-windows": "nodemon ../bin/www",
+    "dev": "DEBUG=server:* nodemon ./server/bin/www",
+    "dev-windows": "nodemon ./server/bin/www",
     "heroku-postbuild":"./build.sh"
   },
   "dependencies": {
