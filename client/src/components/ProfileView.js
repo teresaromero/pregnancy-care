@@ -125,7 +125,7 @@ class _ProfileView extends React.Component {
                     id="id"
                     name="idNum"
                     label="ID"
-                    value={user.idNum}
+                    value={user.idNum || ""}
                     type="text"
                     placeholder="ID"
                     handleChange={e => this.handleUserChange(e)}
@@ -139,7 +139,7 @@ class _ProfileView extends React.Component {
                     id="born-date"
                     name="bornDate"
                     label="Born Date"
-                    value={user.bornDate}
+                    value={user.bornDate ||""}
                     type="date"
                     placeholder=""
                     handleChange={e => this.handleUserChange(e)}
@@ -158,7 +158,7 @@ class _ProfileView extends React.Component {
                     id="street"
                     name="street"
                     label="Street"
-                    value={user.address.street}
+                    value={user.address.street ||""}
                     type="text"
                     placeholder="Street"
                     handleChange={e => this.handleAddressChange(e)}
@@ -170,7 +170,7 @@ class _ProfileView extends React.Component {
                     id="number"
                     name="number"
                     label="Number"
-                    value={user.address.number}
+                    value={user.address.number ||""}
                     type="text"
                     placeholder="24"
                     handleChange={e => this.handleAddressChange(e)}
@@ -184,7 +184,7 @@ class _ProfileView extends React.Component {
                     id="city"
                     name="city"
                     label="City"
-                    value={user.address.city}
+                    value={user.address.city || ""}
                     type="text"
                     placeholder="City"
                     handleChange={e => this.handleAddressChange(e)}
@@ -196,7 +196,7 @@ class _ProfileView extends React.Component {
                     id="state"
                     name="state"
                     label="State"
-                    value={user.address.state}
+                    value={user.address.state || ""}
                     type="text"
                     placeholder="State"
                     handleChange={e => this.handleAddressChange(e)}
@@ -208,7 +208,7 @@ class _ProfileView extends React.Component {
                     id="zip"
                     name="zip"
                     label="Zip"
-                    value={user.address.zip}
+                    value={user.address.zip || ""}
                     type="text"
                     placeholder="Zip"
                     handleChange={e => this.handleAddressChange(e)}
@@ -222,7 +222,7 @@ class _ProfileView extends React.Component {
                     id="phone"
                     name="phone"
                     label="Phone"
-                    value={user.phone}
+                    value={user.phone || ""}
                     type="text"
                     placeholder="Phone"
                     handleChange={e => this.handleUserChange(e)}
