@@ -32,9 +32,7 @@ class _CalendarScreen extends Component {
           displayItems[moment(ap.start).format("YYYY-MM-DD")] = [
             { text: ap.description, time: moment(ap.start).format("HH:mm") }
           ];
-          this.setState({ markedDates, items: displayItems }, () =>
-            console.log(this.state)
-          );
+          this.setState({ markedDates, items: displayItems });
         });
       });
     });

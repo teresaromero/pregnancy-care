@@ -30,7 +30,6 @@ class _InformationForm extends React.Component {
   handleCreate(e) {
     e.preventDefault();
     const { patient } = this.state;
-    console.log(patient);
     const { history, dispatch } = this.props;
     if (!e.target.checkValidity()) {
       return;
@@ -38,7 +37,6 @@ class _InformationForm extends React.Component {
 
     PatientsApi.addPatient(patient)
       .then(res => {
-        console.log(res.patient);
         let { patient } = res;
         PatientsApi.createRecord(patient._id).then(res => {
           dispatch(viewPatient(res.patient));

@@ -1,7 +1,6 @@
 import React from "react";
 import Autosuggest from "react-autosuggest";
 import PatientsApi from "../lib/APIs/patientsApi";
-import { Link } from "react-router-dom";
 
 export default class AutosuggestSelector extends React.Component {
   constructor() {

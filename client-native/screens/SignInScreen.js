@@ -29,7 +29,7 @@ class _SignIn extends React.Component {
     } else {
       AuthApi.login(email, password)
         .then(user => {
-          console.log(user);
+         
           if (user !== undefined) {
             dispatch(login(user));
             navigation.navigate("SignedIn");

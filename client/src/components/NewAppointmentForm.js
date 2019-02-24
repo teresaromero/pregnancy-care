@@ -66,10 +66,8 @@ class _NewAppointmentForm extends React.Component {
   handleDateChange(e) {
     let upt = { ...this.state.appointment };
     let { value, name } = e.target;
-    console.log(e.target);
     upt[name] = moment(moment(value).toISOString());
-    this.setState({ appointment: upt }, () =>
-      console.log(this.state.appointment)
+    this.setState({ appointment: upt }
     );
   }
 
@@ -77,8 +75,7 @@ class _NewAppointmentForm extends React.Component {
     let upt = { ...this.state.appointment };
     let { value, name } = e.target;
     upt[name] = value;
-    this.setState({ appointment: upt }, () =>
-      console.log(this.state.appointment)
+    this.setState({ appointment: upt }
     );
   }
 

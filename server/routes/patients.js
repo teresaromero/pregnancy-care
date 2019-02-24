@@ -36,8 +36,7 @@ router.post("/create", isLoggedIn(), (req, res, next) => {
 
 router.get("/all", isLoggedIn(), (req, res, next) => {
   User.find({ role: "CUSTOMER" })
-    .sort({ createdAt: -1 })
-    .limit(10)
+    .sort({ createdAt: -1 }).select({name:1,surname:1,_id:1,image:1})
     .then(patients => {
       res.json({ patients });
     });

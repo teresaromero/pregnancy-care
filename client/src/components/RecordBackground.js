@@ -15,8 +15,8 @@ class _RecordBackground extends React.Component {
           <React.Fragment>
             <div className="field-wrapper section">
               <p className="label">Familiar Background:</p>
-              <p>{record.backgroundDiseases}</p>
-              {record.backgroundDiseases === "" ? (
+              <p>{record.background}</p>
+              {record.background === "" ? (
                 <p className="help has-text-danger">
                   Enter information about the family background
                 </p>
@@ -25,8 +25,8 @@ class _RecordBackground extends React.Component {
 
             <div className="field-wrapper section">
               <p className="label">Patient Background:</p>
-              <p>{record.diseases}</p>
-              {record.diseases === "" ? (
+              <p>{record.patientBackground}</p>
+              {record.patientBackground === "" ? (
                 <span className="help has-text-danger">
                   Enter information about the patient background
                 </span>
@@ -65,11 +65,6 @@ class _RecordBackground extends React.Component {
                 record.contraceptive.map(a => <span key={a}> {a}</span>)
               )}
 
-              {record.contraceptiveOther === "" ? (
-                ""
-              ) : (
-                <p>Other: {record.contraceptiveOther}</p>
-              )}
             </div>
 
             <div className="field-wrapper section">
@@ -83,18 +78,8 @@ class _RecordBackground extends React.Component {
                 record.STD.map(a => <span key={a}> {a}</span>)
               )}
 
-              {record.STDother === "" ? (
-                ""
-              ) : (
-                <span>Other: {record.STDother}</span>
-              )}
 
-              {record.STD.length !== 0 ? (
-                <React.Fragment>
-                  <p className="label">STD Overcome:</p>
-                  <p>{record.STDovercome}</p>
-                </React.Fragment>
-              ) : null}
+              
             </div>
 
             <div className="field-wrapper section">
@@ -114,12 +99,13 @@ class _RecordBackground extends React.Component {
                   ⏰
                 </span>{" "}Period Cycle</p>
                   {record.menstrualCycleDays ? (
-                    <p className="help has-text-danger">Edit</p>
-                  ) : (
                     <span>
-                      {record.menstrualCycleDays}/
-                      {record.menstrualCycleFrequency}
-                    </span>
+                    {record.menstrualCycleDays}/
+                    {record.menstrualCycleFrequency}
+                  </span>
+                    
+                  ) : (
+                    <p className="help has-text-danger">Edit</p>
                   )}
                 </div>
                 <div className="column">
