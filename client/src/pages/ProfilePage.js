@@ -85,8 +85,8 @@ class _ProfilePage extends React.Component {
                   <p>{moment(user.createdAt).format("Do MMMM YYYY")}</p>
                 </div>
                 <div className="column">
-                  <span class="icon has-text-danger">
-                    <i class="fas fa-trash-alt" />
+                  <span className="icon has-text-danger">
+                    <i className="fas fa-trash-alt" />
                   </span>
                   <span className="has-text-danger">Delete my account</span>
                 </div>

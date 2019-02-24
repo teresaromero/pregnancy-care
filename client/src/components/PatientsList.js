@@ -1,8 +1,8 @@
 import React from "react";
 
 import { PatientsListCard } from "./PatientsListCard.js";
-
-import { withRouter,NavLink } from "react-router-dom";
+import { Loader } from "./Loader";
+import { withRouter, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { SearchBarPatients } from "./SearchBarPatients.js";
 
@@ -14,7 +14,10 @@ const _PatientsList = ({ allPatients, filtered }) => {
           <SearchBarPatients />
         </div>
         <div className="column is-one-fifth">
-          <NavLink to="/admin/patients/add" className="button is-large is-primary is-outlined">
+          <NavLink
+            to="/admin/patients/add"
+            className="button is-large is-primary is-outlined"
+          >
             <span className="icon is-large">
               <i className="fas fa-lg fa-user-plus" />
             </span>
@@ -35,7 +38,7 @@ const _PatientsList = ({ allPatients, filtered }) => {
           </div>
         ))
       ) : (
-        <p>Loading All Patients</p>
+        <Loader />
       )}
     </React.Fragment>
   );

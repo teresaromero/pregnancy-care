@@ -1,7 +1,7 @@
 import React from "react";
 
 import PatientsApi from "../lib/APIs/patientsApi.js";
-import { InputDiv } from "./InputDiv.js";
+import { InputP } from "./InputP";
 
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -15,6 +15,7 @@ class _SearchBarPatients extends React.Component {
       query: ""
     };
   }
+
   componentDidMount() {
     let { dispatch } = this.props;
     console.log("Component did mount");
@@ -49,12 +50,12 @@ class _SearchBarPatients extends React.Component {
   render() {
     return (
       <div className="box">
-        <InputDiv
+        <InputP
           name="Search"
           title="Search"
           label="Patient Search"
           inputtype="text"
-          placeholder="Search by name, surname, id, phone (Only exact values)"
+          help="Search by name, surname, id, phone, email..."
           value={this.state.query}
           handleChange={e => this.handleSearch(e)}
         />

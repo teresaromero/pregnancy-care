@@ -96,7 +96,7 @@ class _RecordPregnancyForm extends React.Component {
   render() {
     let { record } = this.state;
     return (
-      <React.Component>
+      <React.Fragment>
         {record ? (
           <React.Fragment>
             <div className="box">
@@ -308,7 +308,7 @@ class _RecordPregnancyForm extends React.Component {
         ) : (
           <Loader />
         )}
-      </React.Component>
+      </React.Fragment>
     );
   }
 }

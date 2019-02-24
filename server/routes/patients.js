@@ -2,13 +2,13 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const Record = require("../models/Record");
-const { isLoggedIn} = require('../middlewares/isLogged');
+const { isLoggedIn } = require("../middlewares/isLogged");
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
-router.post("/create", isLoggedIn(),(req, res, next) => {
+router.post("/create", isLoggedIn(), (req, res, next) => {
   const { patient } = req.body;
   const emailCheck = patient.email;
   User.find({ email: emailCheck, role: "CUSTOMER" }, (err, user) => {
@@ -34,28 +34,28 @@ router.post("/create", isLoggedIn(),(req, res, next) => {
   });
 });
 
-router.get("/all", isLoggedIn(),(req, res, next) => {
+router.get("/all", isLoggedIn(), (req, res, next) => {
   User.find({ role: "CUSTOMER" })
     .sort({ createdAt: -1 })
+    .limit(10)
     .then(patients => {
       res.json({ patients });
     });
 });
 
-//route for searching - exact text
-router.get("/search", isLoggedIn(),(req, res, next) => {
+router.get("/search", isLoggedIn(), (req, res, next) => {
   let { q } = req.query;
-  User.find(
-    { role: "CUSTOMER", $text: { $search: q } },
-    { score: { $meta: "textScore" } }
-  )
-    .sort({ score: { $meta: "textScore" } })
+  let regex = new RegExp(q, "i");
+  console.log(regex);
+  User.find({ role: "CUSTOMER", concat: regex })
+    .limit(5)
     .then(patients => {
+      console.log(patients);
       res.json({ patients });
     });
 });
 
-router.put("/update",isLoggedIn(), (req, res, next) => {
+router.put("/update", isLoggedIn(), (req, res, next) => {
   let { patient, id } = req.body;
 
   User.findByIdAndUpdate(id, patient, { new: true })
@@ -64,7 +64,7 @@ router.put("/update",isLoggedIn(), (req, res, next) => {
     .catch(e => console.log(e));
 });
 
-router.post("/record/create",isLoggedIn(), (req, res, next) => {
+router.post("/record/create", isLoggedIn(), (req, res, next) => {
   let { id } = req.body;
 
   const newRecord = new Record();
@@ -77,7 +77,7 @@ router.post("/record/create",isLoggedIn(), (req, res, next) => {
   );
 });
 
-router.put("/record/update", isLoggedIn(),(req, res, next) => {
+router.put("/record/update", isLoggedIn(), (req, res, next) => {
   let { record, idRecord } = req.body;
 
   Record.findByIdAndUpdate(idRecord, record, { new: true }).then(record =>
@@ -90,7 +90,7 @@ router.put("/record/update", isLoggedIn(),(req, res, next) => {
   );
 });
 
-router.put("/record/visit",isLoggedIn(), (req, res, next) => {
+router.put("/record/visit", isLoggedIn(), (req, res, next) => {
   let { visit, weight, bloodPressure, IMC, idRecord, idPatient } = req.body;
 
   Record.findById(idRecord).then(record => {
@@ -111,7 +111,7 @@ router.put("/record/visit",isLoggedIn(), (req, res, next) => {
   });
 });
 
-router.get("/record/:id", isLoggedIn(),(req, res, next) => {
+router.get("/record/:id", isLoggedIn(), (req, res, next) => {
   let { id } = req.params;
 
   User.findById(id)
@@ -122,9 +122,7 @@ router.get("/record/:id", isLoggedIn(),(req, res, next) => {
     .catch(e => console.log(e));
 });
 
-
-
-router.get("/record/delete/:id",isLoggedIn(), (req, res, next) => {
+router.get("/record/delete/:id", isLoggedIn(), (req, res, next) => {
   let { id } = req.params;
 
   User.findByIdAndDelete(id)

@@ -21,13 +21,10 @@ let usersCustomer = users
   .filter(user => user.role === "CUSTOMER")
   .map(user => {
     let password = bcrypt.hashSync("1234", bcrypt.genSaltSync(bcryptSalt));
-    return { ...user, password };
+    let concat =
+      user.name + user.surname + user.idNum + user.phone + user.email;
+    return { ...user, password, concat };
   })
-  .map((user, idx) => {
-    let recordId = records[idx];
-
-    return { ...user, recordId };
-  });
 
 mongoose.connect(`${process.env.DBURL}`, { useNewUrlParser: true }).then(x => {
   console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
@@ -44,5 +41,5 @@ mongoose.connect(`${process.env.DBURL}`, { useNewUrlParser: true }).then(x => {
     });
   }
 
-  mongoose.disconnect();
+ 
 });

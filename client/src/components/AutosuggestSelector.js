@@ -26,7 +26,7 @@ export default class AutosuggestSelector extends React.Component {
 
   renderSuggestion(suggestion) {
     return (
-      <button class="button is-white">
+      <button className="button is-white">
         {suggestion.name} {suggestion.surname}
       </button>
     );

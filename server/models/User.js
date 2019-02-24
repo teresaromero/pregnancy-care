@@ -44,15 +44,6 @@ const userSchema = new Schema(
   }
 );
 
-userSchema.index(
-  {
-    name: "text",
-    surname: "text",
-    idNum: "text",
-    phone: "text"
-  },
-  { weights: { name: 4, surname: 3, idNum: 2, phone: 1 } }
-);
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;
