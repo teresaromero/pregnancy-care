@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
+    concat: { type: String },
     name: { type: String, required: true },
     surname: { type: String, required: true },
     email: { type: String, required: true, lowercase: true },
