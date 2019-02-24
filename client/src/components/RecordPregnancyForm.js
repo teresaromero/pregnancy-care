@@ -8,6 +8,7 @@ import PatientsApi from "../lib/APIs/patientsApi";
 import { InputP } from "./InputP";
 
 import CheckboxContainer from "./CheckboxContainer";
+import { Loader } from "./Loader";
 
 const optionsPregnancy = [
   "",
@@ -58,7 +59,7 @@ class _RecordPregnancyForm extends React.Component {
 
     PatientsApi.updateRecord(record, record._id, patient._id).then(res => {
       dispatch(viewPatient(res.patient));
-      dispatch(closeModal())
+      dispatch(closeModal());
     });
   }
 
@@ -95,215 +96,219 @@ class _RecordPregnancyForm extends React.Component {
   render() {
     let { record } = this.state;
     return (
-      <React.Fragment>
-        <div className="box">
-        <div className="section">
-          <p className="label" />
-          <div className="field-wrapper section">
-            <div className="columns has-text-centered">
-              <div className="column">
-                <InputP
-                  id="LMP"
-                  name="LMP"
-                  label="LMP"
-                  value={record.LMP}
-                  type="date"
-                  placeholder=""
-                  handleChange={e => this.handleFieldChange(e)}
-                />
-                <InputP
-                  id="HPT"
-                  name="HPT"
-                  label="HPT"
-                  value={record.HPT}
-                  type="date"
-                  placeholder=""
-                  handleChange={e => this.handleFieldChange(e)}
-                />
-              </div>
-              <div className="column">
-                <InputP
-                  id="EDC"
-                  name="EDC"
-                  label="EDC"
-                  value={record.EDC}
-                  type="date"
-                  placeholder=""
-                  disabled
-                />
-              </div>
-              <div className="column" />
-              <div className="column">
-                <p className="label">Weeks</p>
-                <p className=""> {moment().diff(record.LMP, "weeks")}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="section">
-          <p className="label" />
-          <div className="field-wrapper section">
-            <InputP
-              id="partnerBirthDate"
-              name="partnerBirthDate"
-              label="Partner Born Date"
-              value={moment(record.partnerBirthDate).format("YYYY-MM-DD")}
-              type="date"
-              handleChange={e => this.handleFieldChange(e)}
-            />
-          </div>
-        </div>
-
-        <div className="section">
-          <p className="label" />
-          <div className="field-wrapper section">
-            <div className="field">
-              <label className="label">Pregnancy Type</label>
-              <div className="control">
-                <div className="select">
-                  <select
-                    name="pregnancyType"
-                    value={record.pregnancyType}
-                    onChange={e => this.handleFieldChange(e)}
-                  >
-                    {optionsPregnancy.map(type => (
-                      <option value={type} key={type}>
-                        {type}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="section">
-          <p className="label" />
-          <div className="field-wrapper section">
-            <div className="columns">
-              <div className="column">
-                <div className="field">
-                  <label className="label">Diet</label>
-                  <div className="control">
-                    <div className="select">
-                      <select
-                        name="diet"
-                        value={record.diet}
-                        onChange={e => this.handleFieldChange(e)}
-                      >
-                        {optionsDiet.map(type => (
-                          <option value={type} key={type}>
-                            {type}
-                          </option>
-                        ))}
-                      </select>
+      <React.Component>
+        {record ? (
+          <React.Fragment>
+            <div className="box">
+              <div className="section">
+                <p className="label" />
+                <div className="field-wrapper section">
+                  <div className="columns has-text-centered">
+                    <div className="column">
+                      <InputP
+                        id="LMP"
+                        name="LMP"
+                        label="LMP"
+                        value={record.LMP}
+                        type="date"
+                        placeholder=""
+                        handleChange={e => this.handleFieldChange(e)}
+                      />
+                      <InputP
+                        id="HPT"
+                        name="HPT"
+                        label="HPT"
+                        value={record.HPT}
+                        type="date"
+                        placeholder=""
+                        handleChange={e => this.handleFieldChange(e)}
+                      />
+                    </div>
+                    <div className="column">
+                      <InputP
+                        id="EDC"
+                        name="EDC"
+                        label="EDC"
+                        value={record.EDC}
+                        type="date"
+                        placeholder=""
+                        disabled
+                      />
+                    </div>
+                    <div className="column" />
+                    <div className="column">
+                      <p className="label">Weeks</p>
+                      <p className=""> {moment().diff(record.LMP, "weeks")}</p>
                     </div>
                   </div>
                 </div>
               </div>
-              {record.diet === "Other" ? (
-                <div className="column">
+
+              <div className="section">
+                <p className="label" />
+                <div className="field-wrapper section">
                   <InputP
-                    id="dietOther"
-                    name="dietOther"
-                    label="Other Diet"
-                    value={record.dietOther}
+                    id="partnerBirthDate"
+                    name="partnerBirthDate"
+                    label="Partner Born Date"
+                    value={moment(record.partnerBirthDate).format("YYYY-MM-DD")}
+                    type="date"
+                    handleChange={e => this.handleFieldChange(e)}
+                  />
+                </div>
+              </div>
+
+              <div className="section">
+                <p className="label" />
+                <div className="field-wrapper section">
+                  <div className="field">
+                    <label className="label">Pregnancy Type</label>
+                    <div className="control">
+                      <div className="select">
+                        <select
+                          name="pregnancyType"
+                          value={record.pregnancyType}
+                          onChange={e => this.handleFieldChange(e)}
+                        >
+                          {optionsPregnancy.map(type => (
+                            <option value={type} key={type}>
+                              {type}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="section">
+                <p className="label" />
+                <div className="field-wrapper section">
+                  <div className="columns">
+                    <div className="column">
+                      <div className="field">
+                        <label className="label">Diet</label>
+                        <div className="control">
+                          <div className="select">
+                            <select
+                              name="diet"
+                              value={record.diet}
+                              onChange={e => this.handleFieldChange(e)}
+                            >
+                              {optionsDiet.map(type => (
+                                <option value={type} key={type}>
+                                  {type}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {record.diet === "Other" ? (
+                      <div className="column">
+                        <InputP
+                          id="dietOther"
+                          name="dietOther"
+                          label="Other Diet"
+                          value={record.dietOther}
+                          type="text"
+                          handleChange={e => this.handleFieldChange(e)}
+                        />
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
+
+              <div className="field">
+                <label className="label">Diet Suplements</label>
+                <div className="field-wrapper section">
+                  <CheckboxContainer
+                    options={optionsSuplements}
+                    selection={s => this.handleSelection(s, "dietSuplements")}
+                  />
+                </div>
+              </div>
+
+              <div className="field">
+                <label className="label" />
+                <div className="field-wrapper section">
+                  <InputP
+                    id="sport"
+                    name="sport"
+                    label="Sports"
+                    value={record.sport}
                     type="text"
                     handleChange={e => this.handleFieldChange(e)}
                   />
                 </div>
-              ) : null}
-            </div>
-          </div>
-        </div>
+              </div>
 
-        <div className="field">
-          <label className="label">Diet Suplements</label>
-          <div className="field-wrapper section">
-            <CheckboxContainer
-              options={optionsSuplements}
-              selection={s => this.handleSelection(s, "dietSuplements")}
-            />
-          </div>
-        </div>
+              <div className="field">
+                <label className="label">Work Risk</label>
+                <div className="field-wrapper section">
+                  <CheckboxContainer
+                    options={optionsWorkRisk}
+                    selection={s => this.handleSelection(s, "workRisk")}
+                  />
+                </div>
+              </div>
 
-        <div className="field">
-          <label className="label" />
-          <div className="field-wrapper section">
-            <InputP
-              id="sport"
-              name="sport"
-              label="Sports"
-              value={record.sport}
-              type="text"
-              handleChange={e => this.handleFieldChange(e)}
-            />
-          </div>
-        </div>
+              <div className="section">
+                <p className="label" />
+                <div className="field-wrapper section">
+                  <div className="columns">
+                    <div className="column">
+                      <div className="field">
+                        <label className="label">Pregnancy Risk</label>
+                        <div className="control">
+                          <div className="select">
+                            <select
+                              name="risk"
+                              value={record.risk}
+                              onChange={e => this.handleFieldChange(e)}
+                            >
+                              {optionsRisk.map(type => (
+                                <option value={type} key={type}>
+                                  {type}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
-        <div className="field">
-          <label className="label">Work Risk</label>
-          <div className="field-wrapper section">
-            <CheckboxContainer
-              options={optionsWorkRisk}
-              selection={s => this.handleSelection(s, "workRisk")}
-            />
-          </div>
-        </div>
-
-        <div className="section">
-          <p className="label" />
-          <div className="field-wrapper section">
-            <div className="columns">
-              <div className="column">
-                <div className="field">
-                  <label className="label">Pregnancy Risk</label>
-                  <div className="control">
-                    <div className="select">
-                      <select
-                        name="risk"
-                        value={record.risk}
-                        onChange={e => this.handleFieldChange(e)}
-                      >
-                        {optionsRisk.map(type => (
-                          <option value={type} key={type}>
-                            {type}
-                          </option>
-                        ))}
-                      </select>
+                    <div className="column">
+                      <InputP
+                        id="riskReason"
+                        name="riskReason"
+                        label="Reason"
+                        value={record.riskReason}
+                        type="text"
+                        handleChange={e => this.handleFieldChange(e)}
+                      />
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="column">
-                <InputP
-                  id="riskReason"
-                  name="riskReason"
-                  label="Reason"
-                  value={record.riskReason}
-                  type="text"
-                  handleChange={e => this.handleFieldChange(e)}
-                />
+              <div className="has-text-centered">
+                <button
+                  className="button is-primary"
+                  onClick={e => this.handleUpdate(e)}
+                >
+                  Update
+                </button>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div className="has-text-centered">
-          <button
-            className="button is-primary"
-            onClick={e => this.handleUpdate(e)}
-          >
-            Update
-          </button>
-        </div>
-        
-        </div>
-       
-      </React.Fragment>
+          </React.Fragment>
+        ) : (
+          <Loader />
+        )}
+      </React.Component>
     );
   }
 }

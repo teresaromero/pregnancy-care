@@ -54,7 +54,7 @@ class _HomePage extends React.Component {
   }
 }
 
-export const HomePage = connect(store => ({
+export const HomePage = withRouter(connect(store => ({
   loginActive: store.loginActive,
   signupActive: store.signupActive
-}))(withRouter(_HomePage));
+}))(_HomePage))

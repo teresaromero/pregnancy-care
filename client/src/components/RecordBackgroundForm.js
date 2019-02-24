@@ -90,7 +90,7 @@ class _RecordBackgroundForm extends React.Component {
     let { patient } = this.props;
     return (
       <React.Fragment>
-        {patient ? (
+        {patient && record ? (
           <React.Fragment>
             <div className="box">
               <div className="field-wrapper section">

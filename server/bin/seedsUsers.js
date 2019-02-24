@@ -2,19 +2,9 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const createRecord = require("./seedsRecord");
+require("dotenv").config();
 
 const bcryptSalt = 10;
-
-mongoose
-  .connect(`${process.env.DBURL}`, { useNewUrlParser: true })
-  .then(x => {
-    console.log(
-      `Connected to Mongo! Database name: "${x.connections[0].name}"`
-    );
-  })
-  .catch(err => {
-    console.error("Error connecting to mongo", err);
-  });
 
 let usersAdmin = [
   {
@@ -94,21 +84,31 @@ let usersCustomer = [
   }
 ];
 
-User.collection.drop();
+mongoose
+  .connect(`${process.env.DBURL}`, { useNewUrlParser: true })
+  .then(x => {
+    console.log(
+      `Connected to Mongo! Database name: "${x.connections[0].name}"`
+    );
+    User.collection.drop();
 
-User.create(usersAdmin).then(admins => {
-  User.create(usersCustomer).then(usersCreated => {
-    usersCreated.map((user, idx) => {
-      createRecord(user._id, idx).then(record => {
-        User.findOneAndUpdate(
-          { _id: user._id },
-          { recordId: record._id },
-          { new: true }
-        ).then(user => {
-          console.log(user);
-          mongoose.disconnect();
+    User.create(usersAdmin).then(admins => {
+      User.create(usersCustomer).then(usersCreated => {
+        usersCreated.map((user, idx) => {
+          createRecord(user._id, idx).then(record => {
+            User.findOneAndUpdate(
+              { _id: user._id },
+              { recordId: record._id },
+              { new: true }
+            ).then(user => {
+              console.log(user);
+              mongoose.disconnect();
+            });
+          });
         });
       });
     });
+  })
+  .catch(err => {
+    console.error("Error connecting to mongo", err);
   });
-});

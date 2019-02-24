@@ -117,6 +117,4 @@ class _SignupForm extends React.Component {
   }
 }
 
-export const SignupForm = connect(store => ({ messages: store.messages }))(
-  withRouter(_SignupForm)
-);
+export const SignupForm = withRouter(connect(store => ({ messages: store.messages }))(_SignupForm))

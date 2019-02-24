@@ -8,10 +8,9 @@ class _PregnancyDetail extends React.Component {
   render() {
     let { patient } = this.props;
     let patientRecord = this.props.patient.recordId;
-    console.log(patient);
     return (
       <React.Fragment>
-        {patient ? (
+        {patient && patientRecord ? (
           <React.Fragment>
             <div className="field-wrapper">
               <div className="columns has-text-centered is-marginless is-paddingless">

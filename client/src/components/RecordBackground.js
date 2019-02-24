@@ -11,7 +11,7 @@ class _RecordBackground extends React.Component {
 
     return (
       <React.Fragment>
-        {patient ? (
+        {patient && record ? (
           <React.Fragment>
             <div className="field-wrapper section">
               <p className="label">Familiar Background:</p>

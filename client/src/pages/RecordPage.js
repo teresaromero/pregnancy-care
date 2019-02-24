@@ -56,7 +56,6 @@ class _RecordPage extends React.Component {
     }
   }
 
-
   render() {
     let {
       patient,
@@ -66,7 +65,6 @@ class _RecordPage extends React.Component {
       modalVisit,
       dispatch
     } = this.props;
-
     return (
       <React.Fragment>
         {patient ? (

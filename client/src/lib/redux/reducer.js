@@ -114,7 +114,6 @@ export const rootReducer = (store = initialStore, action) => {
         ...store,
         patient: action.patient
       };
-
       break;
 
     case "EXIT_PATIENT":

@@ -19,6 +19,7 @@ router.post(
 
 router.put("/editProfilePicture", isLoggedIn(), (req, res, next) => {
   let { id, file } = req.body;
+  console.log(id, file);
   User.findByIdAndUpdate(id, { image: file }, { new: true })
     .then(user => res.json(user))
     .catch(e => console.log(e));
@@ -42,7 +43,6 @@ router.put("/editProfile", isLoggedIn(), (req, res, next) => {
     { new: true }
   )
     .then(user => {
-      console.log(user);
       res.json({ user });
     })
     .catch(e => console.log(e));
