@@ -2,7 +2,7 @@ import React from "react";
 import { Aside } from "./Aside";
 import { DashboardPage } from "../pages/DashboardPage";
 import { Switch, Route } from "react-router";
-import { PatientsPage } from "../pages/PatientsPage";
+import  PatientsPage from "../pages/PatientsPage";
 import { ProfilePage } from "../pages/ProfilePage";
 import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";

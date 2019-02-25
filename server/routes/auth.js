@@ -58,12 +58,6 @@ router.post("/signup", isLoggedOut(), (req, res, next) => {
       .save()
       .then(user =>
         loginPromise(req, user).then(user => {
-          activateUserMail(
-            user.email,
-            user.name,
-            user.email,
-            user.confirmationCode
-          );
           res.json({ user });
         })
       )

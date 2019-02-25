@@ -4,33 +4,34 @@ import { Loader } from "./Loader";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-const _PatientsList = ({ allPatients, filtered }) => {
+const PatientsList = ({ data }) => {
   return (
     <React.Fragment>
-      <div className="section">
-        {filtered ? (
-          filtered.map(patient => (
-            <div key={patient.name} className="box">
-              <PatientsListCard patient={patient} />
+      {data.loading ? (
+        <Loader />
+      ) : (
+        <div className="section">
+          {data.patients.length === 0 ? (
+            <div className="notification is-danger">
+              Patient not found, try to search with phone number or email
+              account
             </div>
-          ))
-        ) : allPatients ? (
-          allPatients.map(patient => (
-            <div key={patient.name} className="box">
-              <PatientsListCard patient={patient} />
-            </div>
-          ))
-        ) : (
-          <Loader />
-        )}
-      </div>
+          ) : (
+            data.patients.map(patient => (
+              <div key={patient.name} className="box">
+                <PatientsListCard
+                  name={patient.name}
+                  surname={patient.surname}
+                  id={patient.id}
+                  image={patient.image}
+                />
+              </div>
+            ))
+          )}
+        </div>
+      )}
     </React.Fragment>
   );
 };
 
-export const PatientsList = withRouter(
-  connect(store => ({
-    allPatients: store.patientList,
-    filtered: store.filteredPatientList
-  }))(_PatientsList)
-);
+export default withRouter(connect()(PatientsList));

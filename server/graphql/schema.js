@@ -12,7 +12,8 @@ const {
   GraphQLSchema,
   GraphQLID,
   GraphQLBoolean,
-  GraphQLList
+  GraphQLList,
+  GraphQLNonNull
 } = graphql;
 
 const AppointmentType = new GraphQLObjectType({
@@ -185,10 +186,13 @@ const RootQuery = new GraphQLObjectType({
     },
     patients: {
       type: new GraphQLList(UserType),
+      args: { filter: { type: GraphQLString } },
       resolve(parent, args) {
-        return User.find({ role: "CUSTOMER" });
+        let regex = new RegExp(args.filter, "i");
+        return User.find({ role: "CUSTOMER", concat: regex });
       }
     },
+
     record: {
       type: RecordType,
       args: { id: { type: GraphQLID } },

@@ -16,35 +16,10 @@ class _SearchBarPatients extends React.Component {
     };
   }
 
-  componentDidMount() {
-    let { dispatch } = this.props;
-    console.log("Component did mount");
-
-    PatientsApi.allPatients().then(data => {
-      dispatch(fetchPatients(data.patients));
-    });
-  }
-
-  componentWillUnmount() {
-    console.log("Component will unmount");
-  }
-
   handleSearch(e) {
-    let { dispatch } = this.props;
-    if (e.target.value !== "") {
-      this.setState({ query: e.target.value }, () => {
-        PatientsApi.search(this.state.query).then(res => {
-          let { patients } = res;
-          dispatch(filterPatients(patients));
-        });
-      });
-    } else {
-      this.setState({ query: e.target.value }, () => {
-        PatientsApi.allPatients().then(data => {
-          dispatch(filterPatients(data.patients));
-        });
-      });
-    }
+    this.setState({ query: e.target.value }, () => {
+      this.props.onChange(this.state.query);
+    });
   }
 
   render() {
