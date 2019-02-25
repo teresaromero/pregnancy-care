@@ -4,6 +4,10 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const express = require("express");
 
+const graphqlHTTP = require("express-graphql");
+const schema = require("./graphql/schema");
+const graphiql = require("express-graphql");
+
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
@@ -30,6 +34,7 @@ const debug = require("debug")(
 );
 
 const app = express();
+
 app.use(express.static(path.join(__dirname, "public")));
 // app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
 
@@ -73,6 +78,14 @@ const patientRoutes = require("./routes/patients");
 app.use("/api/patients", patientRoutes);
 const appointmentsRoutes = require("./routes/appointments");
 app.use("/api/appointments", appointmentsRoutes);
+
+app.use(
+  "/grapghql",
+  graphqlHTTP({
+    schema,
+    graphiql
+  })
+);
 
 app.use("*", (req, res) =>
   res.sendFile(path.join(__dirname + "./public/index.html"))

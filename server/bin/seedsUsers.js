@@ -24,7 +24,7 @@ let usersCustomer = users
     let concat =
       user.name + user.surname + user.idNum + user.phone + user.email;
     return { ...user, password, concat };
-  })
+  });
 
 mongoose.connect(`${process.env.DBURL}`, { useNewUrlParser: true }).then(x => {
   console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
@@ -37,9 +37,14 @@ mongoose.connect(`${process.env.DBURL}`, { useNewUrlParser: true }).then(x => {
     new Record(records[i]).save().then(record => {
       let recordId = record._id;
       let newUser = { ...usersCustomer[i], recordId };
-      new User(newUser).save().then(user => console.log(user._id));
+      new User(newUser).save().then(user => {
+        Record.findByIdAndUpdate(
+          recordId,
+          { userId: user._id },
+          { new: true }
+        ).then(record => console.log("record"+record.userId));
+      });
     });
   }
-
- 
+  console.log("finished");
 });
