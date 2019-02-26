@@ -1,6 +1,7 @@
 #!/bin/bash
 rm -rf ./client/build
 rm -rf ./server/public/
+echo "Done removal"
 cd client
 npm install
 npm run build

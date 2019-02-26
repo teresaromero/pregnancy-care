@@ -2,7 +2,7 @@ import axios from "axios";
 
 const instance = axios.create({
   baseURL: "https://cima.aemps.es/cima/rest/",
-  timeout: 5000
+
 });
 
 export default class VademecumApi {

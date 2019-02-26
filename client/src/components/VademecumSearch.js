@@ -10,23 +10,16 @@ export default class VademecumSearch extends React.Component {
     this.state = {
       data: null,
       query: "",
-      notFound: false
+      notFound: false,
+      isLoading: false
     };
-  }
-  componentDidMount() {
-    console.log("Component did mount");
-  }
-
-  componentWillUnmount() {
-    console.log("Component will unmount");
   }
 
   handleSearch(e) {
     if (e.target.value !== "") {
-      this.setState({ query: e.target.value }, () => {
+      this.setState({ isLoading: true, query: e.target.value }, () => {
         VademecumApi.drugs("nombre", this.state.query).then(results => {
-          console.log(results);
-          this.setState({ data: results });
+          this.setState({ data: results, isLoading: false });
         });
       });
     } else {
@@ -75,8 +68,6 @@ export default class VademecumSearch extends React.Component {
               </span>
               <span className="is-size-7">Not Marketed</span>
             </p>
-
-
           </div>
         </div>
 
@@ -91,6 +82,8 @@ export default class VademecumSearch extends React.Component {
                   <div className="message-body">Not matching</div>
                 </article>
               </div>
+            ) : this.state.isLoading ? (
+              <p>Loading</p>
             ) : (
               <React.Fragment>
                 <p>Total results: {this.state.data.length}</p>

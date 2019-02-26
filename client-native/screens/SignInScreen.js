@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { View } from "react-native";
-import { Card, Button, Input, Text } from "react-native-elements";
+import { View, Dimensions } from "react-native";
+import { Card, Button, Input, Text, Image } from "react-native-elements";
 import AuthApi from "../lib/APIs/authApi";
 import { login, errorMessageAction, clearMessages } from "../lib/redux/actions";
-import SourceSans from '../assets/fonts/SourceSansPro-Black.ttf'
+import { logo } from "../assets/images/logo.png";
 
 class _SignIn extends React.Component {
   constructor() {
@@ -29,7 +29,6 @@ class _SignIn extends React.Component {
     } else {
       AuthApi.login(email, password)
         .then(user => {
-         
           if (user !== undefined) {
             dispatch(login(user));
             navigation.navigate("SignedIn");
@@ -49,7 +48,7 @@ class _SignIn extends React.Component {
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "#91d4f2"
+          backgroundColor: "#01395c"
         }}
       >
         <View
@@ -58,14 +57,19 @@ class _SignIn extends React.Component {
             width: "90%",
             paddingTop: 50,
             justifyContent: "center",
-            alignItems: "center",
-           
+            alignItems: "center"
           }}
         >
-          <Text h1 style={{textAlign:"center"}}>Pregnancy Care 🤰🏼</Text>
+          <Image
+            source={require("../assets/images/logo.png")}
+            style={{
+              width: Dimensions.get("screen").width * 0.8,
+              resizeMode: "contain"
+            }}
+          />
         </View>
 
-        <View style={{ flex: 2, width: "90%" }}>
+        <View style={{ flex: 2, width: Dimensions.get("screen").width * 0.9 }}>
           <Card>
             <Input
               placeholder="Email address..."
@@ -80,20 +84,26 @@ class _SignIn extends React.Component {
 
             <Button
               buttonStyle={{ marginTop: 20 }}
-              backgroundColor="#03A9F4"
+              color="#01395c"
               title="Sign In"
+              type="clear"
               onPress={() => this.handleSubmit()}
             />
           </Card>
-          <View style={{padding:15,justifyContent: "center",
-            alignItems: "center",
-           }}>
-          {messages.map(m => (
-            <Text key={m} style={{color:"red"}}>{m}</Text>
-          ))}
+          <View
+            style={{
+              padding: 15,
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            {messages.map(m => (
+              <Text key={m} style={{ color: "red" }}>
+                {m}
+              </Text>
+            ))}
+          </View>
         </View>
-        </View>
-        
       </View>
     );
   }

@@ -1,12 +1,10 @@
 import React from "react";
 
-import PatientsApi from "../lib/APIs/patientsApi.js";
 import { InputP } from "./InputP";
 
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { fetchPatients, filterPatients } from "../lib/redux/actions.js";
 
 class _SearchBarPatients extends React.Component {
   constructor() {

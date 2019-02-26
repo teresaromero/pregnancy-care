@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform, StatusBar } from "react-native";
+import { Platform, StatusBar, Dimensions } from "react-native";
 import {
   createStackNavigator,
   createBottomTabNavigator,
@@ -12,7 +12,7 @@ import { Home } from "../screens/HomeScreen";
 
 import { Profile } from "../screens/ProfileScreen";
 import { CalendarScreen } from "../screens/CalendarScreen";
-import { Text, Header, Card, Button, Icon } from "react-native-elements";
+import { Text, Header, Card, Button, Icon, Image } from "react-native-elements";
 import { Record } from "../screens/RecordScreen";
 
 import { LogoutBtn } from "../components/LogoutBtn";
@@ -23,22 +23,30 @@ const headerStyle = {
 };
 
 const navigationOption = {
-  headerTitle: `Pregnancy Care`,
+  headerTitle: (
+    <Image
+      source={require("../assets/images/logo.png")}
+      style={{
+        width: Dimensions.get("screen").width * 0.5,
+        resizeMode: "contain"
+      }}
+    />
+  ),
   headerTintColor: "#fff",
   headerTitleStyle: {
     fontWeight: "300",
     fontSize: 30,
     color: "hsl(0, 0%, 96%)",
-    paddingBottom:5
+    paddingBottom: 5
   },
   headerRight: <LogoutBtn />,
   headerStyle: headerStyle
-}
+};
 
 export const HomeNavigator = createStackNavigator({
   Home: {
     screen: Home,
-    navigationOptions: () => (navigationOption)
+    navigationOptions: () => navigationOption
   },
   Record: {
     screen: Record,
@@ -57,14 +65,14 @@ export const HomeNavigator = createStackNavigator({
 export const ProfileNavigator = createStackNavigator({
   Profile: {
     screen: Profile,
-    navigationOptions: () => (navigationOption)
+    navigationOptions: () => navigationOption
   }
 });
 
 export const CalendarNavigator = createStackNavigator({
   Calendar: {
     screen: CalendarScreen,
-    navigationOptions: () => (navigationOption)
+    navigationOptions: () => navigationOption
   }
 });
 

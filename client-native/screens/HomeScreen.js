@@ -25,12 +25,13 @@ class _Home extends React.Component {
             <ScrollView>
               <Tile
                 imageSrc={require("../assets/images/pexels-photo-57529.jpeg")}
-                title={`Welcome ${patient.name}!!`}
                 titleStyle={{
-                  textShadowColor: "black",
+                  fontWeight: "200",
+                  textShadowColor: "#01395c",
                   textShadowOffset: { width: -1, height: 1 },
-                  textShadowRadius: 1
+                  textShadowRadius: 3
                 }}
+                imageContainerStyle={{ opacity: 0.8 }}
                 featured
                 caption=""
               />
@@ -43,9 +44,13 @@ class _Home extends React.Component {
                   alignItems: "center"
                 }}
               >
-                <Text h4>You are now</Text>
-                <Text h3>{moment().diff(patient.recordId.LMP, "weeks")}</Text>
-                <Text h4>weeks!!</Text>
+                <Text style={{ fontWeight: "200", fontSize: 40 }}>
+                  You are now
+                </Text>
+                <Text style={{ fontWeight: "300", fontSize: 40 }}>
+                  {moment().diff(patient.recordId.LMP, "weeks")}
+                </Text>
+                <Text style={{ fontWeight: "200", fontSize: 40 }}>weeks!!</Text>
               </View>
               <View
                 style={{
@@ -69,7 +74,7 @@ class _Home extends React.Component {
               </View>
               <View
                 style={{
-                  paddingTop: 15,
+                  paddingTop: 20,
                   flex: 1,
                   marginLeft: 20,
                   marginRight: 20,
@@ -78,14 +83,7 @@ class _Home extends React.Component {
                 }}
               >
                 <Button
-                  icon={
-                    <Icon
-                      type="font-awesome"
-                      name="user-md"
-                      size={20}
-                      color="white"
-                    />
-                  }
+                  type="clear"
                   title=" See Progress"
                   onPress={() => navigate("Record")}
                 />

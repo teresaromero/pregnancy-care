@@ -31,11 +31,13 @@ class _Navbar extends React.Component {
           aria-label="main navigation"
         >
           <div className="navbar-brand">
-            <div className="navbar-item">
-              <NavLink to="/">
-                <img src="/images/logo.png" alt="logo pregnancy care" />
-              </NavLink>
-            </div>
+            <NavLink to="/" className="">
+              <div className="navbar-item">
+                <span>
+                  <img src="/images/logo.png" alt="logo pregnancy care" />
+                </span>
+              </div>
+            </NavLink>
           </div>
 
           <div className="navbar-menu-custom">

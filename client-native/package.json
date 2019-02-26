@@ -1,5 +1,4 @@
 {
-  "main": "./App.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -16,6 +15,7 @@
     "expo": "^32.0.0",
     "moment": "^2.24.0",
     "react": "16.5.0",
+    "react-apollo": "^2.4.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-calendars": "^1.22.0",
     "react-native-chart-kit": "^2.2.1",
