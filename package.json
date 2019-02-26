@@ -6,7 +6,7 @@
     "start": "node ./server/bin/www",
     "dev": "DEBUG=server:* nodemon ./server/bin/www",
     "dev-windows": "nodemon ./server/bin/www",
-    "heroku-postbuild":"./build.sh"
+    "heroku-postbuild": "./build.sh"
   },
   "dependencies": {
     "axios": "^0.18.0",
