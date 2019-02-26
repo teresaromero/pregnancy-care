@@ -12,7 +12,6 @@ const initialStore = {
   patientList: null,
   filteredPatientList: null,
 
-  appointments: null,
   selectedDay: null,
 
   messages: [],
@@ -98,7 +97,6 @@ export const rootReducer = (store = initialStore, action) => {
         selectedDay: action.event,
         modalAppointment:true
       };
-      console.log(store.selectedDay)
       break;
 
     case "UNSELECT_DAY":
@@ -106,7 +104,6 @@ export const rootReducer = (store = initialStore, action) => {
         ...store,
         selectedDay: null
       };
-      console.log(store.selectedDay)
       break;
 
     case "VIEW_PATIENT":

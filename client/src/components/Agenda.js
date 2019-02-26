@@ -1,27 +1,21 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import "fullcalendar-reactwrapper/dist/css/fullcalendar.min.css";
 import FullCalendar from "fullcalendar-reactwrapper";
-import AppointmentsAPI from "../lib/APIs/appointmentsAPI";
 import { ModalCard } from "./ModalCard";
+import { closeModal, selectDay, unSelectDay } from "../lib/redux/actions";
+import NewAppointmentForm from "./NewAppointmentForm";
+import { graphql, compose } from "react-apollo";
 import {
-  getAppointments,
-  closeModal,
-  selectDay,
-  unSelectDay
-} from "../lib/redux/actions";
-import { NewAppointmentForm } from "./NewAppointmentForm";
+  getAppointmentsQuery,
+  updateDateTimeMutation
+} from "../lib/graphQL/queries";
 
-class _Agenda extends React.Component {
+class Agenda extends React.Component {
   handleSelectDate(start, end) {
     let { dispatch } = this.props;
-    let appointment = { start: start, end: end };
-
-    AppointmentsAPI.addAppointment(appointment).then(res => {
-      let { appointments } = res;
-      dispatch(getAppointments(appointments));
-    });
+    let e = { start: start, end: end };
+    dispatch(selectDay(e));
   }
 
   handleClick(e, jsEv, view) {
@@ -30,35 +24,33 @@ class _Agenda extends React.Component {
   }
 
   handleUpdate(e, delta, revertFunc) {
-    let { dispatch } = this.props;
     let { start, end, _id } = e;
-    let updApp = { start, end, _id };
-    AppointmentsAPI.update(updApp).then(res => {
-      let { appointments } = res;
-      dispatch(getAppointments(appointments));
+    let { updateDateTimeMutation } = this.props;
+    updateDateTimeMutation({
+      variables: {
+        id: _id,
+        start: start,
+        end: end
+      },
+      refetchQueries: [{ query: getAppointmentsQuery }]
     });
   }
 
   handleDrop(event, delta, revertFunc) {
-    let { dispatch } = this.props;
     let { start, end, _id } = event;
-    let updApp = { start, end, _id };
-    AppointmentsAPI.update(updApp).then(res => {
-      let { appointments } = res;
-      dispatch(getAppointments(appointments));
-    });
-  }
-
-  componentDidMount() {
-    let { dispatch } = this.props;
-    AppointmentsAPI.allAppointments().then(res => {
-      let { appointments } = res;
-      dispatch(getAppointments(appointments));
+    let { updateDateTimeMutation } = this.props;
+    updateDateTimeMutation({
+      variables: {
+        id: _id,
+        start: start,
+        end: end
+      },
+      refetchQueries: [{ query: getAppointmentsQuery }]
     });
   }
 
   render() {
-    let { appointments, modalAppointment, dispatch } = this.props;
+    let { getAppointmentsQuery, modalAppointment, dispatch } = this.props;
     return (
       <React.Fragment>
         <div id="calendar" className="section">
@@ -68,9 +60,9 @@ class _Agenda extends React.Component {
             handleWindowResize={true}
             visibleRange={{ start: Date.now }}
             nowIndicator={true}
-            events={appointments}
+            events={getAppointmentsQuery.appointments}
             gotoDate={Date.now()}
-            loading={(isLoading,view)=>this.handleLoading(isLoading,view)}
+            loading={(isLoading, view) => this.handleLoading(isLoading, view)}
             firstDay="1"
             weekends={false}
             slotDuration={"00:15:00"}
@@ -112,10 +104,7 @@ class _Agenda extends React.Component {
   }
 }
 
-export const Agenda = withRouter(
-  connect(store => ({
-    modalAppointment: store.modalAppointment,
-    appointments: store.appointments,
-    selectedDay: store.selectedDay
-  }))(_Agenda)
-);
+export default compose(
+  graphql(getAppointmentsQuery, { name: "getAppointmentsQuery" }),
+  graphql(updateDateTimeMutation, { name: "updateDateTimeMutation" })
+)(connect(store => ({ modalAppointment: store.modalAppointment }))(Agenda));

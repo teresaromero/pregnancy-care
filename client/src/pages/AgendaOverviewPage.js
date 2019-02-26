@@ -1,6 +1,6 @@
 import React from "react";
 import { Messages } from "../components/Messages";
-import { Agenda } from "../components/Agenda";
+import Agenda  from "../components/Agenda";
 
 export const AgendaOverviewPage = () => {
   

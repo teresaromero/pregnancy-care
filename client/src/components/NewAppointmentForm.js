@@ -1,20 +1,21 @@
 import React from "react";
-
-import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import moment from "moment";
-import { closeModal, getAppointments } from "../lib/redux/actions";
+import { closeModal } from "../lib/redux/actions";
 
-import PatientsApi from "../lib/APIs/patientsApi";
 import { InputP } from "./InputP";
-
-import { TextArea } from "./TextArea";
 
 import { Loader } from "./Loader";
 import AutosuggestSelector from "./AutosuggestSelector";
-import AppointmentsAPI from "../lib/APIs/appointmentsAPI";
+import { graphql, compose } from "react-apollo";
+import {
+  addAppointmentMutation,
+  getAppointmentsQuery,
+  updateAppointmentMutation,
+  deleteAppointmentMutation
+} from "../lib/graphQL/queries";
 
-class _NewAppointmentForm extends React.Component {
+class NewAppointmentForm extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -27,12 +28,25 @@ class _NewAppointmentForm extends React.Component {
     this.setState({ appointment: selectedDay });
   }
 
-  componentWillUnmount() {
-    this.setState({ appointment: null });
+  handleSave(e) {
+    let { dispatch, addAppointmentMutation } = this.props;
+    e.preventDefault();
+    let { start, end, title, description, userId } = this.state.appointment;
+    addAppointmentMutation({
+      variables: {
+        title: title,
+        start: start,
+        end: end,
+        description: description,
+        userId: userId
+      },
+      refetchQueries: [{ query: getAppointmentsQuery }]
+    });
+    this.setState({ appointment: null }, () => dispatch(closeModal()));
   }
 
-  handleSave(e) {
-    let { dispatch } = this.props;
+  handleUpdate(e) {
+    let { dispatch, updateAppointmentMutation } = this.props;
     e.preventDefault();
     let {
       _id,
@@ -42,41 +56,45 @@ class _NewAppointmentForm extends React.Component {
       description,
       userId
     } = this.state.appointment;
-    let uptApp = { _id, start, end, title, description, userId };
-    AppointmentsAPI.update(uptApp)
-      .then(res => {
-        let { appointments } = res;
-        dispatch(getAppointments(appointments));
-        dispatch(closeModal());
-      })
-      .catch(e => console.log(e));
+    updateAppointmentMutation({
+      variables: {
+        id: _id,
+        title: title,
+        start: start,
+        end: end,
+        description: description,
+        userId: userId
+      },
+      refetchQueries: [{ query: getAppointmentsQuery }]
+    });
+    this.setState({ appointment: null }, () => dispatch(closeModal()));
   }
 
   handleDelete(e) {
     e.preventDefault();
     let { appointment } = this.state;
-    let { dispatch } = this.props;
-    AppointmentsAPI.delete(appointment._id).then(res => {
-      let { appointments } = res;
-      dispatch(getAppointments(appointments));
-      dispatch(closeModal());
+    let { dispatch, deleteAppointmentMutation } = this.props;
+    deleteAppointmentMutation({
+      variables: {
+        id: appointment._id
+      },
+      refetchQueries: [{ query: getAppointmentsQuery }]
     });
+    this.setState({ appointment: null }, () => dispatch(closeModal()));
   }
 
   handleDateChange(e) {
     let upt = { ...this.state.appointment };
     let { value, name } = e.target;
     upt[name] = moment(moment(value).toISOString());
-    this.setState({ appointment: upt }
-    );
+    this.setState({ appointment: upt });
   }
 
   handleChange(e) {
     let upt = { ...this.state.appointment };
     let { value, name } = e.target;
     upt[name] = value;
-    this.setState({ appointment: upt }
-    );
+    this.setState({ appointment: upt });
   }
 
   patientSelection(p) {
@@ -88,7 +106,7 @@ class _NewAppointmentForm extends React.Component {
 
   render() {
     let { appointment } = this.state;
-    let { selectedDay } = this.props;
+    let { selectedDay, dispatch } = this.props;
     return (
       <React.Fragment>
         {selectedDay ? (
@@ -143,22 +161,39 @@ class _NewAppointmentForm extends React.Component {
                 placeholder=""
                 handleChange={e => this.handleChange(e)}
               />
+              {selectedDay._id ? (
+                <div className="buttons">
+                  <button
+                    className="button is-primary"
+                    onClick={e => this.handleUpdate(e)}
+                  >
+                    Update
+                  </button>
 
-              <div className="buttons">
-                <button
-                  className="button is-primary"
-                  onClick={e => this.handleSave(e)}
-                >
-                  Save
-                </button>
+                  <button
+                    className="button is-danger"
+                    onClick={e => this.handleDelete(e)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              ) : (
+                <div className="buttons">
+                  <button
+                    className="button is-primary"
+                    onClick={e => this.handleSave(e)}
+                  >
+                    Save
+                  </button>
 
-                <button
-                  className="button is-danger"
-                  onClick={e => this.handleDelete(e)}
-                >
-                  Delete
-                </button>
-              </div>
+                  <button
+                    className="button is-danger"
+                    onClick={() => dispatch(closeModal())}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              )}
             </div>
           </React.Fragment>
         ) : (
@@ -169,6 +204,8 @@ class _NewAppointmentForm extends React.Component {
   }
 }
 
-export const NewAppointmentForm = withRouter(
-  connect(store => ({ selectedDay: store.selectedDay }))(_NewAppointmentForm)
-);
+export default compose(
+  graphql(addAppointmentMutation, { name: "addAppointmentMutation" }),
+  graphql(deleteAppointmentMutation, { name: "deleteAppointmentMutation" }),
+  graphql(updateAppointmentMutation, { name: "updateAppointmentMutation" })
+)(connect(store => ({ selectedDay: store.selectedDay }))(NewAppointmentForm));

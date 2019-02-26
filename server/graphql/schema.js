@@ -16,13 +16,15 @@ const {
   GraphQLNonNull
 } = graphql;
 
+const { GraphQLDateTime } = require("graphql-iso-date");
+
 const AppointmentType = new GraphQLObjectType({
   name: "Appointment",
   fields: () => ({
     id: { type: GraphQLID },
     title: { type: GraphQLString },
-    start: { type: GraphQLString },
-    end: { type: GraphQLString },
+    start: { type: GraphQLDateTime },
+    end: { type: GraphQLDateTime },
     description: { type: GraphQLString },
     user: {
       type: UserType,
@@ -37,7 +39,7 @@ const TrackedDataType = new GraphQLObjectType({
   name: "TrackedData",
   fields: () => ({
     value: { type: GraphQLInt },
-    date: { type: GraphQLString }
+    date: { type: GraphQLDateTime }
   })
 });
 
@@ -46,7 +48,7 @@ const TrackedPressureType = new GraphQLObjectType({
   fields: () => ({
     Systolic: { type: GraphQLInt },
     Diastolic: { type: GraphQLInt },
-    date: { type: GraphQLString }
+    date: { type: GraphQLDateTime }
   })
 });
 
@@ -57,7 +59,7 @@ const VisitType = new GraphQLObjectType({
     testResults: { type: GraphQLString },
     notes: { type: GraphQLString },
     notesOut: { type: GraphQLString },
-    date: { type: GraphQLString }
+    date: { type: GraphQLDateTime }
   })
 });
 
@@ -92,9 +94,9 @@ const RecordType = new GraphQLObjectType({
     lastCitology: { type: GraphQLString },
     height: { type: GraphQLInt },
     partnerBirthDate: { type: GraphQLString },
-    LMP: { type: GraphQLString },
-    EDC: { type: GraphQLString },
-    HPT: { type: GraphQLString },
+    LMP: { type: GraphQLDateTime },
+    EDC: { type: GraphQLDateTime },
+    HPT: { type: GraphQLDateTime },
     pregnancyType: { type: GraphQLString },
     diet: { type: GraphQLString },
     dietOther: { type: GraphQLString },
@@ -131,7 +133,7 @@ const UserType = new GraphQLObjectType({
     email: { type: GraphQLString },
     password: { type: GraphQLString },
     gender: { type: GraphQLString },
-    bornDate: { type: GraphQLString },
+    bornDate: { type: GraphQLDateTime },
     confirmationCode: { type: GraphQLString },
     image: { type: GraphQLString },
     isActive: { type: GraphQLBoolean },
@@ -177,6 +179,7 @@ const RootQuery = new GraphQLObjectType({
         return Appointment.find();
       }
     },
+
     patient: {
       type: UserType,
       args: { id: { type: GraphQLID } },
@@ -189,7 +192,9 @@ const RootQuery = new GraphQLObjectType({
       args: { filter: { type: GraphQLString } },
       resolve(parent, args) {
         let regex = new RegExp(args.filter, "i");
-        return User.find({ role: "CUSTOMER", concat: regex });
+        return User.find({ role: "CUSTOMER", concat: regex }).sort({
+          name: 1
+        });
       }
     },
 
@@ -217,8 +222,8 @@ const Mutation = new GraphQLObjectType({
       type: AppointmentType,
       args: {
         title: { type: GraphQLString },
-        start: { type: GraphQLString },
-        end: { type: GraphQLString },
+        start: { type: GraphQLDateTime },
+        end: { type: GraphQLDateTime },
         description: { type: GraphQLString },
         userId: { type: GraphQLID }
       },
@@ -231,6 +236,62 @@ const Mutation = new GraphQLObjectType({
           userId: args.user
         });
         return appointment.save();
+      }
+    },
+    updateAppointment: {
+      type: AppointmentType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+        title: { type: GraphQLString },
+        start: { type: GraphQLDateTime },
+        end: { type: GraphQLDateTime },
+        description: { type: GraphQLString },
+        userId: { type: GraphQLID }
+      },
+      resolve(parent, args) {
+        let { id, title, start, end, description, userId } = args;
+        console.log(args);
+        return Appointment.findByIdAndUpdate(
+          id,
+          {
+            title: title,
+            start: start,
+            end: end,
+            description: description,
+            userId: userId
+          },
+          { new: true }
+        );
+      }
+    },
+
+    updateAppointmentDateTime: {
+      type: AppointmentType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+        start: { type: GraphQLDateTime },
+        end: { type: GraphQLDateTime }
+      },
+      resolve(parent, args) {
+        let { id, start, end } = args;
+        console.log(args);
+        return Appointment.findByIdAndUpdate(
+          id,
+          {
+            start: start,
+            end: end
+          },
+          { new: true }
+        );
+      }
+    },
+    deleteAppointment: {
+      type: AppointmentType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) }
+      },
+      resolve(parent, args) {
+        return Appointment.findByIdAndDelete(args.id);
       }
     }
   }
