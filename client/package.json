@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "homepage":".",
+  "homepage": ".",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.7.2",
     "apollo-boost": "^0.1.28",
