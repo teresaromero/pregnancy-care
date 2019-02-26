@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import PatientsApi from "../lib/APIs/patientsApi";
 import moment from "moment";
 import { getPatient } from "../lib/redux/actions";
+import { graphql, compose } from "graphql";
 
 class _Home extends React.Component {
   componentDidMount() {
@@ -101,3 +102,5 @@ export const Home = connect(store => ({
   user: store.user,
   patient: store.patient
 }))(_Home);
+
+

@@ -90,16 +90,14 @@ export const SignedIn = createBottomTabNavigator(
     Home: {
       screen: HomeNavigator,
       navigationOptions: {
-        tabBarLabel: "Home",
         tabBarIcon: ({ tintColor }) => (
-          <FontAwesome name="home" size={20} color={tintColor} />
+          <FontAwesome name="home" size={30} color={tintColor} />
         )
       }
     },
     Calendar: {
       screen: CalendarNavigator,
       navigationOptions: {
-        tabBarLabel: "Calendar",
         tabBarIcon: ({ tintColor }) => (
           <FontAwesome name="calendar" size={20} color={tintColor} />
         )
@@ -108,7 +106,6 @@ export const SignedIn = createBottomTabNavigator(
     Profile: {
       screen: ProfileNavigator,
       navigationOptions: {
-        tabBarLabel: "Profile",
         tabBarIcon: ({ tintColor }) => (
           <FontAwesome name="user" size={20} color={tintColor} />
         )
@@ -117,6 +114,8 @@ export const SignedIn = createBottomTabNavigator(
   },
   {
     tabBarOptions: {
+      activeTintColor:'#7c96c8',
+      inactiveTintColor:'white',
       style: {
         paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
         backgroundColor: "#01395c"

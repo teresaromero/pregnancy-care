@@ -8,6 +8,9 @@ import { isSignedIn } from "./auth/auth";
 import AuthApi from "./lib/APIs/authApi";
 import { login } from "./lib/redux/actions";
 import { ActivityIndicator } from "react-native";
+import { ApolloClient, InMemoryCache } from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
+import { createHttpLink } from "apollo-link-http";
 
 export default class App extends React.Component {
   constructor() {
@@ -17,6 +20,17 @@ export default class App extends React.Component {
       isLoading: true
     };
   }
+
+  createClient() {
+    // Initialize Apollo Client with URL to our server
+    return new ApolloClient({
+      link: createHttpLink({
+        uri: "http://localhost:3000/graphql"
+      }),
+      cache: new InMemoryCache()
+    });
+  }
+
   componentDidMount() {
     AuthApi.currentUser()
       .then(user => {
@@ -32,7 +46,6 @@ export default class App extends React.Component {
 
   render() {
     const { isAuth, isLoading } = this.state;
-    // If we haven't checked AsyncStorage yet, don't render anything (better ways to do this)
 
     const Layout = createAppContainer(createRootNavigator(isAuth));
     return (
@@ -40,9 +53,11 @@ export default class App extends React.Component {
         {isLoading ? (
           <ActivityIndicator />
         ) : (
-          <Provider store={store}>
-            <Layout />
-          </Provider>
+          <ApolloProvider client={this.createClient()}>
+            <Provider store={store}>
+              <Layout />
+            </Provider>
+          </ApolloProvider>
         )}
       </React.Fragment>
     );
