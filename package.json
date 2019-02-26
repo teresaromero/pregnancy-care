@@ -1,7 +1,6 @@
 {
   "name": "server",
   "version": "0.0.0",
-  "homepage":".",
   "private": true,
   "scripts": {
     "start": "node ./server/bin/www",
@@ -35,6 +34,7 @@
     "passport-local": "^1.0.0",
     "serve-favicon": "^2.5.0"
   },
+  "homepage": "/",
   "devDependencies": {
     "nodemon": "^1.12.1"
   }

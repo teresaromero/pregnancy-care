@@ -35,8 +35,7 @@ const debug = require("debug")(
 
 const app = express();
 
-
-app.set('view engine', 'hbs');
+app.set("view engine", "hbs");
 app.use(express.static(path.join(__dirname, "public")));
 // app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
 
@@ -90,6 +89,6 @@ app.use(
 );
 
 app.use("*", (req, res) =>
-  res.sendFile(path.join(__dirname + "/public/index.html"))
+  res.sendFile(path.join(__dirname, "/public/index.html"))
 );
 module.exports = app;
