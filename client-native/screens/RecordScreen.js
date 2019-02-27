@@ -1,90 +1,46 @@
 import React from "react";
 import { ScrollView, ActivityIndicator, View, Dimensions } from "react-native";
 import { Text } from "react-native-elements";
-import { connect } from "react-redux";
-import PatientsApi from "../lib/APIs/patientsApi";
 import moment from "moment";
-import {
-  LineChart,
-  BarChart,
-  Grid,
-  YAxis,
-  XAxis,
-  Path
-} from "react-native-svg-charts";
 
-class _Record extends React.Component {
-  getWeight() {
-    let { patient } = this.props;
-    let dataWeight = patient.recordId.weight.map(w => {
-      return w.value;
-    });
-    return dataWeight;
-  }
+import { graphql } from "react-apollo";
+import { currentUserQueryRecord } from "../lib/graphQL/queries";
+import { branch, renderComponent } from "recompose";
 
-  getBloodSystolic() {
-    let { patient } = this.props;
-    return patient.recordId.bloodPressure.map(b => {
-      return b.Systolic;
-    });
-  }
+import Bar from "../components/graph";
 
-  getBloodDiastolic() {
-    let { patient } = this.props;
-    return patient.recordId.bloodPressure.map(b => {
-      return b.Diastolic;
-    });
-  }
+const enhance = branch(
+  ({ data }) => data.currentUser == null && data.loading,
+  renderComponent(ActivityIndicator)
+);
 
-  getIMC() {
-    let { patient } = this.props;
-    return patient.recordId.IMC.map(i => {
-      return i.value;
-    });
-  }
+const getValues = ({ data }, field) => {
+  return data.currentUser.record[field].map(w => {
+    return w.value;
+  });
+};
 
-  render() {
-    let { patient } = this.props;
-    return (
-      <React.Fragment>
-        <View style={{ flex: 1 }}>
-          {patient ? (
-            <ScrollView>
-              <View style={{ height: 250, padding: 20, flexDirection: "row" }}>
-                <YAxis
-                  data={this.getWeight()}
-                  style={{ marginBottom: 30 }}
-                  contentInset={{ top: 10, bottom: 10 }}
-                  svg={{ fontSize: 10, fill: "grey" }}
-                />
-                <View style={{ flex: 1, marginLeft: 10 }}>
-                  <LineChart
-                    style={{ flex: 1 }}
-                    data={this.getWeight()}
-                    contentInset={{ top: 10, bottom: 10 }}
-                    svg={{ strokeWidth: 2, stroke: "rgb(134, 65, 244)" }}
-                  >
-                    <Grid />
-                  </LineChart>
-                  <XAxis
-                    style={{ marginHorizontal: -10, height: 30 }}
-                    data={this.getWeight()}
-                    formatLabel={(value, index) => index}
-                    contentInset={{ left: 10, right: 10 }}
-                    svg={{ fontSize: 10, fill: "grey" }}
-                  />
-                </View>
-              </View>
-            </ScrollView>
-          ) : (
-            <ActivityIndicator />
-          )}
+const Record = ({ data }) => (
+  <React.Fragment>
+    <View style={{ flex: 1, backgroundColor: "hsl(0, 0%, 96%)" }}>
+      <ScrollView>
+        <View
+          style={{
+            paddingTop: 15,
+            paddingLeft: 15,
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "left"
+          }}
+        >
+          <Text style={{ fontFamily: "SourceSansPro-Light", fontSize: 18 }}>
+            Height: {data.currentUser.record.height} cm
+          </Text>
         </View>
-      </React.Fragment>
-    );
-  }
-}
-export const Record = connect(store => ({
-  user: store.user,
-  patient: store.patient
-}))(_Record);
+        <Bar/>
+      </ScrollView>
+    </View>
+  </React.Fragment>
+);
+
+export default graphql(currentUserQueryRecord)(enhance(Record));

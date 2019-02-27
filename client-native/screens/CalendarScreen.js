@@ -163,14 +163,6 @@ class _CalendarScreen extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  item: {},
-  emptyDate: {
-    height: 15,
-    flex: 1,
-    paddingTop: 30
-  }
-});
 
 export const CalendarScreen = connect(store => ({ user: store.user }))(
   _CalendarScreen

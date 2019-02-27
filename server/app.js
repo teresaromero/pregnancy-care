@@ -28,7 +28,7 @@ mongoose
     console.error("Error connecting to mongo", err);
   });
 
-const app_name = require("../package.json").name;
+const app_name = require("./package.json").name;
 const debug = require("debug")(
   `${app_name}:${path.basename(__filename).split(".")[0]}`
 );
@@ -84,7 +84,7 @@ app.use(
   "/grapghql",
   graphqlHTTP({
     schema,
-    graphiql: process.env.NODE_ENV !== "production"
+    graphiql: process.env.NODE_ENV !== "production",
   })
 );
 

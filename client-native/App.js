@@ -11,6 +11,7 @@ import { ActivityIndicator } from "react-native";
 import { ApolloClient, InMemoryCache } from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import { createHttpLink } from "apollo-link-http";
+import { Font } from "expo";
 
 export default class App extends React.Component {
   constructor() {
@@ -25,13 +26,19 @@ export default class App extends React.Component {
     // Initialize Apollo Client with URL to our server
     return new ApolloClient({
       link: createHttpLink({
-        uri: "http://localhost:3000/graphql"
+        uri: "http://localhost:3000/grapghql"
       }),
       cache: new InMemoryCache()
     });
   }
 
   componentDidMount() {
+    Font.loadAsync({
+      "Raleway-Light": require("./assets/fonts/Raleway-Light.ttf"),
+      "SourceSansPro-Light": require("./assets/fonts/SourceSansPro-Light.ttf"),
+      "SourceSansPro-Regular": require("./assets/fonts/SourceSansPro-Regular.ttf")
+    });
+
     AuthApi.currentUser()
       .then(user => {
         if (user !== undefined) {

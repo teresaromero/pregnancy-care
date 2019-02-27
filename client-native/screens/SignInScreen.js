@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { View, Dimensions } from "react-native";
-import { Card, Button, Input, Text, Image } from "react-native-elements";
+import { Card, Button, Input, Text, Image, Icon } from "react-native-elements";
 import AuthApi from "../lib/APIs/authApi";
 import { login, errorMessageAction, clearMessages } from "../lib/redux/actions";
 import { logo } from "../assets/images/logo.png";
@@ -70,29 +70,48 @@ class _SignIn extends React.Component {
         </View>
 
         <View style={{ flex: 2, width: Dimensions.get("screen").width * 0.9 }}>
-          <Card>
-            <Input
-              placeholder="Email address..."
-              onChangeText={email => this.setState({ email })}
-            />
+          <Input
+            placeholder="Email"
+            shake={true}
+            onChangeText={email => this.setState({ email })}
+            leftIcon={{
+              type: "font-awesome",
+              name: "envelope",
+              color: "white",
+              marginRigth: 5,
+              padding: 5
+            }}
+            placeholderTextColor="grey"
+            inputStyle={{ padding: 10, color: "white" }}
+          />
 
-            <Input
-              secureTextEntry
-              placeholder="Password..."
-              onChangeText={password => this.setState({ password })}
-            />
+          <Input
+            secureTextEntry
+            placeholder="Password"
+            onChangeText={password => this.setState({ password })}
+            leftIcon={{
+              type: "font-awesome",
+              name: "lock",
+              color: "white",
+              marginRigth: 5,
+              padding: 5
+            }}
+            placeholderTextColor="grey"
+            inputStyle={{ padding: 10, color: "white" }}
+            containerStyle={{ marginTop: 10 }}
+          />
 
-            <Button
-              buttonStyle={{ marginTop: 20 }}
-              color="#01395c"
-              title="Sign In"
-              type="clear"
-              onPress={() => this.handleSubmit()}
-            />
-          </Card>
+          <Button
+            buttonStyle={{ marginTop: 40 }}
+            color="#01395c"
+            title="Sign In"
+            type="outline"
+            onPress={() => this.handleSubmit()}
+          />
+
           <View
             style={{
-              padding: 15,
+              padding: 40,
               justifyContent: "center",
               alignItems: "center"
             }}

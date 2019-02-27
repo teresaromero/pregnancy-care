@@ -1,5 +1,49 @@
 import { gql } from "apollo-boost";
 
+export const currentUserQueryHome = gql`
+  {
+    currentUser {
+      name
+      record {
+        LMP
+        EDC
+      }
+    }
+  }
+`;
+
+export const currentUserQueryProfile = gql`
+  {
+    currentUser {
+      name
+      surname
+      email
+      phone
+      image
+    }
+  }
+`;
+
+export const currentUserQueryRecord = gql`
+  {
+    currentUser {
+      record {
+        height
+        weight {
+          value
+        }
+        IMC {
+          value
+        }
+        bloodPressure {
+          Systolic
+          Diastolic
+        }
+      }
+    }
+  }
+`;
+
 export const getAppointmentsQuery = gql`
   {
     appointments {
@@ -12,11 +56,11 @@ export const getAppointmentsQuery = gql`
 `;
 
 export const getPatientQuery = gql`
-  query($id:ID!){
-    patient(id:$id) {
+  query($id: ID!) {
+    patient(id: $id) {
       name
       surname
-      record{
+      record {
         LMP
       }
     }

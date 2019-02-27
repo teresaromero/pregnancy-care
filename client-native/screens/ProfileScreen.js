@@ -1,76 +1,48 @@
 import React from "react";
 import { View, ActivityIndicator, StyleSheet } from "react-native";
-import {
-  Card,
-  Button,
-  Image,
-  Icon,
-  Text,
-  Avatar,
-  ListItem,
-  Header
-} from "react-native-elements";
+import { Card, Avatar, ListItem } from "react-native-elements";
+import { graphql } from "react-apollo";
+import { currentUserQueryProfile } from "../lib/graphQL/queries";
+import { branch, renderComponent } from "recompose";
 
-import { connect } from "react-redux";
-import AuthApi from "../lib/APIs/authApi";
-import { logout } from "../lib/redux/actions";
 
-class _Profile extends React.Component {
-  handleLogOut() {
-    let { dispatch, navigation } = this.props;
-    AuthApi.logout().then(() => {
-      dispatch(logout());
-      navigation.navigate("SignedOut");
-    });
-  }
+const enhance = branch(
+  ({ data }) => data.currentUser == null && data.loading,
+  renderComponent(ActivityIndicator)
+);
 
-  render() {
-    let { user } = this.props;
-
-    return (
-      <React.Fragment>
-        <View>
-          {user ? (
-            <React.Fragment>
-              <Card
-                style={[styles.container, styles.horizontal]}
-                title={user.name}
-              >
-                <View
-                  style={{
-                    backgroundColor: "#bcbec1",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: 80,
-                    height: 80,
-                    borderRadius: 40,
-                    alignSelf: "center",
-                    marginBottom: 20
-                  }}
-                >
-                  <Avatar
-                    rounded
-                    source={{
-                      uri: user.image
-                    }}
-                  />
-                </View>
-              </Card>
-              <View>
-                <ListItem title="Email" subtitle={user.email} />
-                <ListItem title="Phone" subtitle={user.phone} />
-              </View>
-            </React.Fragment>
-          ) : (
-            <View style={[styles.container, styles.horizontal]}>
-              <ActivityIndicator />
-            </View>
-          )}
-        </View>
-      </React.Fragment>
-    );
-  }
-}
+const Profile = ({ data }) => (
+  <View style={{ backgroundColor: "hsl(0, 0%, 96%)" }}>
+    <Card
+      style={[styles.container, styles.horizontal]}
+      title={data.currentUser.name}
+    >
+      <View
+        style={{
+          backgroundColor: "#bcbec1",
+          alignItems: "center",
+          justifyContent: "center",
+          width: 80,
+          height: 80,
+          borderRadius: 40,
+          alignSelf: "center",
+          marginBottom: 20
+        }}
+      >
+        <Avatar
+          rounded
+          source={{
+            uri: data.currentUser.image
+          }}
+        />
+      </View>
+    </Card>
+    <View>
+      <ListItem title="Email" subtitle={data.currentUser.email} />
+      <ListItem title="Phone" subtitle={data.currentUser.phone} />
+    </View>
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -84,4 +56,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export const Profile = connect(store => ({ user: store.user }))(_Profile);
+export default graphql(currentUserQueryProfile)(enhance(Profile));

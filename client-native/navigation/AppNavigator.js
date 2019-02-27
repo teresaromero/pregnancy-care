@@ -8,12 +8,12 @@ import {
 import { FontAwesome } from "react-native-vector-icons";
 
 import { SignIn } from "../screens/SignInScreen";
-import { Home } from "../screens/HomeScreen";
+import  Home  from "../screens/HomeScreen";
 
-import { Profile } from "../screens/ProfileScreen";
+import  Profile  from "../screens/ProfileScreen";
 import { CalendarScreen } from "../screens/CalendarScreen";
 import { Text, Header, Card, Button, Icon, Image } from "react-native-elements";
-import { Record } from "../screens/RecordScreen";
+import  Record  from "../screens/RecordScreen";
 
 import { LogoutBtn } from "../components/LogoutBtn";
 

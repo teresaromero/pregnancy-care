@@ -1,6 +1,5 @@
 const graphql = require("graphql");
 
-const mongoose = require("mongoose");
 const Appointment = require("../models/Appointment");
 const User = require("../models/User");
 const Record = require("../models/Record");
@@ -9,6 +8,7 @@ const {
   GraphQLObjectType,
   GraphQLString,
   GraphQLInt,
+  GraphQLFloat,
   GraphQLSchema,
   GraphQLID,
   GraphQLBoolean,
@@ -38,7 +38,7 @@ const AppointmentType = new GraphQLObjectType({
 const TrackedDataType = new GraphQLObjectType({
   name: "TrackedData",
   fields: () => ({
-    value: { type: GraphQLInt },
+    value: { type: GraphQLFloat },
     date: { type: GraphQLDateTime }
   })
 });
@@ -166,6 +166,12 @@ const UserType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
+    currentUser:{
+      type: UserType,
+      resolve(parent,args,req){
+        return req.user
+      }
+    },
     appointment: {
       type: AppointmentType,
       args: { id: { type: GraphQLID } },
@@ -250,7 +256,6 @@ const Mutation = new GraphQLObjectType({
       },
       resolve(parent, args) {
         let { id, title, start, end, description, userId } = args;
-        console.log(args);
         return Appointment.findByIdAndUpdate(
           id,
           {

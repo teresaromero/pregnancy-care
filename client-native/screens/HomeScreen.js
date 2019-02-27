@@ -1,106 +1,153 @@
 import React from "react";
 import { ScrollView, ActivityIndicator, View } from "react-native";
-import { Text, Header, Button, Icon, Tile } from "react-native-elements";
+import { Text, Button, Tile, Icon } from "react-native-elements";
 import Slider from "react-native-slider";
-import { connect } from "react-redux";
-import PatientsApi from "../lib/APIs/patientsApi";
 import moment from "moment";
-import { getPatient } from "../lib/redux/actions";
-import { graphql, compose } from "graphql";
+import { graphql } from "react-apollo";
+import { currentUserQueryHome } from "../lib/graphQL/queries";
+import { branch, renderComponent } from "recompose";
 
-class _Home extends React.Component {
-  componentDidMount() {
-    let { user, dispatch } = this.props;
-    PatientsApi.getPatient(user._id).then(patient => {
-      dispatch(getPatient(patient));
-    });
-  }
+const enhance = branch(
+  ({ data }) => data.currentUser == null && data.loading,
+  renderComponent(ActivityIndicator)
+);
 
-  render() {
-    let { patient } = this.props;
-    let { navigate } = this.props.navigation;
-    return (
-      <React.Fragment>
-        <View style={{ flex: 1 }}>
-          {patient ? (
-            <ScrollView>
-              <Tile
-                imageSrc={require("../assets/images/pexels-photo-57529.jpeg")}
-                titleStyle={{
-                  fontWeight: "200",
-                  textShadowColor: "#01395c",
-                  textShadowOffset: { width: -1, height: 1 },
-                  textShadowRadius: 3
-                }}
-                imageContainerStyle={{ opacity: 0.8 }}
-                featured
-                caption=""
-              />
-              <View
-                style={{
-                  paddingTop: 7,
-                  flex: 1,
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center"
-                }}
-              >
-                <Text style={{ fontWeight: "200", fontSize: 40 }}>
-                  You are now
-                </Text>
-                <Text style={{ fontWeight: "300", fontSize: 40 }}>
-                  {moment().diff(patient.recordId.LMP, "weeks")}
-                </Text>
-                <Text style={{ fontWeight: "200", fontSize: 40 }}>weeks!!</Text>
-              </View>
-              <View
-                style={{
-                  paddingTop: 2,
-                  flex: 1,
-                  marginLeft: 15,
-                  marginRight: 15,
-                  justifyContent: "center",
-                  alignItems: "stretch"
-                }}
-              >
-                <Slider
-                  value={moment().diff(patient.recordId.LMP, "weeks")}
-                  maximumValue={40}
-                  minimumValue={0}
-                  minimumTrackTintColor="#01395c"
-                  thumbImage={require("../assets/images/baby.png")}
-                  thumbTintColor="transparent"
-                  disabled={true}
-                />
-              </View>
-              <View
-                style={{
-                  paddingTop: 20,
-                  flex: 1,
-                  marginLeft: 20,
-                  marginRight: 20,
-                  justifyContent: "center",
-                  alignItems: "center"
-                }}
-              >
-                <Button
-                  type="clear"
-                  title=" See Progress"
-                  onPress={() => navigate("Record")}
-                />
-              </View>
-            </ScrollView>
-          ) : (
-            <ActivityIndicator />
-          )}
+const Home = ({ data, navigation }) => (
+  <React.Fragment>
+    <View style={{ flex: 1, backgroundColor: "hsl(0, 0%, 96%)" }}>
+      <ScrollView>
+        <Tile
+          imageSrc={require("../assets/images/pexels-photo-57529.jpeg")}
+          titleStyle={{
+            fontWeight: "200",
+            textShadowColor: "#01395c",
+            textShadowOffset: { width: -1, height: 1 },
+            textShadowRadius: 3
+          }}
+          imageContainerStyle={{ opacity: 0.8 }}
+          featured
+          caption=""
+        />
+        <View
+          style={{
+            paddingTop: 15,
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <Text style={{ fontFamily: "SourceSansPro-Light", fontSize: 20 }}>
+            You are now {moment().diff(data.currentUser.record.LMP, "weeks")}{" "}
+            weeks pregnant
+          </Text>
         </View>
-      </React.Fragment>
-    );
-  }
-}
-export const Home = connect(store => ({
-  user: store.user,
-  patient: store.patient
-}))(_Home);
+        <View
+          style={{
+            paddingTop: 20,
+            flex: 1,
+            marginLeft: 50,
+            marginRight: 50,
+            justifyContent: "center",
+            alignItems: "stretch"
+          }}
+        >
+          <Slider
+            value={moment().diff(data.currentUser.record.LMP, "weeks")}
+            maximumValue={40}
+            minimumValue={0}
+            minimumTrackTintColor="#01395c"
+            thumbImage={require("../assets/images/sliderIcon.png")}
+            thumbTintColor="#01395c"
+            thumbStyle={{
+              width: 32,
+              height: 32,
+              borderRadius: 30 / 2,
+              borderColor: "#01395c",
+              justifyContent: "center",
+              alignItems: "center",
+              shadowColor: "black",
+              shadowOffset: { width: 0, height: 1 },
+              shadowOpacity: 0.5,
+              shadowRadius: 1
+            }}
+            disabled={true}
+          />
+        </View>
+        <View
+          style={{
+            paddingTop: 20,
+            flex: 1,
+            marginLeft: 20,
+            marginRight: 20,
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <Text style={{ fontFamily: "SourceSansPro-Light", fontSize: 20 }}>
+            Your estimated date of birth is:
+          </Text>
+          <Text style={{ fontFamily: "SourceSansPro-Regular", fontSize: 20 }}>
+            {moment(data.currentUser.record.EDC).format("dddd")}
+          </Text>
+          <Text style={{ fontFamily: "SourceSansPro-Regular", fontSize: 20 }}>
+            {moment(data.currentUser.record.EDC).format("Do MMMM YYYY")}
+          </Text>
+        </View>
+        <View
+          style={{
+            paddingTop: 35,
+            flex: 1,
+            marginLeft: 20,
+            marginRight: 20,
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <Button
+            type="clear"
+            title="Progress"
+            titleStyle={{ color: "#01395c", paddingRight: 15 }}
+            iconRight
+            icon={
+              <Icon
+                name="arrow-right"
+                type="font-awesome"
+                size={15}
+                color="#01395c"
+              />
+            }
+            onPress={() => navigation.navigate("Record")}
+          />
+        </View>
+        <View
+          style={{
+            paddingTop: 5,
+            flex: 1,
+            marginLeft: 20,
+            marginRight: 20,
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <Button
+            type="clear"
+            title="Important Information"
+            titleStyle={{ color: "#01395c", paddingRight: 15 }}
+            iconRight
+            icon={
+              <Icon
+                name="arrow-right"
+                type="font-awesome"
+                size={15}
+                color="#01395c"
+              />
+            }
+            onPress={() => navigation.navigate("Record")}
+          />
+        </View>
+      </ScrollView>
+    </View>
+  </React.Fragment>
+);
 
-
+export default graphql(currentUserQueryHome)(enhance(Home));
