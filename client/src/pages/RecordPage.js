@@ -30,7 +30,7 @@ import { VisitForm } from "../components/VisitForm";
 class _RecordPage extends React.Component {
   componentDidMount() {
     let { dispatch } = this.props;
-    console.log("Component did mount");
+
     PatientsApi.getPatient(`${this.props.match.params.id}`).then(res => {
       let { patient } = res.data;
       dispatch(viewPatient(patient));
@@ -39,7 +39,7 @@ class _RecordPage extends React.Component {
 
   componentWillUnmount() {
     let { dispatch } = this.props;
-    console.log("Component will unmount");
+
     dispatch(exitPatient());
   }
 

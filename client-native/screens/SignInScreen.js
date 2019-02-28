@@ -105,6 +105,7 @@ class _SignIn extends React.Component {
             buttonStyle={{ marginTop: 40 }}
             color="#01395c"
             title="Sign In"
+            titleStyle={{ color: "white", paddingRight: 15 }}
             type="outline"
             onPress={() => this.handleSubmit()}
           />

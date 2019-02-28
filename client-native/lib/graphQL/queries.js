@@ -20,6 +20,8 @@ export const currentUserQueryProfile = gql`
       email
       phone
       image
+      bornDate
+     
     }
   }
 `;
@@ -31,13 +33,16 @@ export const currentUserQueryRecord = gql`
         height
         weight {
           value
+          date
         }
         IMC {
           value
+          date
         }
         bloodPressure {
           Systolic
           Diastolic
+          date
         }
       }
     }

@@ -16,6 +16,8 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const flash = require("connect-flash");
 const favicon = require("serve-favicon");
+const { isLoggedIn } = require("./middlewares/isLogged");
+
 
 mongoose
   .connect(`${process.env.DBURL}`, { useNewUrlParser: true })
@@ -28,7 +30,7 @@ mongoose
     console.error("Error connecting to mongo", err);
   });
 
-const app_name = require("./package.json").name;
+const app_name = require("../package.json").name;
 const debug = require("debug")(
   `${app_name}:${path.basename(__filename).split(".")[0]}`
 );
@@ -81,7 +83,7 @@ const appointmentsRoutes = require("./routes/appointments");
 app.use("/api/appointments", appointmentsRoutes);
 
 app.use(
-  "/grapghql",
+  "/grapghql",isLoggedIn(),
   graphqlHTTP({
     schema,
     graphiql: process.env.NODE_ENV !== "production",

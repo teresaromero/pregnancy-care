@@ -92,9 +92,7 @@ class _InformationForm extends React.Component {
     } else {
       uptPatient.GDPR = false;
     }
-    this.setState({ patient: uptPatient }, () => {
-      console.log(this.state.patient.GDPR);
-    });
+    this.setState({ patient: uptPatient });
   }
 
   render() {

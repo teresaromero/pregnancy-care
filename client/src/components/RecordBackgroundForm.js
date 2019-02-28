@@ -47,7 +47,7 @@ class _RecordBackgroundForm extends React.Component {
   }
 
   componentWillMount() {
-    console.log("montando");
+   
     this.setState({ record: this.props.patient.recordId });
   }
 

@@ -23,6 +23,10 @@ class NewAppointmentForm extends React.Component {
     };
   }
 
+  componentWillMount() {
+    this.setState({ appointment: this.props.selectedDay });
+  }
+
   componentWillReceiveProps(nextProps) {
     let { selectedDay } = nextProps;
     this.setState({ appointment: selectedDay });
@@ -42,7 +46,7 @@ class NewAppointmentForm extends React.Component {
       },
       refetchQueries: [{ query: getAppointmentsQuery }]
     });
-    this.setState({ appointment: null }, () => dispatch(closeModal()));
+    dispatch(closeModal());
   }
 
   handleUpdate(e) {
@@ -67,7 +71,7 @@ class NewAppointmentForm extends React.Component {
       },
       refetchQueries: [{ query: getAppointmentsQuery }]
     });
-    this.setState({ appointment: null }, () => dispatch(closeModal()));
+    dispatch(closeModal());
   }
 
   handleDelete(e) {
@@ -80,7 +84,7 @@ class NewAppointmentForm extends React.Component {
       },
       refetchQueries: [{ query: getAppointmentsQuery }]
     });
-    this.setState({ appointment: null }, () => dispatch(closeModal()));
+    dispatch(closeModal());
   }
 
   handleDateChange(e) {

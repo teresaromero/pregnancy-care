@@ -1,23 +1,12 @@
 import React from "react";
 import {
-  StyleSheet,
-  View,
   ART,
   Dimensions,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  ActivityIndicator
 } from "react-native";
 
-const {
-  Surface,
-  Group,
-  Rectangle,
-  ClippingRectangle,
-  LinearGradient,
-  Shape,
-  Text,
-  Path,
-  Transform
-} = ART;
+const { Surface, Group, Shape, Text } = ART;
 
 import { max, ticks } from "d3-array";
 
@@ -27,6 +16,12 @@ import * as format from "d3-format";
 import * as axis from "d3-axis";
 import * as path from "d3-path";
 
+import moment from "moment";
+
+import { graphql } from "react-apollo";
+import { currentUserQueryRecord } from "../lib/graphQL/queries";
+import { branch, renderComponent } from "recompose";
+
 const d3 = {
   scale,
   shape,
@@ -35,38 +30,16 @@ const d3 = {
   path
 };
 
-import { scaleLinear, scaleBand, scaleTime } from "d3-scale";
+const enhance = branch(
+  ({ data }) => data.currentUser == null && data.loading,
+  renderComponent(ActivityIndicator)
+);
 
-const colours = {
-  black: "black",
-  blue: "steelblue",
-  brown: "brown"
-};
-
-const data = [
-  { frequency: 5, letter: "a" },
-  { frequency: 6, letter: "b" },
-  { frequency: 4, letter: "c" },
-  { frequency: 1, letter: "d" },
-  { frequency: 2, letter: "e" },
-  { frequency: 3, letter: "f" }
-];
-
-class Bar extends React.Component {
+class BarChart extends React.Component {
   constructor(props) {
     super(props);
-    this.createBarChart = this.createBarChart.bind(this);
-    this.drawLine = this.drawLine.bind(this);
-    this.getRandomColor = this.getRandomColor.bind(this);
-  }
-
-  getRandomColor() {
-    return (
-      "#" +
-      Math.random()
-        .toString(16)
-        .substr(-6)
-    );
+    this.createBarChart.bind(this);
+    this.drawLine.bind(this);
   }
 
   drawLine(startPoint, endPoint) {
@@ -82,27 +55,30 @@ class Bar extends React.Component {
   }
 
   render() {
-    const screen = Dimensions.get("window");
-    const margin = { top: 50, right: 25, bottom: 200, left: 25 };
+    const margin = { top: 10, right: 10, bottom: 10, left: 20 };
     const width = Dimensions.get("window").width * 0.8;
     const height = 150;
+
+    const data = this.props.data.currentUser.record.weight.map(w => {
+      return { y: w.value, x: w.date };
+    });
 
     const x = d3.scale
       .scaleBand()
       .rangeRound([0, width])
       .padding(0.1)
-      .domain(data.map(d => d.letter));
+      .domain(data.map(d => d.x));
 
-    const maxFrequency = max(data, d => d.frequency);
+    const maxFrequency = max(data, d => d.y);
 
     const y = d3.scale
       .scaleLinear()
       .rangeRound([height, 0])
       .domain([0, maxFrequency]);
 
-    const firstLetterX = x(data[0].letter);
-    const secondLetterX = x(data[1].letter);
-    const lastLetterX = x(data[data.length - 1].letter);
+    const firstLetterX = x(data[0].x);
+    const secondLetterX = x(data[1].x);
+    const lastLetterX = x(data[data.length - 1].x);
     const labelDx = (secondLetterX - firstLetterX) / 2;
 
     const bottomAxis = [firstLetterX - labelDx, lastLetterX + labelDx];
@@ -118,43 +94,55 @@ class Bar extends React.Component {
       .line()
       .x(() => bottomAxis[0] + labelDx)
       .y(d => y(d) - height)(leftAxis);
-    const notch = 5;
+    const notch = 3;
     const labelDistance = 9;
     const emptySpace = "";
     return (
-      <View>
-        <Surface width={screen.width} height={screen.height}>
+      <React.Fragment>
+        <Surface width={Dimensions.get("window").width * 0.9} height={250}>
           <Group x={margin.left} y={margin.top}>
             <Group x={0} y={height}>
               <Group key={-1}>
-                <Shape d={bottomAxisD} stroke={colours.black} key="-1" />
+                <Shape d={bottomAxisD} stroke="#01395c" key="-1" />
+
                 {data.map((d, i) => (
-                  <Group x={x(d.letter) + labelDx} y={0} key={i + 1}>
+                  <Group x={x(d.x) + labelDx} y={0} key={i + 1}>
                     <Shape
                       d={this.drawLine(0, notch)}
                       y2={notch}
-                      stroke={colours.black}
+                      stroke="#01395c"
                     />
                     <Text
+                      x={-15}
                       y={labelDistance}
-                      fill={colours.black}
-                      font="18px helvetica"
+                      fill="#01395c"
+                      font="11px helvetica"
                     >
-                      {d.letter}
+                      {moment(d.x).format("MMM 'YY")}
                     </Text>
                   </Group>
                 ))}
               </Group>
+
               <Group key={-2}>
-                <Shape stroke={colours.black} d={leftAxisD} key="-1" />
+                <Text
+                  fill="#01395c"
+                  x={-20}
+                  y={labelDistance}
+                  font="11px helvetica"
+                >
+                  Kg
+                </Text>
+                <Shape stroke="#01395c" d={leftAxisD} key="-1" />
+
                 {leftAxis.map((d, i) => (
                   <Group x={0} y={y(d) - height} key={i + 1}>
-                    <Shape d={this.drawLine(notch, 0)} stroke={colours.black} />
+                    <Shape d={this.drawLine(notch, 0)} stroke="#01395c" />
                     <Text
-                      fill={colours.black}
-                      x={-15}
+                      fill="#01395c"
+                      x={-20}
                       y={-labelDistance}
-                      font="18px helvetica"
+                      font="11px helvetica"
                     >
                       {d + emptySpace}
                     </Text>
@@ -165,32 +153,21 @@ class Bar extends React.Component {
                 <TouchableWithoutFeedback key={i}>
                   <Shape
                     d={this.createBarChart(
-                      x(d.letter),
-                      y(d.frequency) - height,
+                      x(d.x),
+                      y(d.y) - height,
                       x.bandwidth(),
-                      height - y(d.frequency)
+                      height - y(d.y)
                     )}
-                    fill={this.getRandomColor()}
+                    fill={this.props.color}
                   />
                 </TouchableWithoutFeedback>
               ))}
             </Group>
           </Group>
         </Surface>
-      </View>
+      </React.Fragment>
     );
   }
 }
 
-const styles = {
-  container: {
-    margin: 20
-  },
-  label: {
-    fontSize: 15,
-    marginTop: 5,
-    fontWeight: "normal"
-  }
-};
-
-export default Bar;
+export default graphql(currentUserQueryRecord)(enhance(BarChart));

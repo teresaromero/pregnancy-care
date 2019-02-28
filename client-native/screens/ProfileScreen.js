@@ -1,10 +1,9 @@
 import React from "react";
 import { View, ActivityIndicator, StyleSheet } from "react-native";
-import { Card, Avatar, ListItem } from "react-native-elements";
+import { Card, Avatar, ListItem, Text } from "react-native-elements";
 import { graphql } from "react-apollo";
 import { currentUserQueryProfile } from "../lib/graphQL/queries";
 import { branch, renderComponent } from "recompose";
-
 
 const enhance = branch(
   ({ data }) => data.currentUser == null && data.loading,
@@ -12,48 +11,49 @@ const enhance = branch(
 );
 
 const Profile = ({ data }) => (
-  <View style={{ backgroundColor: "hsl(0, 0%, 96%)" }}>
-    <Card
-      style={[styles.container, styles.horizontal]}
-      title={data.currentUser.name}
+  <View style={{ flex: 1, backgroundColor: "hsl(0, 0%, 96%)" }}>
+    <View
+      style={{ justifyContent: "center", alignItems: "center", paddingTop: 20 }}
     >
-      <View
-        style={{
-          backgroundColor: "#bcbec1",
-          alignItems: "center",
-          justifyContent: "center",
-          width: 80,
-          height: 80,
-          borderRadius: 40,
-          alignSelf: "center",
-          marginBottom: 20
+      <Avatar
+        size="large"
+        rounded
+        source={{
+          uri: data.currentUser.image
         }}
-      >
-        <Avatar
-          rounded
-          source={{
-            uri: data.currentUser.image
-          }}
-        />
-      </View>
-    </Card>
-    <View>
-      <ListItem title="Email" subtitle={data.currentUser.email} />
-      <ListItem title="Phone" subtitle={data.currentUser.phone} />
+      />
     </View>
+    <View
+      style={{ justifyContent: "center", alignItems: "center", paddingTop: 10 }}
+    >
+      <Text style={{ fontFamily: "SourceSansPro-Light", fontSize: 20 }}>
+        {data.currentUser.name} {data.currentUser.surname}
+      </Text>
+    </View>
+    <View
+      style={{ justifyContent: "center", alignItems: "center", paddingTop: 10 }}
+    >
+      <Text style={{ fontFamily: "SourceSansPro-Light", fontSize: 15 }}>
+        {data.currentUser.email}
+      </Text>
+    </View>
+    <View
+      style={{ justifyContent: "center", alignItems: "center", paddingTop: 10 }}
+    >
+      <Text style={{ fontFamily: "SourceSansPro-Light", fontSize: 15 }}>
+        Contact phone: {data.currentUser.phone}
+      </Text>
+    </View>
+
+    <View
+      style={{ justifyContent: "center", alignItems: "center", marginTop:50,paddingTop: 10 }}
+    >
+      <Text style={{ fontFamily: "SourceSansPro-Regular", fontSize: 15, color:"#f28c81" }}>
+        Emergency Call
+      </Text>
+    </View>
+    
   </View>
 );
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center"
-  },
-  horizontal: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    padding: 50
-  }
-});
 
 export default graphql(currentUserQueryProfile)(enhance(Profile));

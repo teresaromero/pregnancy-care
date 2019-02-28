@@ -14,6 +14,7 @@ const enhance = branch(
 
 const Home = ({ data, navigation }) => (
   <React.Fragment>
+    {console.log(data.currentUser)}
     <View style={{ flex: 1, backgroundColor: "hsl(0, 0%, 96%)" }}>
       <ScrollView>
         <Tile

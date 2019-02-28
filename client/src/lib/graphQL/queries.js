@@ -1,5 +1,13 @@
 import { gql } from "apollo-boost";
 
+export const workRiskQuery = gql`
+  {
+    records {
+      id
+    }
+  }
+`;
+
 export const getAppointmentsQuery = gql`
   {
     appointments {

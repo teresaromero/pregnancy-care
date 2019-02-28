@@ -1,22 +1,22 @@
 import React from "react";
 import { ScrollView, ActivityIndicator, View, Dimensions } from "react-native";
 import { Text } from "react-native-elements";
-import moment from "moment";
 
 import { graphql } from "react-apollo";
 import { currentUserQueryRecord } from "../lib/graphQL/queries";
 import { branch, renderComponent } from "recompose";
 
-import Bar from "../components/graph";
+import BarChart from "../components/BarChart";
+import ScatterPlot from "../components/ScatterPlot";
 
 const enhance = branch(
   ({ data }) => data.currentUser == null && data.loading,
   renderComponent(ActivityIndicator)
 );
 
-const getValues = ({ data }, field) => {
-  return data.currentUser.record[field].map(w => {
-    return w.value;
+const getBloodPressureValues = data => {
+  return data.currentUser.record.bloodPressure.map(bp => {
+    return { s: bp.Systolic, d: bp.Diastolic };
   });
 };
 
@@ -37,7 +37,27 @@ const Record = ({ data }) => (
             Height: {data.currentUser.record.height} cm
           </Text>
         </View>
-        <Bar/>
+        <View
+          style={{
+            paddingTop: 5,
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <BarChart color="#7c96c8" />
+        </View>
+
+        <View
+          style={{
+            paddingTop: 5,
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <ScatterPlot color="#7c96c8" /> */}
+        </View>
       </ScrollView>
     </View>
   </React.Fragment>

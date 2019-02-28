@@ -14,10 +14,9 @@ class _ProfilePicture extends React.Component {
 
   handlePhoto(e) {
     let { user, dispatch } = this.props;
-    console.log(e.target.files[0]);
+   
     this.setState({ file: e.target.files[0] }, () => {
       UserApi.uploadProfilePicture(this.state.file).then(res => {
-        console.log(res);
         UserApi.editProfilePicture(user._id, res.image).then(user =>
           dispatch(edit(user))
         );
