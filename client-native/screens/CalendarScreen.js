@@ -18,7 +18,9 @@ class _CalendarScreen extends Component {
 
   componentWillMount() {
     let { user } = this.props;
+    console.log(user._id)
     AppointmentsApi.allAppointments(user._id).then(res => {
+      console.log(res)
       let { appointments } = res;
       this.setState({ appointments }, () => {
         let markedDates = {};
@@ -32,7 +34,7 @@ class _CalendarScreen extends Component {
           displayItems[moment(ap.start).format("YYYY-MM-DD")] = [
             { text: ap.description, time: moment(ap.start).format("HH:mm") }
           ];
-          this.setState({ markedDates, items: displayItems });
+          this.setState({ markedDates, items: displayItems },()=>console.log(this.state));
         });
       });
     });

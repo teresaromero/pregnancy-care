@@ -24,7 +24,7 @@ export const addAppointmentMutation = gql`
     $title: String!
     $start: DateTime!
     $end: DateTime!
-    $description: String!
+    $description: String
     $userId: ID!
   ) {
     addAppointment(

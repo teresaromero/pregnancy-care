@@ -26,7 +26,8 @@ export default class App extends React.Component {
     // Initialize Apollo Client with URL to our server
     return new ApolloClient({
       link: createHttpLink({
-        uri: "http://localhost:3000/grapghql"
+        uri: "https://pregnancy-care.herokuapp.com/grapghql",
+        credentials: "include"
       }),
       cache: new InMemoryCache()
     });
@@ -43,7 +44,7 @@ export default class App extends React.Component {
       .then(user => {
         if (user !== undefined) {
           store.dispatch(login(user));
-          this.setState({ isAuth: store.getState().isAuth, isLoading: false });
+          this.setState({ isAuth: store.getState().isAuth, isLoading: false },()=>console.log(user));
         } else {
           this.setState({ isLoading: false });
         }

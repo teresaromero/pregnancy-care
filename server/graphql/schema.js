@@ -239,7 +239,7 @@ const Mutation = new GraphQLObjectType({
           start: args.start,
           end: args.end,
           description: args.description,
-          userId: args.user
+          userId: args.userId
         });
         return appointment.save();
       }

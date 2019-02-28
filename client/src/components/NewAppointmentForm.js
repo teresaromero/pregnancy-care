@@ -19,7 +19,9 @@ class NewAppointmentForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      appointment: null
+      appointment: {
+        description: ""
+      }
     };
   }
 
@@ -105,7 +107,9 @@ class NewAppointmentForm extends React.Component {
     let upt = { ...this.state.appointment };
     upt.userId = p._id;
     upt.title = `${p.name} ${p.surname}`;
-    this.setState({ appointment: upt });
+    this.setState({ appointment: upt }, () =>
+      console.log(this.state.appointment)
+    );
   }
 
   render() {
@@ -162,7 +166,6 @@ class NewAppointmentForm extends React.Component {
                 label="Description"
                 value={appointment.description}
                 type="text"
-                placeholder=""
                 handleChange={e => this.handleChange(e)}
               />
               {selectedDay._id ? (
