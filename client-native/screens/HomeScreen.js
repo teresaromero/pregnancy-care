@@ -13,7 +13,7 @@ const enhance = branch(
 );
 
 const Home = ({ data, navigation }) => (
-  <React.Fragment>
+  
     <View style={{ flex: 1, backgroundColor: "hsl(0, 0%, 96%)" }}>
       <ScrollView>
         <Tile
@@ -147,7 +147,6 @@ const Home = ({ data, navigation }) => (
         </View>
       </ScrollView>
     </View>
-  </React.Fragment>
 );
 
 export default graphql(currentUserQueryHome)(enhance(Home));

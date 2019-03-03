@@ -48,67 +48,65 @@ class _SignupForm extends React.Component {
     let { dispatch, messages } = this.props;
     return (
       <React.Fragment>
-        <div className="section">
-          <InputP
-            id="name-signup"
-            name="name"
-            value={name}
-            label="Name"
-            type="text"
-            placeholder=""
-            handleChange={e => this.setState({ name: e.target.value })}
-          />
+        <InputP
+          id="name-signup"
+          name="name"
+          value={name}
+          label="Name"
+          type="text"
+          placeholder=""
+          handleChange={e => this.setState({ name: e.target.value })}
+        />
 
-          <InputP
-            id="surname-signup"
-            name="surname"
-            value={surname}
-            label="Surname"
-            type="text"
-            placeholder=""
-            handleChange={e => this.setState({ surname: e.target.value })}
-          />
+        <InputP
+          id="surname-signup"
+          name="surname"
+          value={surname}
+          label="Surname"
+          type="text"
+          placeholder=""
+          handleChange={e => this.setState({ surname: e.target.value })}
+        />
 
-          <InputP
-            id="email-signup"
-            name="email"
-            value={email}
-            label="Email"
-            type="email"
-            placeholder=""
-            handleChange={e => this.setState({ email: e.target.value })}
-          />
-          <InputP
-            id="password-signup"
-            name="password"
-            value={password}
-            label="Password"
-            type="password"
-            placeholder=""
-            handleChange={e => this.setState({ password: e.target.value })}
-          />
+        <InputP
+          id="email-signup"
+          name="email"
+          value={email}
+          label="Email"
+          type="email"
+          placeholder=""
+          handleChange={e => this.setState({ email: e.target.value })}
+        />
+        <InputP
+          id="password-signup"
+          name="password"
+          value={password}
+          label="Password"
+          type="password"
+          placeholder=""
+          handleChange={e => this.setState({ password: e.target.value })}
+        />
 
-          <button
-            className="button is-info is-outlined"
-            onClick={e => this.handleSubmit(e)}
+        <button
+          className="button is-primary is-outlined"
+          onClick={e => this.handleSubmit(e)}
+        >
+          Signup
+        </button>
+
+        <p className="help has-text-grey">
+          If you already have an account please{" "}
+          <Link
+            to=""
+            onClick={() => {
+              dispatch(loginAct());
+              dispatch(clearMessages());
+            }}
           >
-            Signup
-          </button>
-        </div>
-        <div className="section is-paddingless">
-          <p className="help">
-            If you already have an account please{" "}
-            <Link
-              to=""
-              onClick={() => {
-                dispatch(loginAct());
-                dispatch(clearMessages());
-              }}
-            >
-              Login.
-            </Link>
-          </p>
-        </div>
+            Login.
+          </Link>
+        </p>
+
         <div className="section has-text-centered is-paddingless">
           <p className="help has-text-danger">{messages}</p>
         </div>
@@ -117,4 +115,6 @@ class _SignupForm extends React.Component {
   }
 }
 
-export const SignupForm = withRouter(connect(store => ({ messages: store.messages }))(_SignupForm))
+export const SignupForm = withRouter(
+  connect(store => ({ messages: store.messages }))(_SignupForm)
+);

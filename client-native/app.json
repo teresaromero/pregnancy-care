@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "pregnancy-care",
+    "name": "Pregnancy Care",
     "slug": "pregnancy-care",
     "privacy": "public",
     "sdkVersion": "32.0.0",
@@ -14,7 +14,7 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#01395c"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

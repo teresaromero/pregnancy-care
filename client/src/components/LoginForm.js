@@ -44,46 +44,44 @@ class _LoginForm extends React.Component {
     let { messages, dispatch } = this.props;
     return (
       <React.Fragment>
-        <div className="section">
-          <InputP
-            id="email-login"
-            name="email"
-            label="Email"
-            value={email}
-            type="email"
-            placeholder=""
-            handleChange={e => this.setState({ email: e.target.value })}
-          />
-          <InputP
-            id="password-login"
-            name="password"
-            label="Password"
-            value={password}
-            type="password"
-            placeholder=""
-            handleChange={e => this.setState({ password: e.target.value })}
-          />
-          <button
-            className="button is-info is-outlined"
-            onClick={e => this.handleSubmit(e)}
+        <InputP
+          id="email-login"
+          name="email"
+          label="Email"
+          value={email}
+          type="email"
+          placeholder=""
+          handleChange={e => this.setState({ email: e.target.value })}
+        />
+        <InputP
+          id="password-login"
+          name="password"
+          label="Password"
+          value={password}
+          type="password"
+          placeholder=""
+          handleChange={e => this.setState({ password: e.target.value })}
+        />
+        <button
+          className="button is-primary is-outlined"
+          onClick={e => this.handleSubmit(e)}
+        >
+          Login
+        </button>
+
+        <p className="help has-text-grey">
+          If you don't have an account please{" "}
+          <Link
+            to=""
+            onClick={() => {
+              dispatch(signupAct());
+              dispatch(clearMessages());
+            }}
           >
-            Login
-          </button>
-        </div>
-        <div className="section is-paddingless">
-          <p className="help">
-            If you don't have an account please{" "}
-            <Link
-              to=""
-              onClick={() => {
-                dispatch(signupAct());
-                dispatch(clearMessages());
-              }}
-            >
-              Signup.
-            </Link>
-          </p>
-        </div>
+            Signup.
+          </Link>
+        </p>
+
         <div className="section has-text-centered is-paddingless">
           <p className="help has-text-danger">{messages}</p>
         </div>

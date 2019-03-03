@@ -1,8 +1,8 @@
 import React from "react";
 import { Aside } from "./Aside";
-import  DashboardPage  from "../pages/DashboardPage";
+import DashboardPage from "../pages/DashboardPage";
 import { Switch, Route } from "react-router";
-import  PatientsPage from "../pages/PatientsPage";
+import PatientsPage from "../pages/PatientsPage";
 import { ProfilePage } from "../pages/ProfilePage";
 import { connect } from "react-redux";
 import { withRouter, Redirect } from "react-router-dom";
@@ -19,17 +19,14 @@ const _Dashboard = ({ user, match }) => {
       {user ? (
         <React.Fragment>
           <Navbar />
-         
-            <div className="columns is-marginless has-background-light">
-              <div className="column is-narrow is-hidden-mobile is-3 is-paddingless is-marginless">
-                <div className="section">
-                  <Aside />
-                </div>
+          <section>
+            <div className="columns has-background-light is-paddingless is-marginless">
+              <div className="column is-narrow is-hidden-mobile is-3">
+                <Aside />
               </div>
 
-              <div className="column is-paddingless is-marginless">
-              <div className="mainContent has-background-light">
-                <div className="section">
+              <div className="column is-9">
+                <div className="content mainContent">
                   <Switch>
                     <Route
                       exact
@@ -68,7 +65,7 @@ const _Dashboard = ({ user, match }) => {
                 </div>
               </div>
             </div>
-          </div>
+          </section>
         </React.Fragment>
       ) : (
         <React.Fragment>

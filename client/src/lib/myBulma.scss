@@ -85,6 +85,9 @@ $section-padding-large: 6rem 1.5rem;
 $box-radius: 0px;
 $box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 0px rgba(10, 10, 10, 0.1);
 
+.card{
+  box-shadow: $box-shadow
+}
 //Navbar
 $navbar-breakpoint: 769px;
 $navbar-height: 3rem;
@@ -106,21 +109,20 @@ $navbar-height: 3rem;
 
 //Aside
 aside {
-  min-height: 85vh;
-  max-height: 85vh;
+  min-height: 84vh;
+  max-height: 84vh;
   overflow-y: scroll;
 }
 
 //timeline
-
 .timeline-content {
   width: 100%;
 }
 
 //main content scroll
 .mainContent {
-  min-height: 87vh;
-  max-height: 87vh;
+  min-height: 84vh;
+  max-height: 84vh;
   overflow-y: scroll;
 }
 ::-webkit-scrollbar {
@@ -157,3 +159,4 @@ aside {
 @import "../../node_modules/bulma-tooltip/dist/css/bulma-tooltip.sass";
 @import "../../node_modules/cool-checkboxes-for-bulma.io/dist/css/bulma-radio-checkbox.css";
 @import "../../node_modules/bulma-pageloader/dist/css/bulma-pageloader.sass";
+@import '../../node_modules/bulma-timeline/dist/css/bulma-timeline.sass';

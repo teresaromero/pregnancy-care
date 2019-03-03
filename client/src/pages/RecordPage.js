@@ -22,7 +22,6 @@ import { RecordBackgroundForm } from "../components/RecordBackgroundForm";
 import { RecordPregnancyForm } from "../components/RecordPregnancyForm";
 import { InformationForm } from "../components/InformationForm";
 
-import "bulma-timeline";
 import { Timeline } from "../components/Timeline";
 import { PregnancyDetail } from "../components/PregnancyDetail";
 import { VisitForm } from "../components/VisitForm";

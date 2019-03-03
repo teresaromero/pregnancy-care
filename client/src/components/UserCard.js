@@ -5,23 +5,21 @@ import { UserBadge } from "./UserBadge";
 
 const _UserCard = ({ user, match }) => {
   return (
-    <React.Fragment>
-      <div className="columns">
-        <div className="column is-paddingless">
-          <figure className="image is-64x64">
-            <img className="is-rounded" src={user.image} alt="profile" />
-          </figure>
-        </div>
-
-        <div className="column is-paddingless">
-          <p className="is-size-7">
-            {user.name} {user.surname}
-          </p>
-
-          <UserBadge />
-        </div>
+    <div className="box columns">
+      <div className="column is-paddingless">
+        <figure className="image is-64x64">
+          <img className="is-rounded" src={user.image} alt="profile" />
+        </figure>
       </div>
-    </React.Fragment>
+
+      <div className="column is-paddingless">
+        <p className="is-size-7">
+          {user.name} {user.surname}
+        </p>
+
+        <UserBadge />
+      </div>
+    </div>
   );
 };
 

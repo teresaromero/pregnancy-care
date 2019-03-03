@@ -18,9 +18,9 @@ class _CalendarScreen extends Component {
 
   componentWillMount() {
     let { user } = this.props;
-    console.log(user._id)
+    console.log(user._id);
     AppointmentsApi.allAppointments(user._id).then(res => {
-      console.log(res)
+      console.log(res);
       let { appointments } = res;
       this.setState({ appointments }, () => {
         let markedDates = {};
@@ -34,7 +34,9 @@ class _CalendarScreen extends Component {
           displayItems[moment(ap.start).format("YYYY-MM-DD")] = [
             { text: ap.description, time: moment(ap.start).format("HH:mm") }
           ];
-          this.setState({ markedDates, items: displayItems },()=>console.log(this.state));
+          this.setState({ markedDates, items: displayItems }, () =>
+            console.log(this.state)
+          );
         });
       });
     });
@@ -142,29 +144,30 @@ class _CalendarScreen extends Component {
 
   render() {
     return (
-      <Agenda
-        items={this.state.items}
-        loadItemsForMonth={day => this.loadItems(day)}
-        rowHasChanged={(r1, r2) => this.rowHasChanged(r1, r2)}
-        markedDates={this.state.markedDates}
-        monthFormat={"MMMM yyyy"}
-        theme={{
-          calendarBackground: "white",
-          backgroundColor: "hsl(0, 0%, 96%)",
-          agendaKnobColor: "#01395c",
-          dayTextColor: "#01395c",
-          selectedDayBackgroundColor: "#f28c81",
-          selectedDayTextColor: "#01395c",
-          todayTextColor: "#f28c81"
-        }}
-        renderDay={(day, item) => this.renderDay(day, item)}
-        renderItem={i => this.renderItem(i)}
-        renderEmptyDate={() => this.renderEmptyDate()}
-      />
+      <View style={{ flex: 1, backgroundColor: "hsl(0, 0%, 96%)" }}>
+        <Agenda
+          items={this.state.items}
+          loadItemsForMonth={day => this.loadItems(day)}
+          rowHasChanged={(r1, r2) => this.rowHasChanged(r1, r2)}
+          markedDates={this.state.markedDates}
+          monthFormat={"MMMM yyyy"}
+          theme={{
+            calendarBackground: "white",
+            backgroundColor: "hsl(0, 0%, 96%)",
+            agendaKnobColor: "#01395c",
+            dayTextColor: "#01395c",
+            selectedDayBackgroundColor: "#f28c81",
+            selectedDayTextColor: "#01395c",
+            todayTextColor: "#f28c81"
+          }}
+          renderDay={(day, item) => this.renderDay(day, item)}
+          renderItem={i => this.renderItem(i)}
+          renderEmptyDate={() => this.renderEmptyDate()}
+        />
+      </View>
     );
   }
 }
-
 
 export const CalendarScreen = connect(store => ({ user: store.user }))(
   _CalendarScreen
