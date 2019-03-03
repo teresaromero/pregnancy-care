@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700");
 @import url(../../node_modules/@fortawesome/fontawesome-free/css/all.css);
+@import url(../../node_modules/fullcalendar-reactwrapper/dist/css/fullcalendar.min.css);
 @import url(../../node_modules/cool-checkboxes-for-bulma.io/dist/css/bulma-radio-checkbox.css);
 .label.label-heading {
   background: #01395c;

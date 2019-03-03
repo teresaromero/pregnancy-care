@@ -10,7 +10,7 @@ const PatientsList = ({ data }) => {
       {data.loading ? (
         <Loader />
       ) : (
-        <div className="section">
+       <React.Fragment>
           {data.patients.length === 0 ? (
             <div className="notification is-danger">
               Patient not found, try to search with phone number or email
@@ -28,7 +28,7 @@ const PatientsList = ({ data }) => {
               </div>
             ))
           )}
-        </div>
+       </React.Fragment>
       )}
     </React.Fragment>
   );

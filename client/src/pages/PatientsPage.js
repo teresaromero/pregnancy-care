@@ -47,7 +47,7 @@ class PatientsPage extends React.Component {
 
   render() {
     return (
-      <div className="section">
+      <React.Fragment>
         <div className="columns is-vcentered is-marginless has-text-centered">
           <div className="column">
             <SearchBarPatients onChange={e => this.handleChange(e)} />
@@ -65,7 +65,7 @@ class PatientsPage extends React.Component {
           </div>
         </div>
         <PatientsList data={this.props.data} />
-      </div>
+      </React.Fragment>
     );
   }
 }

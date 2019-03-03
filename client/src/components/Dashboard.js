@@ -21,12 +21,12 @@ const _Dashboard = ({ user, match }) => {
           <Navbar />
           <section>
             <div className="columns has-background-light is-paddingless is-marginless">
-              <div className="column is-narrow is-hidden-mobile is-3">
+              <div className="column is-narrow is-hidden-mobile is-2">
                 <Aside />
               </div>
 
-              <div className="column is-9">
-                <div className="content mainContent">
+              <div className="column is-10">
+                <div className="mainContent">
                   <Switch>
                     <Route
                       exact

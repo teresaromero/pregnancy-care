@@ -6,7 +6,7 @@ import { UserCard } from "./UserCard";
 
 const _Aside = ({ match }) => {
   return (
-    <aside className="menu">
+    <aside className="menu" style={{minWidth:142}}>
       {/* <UserCard /> */}
       <p className="menu-label">General</p>
 
@@ -51,7 +51,7 @@ const _Aside = ({ match }) => {
           </NavLink>
         </li>
       </ul>
-
+      <p className="menu-label">Settings</p>
       <ul className="menu-list">
         <li>
           <NavLink to={`${match.url}/profile`} activeClassName="is-active">

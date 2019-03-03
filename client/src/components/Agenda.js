@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import "fullcalendar-reactwrapper/dist/css/fullcalendar.min.css";
 import FullCalendar from "fullcalendar-reactwrapper";
 import { ModalCard } from "./ModalCard";
 import { closeModal, selectDay, unSelectDay } from "../lib/redux/actions";
@@ -53,11 +52,13 @@ class Agenda extends React.Component {
     let { getAppointmentsQuery, modalAppointment, dispatch } = this.props;
     return (
       <React.Fragment>
-        <div id="calendar" className="section">
+        
           <FullCalendar
             schedulerLicenseKey={"CC-Attribution-NonCommercial-NoDerivatives"}
             defaultView={"agendaWeek"}
             handleWindowResize={true}
+            height={"auto"}
+            contentHeight={"auto"}
             visibleRange={{ start: Date.now }}
             nowIndicator={true}
             events={getAppointmentsQuery.appointments}
@@ -87,7 +88,7 @@ class Agenda extends React.Component {
             droppable={true}
             eventOverlap={false}
           />
-        </div>
+       
 
         <ModalCard
           id="appointment-modal"
