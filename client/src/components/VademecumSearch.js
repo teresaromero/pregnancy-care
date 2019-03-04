@@ -1,6 +1,6 @@
 import React from "react";
 
-import { InputDiv } from "./InputDiv.js";
+import { InputP } from "./InputP";
 import VademecumApi from "../lib/APIs/vademecumApi.js";
 import { DrugListCard } from "./DrugListCard.js";
 
@@ -30,9 +30,9 @@ export default class VademecumSearch extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="columns is-mobile">
-          <div className="column">
-            <InputDiv
+        <div className="columns is-mobile is-multiline">
+          <div className="column is-full">
+            <InputP
               name="nombre"
               title="Search"
               label="Drug Name"
@@ -42,32 +42,41 @@ export default class VademecumSearch extends React.Component {
               handleChange={e => this.handleSearch(e)}
             />
           </div>
-          <div className="column is-one-third">
-            <p className="is-paddingless is-marginless">
-              <span className="icon has-text-danger">
-                <i className="fas fa-user-md" aria-hidden="true" />
-              </span>
-              <span className="is-size-7">With medical reciept</span>
-            </p>
-
-            <p className="is-paddingless is-marginless">
-              <span className="icon has-text-danger ">
-                <i className="fas fa-car-crash" aria-hidden="true" />
-              </span>
-              <span className="is-size-7">Driving effects</span>
-            </p>
-            <p className="is-paddingless is-marginless">
-              <span className="icon has-text-success ">
-                <i className="fas fa-shopping-cart" aria-hidden="true" />
-              </span>
-              <span className="is-size-7">Marketed</span>
-            </p>
-            <p className="is-paddingless is-marginless">
-              <span className="icon has-text-danger ">
-                <i className="fas fa-shopping-cart" aria-hidden="true" />
-              </span>
-              <span className="is-size-7">Not Marketed</span>
-            </p>
+          <div className="column is-full">
+            <div className="columns is-mobile is-multiline is-paddingless is-marginless">
+              <div className="column is-half-mobile is-paddingless is-marginless">
+                <p className="is-paddingless is-marginless">
+                  <span className="icon has-text-danger">
+                    <i className="fas fa-user-md" aria-hidden="true" />
+                  </span>
+                  <span className="is-size-7">With medical reciept</span>
+                </p>
+              </div>
+              <div className="column is-half-mobile is-paddingless is-marginless">
+                <p className="is-paddingless is-marginless">
+                  <span className="icon has-text-danger ">
+                    <i className="fas fa-car-crash" aria-hidden="true" />
+                  </span>
+                  <span className="is-size-7">Driving effects</span>
+                </p>
+              </div>
+              <div className="column is-half-mobile is-paddingless is-marginless">
+                <p className="is-paddingless is-marginless">
+                  <span className="icon has-text-success ">
+                    <i className="fas fa-shopping-cart" aria-hidden="true" />
+                  </span>
+                  <span className="is-size-7">Marketed</span>
+                </p>
+              </div>
+              <div className="column is-half-mobile is-paddingless is-marginless">
+                <p className="is-paddingless is-marginless">
+                  <span className="icon has-text-danger ">
+                    <i className="fas fa-shopping-cart" aria-hidden="true" />
+                  </span>
+                  <span className="is-size-7">Not Marketed</span>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -87,7 +96,7 @@ export default class VademecumSearch extends React.Component {
             ) : (
               <React.Fragment>
                 <p>Total results: {this.state.data.length}</p>
-                <div className="section is-paddingless is-marginless">
+                <div className="is-paddingless is-marginless">
                   {this.state.data.map(drug => (
                     <DrugListCard key={drug.nregistro} drug={drug} />
                   ))}

@@ -13,20 +13,20 @@ class _PregnancyDetail extends React.Component {
         {patient && patientRecord ? (
           <React.Fragment>
             <div className="field-wrapper">
-              <div className="columns has-text-centered is-marginless is-paddingless">
-                <div className="column">
+              <div className="columns has-text-centered is-marginless is-paddingless is-mobile is-multiline">
+                <div className="column is-half-mobile">
                   <p className="label">LMP</p>
                   <p className="">
                     {moment(patientRecord.LMP).format("Do MMM YY")}
                   </p>
                 </div>
-                <div className="column">
+                <div className="column is-half-mobile">
                   <p className="label">EDC</p>
                   <p className="">
                     {moment(patientRecord.EDC).format("Do MMM YY")}
                   </p>
                 </div>
-                <div className="column">
+                <div className="column is-full-mobile">
                   <p className="label">Weeks</p>
                   <p className="">
                     {moment().diff(patientRecord.LMP, "weeks")}
@@ -37,8 +37,8 @@ class _PregnancyDetail extends React.Component {
 
             <p className="label" />
             <div className="field-wrapper">
-              <div className="columns is-marginless is-paddingless">
-                <div className="column">
+              <div className="columns is-marginless is-paddingless is-mobile is-multiline">
+                <div className="column is-half-mobile">
                   <p className="label">Mother Age</p>
                   <p className="">
                     {moment().diff(patient.bornDate, "years")} years
@@ -50,7 +50,7 @@ class _PregnancyDetail extends React.Component {
                     years
                   </p>
                 </div>
-                <div className="column">
+                <div className="column is-half-mobile">
                   <p className="label">Pregnancy Type</p>
                   <p className="">{patientRecord.pregnancyType}</p>
                 </div>
@@ -59,8 +59,8 @@ class _PregnancyDetail extends React.Component {
 
             <p className="label" />
             <div className="field-wrapper">
-              <div className="columns is-marginless is-paddingless">
-                <div className="column">
+              <div className="columns is-marginless is-paddingless is-mobile is-multiline">
+                <div className="column is-half-mobile">
                   <p className="label">Diet</p>
                   <p className="">{patientRecord.diet}</p>
                   {patient.diet === "Other" ? (
@@ -69,7 +69,7 @@ class _PregnancyDetail extends React.Component {
                     </p>
                   ) : null}
                 </div>
-                <div className="column">
+                <div className="column is-half-mobile">
                   <p className="label">Diet Suplements</p>
 
                   <ul>
@@ -78,7 +78,7 @@ class _PregnancyDetail extends React.Component {
                     ))}
                   </ul>
                 </div>
-                <div className="column">
+                <div className="column is-full-mobile">
                   <p className="label">Sports </p>
                   <p>{patientRecord.sport}</p>
                 </div>
@@ -86,12 +86,12 @@ class _PregnancyDetail extends React.Component {
             </div>
 
             <div className="field-wrapper">
-              <div className="columns is-marginless is-paddingless">
-                <div className="column">
+              <div className="columns is-marginless is-paddingless is-mobile is-multiline">
+                <div className="column is-half-mobile">
                   <p className="label">Profession</p>
                   <p className="">{patient.profession}</p>
                 </div>
-                <div className="column">
+                <div className="column is-half-mobile">
                   <p className="label">Work Risk</p>
                   <ul>
                     {patientRecord.workRisk.map(risk => (
@@ -99,7 +99,7 @@ class _PregnancyDetail extends React.Component {
                     ))}
                   </ul>
                 </div>
-                <div className="column">
+                <div className="column is-full-mobile">
                   <p className="label">Pregnancy Risk</p>
                   <p className="">{patientRecord.risk}</p>
                   <p className="">{patientRecord.riskReason}</p>

@@ -14,6 +14,7 @@ class _RecordBackground extends React.Component {
         {patient && record ? (
           <React.Fragment>
             <div className="field-wrapper section">
+            
               <p className="label">Familiar Background:</p>
               <p>{record.background}</p>
               {record.background === "" ? (
@@ -83,8 +84,8 @@ class _RecordBackground extends React.Component {
             </div>
 
             <div className="field-wrapper section">
-              <div className="columns">
-                <div className="column">
+              <div className="columns is-marginless is-paddingless is-mobile is-multiline">
+                <div className="column is-half-mobile ">
                   <p className="label"><span role="img" aria-label="emoji">
                   💉
                 </span>{" "}HPV Vaccine</p>
@@ -94,7 +95,7 @@ class _RecordBackground extends React.Component {
                     <p>{record.HPVvaccine}</p>
                   )}
                 </div>
-                <div className="column">
+                <div className="column is-half-mobile">
                   <p className="label"><span role="img" aria-label="emoji">
                   ⏰
                 </span>{" "}Period Cycle</p>
@@ -108,14 +109,14 @@ class _RecordBackground extends React.Component {
                     <p className="help has-text-danger">Edit</p>
                   )}
                 </div>
-                <div className="column">
+                <div className="column is-half-mobile">
                   <p className="label">Blood Type</p>
 
                   <span>
                     {record.bloodGroup} {record.rh}
                   </span>
                 </div>
-                <div className="column">
+                <div className="column is-half-mobile">
                   <p className="label">Height</p>
 
                   <span>{record.height} cm</span>
@@ -124,24 +125,24 @@ class _RecordBackground extends React.Component {
             </div>
 
             <div className="field-wrapper section">
-              <div className="columns has-text-centered">
-                <div className="column">
+              <div className="columns has-text-centered is-marginless is-paddingless is-mobile is-multiline">
+                <div className="column is-full-mobile">
                   <p className="label">Pregnancies</p>
                   <p>{record.pregnancies}</p>
                 </div>
-                <div className="column">
+                <div className="column is-half-mobile">
                   <p className="label">Labours</p>
                   <p>{record.labours}</p>
                 </div>
-                <div className="column">
+                <div className="column is-half-mobile">
                   <p className="label">C-Sections</p>
                   <p>{record.caesareanSections}</p>
                 </div>
-                <div className="column">
+                <div className="column is-half-mobile">
                   <p className="label">Abortions</p>
                   <p>{record.abortions}</p>
                 </div>
-                <div className="column">
+                <div className="column is-half-mobile">
                   <p className="label">Ectopics</p>
                   <p>{record.ectopics}</p>
                 </div>

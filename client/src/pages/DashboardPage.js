@@ -1,21 +1,19 @@
 import React from "react";
 import WorkRiskGraph from "../components/BarChart";
-import { withRouter } from "react-router-dom";
+import { withRouter, NavLink } from "react-router-dom";
 import ScatterChartComponent from "../components/ScatterChart";
 import RadarChartComponent from "../components/RadarChart";
 import { branch, renderComponent } from "recompose";
+import moment from "moment";
 
 import { gql } from "apollo-boost";
-import { graphql, compose } from "react-apollo";
 import { gqlLodash } from "../components/gqlLodash";
 import _ from "lodash";
+import { Loader } from "../components/Loader";
 
-const enhance = branch(
-  ({ getWorkRisksQuery }) => getWorkRisksQuery.loading,
-  renderComponent(<p>Loading</p>)
-);
+const enhance = branch(({ data }) => data.loading, renderComponent(Loader));
 
-const getWorkRisksQuery = gql`
+const dashboardQueries = gql`
   {
     workRiskQuery: records {
       workRisk
@@ -28,6 +26,20 @@ const getWorkRisksQuery = gql`
 
     pregType: records @_(countBy: "pregnancyType") {
       pregnancyType
+    }
+
+    allAppointments: appointments {
+      id
+    }
+
+    allPatients: patients {
+      id
+    }
+
+    todayAppointments: todayAppointments {
+      start
+      title
+      description
     }
   }
 `;
@@ -68,10 +80,11 @@ const pregType = ({ data }) => {
 
 const DashboardPage = ({ data }) => (
   <div className="content">
-    <section class="hero is-primary is-small">
-      <div class="hero-body">
-        <div class="content">
-          <h1 class="title">Welcome back!</h1>
+    {console.log(data)}
+    <section className="hero is-primary is-small">
+      <div className="hero-body">
+        <div className="content">
+          <h1 className="title">Welcome back!</h1>
         </div>
       </div>
     </section>
@@ -79,19 +92,13 @@ const DashboardPage = ({ data }) => (
       <div className="tile is-ancestor has-text-centered">
         <div className="tile is-parent">
           <article className="tile is-child box">
-            <p className="title">239</p>
-            <p className="subtitle">Patients</p>
+            <p className="title">{data.allAppointments.length}</p>
+            <p className="subtitle">Booked Appointments</p>
           </article>
         </div>
         <div className="tile is-parent">
           <article className="tile is-child box">
-            <p className="title">239</p>
-            <p className="subtitle">Patients</p>
-          </article>
-        </div>
-        <div className="tile is-parent">
-          <article className="tile is-child box">
-            <p className="title">239</p>
+            <p className="title">{data.allPatients.length}</p>
             <p className="subtitle">Patients</p>
           </article>
         </div>
@@ -111,46 +118,45 @@ const DashboardPage = ({ data }) => (
           </header>
 
           <div className="card-content">
-            <div class="timeline">
-              <div class="timeline-item">
-                <div class="timeline-marker is-primary" />
-                <div class="timeline-content">
-                  <p class="heading">January 2016</p>
-                  <p>Timeline content - Can include any HTML element</p>
+            <div className="timeline">
+              {data.todayAppointments.map(ap => (
+                <div key={ap.title} className="timeline-item">
+                  <div className="timeline-marker is-primary" />
+                  <div className="timeline-content">
+                    <p className="heading">
+                      {moment(ap.start).format("HH:mm")}
+                    </p>
+                    <p>
+                      {ap.title} - {ap.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-marker is-icon">
-                  <i class="fa fa-flag" />
-                </div>
-                <div class="timeline-content">
-                  <p class="heading">March 2017</p>
-                  <p>Timeline content - Can include any HTML element</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
           <div className="card-footer">
-            <span className="card-footer-item">View Agenda</span>
+            <NavLink to="/admin/agenda" className="card-footer-item">
+              View Agenda
+            </NavLink>
           </div>
         </div>
       </div>
       <div className="column is-6">
-        <div className="card">
+        <div className="card" style={{ marginBottom: "1rem" }}>
           <div className="card-content">
             <p>Principal Risks at Work for Pregnants</p>
             <WorkRiskGraph data={workRisk({ data })} />
           </div>
         </div>
 
-        <div className="card">
+        <div className="card" style={{ marginBottom: "1rem" }}>
           <div className="card-content">
             <p>Duration and Frequency of Period</p>
             <ScatterChartComponent data={menstCycle({ data })} />
           </div>
         </div>
 
-        <div className="card">
+        <div className="card" style={{ marginBottom: "1rem" }}>
           <div className="card-content">
             <p>Origin of pregnancies</p>
             <RadarChartComponent data={pregType({ data })} />
@@ -161,4 +167,4 @@ const DashboardPage = ({ data }) => (
   </div>
 );
 
-export default gqlLodash(getWorkRisksQuery)(withRouter(DashboardPage));
+export default gqlLodash(dashboardQueries)(withRouter(enhance(DashboardPage)));

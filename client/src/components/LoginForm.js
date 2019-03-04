@@ -82,9 +82,7 @@ class _LoginForm extends React.Component {
           </Link>
         </p>
 
-        <div className="section has-text-centered is-paddingless">
-          <p className="help has-text-danger">{messages}</p>
-        </div>
+        <p className="help has-text-danger">{messages}</p>
       </React.Fragment>
     );
   }

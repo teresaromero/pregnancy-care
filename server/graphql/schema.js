@@ -3,6 +3,7 @@ const graphql = require("graphql");
 const Appointment = require("../models/Appointment");
 const User = require("../models/User");
 const Record = require("../models/Record");
+const moment = require("moment");
 
 const {
   GraphQLObjectType,
@@ -166,10 +167,10 @@ const UserType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
-    currentUser:{
+    currentUser: {
       type: UserType,
-      resolve(parent,args,req){
-        return req.user
+      resolve(parent, args, req) {
+        return req.user;
       }
     },
     appointment: {
@@ -185,6 +186,18 @@ const RootQuery = new GraphQLObjectType({
         return Appointment.find();
       }
     },
+
+    todayAppointments: {
+      type: new GraphQLList(AppointmentType),
+      resolve(parent, args) {
+        let start=moment(Date.now()).startOf('day')._d;
+        let end=moment(Date.now()).endOf('day')._d
+        return Appointment.find({start:{$gte:start,$lt:end}});
+      }
+    },
+
+
+
 
     patient: {
       type: UserType,

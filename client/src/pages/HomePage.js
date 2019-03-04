@@ -10,18 +10,18 @@ class _HomePage extends React.Component {
     
     return (
       <section
-        class="hero is-primary is-fullheight"
+        className="hero is-primary is-fullheight"
         style={{ marginTop: "-3rem", marginBottom: "-3rem" }}
       >
-        <div class="hero-body">
-          <div class="content has-text-centered">
-            <div class="column is-4 is-offset-4">
+        <div className="hero-body">
+          <div className="content has-text-centered">
+            <div className="column is-4 is-offset-4">
               <img
                 className="logo"
                 src="/images/logo.png"
                 alt="logo pregnancy care"
               />
-              <div class="box">
+              <div className="box">
                 {loginActive ? <LoginForm /> : <SignupForm />}
               </div>
             </div>

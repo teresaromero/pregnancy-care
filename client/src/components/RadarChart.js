@@ -12,7 +12,7 @@ const RadarChartComponent = ({ data }) => (
   <ResponsiveContainer width="100%" height={250}>
     <RadarChart outerRadius={100} data={data}>
       <PolarGrid />
-      <PolarAngleAxis dataKey="type" />
+      <PolarAngleAxis width="20" dataKey="type" type="category" orient="out"/>
       <PolarRadiusAxis angle={55} domain={[0, 50]} />
       <Radar
         dataKey="value"

@@ -10,6 +10,8 @@ import {
   updateDateTimeMutation
 } from "../lib/graphQL/queries";
 
+import moment from 'moment'
+
 class Agenda extends React.Component {
   handleSelectDate(start, end) {
     let { dispatch } = this.props;
@@ -62,17 +64,19 @@ class Agenda extends React.Component {
             visibleRange={{ start: Date.now }}
             nowIndicator={true}
             events={getAppointmentsQuery.appointments}
-            gotoDate={Date.now()}
+            eventColor={"#01395c"}
             loading={(isLoading, view) => this.handleLoading(isLoading, view)}
             firstDay="1"
             weekends={false}
+            minTime={'08:00:00'}
+            maxTime={'22:00:00'}
             slotDuration={"00:15:00"}
             slotLabelFormat="HH:mm"
             timezone="local"
             header={{
               left: "prev,next today",
               center: "title",
-              right: "month,agendaWeek,agendaDay"
+              right: "agendaWeek,agendaDay"
             }}
             allDaySlot={false}
             selectable={true}

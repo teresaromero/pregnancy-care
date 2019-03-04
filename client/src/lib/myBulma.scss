@@ -50,6 +50,24 @@ body {
   max-width: 80%;
 }
 
+.fc-unthemed .fc-today {
+  background: #f0e5d6 !important;
+}
+
+.fc-unthemed .fc-widget-header {
+  background: $dark-blue !important;
+  border-color: transparent !important;
+  color:white;
+  font-weight: 300;
+}
+
+.fc-unthemed .fc-time-grid-event {
+  border:none !important;
+  border-radius: 0 !important;
+  margin-bottom: 1px !important;
+}
+
+
 
 
 .button.is-primary.is-inverted.is-outlined {

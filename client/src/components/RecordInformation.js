@@ -10,19 +10,19 @@ const _RecordInformation = ({ patient }) => {
     <React.Fragment>
       {patient ? (
         <React.Fragment>
-          <div className="field-wrapper section">
-            <div className="columns is-marginless is-paddingless">
-              <div className="column">
+          <div className="field-wrapper">
+            <div className="columns is-marginless is-paddingless is-mobile is-multiline">
+              <div className="column is-one-third">
                 <p className="label">Name and surname</p>
                 <p>
                   {patient.name} {patient.surname}
                 </p>
               </div>
-              <div className="column">
+              <div className="column is-one-third">
                 <p className="label">ID</p>
                 <p>{patient.idNum}</p>
               </div>
-              <div className="column">
+              <div className="column is-one-third">
                 <p className="label">Born Date</p>
                 <p>
                   {moment(patient.bornDate).format("Do MMM YY")} (
@@ -31,8 +31,8 @@ const _RecordInformation = ({ patient }) => {
               </div>
             </div>
 
-            <div className="columns is-marginless is-paddingless">
-              <div className="column">
+            <div className="columns is-marginless is-paddingless is-mobile is-multiline">
+              <div className="column is-half-mobile">
                 <p className="label">Address</p>
                 <p className="is-marginless">
                   {patient.address.street} <span>{patient.address.number}</span>
@@ -42,15 +42,15 @@ const _RecordInformation = ({ patient }) => {
                 </p>
                 <p className="is-marginless">{patient.address.state}</p>
               </div>
-              <div className="column">
+              <div className="column is-half-mobile">
                 <p className="label">Phone</p>
                 <p>{patient.phone}</p>
               </div>
-              <div className="column">
+              <div className="column is-half-mobile">
                 <p className="label">Email</p>
                 <p>{patient.email}</p>
               </div>
-              <div className="column">
+              <div className="column is-half-mobile">
                 <p className="label">Insurance Company</p>
                 <p>{patient.insurance}</p>
                 <p>Policy Nª{patient.insNumber}</p>
