@@ -116,8 +116,9 @@ export const SignedIn = createBottomTabNavigator(
     tabBarOptions: {
       activeTintColor: "#7c96c8",
       inactiveTintColor: "white",
+      showLabel:false,
       style: {
-        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 10,
         backgroundColor: "#01395c"
       }
     }

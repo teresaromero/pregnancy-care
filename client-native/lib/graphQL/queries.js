@@ -8,6 +8,24 @@ export const currentUserApp = gql`
   }
 `;
 
+export const currentUserCalendar = gql`
+  query currentUser {
+    currentUser {
+      id
+      record {
+        LMP
+        EDC
+      }
+      appointments{
+        id
+        start
+        end
+        description
+      }
+    }
+  }
+`;
+
 export const currentUserQueryHome = gql`
   {
     currentUser {

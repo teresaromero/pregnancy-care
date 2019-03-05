@@ -4,7 +4,7 @@ import { Agenda } from "react-native-calendars";
 import moment from "moment";
 import AppointmentsApi from "../lib/APIs/appointmentsAPI";
 import { graphql } from "react-apollo";
-import { currentUserApp } from "../lib/graphQL/queries";
+import { currentUserCalendar } from "../lib/graphQL/queries";
 import { branch, renderComponent } from "recompose";
 
 const enhance = branch(
@@ -17,55 +17,147 @@ class CalendarScreen extends Component {
     super();
     this.state = {
       items: {},
-      appointments: null,
       markedDates: null
     };
   }
 
   componentWillMount() {
-    let { currentUser } = this.props.data;
-    AppointmentsApi.allAppointments(currentUser.id).then(res => {
-      let { appointments } = res;
-      this.setState({ appointments }, () => {
-        let markedDates = {};
-        let displayItems = {};
-        appointments.map(ap => {
-          markedDates[moment(ap.start).format("YYYY-MM-DD")] = {
-            marked: true,
-            dotColor: "#f28c81",
+    let { appointments } = this.props.data.currentUser;
+    let { LMP, EDC } = this.props.data.currentUser.record;
+
+    let milestones = [
+      {
+        start: LMP,
+        description: "Last Period Date",
+        type: "Milestone",
+        color: "#f28c81",
+        selected: true
+      },
+      {
+        start: EDC,
+        description: "Estimated Date of Birth",
+        type: "Milestone",
+        color: "#f28c81",
+        selected: true
+      },
+      {
+        start: moment(LMP).add(8, "weeks"),
+        description: `1st Visit - until ${moment(LMP)
+          .add(10 * 7 + 6, "days")
+          .format("DD-MM-YYYY")}`,
+        type: "Milestone",
+        color: "#8ac6bf",
+        selected: true
+      },
+      {
+        start: moment(LMP).add(12, "weeks"),
+        description: `1st Ultrasound - until ${moment(LMP)
+          .add(13 * 7 + 6, "days")
+          .format("DD-MM-YYYY")}`,
+        type: "Milestone",
+        color: "#8ac6bf",
+        selected: true
+      },
+      {
+        start: moment(LMP).add(14, "weeks"),
+        description: `2nd Visit - until ${moment(LMP)
+          .add(16 * 7 + 6, "days")
+          .format("DD-MM-YYYY")}`,
+        type: "Milestone",
+        color: "#8ac6bf",
+        selected: true
+      },
+      {
+        start: moment(LMP).add(19, "weeks"),
+        description: `2nd Ultrasound - until ${moment(LMP)
+          .add(21 * 7 + 6, "days")
+          .format("DD-MM-YYYY")}`,
+        type: "Milestone",
+        color: "#8ac6bf",
+        selected: true
+      },
+      {
+        start: moment(LMP).add(22, "weeks"),
+        description: `3rd Visit - until ${moment(LMP)
+          .add(24 * 7 + 6, "days")
+          .format("DD-MM-YYYY")}`,
+        type: "Milestone",
+        color: "#8ac6bf",
+        selected: true
+      },
+      {
+        start: moment(LMP).add(26, "weeks"),
+        description: `4th Visit - until ${moment(LMP)
+          .add(30 * 7 + 6, "days")
+          .format("DD-MM-YYYY")}`,
+        type: "Milestone",
+        color: "#8ac6bf",
+        selected: true
+      },
+      {
+        start: moment(LMP).add(28, "weeks"),
+        description: `5th Visit - until ${moment(LMP)
+          .add(32 * 7 + 6, "days")
+          .format("DD-MM-YYYY")}`,
+        type: "Milestone",
+        color: "#8ac6bf",
+        selected: true
+      },
+      {
+        start: moment(LMP).add(34, "weeks"),
+        description: `3rd Ultrasound - until ${moment(LMP)
+          .add(36 * 7 + 6, "days")
+          .format("DD-MM-YYYY")}`,
+        type: "Milestone",
+        color: "#8ac6bf",
+        selected: true
+      }
+    ];
+    milestones.map(m => appointments.push(m));
+    let markedDates = {};
+    let displayItems = {};
+    appointments.map(ap => {
+      ap.type === "Milestone"
+        ? (markedDates[moment(ap.start).format("YYYY-MM-DD")] = {
+            marked: ap.marked,
+            selected: ap.selected,
+            selectedColor: ap.color,
+            dotColor: ap.color,
             activeOpacity: 0
-          };
-          displayItems[moment(ap.start).format("YYYY-MM-DD")] = [
-            { text: ap.description, time: moment(ap.start).format("HH:mm") }
-          ];
-          this.setState({ markedDates, items: displayItems }, () =>
-            console.log(this.state)
-          );
-        });
-      });
+          })
+        : (markedDates[moment(ap.start).format("YYYY-MM-DD")] = {
+            marked: false,
+            selected: true,
+            selectedColor: "#f28c81",
+            activeOpacity: 0
+          });
+      displayItems[moment(ap.start).format("YYYY-MM-DD")] = [
+        ap.type === "Milestone"
+          ? { text: ap.description, time: "" }
+          : { text: ap.description, time: moment(ap.start).format("HH:mm") }
+      ];
+      this.setState({ markedDates, items: displayItems });
     });
   }
 
   loadItems(day) {
-    setTimeout(() => {
-      for (let i = -15; i < 85; i++) {
-        const time = day.timestamp + i * 24 * 60 * 60 * 1000;
-        const strTime = this.timeToString(time);
+    for (let i = -15; i < 85; i++) {
+      const time = day.timestamp + i * 24 * 60 * 60 * 1000;
+      const strTime = this.timeToString(time);
 
-        if (!this.state.items[strTime]) {
-          this.state.items[strTime] = [];
-        }
+      if (!this.state.items[strTime]) {
+        this.state.items[strTime] = [];
       }
+    }
 
-      const newItems = {};
-      Object.keys(this.state.items).forEach(key => {
-        newItems[key] = this.state.items[key];
-      });
+    const newItems = {};
+    Object.keys(this.state.items).forEach(key => {
+      newItems[key] = this.state.items[key];
+    });
 
-      this.setState({
-        items: newItems
-      });
-    }, 1000);
+    this.setState({
+      items: newItems
+    });
   }
   renderDay(day, item) {
     return (
@@ -115,7 +207,7 @@ class CalendarScreen extends Component {
           height: "auto"
         }}
       >
-        <Text>⏰ {item.time}</Text>
+        <Text>{item.time}</Text>
         <Text>{item.text}</Text>
       </View>
     );
@@ -160,7 +252,7 @@ class CalendarScreen extends Component {
             backgroundColor: "hsl(0, 0%, 96%)",
             agendaKnobColor: "#01395c",
             dayTextColor: "#01395c",
-            selectedDayBackgroundColor: "#f28c81",
+            selectedDayBackgroundColor: "#7c96c8",
             selectedDayTextColor: "#01395c",
             todayTextColor: "#f28c81"
           }}
@@ -173,4 +265,4 @@ class CalendarScreen extends Component {
   }
 }
 
-export default graphql(currentUserApp)(enhance(CalendarScreen));
+export default graphql(currentUserCalendar)(enhance(CalendarScreen));
