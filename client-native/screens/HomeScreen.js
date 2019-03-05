@@ -8,12 +8,11 @@ import { currentUserQueryHome } from "../lib/graphQL/queries";
 import { branch, renderComponent } from "recompose";
 
 const enhance = branch(
-  ({ data }) => data.currentUser == null && data.loading,
+  ({ data }) => data.loading,
   renderComponent(ActivityIndicator)
 );
 
 const Home = ({ data, navigation }) => (
-  
     <View style={{ flex: 1, backgroundColor: "hsl(0, 0%, 96%)" }}>
       <ScrollView>
         <Tile

@@ -1,12 +1,18 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet } from "react-native";
-import { Divider, Card } from "react-native-elements";
+import { Text, View, ActivityIndicator } from "react-native";
 import { Agenda } from "react-native-calendars";
-import { connect } from "react-redux";
 import moment from "moment";
 import AppointmentsApi from "../lib/APIs/appointmentsAPI";
+import { graphql } from "react-apollo";
+import { currentUserApp } from "../lib/graphQL/queries";
+import { branch, renderComponent } from "recompose";
 
-class _CalendarScreen extends Component {
+const enhance = branch(
+  ({ data }) => data.loading,
+  renderComponent(ActivityIndicator)
+);
+
+class CalendarScreen extends Component {
   constructor() {
     super();
     this.state = {
@@ -17,10 +23,8 @@ class _CalendarScreen extends Component {
   }
 
   componentWillMount() {
-    let { user } = this.props;
-    console.log(user._id);
-    AppointmentsApi.allAppointments(user._id).then(res => {
-      console.log(res);
+    let { currentUser } = this.props.data;
+    AppointmentsApi.allAppointments(currentUser.id).then(res => {
       let { appointments } = res;
       this.setState({ appointments }, () => {
         let markedDates = {};
@@ -169,6 +173,4 @@ class _CalendarScreen extends Component {
   }
 }
 
-export const CalendarScreen = connect(store => ({ user: store.user }))(
-  _CalendarScreen
-);
+export default graphql(currentUserApp)(enhance(CalendarScreen));

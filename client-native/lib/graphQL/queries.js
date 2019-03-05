@@ -1,8 +1,17 @@
 import { gql } from "apollo-boost";
 
+export const currentUserApp = gql`
+  query currentUser {
+    currentUser {
+      id
+    }
+  }
+`;
+
 export const currentUserQueryHome = gql`
   {
     currentUser {
+      id
       name
       record {
         LMP
@@ -15,13 +24,13 @@ export const currentUserQueryHome = gql`
 export const currentUserQueryProfile = gql`
   {
     currentUser {
+      id
       name
       surname
       email
       phone
       image
       bornDate
-     
     }
   }
 `;
@@ -29,6 +38,7 @@ export const currentUserQueryProfile = gql`
 export const currentUserQueryRecord = gql`
   {
     currentUser {
+      id
       record {
         height
         weight {
@@ -56,76 +66,6 @@ export const getAppointmentsQuery = gql`
       start
       end
       title
-    }
-  }
-`;
-
-export const getPatientQuery = gql`
-  query($id: ID!) {
-    patient(id: $id) {
-      name
-      surname
-      record {
-        LMP
-      }
-    }
-  }
-`;
-
-export const addAppointmentMutation = gql`
-  mutation(
-    $title: String!
-    $start: DateTime!
-    $end: DateTime!
-    $description: String!
-    $userId: ID!
-  ) {
-    addAppointment(
-      title: $title
-      start: $start
-      end: $end
-      description: $description
-      userId: $userId
-    ) {
-      id
-    }
-  }
-`;
-
-export const updateAppointmentMutation = gql`
-  mutation(
-    $id: ID!
-    $title: String
-    $start: DateTime
-    $end: DateTime
-    $description: String
-    $userId: ID
-  ) {
-    updateAppointment(
-      id: $id
-      title: $title
-      start: $start
-      end: $end
-      description: $description
-      userId: $userId
-    ) {
-      id
-    }
-  }
-`;
-
-export const updateDateTimeMutation = gql`
-  mutation($id: ID!, $start: DateTime, $end: DateTime) {
-    updateAppointmentDateTime(id: $id, start: $start, end: $end) {
-      id
-    }
-  }
-`;
-
-export const deleteAppointmentMutation = gql`
-  mutation($id: ID!) {
-    deleteAppointment(id: $id) {
-      id
     }
   }
 `;

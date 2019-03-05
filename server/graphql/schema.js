@@ -1,4 +1,6 @@
 const graphql = require("graphql");
+const passport = require("passport");
+const bcrypt = require("bcrypt");
 
 const Appointment = require("../models/Appointment");
 const User = require("../models/User");
@@ -170,65 +172,97 @@ const RootQuery = new GraphQLObjectType({
     currentUser: {
       type: UserType,
       resolve(parent, args, req) {
-        return req.user;
+        if (req.isAuthenticated()) {
+          return req.user;
+        }
+        throw new Error("Not logged");
       }
     },
+    logout: {
+      type: UserType,
+      resolve(parent, args, req) {
+        if (req.isAuthenticated()) {
+          return req.logout();
+        }
+        throw new Error("There is not current session");
+      }
+    },
+
     appointment: {
       type: AppointmentType,
       args: { id: { type: GraphQLID } },
-      resolve(parent, args) {
-        return Appointment.findById(args.id);
+      resolve(parent, args, req) {
+        if (req.isAuthenticated()) {
+          return Appointment.findById(args.id);
+        }
+        throw new Error("You need to log in!");
       }
     },
     appointments: {
       type: new GraphQLList(AppointmentType),
-      resolve(parent, args) {
-        return Appointment.find();
+      resolve(parent, args, req) {
+        if (req.isAuthenticated()) {
+          return Appointment.find();
+        }
+        throw new Error("You need to log in!");
       }
     },
 
     todayAppointments: {
       type: new GraphQLList(AppointmentType),
-      resolve(parent, args) {
-        let start=moment(Date.now()).startOf('day')._d;
-        let end=moment(Date.now()).endOf('day')._d
-        return Appointment.find({start:{$gte:start,$lt:end}});
+      resolve(parent, args, req) {
+        let start = moment(Date.now()).startOf("day")._d;
+        let end = moment(Date.now()).endOf("day")._d;
+
+        if (req.isAuthenticated()) {
+          return Appointment.find({ start: { $gte: start, $lt: end } });
+        }
+        throw new Error("You need to log in!");
       }
     },
-
-
-
 
     patient: {
       type: UserType,
       args: { id: { type: GraphQLID } },
-      resolve(parent, args) {
-        return User.findById(args.id);
+      resolve(parent, args, req) {
+        if (req.isAuthenticated()) {
+          return User.findById(args.id);
+        }
+        throw new Error("You need to log in!");
       }
     },
     patients: {
       type: new GraphQLList(UserType),
       args: { filter: { type: GraphQLString } },
-      resolve(parent, args) {
+      resolve(parent, args, req) {
         let regex = new RegExp(args.filter, "i");
-        return User.find({ role: "CUSTOMER", concat: regex }).sort({
-          name: 1
-        });
+        if (req.isAuthenticated()) {
+          return User.find({ role: "CUSTOMER", concat: regex }).sort({
+            name: 1
+          });
+        }
+        throw new Error("You need to log in!");
       }
     },
 
     record: {
       type: RecordType,
       args: { id: { type: GraphQLID } },
-      resolve(parent, args) {
-        return Record.findById(args.id);
+      resolve(parent, args, req) {
+        if (req.isAuthenticated()) {
+          return Record.findById(args.id);
+        }
+        throw new Error("You need to log in!");
       }
     },
 
     records: {
       type: new GraphQLList(RecordType),
-      resolve(parent, args) {
-        return Record.find();
+      resolve(parent, args, req) {
+        if (req.isAuthenticated()) {
+          return Record.find();
+        }
+        throw new Error("You need to log in!");
       }
     }
   }
@@ -237,6 +271,39 @@ const RootQuery = new GraphQLObjectType({
 const Mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
+    login: {
+      type: UserType,
+      args: {
+        email: { type: GraphQLString },
+        password: { type: GraphQLString }
+      },
+      resolve(parent, args, req) {
+        let { email, password } = args;
+
+        if (req.isAuthenticated()) {
+          throw new Error("There is already a session!");
+        }
+
+        return User.findOne({ email: email, role: "CUSTOMER" }).then(
+          foundUser => {
+            if (!foundUser) {
+              throw new Error("Email not found");
+            }
+
+            if (!bcrypt.compareSync(password, foundUser.password)) {
+              throw new Error("Password is incorrect");
+            }
+
+            return new Promise((resolve, reject) => {
+              req.login(foundUser, e => (e ? reject(e) : resolve(foundUser)));
+            }).then(user => {
+              return user;
+            });
+          }
+        );
+      }
+    },
+
     addAppointment: {
       type: AppointmentType,
       args: {
@@ -246,15 +313,18 @@ const Mutation = new GraphQLObjectType({
         description: { type: GraphQLString },
         userId: { type: GraphQLID }
       },
-      resolve(parent, args) {
-        let appointment = new Appointment({
-          title: args.title,
-          start: args.start,
-          end: args.end,
-          description: args.description,
-          userId: args.userId
-        });
-        return appointment.save();
+      resolve(parent, args, req) {
+        if (req.isAuthenticated()) {
+          let appointment = new Appointment({
+            title: args.title,
+            start: args.start,
+            end: args.end,
+            description: args.description,
+            userId: args.userId
+          });
+          return appointment.save();
+        }
+        throw new Error("You need to log in!");
       }
     },
     updateAppointment: {
@@ -267,19 +337,22 @@ const Mutation = new GraphQLObjectType({
         description: { type: GraphQLString },
         userId: { type: GraphQLID }
       },
-      resolve(parent, args) {
-        let { id, title, start, end, description, userId } = args;
-        return Appointment.findByIdAndUpdate(
-          id,
-          {
-            title: title,
-            start: start,
-            end: end,
-            description: description,
-            userId: userId
-          },
-          { new: true }
-        );
+      resolve(parent, args, req) {
+        if (req.isAuthenticated()) {
+          let { id, title, start, end, description, userId } = args;
+          return Appointment.findByIdAndUpdate(
+            id,
+            {
+              title: title,
+              start: start,
+              end: end,
+              description: description,
+              userId: userId
+            },
+            { new: true }
+          );
+        }
+        throw new Error("You need to log in!");
       }
     },
 
@@ -290,17 +363,20 @@ const Mutation = new GraphQLObjectType({
         start: { type: GraphQLDateTime },
         end: { type: GraphQLDateTime }
       },
-      resolve(parent, args) {
-        let { id, start, end } = args;
-        console.log(args);
-        return Appointment.findByIdAndUpdate(
-          id,
-          {
-            start: start,
-            end: end
-          },
-          { new: true }
-        );
+      resolve(parent, args, req) {
+        if (req.isAuthenticated()) {
+          let { id, start, end } = args;
+
+          return Appointment.findByIdAndUpdate(
+            id,
+            {
+              start: start,
+              end: end
+            },
+            { new: true }
+          );
+        }
+        throw new Error("You need to log in!");
       }
     },
     deleteAppointment: {
@@ -308,8 +384,11 @@ const Mutation = new GraphQLObjectType({
       args: {
         id: { type: GraphQLNonNull(GraphQLID) }
       },
-      resolve(parent, args) {
-        return Appointment.findByIdAndDelete(args.id);
+      resolve(parent, args, req) {
+        if (req.isAuthenticated()) {
+          return Appointment.findByIdAndDelete(args.id);
+        }
+        throw new Error("You need to log in!");
       }
     }
   }

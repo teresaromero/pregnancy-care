@@ -7,13 +7,13 @@ import {
 } from "react-navigation";
 import { FontAwesome } from "react-native-vector-icons";
 
-import { SignIn } from "../screens/SignInScreen";
-import  Home  from "../screens/HomeScreen";
+import SignIn from "../screens/SignInScreen";
+import Home from "../screens/HomeScreen";
 
-import  Profile  from "../screens/ProfileScreen";
-import { CalendarScreen } from "../screens/CalendarScreen";
-import { Text, Header, Card, Button, Icon, Image } from "react-native-elements";
-import  Record  from "../screens/RecordScreen";
+import Profile from "../screens/ProfileScreen";
+import CalendarScreen from "../screens/CalendarScreen";
+import { Image } from "react-native-elements";
+import Record from "../screens/RecordScreen";
 
 import { LogoutBtn } from "../components/LogoutBtn";
 
@@ -114,8 +114,8 @@ export const SignedIn = createBottomTabNavigator(
   },
   {
     tabBarOptions: {
-      activeTintColor:'#7c96c8',
-      inactiveTintColor:'white',
+      activeTintColor: "#7c96c8",
+      inactiveTintColor: "white",
       style: {
         paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
         backgroundColor: "#01395c"

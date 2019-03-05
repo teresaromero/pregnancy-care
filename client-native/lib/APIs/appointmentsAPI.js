@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://pregnancy-care.herokuapp.com",
+  baseURL: "http://localhost:3000",
   timeout: 1000,
   withCredentials: true,
 });

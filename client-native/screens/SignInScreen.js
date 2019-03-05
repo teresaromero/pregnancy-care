@@ -1,47 +1,40 @@
 import React from "react";
 import { connect } from "react-redux";
-import { View, Dimensions } from "react-native";
-import { Card, Button, Input, Text, Image, Icon } from "react-native-elements";
+import { View, Dimensions, ActivityIndicator } from "react-native";
+import { Card, Button, Input, Text, Image } from "react-native-elements";
 import AuthApi from "../lib/APIs/authApi";
 import { login, errorMessageAction, clearMessages } from "../lib/redux/actions";
-import { logo } from "../assets/images/logo.png";
+import { graphql } from "react-apollo";
+import { gql } from "apollo-boost";
+import { currentUserApp } from "../lib/graphQL/queries";
 
-class _SignIn extends React.Component {
+class SignIn extends React.Component {
   constructor() {
     super();
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      error: ""
     };
   }
 
-  componentDidMount() {
-    let { dispatch } = this.props;
-    dispatch(clearMessages());
-  }
-
   handleSubmit() {
-    let { dispatch, navigation } = this.props;
+    let { navigation, login } = this.props;
     let { email, password } = this.state;
 
     if (email === "" || password === "") {
-      dispatch(errorMessageAction("You have to enter data"));
+      this.setState({ error: "Please enter all information" });
     } else {
-      AuthApi.login(email, password)
-        .then(user => {
-          if (user !== undefined) {
-            dispatch(login(user));
-            navigation.navigate("SignedIn");
-          } else {
-            dispatch(errorMessageAction("User not found"));
-          }
+      login(email, password)
+        .then(({ data }) => {
+          navigation.navigate("SignedIn");
         })
-        .catch(e => console.log(e));
+        .catch(err => console.log(err));
     }
   }
 
   render() {
-    let { messages } = this.props;
+    console.log(this.props);
     return (
       <View
         style={{
@@ -106,7 +99,7 @@ class _SignIn extends React.Component {
             color="#01395c"
             title="Sign In"
             titleStyle={{ color: "white", paddingRight: 15 }}
-            type="outline"
+            type="clear"
             onPress={() => this.handleSubmit()}
           />
 
@@ -117,11 +110,7 @@ class _SignIn extends React.Component {
               alignItems: "center"
             }}
           >
-            {messages.map(m => (
-              <Text key={m} style={{ color: "red" }}>
-                {m}
-              </Text>
-            ))}
+            <Text style={{ color: "red" }}>{this.state.error}</Text>
           </View>
         </View>
       </View>
@@ -129,4 +118,20 @@ class _SignIn extends React.Component {
   }
 }
 
-export const SignIn = connect(store => ({ messages: store.messages }))(_SignIn);
+export default graphql(
+  gql`
+    mutation Login($email: String!, $password: String!) {
+      login(email: $email, password: $password) {
+        id
+        name
+        email
+      }
+    }
+  `,
+  {
+    options: { refetchQueries: ['currentUser'] },
+    props: ({ mutate }) => ({
+      login: (email, password) => mutate({ variables: { email, password } })
+    })
+  }
+)(SignIn);

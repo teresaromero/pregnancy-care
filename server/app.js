@@ -83,7 +83,7 @@ const appointmentsRoutes = require("./routes/appointments");
 app.use("/api/appointments", appointmentsRoutes);
 
 app.use(
-  "/grapghql",isLoggedIn(),
+  "/grapghql",
   graphqlHTTP({
     schema,
     graphiql: process.env.NODE_ENV !== "production",
