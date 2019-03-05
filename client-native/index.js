@@ -9,7 +9,7 @@ import App from './App';
 
 const client = new ApolloClient({
   link: createHttpLink({
-    uri: "http://localhost:3000/grapghql",
+    uri: "https://pregnancy-care.herokuapp.com/grapghql",
     credentials: "include"
   }),
   cache: new InMemoryCache()
