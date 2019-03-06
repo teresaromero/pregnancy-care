@@ -169,7 +169,7 @@ const Home = ({ data, navigation }) => (
               color="#01395c"
             />
           }
-          onPress={() => navigation.navigate("Record")}
+          onPress={() => navigation.navigate("Progress")}
         />
       </View>
       <View
@@ -195,7 +195,7 @@ const Home = ({ data, navigation }) => (
               color="#01395c"
             />
           }
-          onPress={() => navigation.navigate("Record")}
+          onPress={() => navigation.navigate("Information")}
         />
       </View>
     </ScrollView>

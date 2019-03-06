@@ -34,7 +34,6 @@ class SignIn extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <View
         style={{
@@ -129,7 +128,7 @@ export default graphql(
     }
   `,
   {
-    options: { refetchQueries: ['currentUser'] },
+    options: { refetchQueries: ['currentUserApp'] },
     props: ({ mutate }) => ({
       login: (email, password) => mutate({ variables: { email, password } })
     })

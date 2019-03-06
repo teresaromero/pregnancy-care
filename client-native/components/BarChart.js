@@ -59,9 +59,7 @@ class BarChart extends React.Component {
     const width = Dimensions.get("window").width * 0.8;
     const height = 150;
 
-    const data = this.props.data.currentUser.record.weight.map(w => {
-      return { y: w.value, x: w.date };
-    });
+   
 
     const x = d3.scale
       .scaleBand()

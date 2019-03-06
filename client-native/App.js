@@ -9,7 +9,7 @@ import { branch, renderComponent } from "recompose";
 import { currentUserApp } from "./lib/graphQL/queries";
 
 const enhance = branch(
-  ({ data }) => data.loading,
+  ({ currentUserApp }) => currentUserApp.loading,
   renderComponent(ActivityIndicator)
 );
 
@@ -27,18 +27,28 @@ class App extends React.Component {
       "SourceSansPro-Light": require("./assets/fonts/SourceSansPro-Light.ttf"),
       "SourceSansPro-Regular": require("./assets/fonts/SourceSansPro-Regular.ttf")
     });
-    const { currentUser } = this.props.data;
+    const { currentUser } = this.props.currentUserApp;
     if (currentUser) {
+      this.setState({ isAuth: true });
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (
+      JSON.stringify(this.props.currentUserApp) !==
+      JSON.stringify(nextProps.currentUserApp)
+    ) {
       this.setState({ isAuth: true });
     }
   }
 
   render() {
     let { isAuth } = this.state;
-    console.log(this.props.data)
     const Layout = createAppContainer(createRootNavigator(isAuth));
     return <Layout />;
   }
 }
 
-export default graphql(currentUserApp)(enhance(App));
+export default graphql(currentUserApp, { name: "currentUserApp" })(
+  enhance(App)
+);

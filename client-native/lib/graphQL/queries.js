@@ -1,7 +1,7 @@
 import { gql } from "apollo-boost";
 
 export const currentUserApp = gql`
-  query currentUser {
+  {
     currentUser {
       id
     }
@@ -9,14 +9,14 @@ export const currentUserApp = gql`
 `;
 
 export const currentUserCalendar = gql`
-  query currentUser {
+  {
     currentUser {
       id
       record {
         LMP
         EDC
       }
-      appointments{
+      appointments {
         id
         start
         end
@@ -71,6 +71,24 @@ export const currentUserQueryRecord = gql`
           Systolic
           Diastolic
           date
+        }
+      }
+    }
+  }
+`;
+
+export const currentUserQueryInformation = gql`
+  {
+    currentUser {
+      id
+      record {
+        bloodGroup
+        rh
+        pregnancyType
+        risk
+        visits {
+          date
+          notesOut
         }
       }
     }

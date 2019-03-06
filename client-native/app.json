@@ -2,7 +2,7 @@
   "expo": {
     "name": "Pregnancy Care",
     "slug": "pregnancy-care",
-    "privacy": "private",
+    "privacy": "unlisted",
     "sdkVersion": "32.0.0",
     "platforms": [
       "ios",

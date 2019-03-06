@@ -13,7 +13,8 @@ import Home from "../screens/HomeScreen";
 import Profile from "../screens/ProfileScreen";
 import CalendarScreen from "../screens/CalendarScreen";
 import { Image } from "react-native-elements";
-import Record from "../screens/RecordScreen";
+import Progress from "../screens/ProgressScreen";
+import Information from "../screens/InformationScreen";
 
 import { LogoutBtn } from "../components/LogoutBtn";
 
@@ -48,8 +49,20 @@ export const HomeNavigator = createStackNavigator({
     screen: Home,
     navigationOptions: () => navigationOption
   },
-  Record: {
-    screen: Record,
+  Progress: {
+    screen: Progress,
+    navigationOptions: () => ({
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        fontWeight: "bold",
+        fontSize: 15,
+        color: "black"
+      },
+      headerStyle: headerStyle
+    })
+  },
+  Information: {
+    screen: Information,
     navigationOptions: () => ({
       headerTintColor: "#fff",
       headerTitleStyle: {
