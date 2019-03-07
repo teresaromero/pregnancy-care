@@ -1,7 +1,6 @@
 import React from "react";
 import { createRootNavigator } from "./navigation/AppNavigator";
 import { createAppContainer } from "react-navigation";
-import { store } from "./lib/redux/store";
 import { ActivityIndicator } from "react-native";
 import { Font } from "expo";
 import { graphql } from "react-apollo";
@@ -31,6 +30,7 @@ class App extends React.Component {
     if (currentUser) {
       this.setState({ isAuth: true });
     }
+
   }
 
   componentWillReceiveProps(nextProps) {

@@ -5,7 +5,7 @@ import { withNavigation } from "react-navigation";
 
 class _LogoutBtn extends React.Component {
   handleLogOut() {
-    let { navigation, client } = this.props;
+    let { navigation } = this.props;
     AuthApi.logout().then(() => {
       navigation.navigate("SignedOut");
     });

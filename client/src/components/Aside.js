@@ -2,11 +2,10 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { UserCard } from "./UserCard";
 
 const _Aside = ({ match }) => {
   return (
-    <aside className="menu" style={{minWidth:142}}>
+    <aside className="menu" style={{ minWidth: 142 }}>
       {/* <UserCard /> */}
       <p className="menu-label">General</p>
 

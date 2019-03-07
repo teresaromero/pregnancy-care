@@ -27,7 +27,7 @@ class SignIn extends React.Component {
     } else {
       login(email, password)
         .then(({ data }) => {
-          navigation.navigate("SignedIn");
+          navigation.navigate("Home");
         })
         .catch(err => console.log(err));
     }
@@ -128,9 +128,12 @@ export default graphql(
     }
   `,
   {
-    options: { refetchQueries: ['currentUserApp'] },
     props: ({ mutate }) => ({
-      login: (email, password) => mutate({ variables: { email, password } })
+      login: (email, password) =>
+        mutate({
+          variables: { email, password },
+          refetchQueries: ["currentUserApp","currentUserQueryHome"]
+        })
     })
   }
 )(SignIn);

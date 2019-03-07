@@ -65,6 +65,9 @@ body {
   align-items: center;
   padding: 0 1rem; }
 
+.pageloader {
+  background: #01395c; }
+
 aside {
   min-height: 84vh;
   max-height: 84vh;

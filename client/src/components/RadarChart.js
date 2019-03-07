@@ -4,16 +4,15 @@ import {
   ResponsiveContainer,
   PolarAngleAxis,
   Radar,
-  PolarGrid,
-  PolarRadiusAxis
+  PolarGrid
 } from "recharts";
 
 const RadarChartComponent = ({ data }) => (
   <ResponsiveContainer width="100%" height={250}>
     <RadarChart outerRadius={100} data={data}>
       <PolarGrid />
-      <PolarAngleAxis width="20" dataKey="type" type="category" orient="out"/>
-      <PolarRadiusAxis angle={55} domain={[0, 50]} />
+      <PolarAngleAxis width={20} dataKey="type" type="category" orient="out" />
+
       <Radar
         dataKey="value"
         stroke="#8884d8"

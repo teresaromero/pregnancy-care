@@ -15,16 +15,18 @@ export default class VademecumSearch extends React.Component {
     };
   }
 
-  handleSearch(e) {
-    if (e.target.value !== "") {
-      this.setState({ isLoading: true, query: e.target.value }, () => {
-        VademecumApi.drugs("nombre", this.state.query).then(results => {
-          this.setState({ data: results, isLoading: false });
-        });
+  handleSearch() {
+    this.setState({ isLoading: true }, () => {
+      console.log(this.state.query);
+      VademecumApi.drugs("nombre", this.state.query).then(results => {
+        console.log(results);
+        this.setState({ data: results, isLoading: false });
       });
-    } else {
-      this.setState({ query: "", data: null });
-    }
+    });
+  }
+
+  handleChange(e) {
+    this.setState({ query: e.target.value });
   }
 
   render() {
@@ -39,8 +41,14 @@ export default class VademecumSearch extends React.Component {
               inputtype="text"
               placeholder=""
               value={this.state.query}
-              handleChange={e => this.handleSearch(e)}
+              handleChange={e => this.handleChange(e)}
             />
+            <button
+              className="button is-primary is-rounded"
+              onClick={() => this.handleSearch()}
+            >
+              Search
+            </button>
           </div>
           <div className="column is-full">
             <div className="columns is-mobile is-multiline is-paddingless is-marginless">
@@ -92,11 +100,13 @@ export default class VademecumSearch extends React.Component {
                 </article>
               </div>
             ) : this.state.isLoading ? (
-              <p>Loading</p>
+              <progress className="progress is-small is-primary" max="100">
+                15%
+              </progress>
             ) : (
               <React.Fragment>
                 <p>Total results: {this.state.data.length}</p>
-                <div className="is-paddingless is-marginless">
+                <div className="section">
                   {this.state.data.map(drug => (
                     <DrugListCard key={drug.nregistro} drug={drug} />
                   ))}

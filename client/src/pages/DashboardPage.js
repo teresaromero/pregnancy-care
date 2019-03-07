@@ -6,43 +6,12 @@ import RadarChartComponent from "../components/RadarChart";
 import { branch, renderComponent } from "recompose";
 import moment from "moment";
 
-import { gql } from "apollo-boost";
 import { gqlLodash } from "../components/gqlLodash";
 import _ from "lodash";
 import { Loader } from "../components/Loader";
+import { dashboardQueries } from "../lib/graphQL/queries";
 
 const enhance = branch(({ data }) => data.loading, renderComponent(Loader));
-
-const dashboardQueries = gql`
-  {
-    workRiskQuery: records {
-      workRisk
-    }
-
-    menstrQuery: records {
-      menstrualCycleDays
-      menstrualCycleFrequency
-    }
-
-    pregType: records @_(countBy: "pregnancyType") {
-      pregnancyType
-    }
-
-    allAppointments: appointments {
-      id
-    }
-
-    allPatients: patients {
-      id
-    }
-
-    todayAppointments: todayAppointments {
-      start
-      title
-      description
-    }
-  }
-`;
 
 const workRisk = ({ data }) => {
   let unified = _.groupBy(
@@ -80,7 +49,6 @@ const pregType = ({ data }) => {
 
 const DashboardPage = ({ data }) => (
   <div className="content">
-    {console.log(data)}
     <section className="hero is-primary is-small">
       <div className="hero-body">
         <div className="content">

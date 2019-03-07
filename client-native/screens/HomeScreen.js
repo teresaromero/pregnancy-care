@@ -8,7 +8,7 @@ import { currentUserQueryHome } from "../lib/graphQL/queries";
 import { branch, renderComponent } from "recompose";
 
 const enhance = branch(
-  ({ data }) => data.loading,
+  ({ currentUserQueryHome }) => currentUserQueryHome.loading,
   renderComponent(ActivityIndicator)
 );
 
@@ -60,11 +60,11 @@ const getImage = week => {
   }
 };
 
-const weekNum = ({ data }) => {
-  return parseInt(moment().diff(data.currentUser.record.LMP, "weeks"));
+const weekNum = ({ currentUserQueryHome }) => {
+  return parseInt(moment().diff(currentUserQueryHome.currentUser.record.LMP, "weeks"));
 };
 
-const Home = ({ data, navigation }) => (
+const Home = ({ currentUserQueryHome, navigation }) => (
   <View style={{ flex: 1, backgroundColor: "hsl(0, 0%, 96%)" }}>
     <ScrollView>
       <View
@@ -75,7 +75,7 @@ const Home = ({ data, navigation }) => (
         }}
       >
         <Image
-          source={getImage(weekNum({ data }))}
+          source={getImage(weekNum({ currentUserQueryHome }))}
           style={{ width: 200, height: 200, padding: 10 }}
           resizeMode="cover"
         />
@@ -90,7 +90,7 @@ const Home = ({ data, navigation }) => (
         }}
       >
         <Text style={{ fontFamily: "SourceSansPro-Light", fontSize: 20 }}>
-          You are now {moment().diff(data.currentUser.record.LMP, "weeks")}{" "}
+          You are now {moment().diff(currentUserQueryHome.currentUser.record.LMP, "weeks")}{" "}
           weeks pregnant
         </Text>
       </View>
@@ -105,7 +105,7 @@ const Home = ({ data, navigation }) => (
         }}
       >
         <Slider
-          value={moment().diff(data.currentUser.record.LMP, "weeks")}
+          value={moment().diff(currentUserQueryHome.currentUser.record.LMP, "weeks")}
           maximumValue={40}
           minimumValue={0}
           minimumTrackTintColor="#01395c"
@@ -140,10 +140,10 @@ const Home = ({ data, navigation }) => (
           Your estimated date of birth is:
         </Text>
         <Text style={{ fontFamily: "SourceSansPro-Regular", fontSize: 20 }}>
-          {moment(data.currentUser.record.EDC).format("dddd")}
+          {moment(currentUserQueryHome.currentUser.record.EDC).format("dddd")}
         </Text>
         <Text style={{ fontFamily: "SourceSansPro-Regular", fontSize: 20 }}>
-          {moment(data.currentUser.record.EDC).format("Do MMMM YYYY")}
+          {moment(currentUserQueryHome.currentUser.record.EDC).format("Do MMMM YYYY")}
         </Text>
       </View>
       <View
@@ -202,4 +202,4 @@ const Home = ({ data, navigation }) => (
   </View>
 );
 
-export default graphql(currentUserQueryHome)(enhance(Home));
+export default graphql(currentUserQueryHome, { name: "currentUserQueryHome" })(enhance(Home));

@@ -17,8 +17,8 @@ const PatientsList = ({ data }) => {
               account
             </div>
           ) : (
-            data.patients.map(patient => (
-              <div key={patient.name} className="box">
+            data.patients.map((patient,idx) => (
+              <div key={patient.name+idx} className="box">
                 <PatientsListCard
                   name={patient.name}
                   surname={patient.surname}

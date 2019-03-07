@@ -2,31 +2,9 @@ import React from "react";
 import PatientsList from "../components/PatientsList";
 import { SearchBarPatients } from "../components/SearchBarPatients";
 import { withRouter, NavLink } from "react-router-dom";
-import { gql } from "apollo-boost";
 import { graphql, compose } from "react-apollo";
 import debounce from "lodash/debounce";
-
-const getPatientsQuery = gql`
-  {
-    patients {
-      name
-      surname
-      id
-      image
-    }
-  }
-`;
-
-const searchPatientsQuery = gql`
-  query($searchQuery: String) {
-    patients(filter: $searchQuery) {
-      name
-      surname
-      id
-      image
-    }
-  }
-`;
+import { getPatientsQuery, searchPatientsQuery } from "../lib/graphQL/queries";
 
 class PatientsPage extends React.Component {
   constructor() {

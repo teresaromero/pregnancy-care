@@ -1,5 +1,58 @@
 import { gql } from "apollo-boost";
 
+export const dashboardQueries = gql`
+  {
+    workRiskQuery: records {
+      workRisk
+    }
+
+    menstrQuery: records {
+      menstrualCycleDays
+      menstrualCycleFrequency
+    }
+
+    pregType: records @_(countBy: "pregnancyType") {
+      pregnancyType
+    }
+
+    allAppointments: appointments {
+      id
+    }
+
+    allPatients: patients {
+      id
+    }
+
+    todayAppointments: todayAppointments {
+      start
+      title
+      description
+    }
+  }
+`;
+
+export const getPatientsQuery = gql`
+  {
+    patients {
+      name
+      surname
+      id
+      image
+    }
+  }
+`;
+
+export const searchPatientsQuery = gql`
+  query($searchQuery: String) {
+    patients(filter: $searchQuery) {
+      name
+      surname
+      id
+      image
+    }
+  }
+`;
+
 export const workRiskQuery = gql`
   {
     records {

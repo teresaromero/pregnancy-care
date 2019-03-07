@@ -10,7 +10,6 @@ import {
   updateDateTimeMutation
 } from "../lib/graphQL/queries";
 
-import moment from 'moment'
 
 class Agenda extends React.Component {
   handleSelectDate(start, end) {

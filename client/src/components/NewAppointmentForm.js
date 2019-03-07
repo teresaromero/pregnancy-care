@@ -107,9 +107,7 @@ class NewAppointmentForm extends React.Component {
     let upt = { ...this.state.appointment };
     upt.userId = p._id;
     upt.title = `${p.name} ${p.surname}`;
-    this.setState({ appointment: upt }, () =>
-      console.log(this.state.appointment)
-    );
+    this.setState({ appointment: upt });
   }
 
   render() {

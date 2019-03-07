@@ -7,23 +7,21 @@ import { connect } from "react-redux";
 class _HomePage extends React.Component {
   render() {
     let { loginActive } = this.props;
-    
+
     return (
       <section
         className="hero is-primary is-fullheight"
         style={{ marginTop: "-3rem", marginBottom: "-3rem" }}
       >
         <div className="hero-body">
-          <div className="content has-text-centered">
-            <div className="column is-4 is-offset-4">
-              <img
-                className="logo"
-                src="/images/logo.png"
-                alt="logo pregnancy care"
-              />
-              <div className="box">
-                {loginActive ? <LoginForm /> : <SignupForm />}
-              </div>
+          <div className="column is-4 is-offset-4 is-fullhd has-text-centered">
+            <img
+              className="logo"
+              src="/images/logo.png"
+              alt="logo pregnancy care"
+            />
+            <div className="box">
+              {loginActive ? <LoginForm /> : <SignupForm />}
             </div>
           </div>
         </div>
