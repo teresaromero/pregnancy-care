@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: process.env.NODE_ENV === "production" ? "":'http://localhost:3000',
-  timeout:1000,
+  baseURL: process.env.NODE_ENV === "production" ? "" : "http://localhost:3000",
   withCredentials: true
 });
 
@@ -19,26 +18,20 @@ export default class UserApi {
     const formData = new FormData();
     formData.append("profile-picture", file);
     return instance
-      .post("/profile-picture", formData, {
+      .post("/api/user/profile-picture", formData, {
         headers: {
           "Content-Type": "multipart/form-data"
-        }
+        },
       })
       .then(res => res.data)
       .catch(errHandler);
   }
 
-  static editProfilePicture(id, file) {
-    return instance
-      .put("/editProfilePicture", { file, id })
-      .then(user => console.log(user))
-      .catch(e => console.log(e));
-  }
 
   static editProfile(user) {
     return instance
       .put("/editProfile", { user })
-      .then(user => console.log(user))
-      .catch(e => console.log(e));
+      .then(user => user)
+      .catch(errHandler);
   }
 }

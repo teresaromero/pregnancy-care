@@ -8,8 +8,9 @@ import { InputDiv } from "./InputDiv";
 import moment from "moment";
 import { insurances } from "../lib/insuranceCompany";
 import { viewPatient, closeModal } from "../lib/redux/actions";
+import {withApollo} from 'react-apollo'
 
-class _InformationForm extends React.Component {
+class InformationForm extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -314,6 +315,6 @@ class _InformationForm extends React.Component {
   }
 }
 
-export const InformationForm = withRouter(
-  connect(store => ({ patientEdit: store.patient }))(_InformationForm)
-);
+export default withApollo(withRouter(
+  connect(store => ({ patientEdit: store.patient }))(InformationForm)
+));

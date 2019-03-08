@@ -112,7 +112,7 @@ export const SignedIn = createBottomTabNavigator(
       screen: CalendarNavigator,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
-          <FontAwesome name="calendar" size={20} color={tintColor} />
+          <FontAwesome name="calendar" size={30} color={tintColor} />
         )
       }
     },
@@ -120,7 +120,7 @@ export const SignedIn = createBottomTabNavigator(
       screen: ProfileNavigator,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
-          <FontAwesome name="user" size={20} color={tintColor} />
+          <FontAwesome name="user" size={30} color={tintColor} />
         )
       }
     }

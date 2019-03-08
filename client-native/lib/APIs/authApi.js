@@ -5,18 +5,26 @@ const instance = axios.create({
   withCredentials: true
 });
 
+const errHandler = err => {
+  if (err.response && err.response.data) {
+    // console.error("API response", err.response.data);
+    throw err.response.data.message;
+  }
+  throw err;
+};
+
 export default class AuthApi {
   static currentUser() {
     return instance
       .get("/api/auth/currentUser")
       .then(res => res.data)
-      .catch(err => console.log(err));
+      .catch( errHandler);
   }
   static signup(name, surname, email, password) {
     return instance
       .post("/api/auth/signup", { name, surname, email, password })
       .then(res => res.data.user)
-      .catch(err => console.log(err));
+      .catch(errHandler);
   }
 
   static edit(
@@ -49,7 +57,7 @@ export default class AuthApi {
         id
       })
       .then(res => res.data.user)
-      .catch(err => console.log(err));
+      .catch(errHandler);
   }
 
   static login(email, password) {
@@ -59,13 +67,13 @@ export default class AuthApi {
         { email, password }
       )
       .then(res => res.data.user)
-      .catch(err => console.log(err));
+      .catch(errHandler);
   }
 
   static logout() {
     return instance
       .get("/api/auth/logout")
       .then(res => res)
-      .catch(err => console.log(err));
+      .catch(errHandler);
   }
 }

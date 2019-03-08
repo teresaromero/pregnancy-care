@@ -13,14 +13,14 @@ class _ProfilePicture extends React.Component {
   }
 
   handlePhoto(e) {
-    let { user, dispatch } = this.props;
-   
+    let { dispatch } = this.props;
+
     this.setState({ file: e.target.files[0] }, () => {
-      UserApi.uploadProfilePicture(this.state.file).then(res => {
-        UserApi.editProfilePicture(user._id, res.image).then(user =>
-          dispatch(edit(user))
-        );
-      });
+      UserApi.uploadProfilePicture(this.state.file)
+        .then(user => {
+          dispatch(edit(user));
+        })
+        .catch(err => console.log(err));
     });
   }
 

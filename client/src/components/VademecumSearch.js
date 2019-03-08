@@ -17,9 +17,7 @@ export default class VademecumSearch extends React.Component {
 
   handleSearch() {
     this.setState({ isLoading: true }, () => {
-      console.log(this.state.query);
       VademecumApi.drugs("nombre", this.state.query).then(results => {
-        console.log(results);
         this.setState({ data: results, isLoading: false });
       });
     });

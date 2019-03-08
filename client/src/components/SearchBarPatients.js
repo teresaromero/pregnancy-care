@@ -2,11 +2,8 @@ import React from "react";
 
 import { InputP } from "./InputP";
 
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
 
-
-class _SearchBarPatients extends React.Component {
+export default class SearchBarPatients extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -37,4 +34,3 @@ class _SearchBarPatients extends React.Component {
   }
 }
 
-export const SearchBarPatients = withRouter(connect()(_SearchBarPatients));

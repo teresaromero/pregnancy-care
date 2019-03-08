@@ -97,7 +97,7 @@ class _RecordBackgroundForm extends React.Component {
                 <TextArea
                   label="Familiar Background"
                   value={record.background}
-                  name="backgroundDiseases"
+                  name="background"
                   handleChange={e => this.handleRecordChange(e)}
                   rows="4"
                   help="Diseases, Psychiatric Illness, Addictions, Abortions, Sterility, Assisted Reproduction, Malformations, ..."
@@ -108,7 +108,7 @@ class _RecordBackgroundForm extends React.Component {
                 <TextArea
                   label="Patient Background"
                   value={record.patientBackground}
-                  name="diseases"
+                  name="patientBackground"
                   handleChange={e => this.handleRecordChange(e)}
                   help="Diseases, Cronical Illness, Surgeries, Allergies"
                   rows="4"

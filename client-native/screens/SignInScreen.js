@@ -4,7 +4,7 @@ import { View, Dimensions, ActivityIndicator } from "react-native";
 import { Card, Button, Input, Text, Image } from "react-native-elements";
 import AuthApi from "../lib/APIs/authApi";
 import { login, errorMessageAction, clearMessages } from "../lib/redux/actions";
-import { graphql } from "react-apollo";
+import { graphql, withApollo } from "react-apollo";
 import { gql } from "apollo-boost";
 import { currentUserApp } from "../lib/graphQL/queries";
 
@@ -27,9 +27,10 @@ class SignIn extends React.Component {
     } else {
       login(email, password)
         .then(({ data }) => {
+          console.log("RDY YO GO");
           navigation.navigate("Home");
         })
-        .catch(err => console.log(err));
+        .catch(err => this.setState({ error: "Not found" }));
     }
   }
 
@@ -117,10 +118,10 @@ class SignIn extends React.Component {
   }
 }
 
-export default graphql(
+export default withApollo(graphql(
   gql`
     mutation Login($email: String!, $password: String!) {
-      login(email: $email, password: $password) {
+      currentUser: login(email: $email, password: $password) {
         id
         name
         email
@@ -128,12 +129,14 @@ export default graphql(
     }
   `,
   {
-    props: ({ mutate }) => ({
-      login: (email, password) =>
-        mutate({
-          variables: { email, password },
-          refetchQueries: ["currentUserApp","currentUserQueryHome"]
+    props: (props) => ({
+      login: (email, password) =>{
+        const { mutate, ownProps } = props;
+        ownProps.client.resetStore();
+        return mutate({
+          variables: { email, password }
         })
+      }
     })
   }
-)(SignIn);
+)(SignIn));

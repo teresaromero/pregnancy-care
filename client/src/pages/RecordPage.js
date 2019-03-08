@@ -20,7 +20,7 @@ import { RecordInformation } from "../components/RecordInformation";
 import { ModalCard } from "../components/ModalCard";
 import { RecordBackgroundForm } from "../components/RecordBackgroundForm";
 import { RecordPregnancyForm } from "../components/RecordPregnancyForm";
-import { InformationForm } from "../components/InformationForm";
+import  InformationForm  from "../components/InformationForm";
 
 import { Timeline } from "../components/Timeline";
 import { PregnancyDetail } from "../components/PregnancyDetail";

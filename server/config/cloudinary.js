@@ -8,8 +8,8 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET
 });
 
-const profilePictures = cloudinaryStorage({
-  cloudinary,
+let profilePictures = cloudinaryStorage({
+  cloudinary:cloudinary,
   folder: "pregnancy-care/profile-pictures",
   allowedFormats: ["jpg", "png"],
   filename: function(req, file, cb) {

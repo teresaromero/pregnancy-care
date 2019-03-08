@@ -1,8 +1,8 @@
 import React from "react";
 import PatientsList from "../components/PatientsList";
-import { SearchBarPatients } from "../components/SearchBarPatients";
+import SearchBarPatients from "../components/SearchBarPatients";
 import { withRouter, NavLink } from "react-router-dom";
-import { graphql, compose } from "react-apollo";
+import { graphql, compose, withApollo } from "react-apollo";
 import debounce from "lodash/debounce";
 import { getPatientsQuery, searchPatientsQuery } from "../lib/graphQL/queries";
 
@@ -13,6 +13,7 @@ class PatientsPage extends React.Component {
       query: ""
     };
   }
+
 
   handleChange(e) {
     const value = e;
@@ -48,25 +49,27 @@ class PatientsPage extends React.Component {
   }
 }
 
-export default compose(
-  graphql(getPatientsQuery, {
-    options: data => ({
-      fetchPolicy: "cache-and-network"
-    }),
-    props: props => ({
-      onSearch: searchQuery => {
-        return props.data.fetchMore({
-          query: searchQuery === "" ? getPatientsQuery : searchPatientsQuery,
-          variables: {
-            searchQuery
-          },
-          updateQuery: (previousResult, { fetchMoreResult }) => {
-            if (!fetchMoreResult) return previousResult;
-            return fetchMoreResult;
-          }
-        });
-      },
-      data: props.data
+export default withApollo(
+  compose(
+    graphql(getPatientsQuery, {
+      options: data => ({
+        fetchPolicy: "only-network"
+      }),
+      props: props => ({
+        onSearch: searchQuery => {
+          return props.data.fetchMore({
+            query: searchQuery === "" ? getPatientsQuery : searchPatientsQuery,
+            variables: {
+              searchQuery
+            },
+            updateQuery: (previousResult, { fetchMoreResult }) => {
+              if (!fetchMoreResult) return previousResult;
+              return fetchMoreResult;
+            }
+          });
+        },
+        data: props.data
+      })
     })
-  })
-)(withRouter(PatientsPage));
+  )(withRouter(PatientsPage))
+);

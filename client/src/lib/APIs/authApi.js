@@ -7,6 +7,14 @@ const instance = axios.create({
     withCredentials: true
 });
 
+const errHandler = err => {
+  if (err.response && err.response.data) {
+    // console.error("API response", err.response.data);
+    throw err.response.data.message;
+  }
+  throw err;
+};
+
 
 export default class AuthApi {
   static currentUser() {
@@ -43,18 +51,18 @@ export default class AuthApi {
       bornDate,
       phone, id})
       .then(res => res.data.user)
-      .catch(err => console.log(err));
+      .catch(errHandler);
   }
 
   static login(email, password) {
     return instance.post("/api/auth/login", { email, password })
       .then(res => res.data.user)
-      .catch(err => console.log(err));
+      .catch(errHandler);
   }
 
   static logout() {
     return instance.get("/api/auth/logout")
       .then(res => console.log(res))
-      .catch(err => console.log(err));
+      .catch(errHandler);
   }
 }

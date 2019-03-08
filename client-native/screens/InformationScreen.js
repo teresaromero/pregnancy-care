@@ -14,7 +14,6 @@ const enhance = branch(
 
 const Information = ({ data }) => (
   <React.Fragment>
-    {console.log(data)}
     <View style={{ flex: 1, backgroundColor: "hsl(0, 0%, 96%)" }}>
       <ScrollView style={{ backgroundColor: "hsl(0, 0%, 96%)" }}>
         <View
@@ -99,8 +98,8 @@ const Information = ({ data }) => (
               alignItems: "center"
             }}
           >
-            <Text style={{ fontFamily: "SourceSansPro-Light", fontSize: 18 }}>
-              Name and phone of doctor
+            <Text style={{ fontFamily: "SourceSansPro-Light", fontSize: 15 }}>
+             Dr. Pregnancy Care - phone: 99 999 999
             </Text>
           </View>
         </View>

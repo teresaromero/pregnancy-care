@@ -30,7 +30,6 @@ class App extends React.Component {
     if (currentUser) {
       this.setState({ isAuth: true });
     }
-
   }
 
   componentWillReceiveProps(nextProps) {
