@@ -14,7 +14,7 @@ Ironhack Part Time Web Development Final Project - March 2019
 
 **MERN App**
 
-![](https://res.cloudinary.com/dpid82d4m/image/upload/v1552064804/pregnancy_-ipad.png)
+![](https://res.cloudinary.com/dpid82d4m/image/upload/c_scale,h_600/v1552064804/pregnancy_-ipad.png)
 * Admin Signup
 * Patient registration
 * Visits registration
@@ -26,7 +26,7 @@ Ironhack Part Time Web Development Final Project - March 2019
 
 **React Native App**
 
-![](https://res.cloudinary.com/dpid82d4m/image/upload/v1552064770/pregnancy-care-iphone.png)
+![](https://res.cloudinary.com/dpid82d4m/image/upload/c_scale,h_600/v1552064770/pregnancy-care-iphone.png)
 * Track of pregnancy by week
 * Size of baby by week
 * Weight and blood pressure charts
