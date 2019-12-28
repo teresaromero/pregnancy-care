@@ -25,7 +25,7 @@
     "fs": "0.0.1-security",
     "graphql": "^14.1.1",
     "graphql-iso-date": "^3.6.1",
-    "handlebars": "^4.0.12",
+    "handlebars": "^4.3.0",
     "moment": "^2.24.0",
     "mongoose": "^5.2.10",
     "morgan": "^1.9.0",
