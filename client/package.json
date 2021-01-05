@@ -5,7 +5,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.7.2",
     "apollo-boost": "^0.1.28",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bulma": "^0.7.2",
     "bulma-badge": "^0.2.0",
     "bulma-pageloader": "^2.1.0",
